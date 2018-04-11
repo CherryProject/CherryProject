@@ -1,0 +1,25 @@
+package com.cherryproject.www.dao;
+
+import java.util.HashMap;
+
+import com.cherryproject.www.vo.UserInfoVO;
+
+/*
+ * @comment 
+ */
+
+public interface UserInfoMapper {
+	
+	// 회원 가입 : 정보승
+	public int joinUser(UserInfoVO joinUser);
+	
+	// E-mail 인증 처리 : 정보승
+	public int verifyUser(String verify);
+	
+	// 회원 로그인 + 회원 정보 조회 (비밀번호를 제외한 모든 정보가 출력) : 정보승
+	public UserInfoVO selectUser(HashMap<String, Object> loginUser);
+	
+	// 회원 정보 수정 : 정보승
+	public int updateUserInfo(UserInfoVO updateUser);
+
+}

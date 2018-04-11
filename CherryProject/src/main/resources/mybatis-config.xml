@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--  DOCTYPE이 가장 중요 -->
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.cherryproject.www.vo.UserInfoVO" 		alias="userinfo" />
+		<typeAlias type="com.cherryproject.www.vo.MyCardInfoVO" 		alias="mycard" />
+		<typeAlias type="com.cherryproject.www.vo.YourCardInfoVO" 	alias="yourcard" />
+		<typeAlias type="com.cherryproject.www.vo.CardLayoutVO" 		alias="layout" />
+		<typeAlias type="com.cherryproject.www.vo.BoardVO" 			alias="board" />
+		<typeAlias type="com.cherryproject.www.vo.CommentVO" 		alias="comment" />
+	</typeAliases>
+	
+	<mappers>
+	
+		<!-- MembersInfo MapperFile -->
+		<mapper resource="mappers/userInfoMapper.xml" />
+		<mapper resource="mappers/yourCardInfoMapper.xml" />
+		<mapper resource="mappers/boardMapper.xml" />
+
+	</mappers>
+	
+</configuration>

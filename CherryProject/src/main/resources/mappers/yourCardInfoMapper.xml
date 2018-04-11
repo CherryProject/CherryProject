@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 받은 명함 관리 처리 SQL -->
+<mapper namespace="com.cherryproject.www.dao.YourCardInfoMapper">
+
+	<!-- 정보승 : 받은 명함 전체 가져오기 -->
+	<select id="selectAllCard" parameterType="string" resultType="yourcard">
+	
+		SELECT 
+			yourcardnum
+			, userid
+			, yournum
+			, mycardnum
+			, memo
+			, company
+			, name1
+			, name2
+			, name3
+			, phone
+			, tel
+			, fax
+			, email
+			, address
+			, job
+			, department
+			, otherinfo
+			, frontimgsaved
+			, backimgsaved
+			, cardorder
+			, sex
+			, frontimgoriginal
+			, backimgoriginal
+		FROM
+			tbl_yourcardinfo
+		WHERE
+			userid like #{userid}
+		ORDER BY
+			yourcardnum
+	
+	</select>
+	
+	
+	<!-- 정보승 : 받은 명함 등록 -->
+	<insert id="yourCardInsert" parameterType="yourcard">
+	
+		INSERT INTO
+			tbl_yourcardinfo (
+				yourcardnum
+				, userid
+				, yournum
+				, mycardnum
+				, memo
+				, company
+				, name1
+				, name2
+				, name3
+				, phone
+				, tel
+				, fax
+				, email
+				, address
+				, job
+				, department
+				, otherinfo
+				, frontimgsaved
+				, backimgsaved
+				, cardorder
+				, frontimgoriginal
+				, backimgoriginal
+			)
+		VALUES (
+				CONCAT('ybc', TO_CHAR(seq_yourcardnum.nextval))
+				, #{userid}
+				, CONCAT('yn', TO_CHAR(seq_yournum.nextval))
+				, #{mycardnum}
+				, #{memo}
+				, #{company}
+				, #{name}
+				, #{phone}
+				, #{tel}
+				, #{fax}
+				, #{email}
+				, #{address}
+				, #{job}
+				, #{department}
+				, #{otherinfo}
+				, #{frontimgsaved}
+				, #{backimgsaved}
+				, #{cardorder}
+				, #{frontimgoriginal}
+				, #{backimgoriginal}
+		)
+	
+	</insert>
+	
+	
+	<!-- 정보승 : 하나의 명함 정보 선택 -->
+	<select id="selectYourCardOne" parameterType="hashmap" resultType="yourcard">
+		
+		SELECT 
+			*
+		FROM
+			tbl_yourcardinfo
+		WHERE
+			yourcardnum like #{yourcardnum}
+		AND
+			userid like #{userid}
+	
+	</select>
+	
+	
+	<!-- 정보승 : 명함 삭제(1개) -->
+	<delete id="deleteYourCardOne" parameterType="hashmap">
+		
+		DELETE FROM
+			tbl_yourcardinfo
+		WHERE
+			userid like #{userid}
+		AND
+			yourcardnum like #{yourcardnum}
+	
+	</delete>
+
+</mapper>

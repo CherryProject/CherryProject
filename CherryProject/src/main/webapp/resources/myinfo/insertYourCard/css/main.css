@@ -1,0 +1,30 @@
+
+.right {
+	float:right; 
+	width:30%;
+}
+
+.insertCardBtn {
+	text-align: center;
+	margin : 10;
+}
+
+.col-8 {
+	float:left;
+	width : 70%;
+	margin: 0 auto;
+}
+
+.tab-content {
+	align-item : center;
+}
+
+.fileUploadBtn {
+	
+	display: none; 
+}
+
+.imgPreview {
+	margin-bottom: 20px;
+}
+

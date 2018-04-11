@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Block Reveal Effects | Menu | Codrops</title>
+	<!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700|Poppins:700" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<link rel="stylesheet" type="text/css" href="../css/header.css">
+	<link rel="stylesheet" type="text/css" href="../css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="../css/index.css" />
+	<link rel="stylesheet" type="text/css" href="../css/revealer.css" />
+	<link rel="stylesheet" type="text/css" href="../css/pater.css" />
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/uncover.css" /> -->
+	<script>
+		document.documentElement.className = "js";
+		var supportsCssVars = function() { var e, t = document.createElement("style"); return t.innerHTML = "root: { --tmp-var: bold; }", document.head.appendChild(t), e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)")), t.parentNode.removeChild(t), e };
+		supportsCssVars() || alert("Please view this demo in a modern browser that supports CSS Variables.");
+	</script>
+</head>
+<body>
+	<!-- <header class="codrops-header">
+		<h1 class="codrops-header__title">명함만들기프로젝트</h1>
+		<button class="btn btn--menu"><i class="fas fa-bars"></i></button>
+		<nav class="menu">
+			<button class="btn btn--close"><i class="fas fa-times"></i></button>
+			<ul class="menu__inner">
+				<li class="menu__item"><a class="menu__link" href="../index.html">Home</a></li>
+				<li class="menu__item"><a class="menu__link" href="#">TemplateList</a></li>
+				<li class="menu__item"><a class="menu__link" href="#">Tool</a></li>
+				<li class="menu__item"><a class="menu__link" href="../management/management.html">Management</a></li>
+				<li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
+			</ul>
+		</nav>
+	</header>header end
+	<article>
+		<div class="content grid">
+			<div class="grid__item">
+				<div class="scroll-img" style="background-image: url(img/tem1.jpg);"></div>
+				<div class="grid__item-titlewrap">
+					<h2 class="grid__item-title">#Template1</h2>
+					<p class="grid__item-description">Find me tomorrow or never</p>
+				</div>
+			</div>
+			<div class="grid__item">
+				<div class="scroll-img" style="background-image: url(img/tem2.jpg);"></div>
+				<div class="grid__item-titlewrap">
+					<h2 class="grid__item-title">#Template2</h2>
+					<p class="grid__item-description">Never end it like that</p>
+				</div>
+			</div>
+			<div class="grid__item">
+				<div class="scroll-img" style="background-image: url(img/tem3.jpg);"></div>
+				<div class="grid__item-titlewrap">
+					<h2 class="grid__item-title">#Template3</h2>
+					<p class="grid__item-description">Why make noise like that?</p>
+				</div>
+			</div>
+			<div class="grid__item">
+				<div class="scroll-img" style="background-image: url(img/tem4.jpg);"></div>
+				<div class="grid__item-titlewrap">
+					<h2 class="grid__item-title">#Template4</h2>
+					<p class="grid__item-description">No point in running</p>
+				</div>
+			</div>
+			<div class="grid__item">
+				<div class="scroll-img" style="background-image: url(img/tem5.jpg);"></div>
+				<div class="grid__item-titlewrap">
+					<h2 class="grid__item-title">#Template5</h2>
+					<p class="grid__item-description">When you get there</p>
+				</div>
+			</div>
+			<div class="grid__item">
+				<div class="scroll-img" style="background-image: url(img/tem1.jpg);"></div>
+				<div class="grid__item-titlewrap">
+					<h2 class="grid__item-title">#Template6</h2>
+					<p class="grid__item-description">Timeless manners count</p>
+				</div>
+			</div>
+			<div class="grid__item">
+				<div class="scroll-img" style="background-image: url(img/tem2.jpg);"></div>
+				<div class="grid__item-titlewrap">
+					<h2 class="grid__item-title">#Template7</h2>
+					<p class="grid__item-description">Together we can sit</p>
+				</div>
+			</div>
+			<div class="grid__item">
+				<div class="scroll-img" style="background-image: url(img/tem3.jpg);"></div>
+				<div class="grid__item-titlewrap">
+					<h2 class="grid__item-title">#Template8</h2>
+					<p class="grid__item-description">The new kid on the block</p>
+				</div>
+			</div>
+			<div class="grid__item">
+				<div class="scroll-img" style="background-image: url(img/tem4.jpg);"></div>
+				<div class="grid__item-titlewrap">
+					<h2 class="grid__item-title">#Template9</h2>
+					<p class="grid__item-description">The new kid on the block</p>
+				</div>
+			</div>
+			<div class="grid__item">
+				<div class="scroll-img" style="background-image: url(img/tem5.jpg);"></div>
+				<div class="grid__item-titlewrap">
+					<h2 class="grid__item-title">#Template10</h2>
+					<p class="grid__item-description">Find me tomorrow or never</p>
+				</div>
+			</div>
+		</div>
+		<script src="js/imagesloaded.pkgd.min.js"></script>
+		<script src="../js/anime.min.js"></script>
+		<script src="js/uncover.js"></script>
+		<script src="js/demo3.js"></script>
+	</article>article end
+	<footer></footer>footer end
+	<script src="../js/commonmain.js"></script> -->
+</body>
+</html>

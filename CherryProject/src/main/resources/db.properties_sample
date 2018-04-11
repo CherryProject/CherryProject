@@ -1,0 +1,22 @@
+
+- MariaDB DataBase
+
+driver=net.sf.log4jdbc.DriverSpy
+url=jdbc:log4jdbc:mariadb://localhost:3306/businesscard
+user=hr
+password=hr
+
+
+- Oracle Database
+
+<본인 데이터베이스 접속>
+driver=oracle.jdbc.driver.OracleDriver
+url=jdbc:oracle:thin:@localhost:1521:XE
+user=hr
+password=hr
+
+<공용 데이터베이스 접속>
+driver=oracle.jdbc.driver.OracleDriver
+url=jdbc:oracle:thin:@203.233.199.165:1521:XE
+user=hr
+password=hr

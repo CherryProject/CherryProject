@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원정보 처리 SQL -->
+<mapper namespace="com.cherryproject.www.dao.UserInfoMapper">
+
+	<!-- 회원 가입 처리 : 정보승 -->
+	<insert id="joinUser" parameterType="userinfo">
+	
+		INSERT INTO
+			tbl_userinfo (	
+				userid
+				, userpw
+				, username
+			)
+		VALUES (
+			#{userid}
+			, #{userpw}
+			, #{username}
+		)
+	
+	</insert>
+	
+	<!-- E-mail 인증 처리 : 정보승 -->
+	<update id="verifyUser" parameterType="string">
+	
+		UPDATE 
+			tbl_userinfo
+		SET 
+			emailverify = 'Y' 
+		WHERE 
+			userid like #{userid}
+	
+	</update>
+	
+	
+	<!-- 회원 로그인 + 회원 정보 조회 : 정보승 -->
+	<select id="selectUser" parameterType="hashmap" resultType="userinfo">
+	
+		SELECT
+			userid
+			, username
+			, emailverify		
+		FROM
+			tbl_userinfo
+		WHERE
+				userid like #{userid}	
+			
+			<if test="userpw != null and userpw != '' ">
+				AND
+				
+					userpw like #{userpw}	
+			</if>
+	
+	
+	</select>
+
+	
+	<!-- 회원 정보 수정 : 정보승 -->
+	<update id="updateUserInfo" parameterType="userinfo">
+	
+		UPDATE
+			tbl_userinfo
+		SET
+			username = #{username}
+			
+			<if test="userpw != null and userpw != '' ">
+				, userpw = #{userpw}
+			</if>
+		WHERE
+			userid like #{userid}
+	
+	</update>
+
+
+</mapper>

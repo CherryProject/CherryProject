@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원정보 처리 SQL -->
+<mapper namespace="com.cherryproject.www.dao.BoardMapper">
+
+	<insert id="insertBoard" parameterType="board" >
+	
+		insert into 
+			tbl_board(
+				boardnum
+				,board_writer
+				,board_title
+				,board_content
+			)values(
+				tbl_board_seq.nextval
+				,#{board_writer}
+				,#{board_title}
+				,#{board_content}
+			)
+	</insert>
+	
+	<!-- 2018-03-28-1925 : 정현수 작성, contact 게시글 전부 출력  -->
+	<!-- 2018-03-31-1024 : 정현수 작성, contact 게시글 전부 출력 수정, parameterType 추가, 조건문 추가  -->
+	<select id="selectBoardAll" parameterType="map" resultType="board">
+		
+		select
+			boardnum
+			,board_writer
+			,board_title
+			,board_content
+			,board_hits
+			,to_char(board_inputdate, 'yyyy-MM-dd')board_inputdate
+			,check_notice
+		from
+			tbl_board
+		<if test="findList != 'default'">
+			<choose>
+					<when test="findList == 'all'">
+					 	where 
+					 	 	board_title like '%' || #{findText} || '%'
+					 	 or
+					 	  	board_writer like '%' || #{findText} || '%' 
+					 	 or 
+					 	    board_content like '%' || #{findText} || '%' 	
+					</when>
+					<when test="findList == 'board_title'">
+						where
+							board_title like '%' || #{findText} || '%'
+					</when>
+					<when test="findList == 'board_content'">
+						where
+							board_content like '%' || #{findText} || '%'
+					</when>
+					<when test="findList == 'board_writer'">
+						where
+							board_writer like '%' || #{findText} || '%'
+					</when>
+				
+			</choose>	
+		</if>
+		order by
+			boardnum desc
+	</select>
+	
+	<!-- 2018-03-31-1024 : 정현수 작성, contact 게시글 전체 수 출력 -->
+	<select id="getTotal" parameterType="map" resultType="int">
+		select
+			count(*)	
+		from
+			tbl_board
+	<choose>
+			<when test="findList == 'all'">
+			 	where 
+			 	 	board_title like '%' || #{findText} || '%'
+			 	 or
+			 	  	board_writer like '%' || #{findText} || '%' 	
+			</when>
+			<when test="findList == 'board_title'">
+				where
+					board_title like '%' || #{findText} || '%'
+			</when>
+			<when test="findList == 'board_content'">
+				where
+					board_content like '%' || #{findText} || '%'
+			</when>
+			<when test="findList == 'board_writer'">
+				where
+					board_writer like '%' || #{findText} || '%'
+			</when>
+		</choose>	
+		order by
+			boardnum desc			
+	</select>
+	
+	
+<!-- 2018-03-28-1925 : 정현수 작성, contact 게시글 하나만 읽기  -->
+	<select id="selectBoardOne" parameterType="int" resultType="board">
+		
+		select
+			boardnum
+			,board_writer
+			,board_title
+			,board_content
+			,board_hits
+			,to_char(board_inputdate, 'yyyy-MM-dd')board_inputdate
+			,check_notice
+		from
+			tbl_board
+		where
+			boardnum = #{boardnum}	
+		
+	</select>
+	
+	<update id="updateHits" parameterType="int">
+		update
+			tbl_board
+		set
+			board_hits = board_hits+1
+		where
+			boardnum = #{boardnum}
+	</update>
+	
+	
+	
+	
+<!--여지원 : 게시판 수정 -->
+<update id="updateBoard" parameterType="Board">
+	update
+		tbl_board
+	set
+		board_title =#{board_title}
+		,board_content =#{board_content}
+		,check_notice =#{check_notice}
+	where
+		boardnum =#{boardnum}
+
+</update>
+
+
+<!--여지원 : 게시판 삭제-->
+<delete id ="deleteBoard" parameterType="int">
+	delete 
+		tbl_board
+	where 
+		boardnum = #{boardnum}
+
+</delete>
+
+
+<!--여지원 : 댓글 등록  -->
+<insert id="insertComment" parameterType="Comment">
+	insert into
+		tbl_comment(
+			boardnum
+			,commentnum
+			,com_writer
+			,com_content
+		)values(
+			#{boardnum}
+			,tbl_comment_seq.nextval
+			,#{com_writer}
+			,#{com_content}
+		)
+	
+</insert>
+
+<!--여지원 : 댓글 list 가져오기 -->
+<select id="commentList" parameterType="int" resultType="comment">
+		select
+			boardnum
+			,commentnum
+			,com_writer
+			,com_content
+			,to_char(com_date, 'yyyy-MM-dd')board_inputdate
+		from
+			tbl_comment
+		where 
+			boardnum =#{boardnum}
+		order by
+			commentnum desc
+
+</select>
+
+<!--여지원 : 댓글 수정 -->
+<update id="updateComment" parameterType="Comment">   
+     update 
+     	tbl_comment
+     set
+     	com_content = #{com_content}
+     where
+     	commentnum =#{commentnum}
+</update>
+
+
+
+<!--여지원 : 댓글 삭제 -->
+<delete id="deleteComment" parameterType="int">
+	delete from
+		tbl_comment
+	where 
+		commentnum = #{commentnum}
+</delete>
+	
+	
+</mapper>
