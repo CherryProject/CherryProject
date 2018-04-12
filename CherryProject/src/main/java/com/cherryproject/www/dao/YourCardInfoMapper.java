@@ -22,4 +22,7 @@ public interface YourCardInfoMapper {
 	
 	// 정보승 : 명함 삭제(1개)
 	public int deleteYourCardOne(HashMap<String, String> deleteYourCard);
+	
+	// 전병익 : 검색한 명함 리스트를 가져옴
+	public ArrayList<YourCardInfoVO> selectSearchCard(HashMap<String, String> autoComplete);
 }

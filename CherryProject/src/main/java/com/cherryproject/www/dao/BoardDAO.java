@@ -22,6 +22,7 @@ public class BoardDAO {
 
 	private static final Logger logger = LoggerFactory.getLogger(BoardDAO.class);
 
+	
 	/*
 	 * @comment		:	게시글 삽입 시 쓰이는 메소드
 	 * @param		:	BoardVO
@@ -42,6 +43,8 @@ public class BoardDAO {
 		logger.info("inserBoard end");
 		return result;
 	}
+	
+	
 	/*
 	 * @comment		:	contact 게시판 전체 출력  메소드
 	 * @param		: 	findList, findText, startRecord, countPerPage 	
@@ -111,6 +114,7 @@ public class BoardDAO {
 		logger.info("selectBoardOne end");
 		return board;
 	}
+	
 	
 	/*
 	 * @comment		:	게시글 올리기

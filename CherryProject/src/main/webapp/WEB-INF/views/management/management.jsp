@@ -57,6 +57,31 @@
   		});
   	}
   	
+  	/* 전병익 : db에서 저장된 명함을 검색 */
+	$(document).ready(function(){
+		
+		var searchArray = [];
+		$.ajax({
+			url:"search",
+			dataType: "json",
+			success:function(result){
+				console.log(result);
+				$.each(result,function(index,item){
+					searchArray.push(item.name1);
+					searchArray.push(item.phone);
+					searchArray.push(item.company);
+				});
+			}
+		});
+		console.log(searchArray);
+		$("#autocomplete").autocomplete({
+			source : searchArray,
+			minLength:1,
+			select:function(event,ui){}
+			
+		});
+	});
+  	
   	</script>
 </head>
 <body>
@@ -65,6 +90,15 @@
 	<%@ include file="/WEB-INF/views/common/bodyHeader.jsp" %>
 	
 	<a href="yourcard/insertYourCard"> 카드 등록 </a>
+	
+	<!-- 전병익 : 명함을 검색하는 검색창 -->
+	<form action="search" method="post">
+		<div class="ui-widget">
+			<label for="autocomplete">검색어를 입력:</label>
+			<input id="autocomplete" name="autocomplete" value = "${autocomplete}" type="text">
+			<input type="submit" value ="검색">
+		</div>
+	</form>
 	
 	<article class="container">
 	    <section class="content">

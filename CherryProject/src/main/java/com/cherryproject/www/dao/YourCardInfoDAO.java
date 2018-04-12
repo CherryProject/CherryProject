@@ -24,6 +24,7 @@ public class YourCardInfoDAO {
 	
 	private static final Logger logger = LoggerFactory.getLogger(YourCardInfoDAO.class);
 	
+	
 	/*
 	 * @comment		:	회원이 받은 모든 명함을 가져오는 메소드.
 	 * @param		:	회원의 ID
@@ -49,6 +50,42 @@ public class YourCardInfoDAO {
 		if(resultList != null && resultList.size() != 0) {
 			
 			logger.info("YourCardInfo List Success");
+		}
+		else {
+			
+			logger.info("YourCardInfo List Fail");
+		}
+		
+		return resultList;
+	}
+	
+	
+	/*
+	 * @comment		:	회원이 가진 명함 중 검색어에 해당하는 명함 호출
+	 * @param		:	회원의 ID
+	 * @return		:	검색어에 해당하는 모든 명함 정보.
+	 * @author		:	전병익
+	 */
+	public ArrayList<YourCardInfoVO> selectSearchCard(HashMap<String, String> autoComplete) {
+		
+		logger.info("YourCardInfo Selected List");
+		
+		YourCardInfoMapper mapper = sqlSession.getMapper(YourCardInfoMapper.class);
+		
+		ArrayList<YourCardInfoVO> resultList = null;
+		
+		try {
+			
+			resultList = mapper.selectSearchCard(autoComplete);
+		}
+		catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		if(resultList != null && resultList.size() != 0) {
+			
+			logger.info("YourCardInfo Selected List Success");
 		}
 		else {
 			
@@ -98,6 +135,7 @@ public class YourCardInfoDAO {
 	
 	/*
 	 * @comment		: 하나의 명함 정보 선택
+	 * @author		: 전병익
 	 */
 	public YourCardInfoVO selectYourCardOne(HashMap<String, String> selectYourCard) {
 		
@@ -127,6 +165,39 @@ public class YourCardInfoDAO {
 		return resultYourCard;
 		
 	}
+	
+	
+	/*
+	 * @comment		: 하나의 명함 정보 선택
+	 */
+//	public YourCardInfoVO selectYourCardOne(HashMap<String, String> selectYourCard) {
+//		
+//		logger.info("Select One YourCardInfo");
+//		
+//		YourCardInfoMapper mapper = sqlSession.getMapper(YourCardInfoMapper.class);
+//		YourCardInfoVO resultYourCard = null;
+//		
+//		try {
+//			
+//			resultYourCard = mapper.selectYourCardOne(selectYourCard);
+//		}
+//		catch(Exception e) {
+//			
+//			e.printStackTrace();
+//		}
+//		
+//		if(resultYourCard != null) {
+//			
+//			logger.info("Select One YourCardInfo Success");
+//		}
+//		else {
+//			
+//			logger.info("Select One YourCardInfo Fail");
+//		}
+//		
+//		return resultYourCard;
+//		
+//	}
 	
 	
 	/*

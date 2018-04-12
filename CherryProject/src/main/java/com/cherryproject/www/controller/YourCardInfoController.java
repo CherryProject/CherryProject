@@ -62,7 +62,6 @@ public class YourCardInfoController {
 	}
 	
 	
-	
 	/*
 	 * @comment		: 다른 사람 명함 등록 
 	 * @author		: 정보승

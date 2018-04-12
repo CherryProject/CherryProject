@@ -1,6 +1,7 @@
 package com.cherryproject.www;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cherryproject.www.dao.YourCardInfoDAO;
 import com.cherryproject.www.vo.YourCardInfoVO;
@@ -151,8 +153,6 @@ public class HomeController {
 	 * @comment		: contact 메뉴로 이동
 	 * @author		: 여지원
 	 */
-
-	
 	@RequestMapping(value = "contact", method = RequestMethod.GET)
 	public String contactPage(Model model) {
 		
@@ -162,6 +162,71 @@ public class HomeController {
 		/*contact 밑에 또 jsp가 들어가는건데 헷갈리기 쉬워 그냥 jsp 이름을 contactMain이라고했습니다.*/
 		return "contact/contactMain";
 	}
+	
+	
+	/*
+	 * @comment	:처음 정보를 가져올 때
+	 * @author	:전병익
+	 */
+	@ResponseBody
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	public ArrayList<YourCardInfoVO> search(HttpSession session) {
+		
+		logger.info("Move Management Page");
+				
+		String userid = (String) session.getAttribute("userid");
+		
+		ArrayList<YourCardInfoVO> search = yCardInfoDAO.selectAllCard(userid);
+		// String jsonArray = "제이슨문자열을 변환";
+		if(search != null && search.size() != 0) {
+			
+			logger.info("YourCardInfo searchlist Success");			
+		}
+		else {			
+			logger.info("YourCardInfo searchlist Fail");
+		}
+		
+		return search;
+	}
+	
+	
+	/*
+	 * @author	: 전병익
+	 * @comment	: 검색어에 맞춰 필요한 데이터만 다시 가져옴	
+	 */
+	@RequestMapping(value = "search", method = RequestMethod.POST)
+	public String search(HttpSession session, Model model, String autocomplete) {
+		
+		logger.info("Move Management Page");
+//		String keyword = (String) session.getAttribute("search");
+		String userid = (String) session.getAttribute("userid");
+		HashMap<String, String> autoComplete = new HashMap<>();
+		autoComplete.put("userid", userid);
+		autoComplete.put("search", autocomplete);
+		logger.info(autocomplete);
+		
+		ArrayList<YourCardInfoVO> resultList = yCardInfoDAO.selectSearchCard(autoComplete);
+		//검색어가 없을 경우 전체 데이터를 다시 가져옴
+		if(autocomplete == ""){
+			return managementPage(session, model);
+		}
+		
+		
+		if(resultList != null && resultList.size() != 0) {
+			
+			logger.info("YourCardInfo Selected List Success");
+			model.addAttribute("yourCardList", resultList);
+		}
+		else {
+			
+			logger.info("YourCardInfo Selected List Fail");
+		}
+		
+		return "management/management";
+	}
+	
+	
+	
 	
 
 }

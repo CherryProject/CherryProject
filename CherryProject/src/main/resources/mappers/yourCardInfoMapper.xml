@@ -112,6 +112,47 @@
 	</select>
 	
 	
+	<!-- 전병익 : 검색된 테이블 목록을 가져옴-->
+	<select id="selectSearchCard" parameterType="hashmap" resultType="yourcard">
+		
+		SELECT 
+			yourcardnum
+			, userid
+			, yournum
+			, mycardnum
+			, memo
+			, company
+			, name1
+			, name2
+			, name3
+			, phone
+			, tel
+			, fax
+			, email
+			, address
+			, job
+			, department
+			, otherinfo
+			, frontimgsaved
+			, backimgsaved
+			, cardorder
+			, sex
+			, frontimgoriginal
+			, backimgoriginal
+		FROM
+			tbl_yourcardinfo
+					
+		WHERE
+			(userid like #{userid} and phone like #{search}) 
+			or
+			(userid like #{userid} and name1 like #{search}) 
+			or
+			(userid like #{userid} and company like #{search})
+		ORDER BY
+			yourcardnum
+	
+	</select>
+	
 	<!-- 정보승 : 명함 삭제(1개) -->
 	<delete id="deleteYourCardOne" parameterType="hashmap">
 		
