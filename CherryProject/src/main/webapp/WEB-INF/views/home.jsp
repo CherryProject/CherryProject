@@ -26,7 +26,7 @@
 
 	<div class="videoBox">
 		<video autoplay loop="100" muted  id="videoBG">
-			<source src="resources/img/aaaa.mp4" type="video/mp4">
+			<source src="resources/img/SUZY-BLOSSOM PINK.mp4" type="video/mp4">
 		</video>
 	</div>
 	

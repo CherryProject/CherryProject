@@ -37,7 +37,7 @@
   	 */
   	function yourCardInfoList() {
   		
-  		alert("리스트 가져오기 처음");
+  		//alert("리스트 가져오기 처음");
   		
   		$.ajax({
   			
@@ -46,7 +46,7 @@
   			, data : {}
   			, dataTYpe : "json"
   			, success : function(yourCardList){
-  				alert("리스트 가져오기");
+  				//alert("리스트 가져오기");
   				
   				var obj = JSON.parse('${jsonList}');	// JSON파일을 파싱
   				// var list = obj.yourCardList;
@@ -89,7 +89,11 @@
 	<!-- 정보승 : <header>부분 -->
 	<%@ include file="/WEB-INF/views/common/bodyHeader.jsp" %>
 	
-	<a href="yourcard/insertYourCard"> 카드 등록 </a>
+	<!-- 정보승 : 카드 등록 -->
+	<a href="yourcard/insertYourCard">
+		<img src="<c:url value="/resources/management/img/icon/yourCardPlus.png"/>" />
+	</a>
+	
 	
 	<!-- 전병익 : 명함을 검색하는 검색창 -->
 	<form action="search" method="post">

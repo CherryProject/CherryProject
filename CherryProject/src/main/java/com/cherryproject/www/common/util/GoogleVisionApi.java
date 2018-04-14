@@ -42,7 +42,7 @@ public class GoogleVisionApi {
         //	로컬에서 이미지를 가져올때 image 생성
         else { 
         	
-        	logger.info("local" + filePath);
+        	logger.info("local : " + filePath);
             ByteString imgBytes = ByteString.readFrom(new FileInputStream(filePath));
             image = Image.newBuilder().setContent(imgBytes).build();
         }

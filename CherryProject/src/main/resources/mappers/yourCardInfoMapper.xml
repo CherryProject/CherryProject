@@ -76,22 +76,24 @@
 				, #{userid}
 				, CONCAT('yn', TO_CHAR(seq_yournum.nextval))
 				, #{mycardnum}
-				, #{memo}
-				, #{company}
-				, #{name}
-				, #{phone}
-				, #{tel}
-				, #{fax}
-				, #{email}
-				, #{address}
-				, #{job}
-				, #{department}
-				, #{otherinfo}
+				, #{memo, jdbcType=VARCHAR}
+				, #{company, jdbcType=VARCHAR}
+				, #{name1, jdbcType=VARCHAR}
+				, #{name2, jdbcType=VARCHAR}
+				, #{name3, jdbcType=VARCHAR}
+				, #{phone, jdbcType=VARCHAR}
+				, #{tel, jdbcType=VARCHAR}
+				, #{fax, jdbcType=VARCHAR}
+				, #{email, jdbcType=VARCHAR}
+				, #{address, jdbcType=VARCHAR}
+				, #{job, jdbcType=VARCHAR}
+				, #{department, jdbcType=VARCHAR}
+				, #{otherinfo, jdbcType=VARCHAR}
 				, #{frontimgsaved}
-				, #{backimgsaved}
-				, #{cardorder}
-				, #{frontimgoriginal}
-				, #{backimgoriginal}
+				, #{backimgsaved, jdbcType=VARCHAR}
+				, #{cardorder, jdbcType=VARCHAR}
+				, #{frontimgoriginal, jdbcType=VARCHAR}
+				, #{backimgoriginal, jdbcType=VARCHAR}
 		)
 	
 	</insert>

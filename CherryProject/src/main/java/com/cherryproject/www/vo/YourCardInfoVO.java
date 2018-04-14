@@ -89,18 +89,10 @@ public class YourCardInfoVO {
 	public void   setMycardnum(String mycardnum) 	{	this.mycardnum = mycardnum;	}
 	
 	public String getMemo() 			{	return memo;		}
-	public void   setMemo(String memo) 	{	
-		
-		if(memo == null) 	{	this.memo = "";		}
-		else 				{	this.memo = memo;	}
-	}
+	public void   setMemo(String memo) 	{	this.memo = memo;	}
 	
 	public String getCompany() 					{	return company;			}
-	public void   setCompany(String company) 	{	
-		
-		if(company == null) {	this.company = "";		}
-		else 				{	this.company = company;	}
-	}
+	public void   setCompany(String company) 	{	this.company = company;	}
 	
 	public String getName1() 				{	return name1;		}
 	public void   setName1(String name1) 	{	this.name1 = name1;	}
