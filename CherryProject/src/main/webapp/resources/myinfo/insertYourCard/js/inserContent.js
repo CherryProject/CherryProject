@@ -109,7 +109,11 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 			 
 	//  업로드한 이미지 파일을 나타내는 경로를 <div class='selectedImg img' src=''> 에 추가한다.
 	$(".selectedImg img").attr("src", src);
-
+	
+	// 이미지 미리보기를 선택할 경우 이미지에 테두리를 나타나게 한다.
+	$("#ocrImg_" + index).css('border', 'solid 10px red');
+	$("#ocrImg_" + index).trigger("create");
+	
 	var form = $('#tempUpload')[0];
 	var formData = new FormData(form);
 	
@@ -177,69 +181,70 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 
 }
 
- 
+
  /*
   *	@comment	:	OCR분석 결과를 텍스트에 집어넣기
   */
- function resultInput(detectResult) {
-	 
-	// 엔터키 기준으로 OCR 분석 결과 자르기
-	var detectResultArr = detectResult.split('\n');
-	var detectResultArrLen = detectResultArr.length;
-	inputTypeNum = detectResultArrLen;
-	
-	// 회원ID를 hidden으로 추가
-	$("#cardInfo").append("<input type='hidden' name='userid' value='${sessionScope.userid}' />");
-	var htmlCode = '';
-	var keyName = '';
-	
-	// 정규표현식들
-	//var regExp = /\s/g;					//모든 공백 체크 정규식
-	//var numberRegExp = /^[0-9]+$/;		//숫자만 체크 정규식
-	
-	var urlRegExp = /^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$/;	//도메인 형태, http:// https:// 포함안해도 되고 해도 되고	
-	var eMailRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	var phoneRegExp =  /^\d{3}-\d{3,4}-\d{4}$/;
-	var telRegExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
-	
-	for(var i=0; i<detectResultArrLen; i++) {
+	 function resultInput(detectResult) {
+		 
+		// 엔터키 기준으로 OCR 분석 결과 자르기
+		var detectResultArr = detectResult.split('\n');
+		var detectResultArrLen = detectResultArr.length;
+		inputTypeNum = detectResultArrLen;
 		
-		console.log(detectResultArr[i]);
+		// 회원ID를 hidden으로 추가
+		$("#cardInfo").append("<input type='hidden' name='userid' />");
+		$("#cardInfo").append("<input type='file' name='fileUpload' />");
+		var htmlCode = '';
+		var keyName = '';
 		
-		if(detectResultArr[i].length == 0 || detectResultArr[i] == null) {
+		// 정규표현식들
+		//var regExp = /\s/g;					//모든 공백 체크 정규식
+		//var numberRegExp = /^[0-9]+$/;		//숫자만 체크 정규식
+		
+		var urlRegExp = /^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$/;	//도메인 형태, http:// https:// 포함안해도 되고 해도 되고	
+		var eMailRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		var phoneRegExp =  /^\d{3}-\d{3,4}-\d{4}$/;
+		var telRegExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
+		
+		for(var i=0; i<detectResultArrLen; i++) {
 			
-			continue;
-		}
-		
-		keyName += "<select class='selectMenu' id='selectMenu_" + i + "'>";
-			keyName += "<option>선택</option>";
-			keyName += "<option value='name1'>이름(국문)</option>";
-			keyName += "<option value='name2'>이름(영문)</option>";
-			keyName += "<option value='name3'>이름</option>";
-			keyName += "<option value='company'>회사</option>";
-			keyName += "<option value='job'>직급</option>";
-			keyName += "<option value='department'>부서</option>";
-			keyName += "<option value='address'>주소</option>";
-			keyName += "<option value='tel'>전화번호</option>";
-			keyName += "<option value='phone'>휴대폰번호</option>";
-			keyName += "<option value='email'>E-Mail</option>";
-			keyName += "<option value='fax'>Fax</option>";
-			keyName += "<option value='memo'>Memo</option>";
-			keyName += "<option value='otherinfo'>Etc</option>";
-		keyName += "</select>";
-		
-		htmlCode += "<div class='input-group'>";
-			htmlCode += "<span class='input-group-addon'>" + keyName + "</span>";
-			htmlCode += "<textarea class='form-control' name='' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
-		htmlCode += "</div>";
-		
-		$("#cardInfo").append(htmlCode);
-		// htmlCode 초기화
-		htmlCode='';
-		keyName='';
-		
-	}
- }
+			console.log(detectResultArr[i]);
+			
+			if(detectResultArr[i].length == 0 || detectResultArr[i] == null) {
+				
+				continue;
+			}
+			
+			keyName += "<select class='selectMenu' id='selectMenu_" + i + "'>";
+				keyName += "<option>선택</option>";
+				keyName += "<option value='name1'>이름(국문)</option>";
+				keyName += "<option value='name2'>이름(영문)</option>";
+				keyName += "<option value='name3'>이름</option>";
+				keyName += "<option value='company'>회사</option>";
+				keyName += "<option value='job'>직급</option>";
+				keyName += "<option value='department'>부서</option>";
+				keyName += "<option value='address'>주소</option>";
+				keyName += "<option value='tel'>전화번호</option>";
+				keyName += "<option value='phone'>휴대폰번호</option>";
+				keyName += "<option value='email'>E-Mail</option>";
+				keyName += "<option value='fax'>Fax</option>";
+				keyName += "<option value='memo'>Memo</option>";
+				keyName += "<option value='otherinfo'>Etc</option>";
+			keyName += "</select>";
+			
+			htmlCode += "<div class='input-group'>";
+				htmlCode += "<span class='input-group-addon'>" + keyName + "</span>";
+				htmlCode += "<textarea class='form-control' name='' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
+			htmlCode += "</div>";
+			
+			$("#cardInfo").append(htmlCode);
+			// htmlCode 초기화
+			htmlCode='';
+			keyName='';
+				
+			}
+	 }
  
 // Select Menu 추가하기
 /*

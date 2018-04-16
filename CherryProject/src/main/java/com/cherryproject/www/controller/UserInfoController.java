@@ -44,6 +44,20 @@ public class UserInfoController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserInfoController.class);
 	
+	
+	/*
+	 * @comment				: 회원 가입 페이지 이동
+	 * @param	joinUser	: 
+	 * @author				: 정보승
+	 */
+	@RequestMapping(value="join", method=RequestMethod.GET)
+	public String userJoinForm(UserInfoVO joinUser, Model model) {
+		
+		logger.info("Move Join Form");
+		
+		return "sign/sign";
+	}
+	
 	/*
 	 * @comment				: 회원 가입 처리 (인증을 위한 E-mail 발송 기능 포함)
 	 * @param	joinUser	: View에서 받은 회원의 개인정보를 저장한 객체
@@ -94,7 +108,7 @@ public class UserInfoController {
 			logger.info("User Join Fail");
 		}
 		
-		return "redirect:/";
+		return "redirect:../";
 
 	}
 	
@@ -121,7 +135,7 @@ public class UserInfoController {
 			logger.info("E-mail Verify Fail");
 		}
 		
-		return "redirect:/";
+		return "redirect:../";
 	}
 
 	

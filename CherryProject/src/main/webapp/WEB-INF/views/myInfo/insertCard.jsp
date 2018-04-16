@@ -114,7 +114,7 @@
 			</div>
 			
 			<!-- 가장 좌측에 이미지들이 세로로 정렬되는 부분 : 미리보기 -->
-			<div class="imgs_wrap" style="float: left; width: 320px"> 
+			<div class="imgs_wrap" style="float: left; width: 320px;"> 
 				<img id="img" src="<c:url value="/resources/myinfo/insertYourCard/img/bg4(B).png "/>" width="400px">
 			</div>
 			

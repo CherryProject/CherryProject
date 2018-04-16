@@ -67,17 +67,17 @@ public class YourCardInfoController {
 	 */
 	@RequestMapping(value = "insertYourCard", method = RequestMethod.POST)
 	public String yourCardInsert(YourCardInfoVO yourCard
-								//, MultipartFile upload
-//								, HttpSession session
+								, MultipartFile upload
+								, HttpSession session
 								,  Model model) {
 		
 		logger.info("yourCardInsert");
 		
 		// 세션을 통해 회원 ID를 가져와서 저장.
-//		String userid = (String) session.getAttribute("userid");
-//		yourCard.setUserid(userid);
+		String userid = (String) session.getAttribute("userid");
+		yourCard.setUserid(userid);
 		yourCard.setFrontimgsaved("img");
-		yourCard.setMycardnum("mbc14");
+//		yourCard.setMycardnum("mbc14");
 		logger.info("MEMO : " + yourCard.toString());
 		//logger.info(upload.getOriginalFilename());
 		
