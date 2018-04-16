@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html >
 <!-- 정보승 : CSS 및 JS 공통부분 -->
@@ -7,8 +6,8 @@
 <html lang="ko">
 <head>
 <title>contactRead</title>
-<%-- <link rel="stylesheet" type="text/css" href="<c:url value="resources/contact/contactRead.css" />"/> --%>
-   <%-- <script type="text/javascript" src=" <c:url value="/resources/js/jquery-3.2.1.js" />" > </script> --%>
+<!-- <link rel="stylesheet" type="text/css" href="<c:url value="resources/contact/contactRead.css" />"/> 
+    <script type="text/javascript" src=" <c:url value="/resources/js/jquery-3.2.1.js" />" > </script>  -->
    <script type="text/javascript">
    
    /* 지원   : 수정하기 &삭제하기 버튼을 눌렀을때 ajax발동시키기 */
@@ -104,11 +103,23 @@
 	        data : {'boardnum': boardnum},
 	        success : function(data){
 	            var str =''; 
-	            $.each(data, function(key, value){ 
+	            var list = data.list;// 해쉬맵에 댓글리스트가 담겨있다.
+	            var id = data.loginid;//session에 담겨있던 loginid 값 (string)
+	        
+	            $.each(list, function(key, value){ 
+	            	var writer = (value.com_writer).substring(0,4);
+                    var showWriter = writer+"***";
 	            	str += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-	            	str += '<div class="commentInfo'+value.commentnum+'">'+'_작성자 : '+value.com_writer;
-	            	str += '<a onclick="commentUpdate('+value.commentnum+',\''+value.com_content+'\');"> [수정] </a>';
-	            	str += '<a onclick="deleteComment('+value.commentnum+');"> [삭제] </a> </div>';
+	            	str += '<div class="commentInfo'+value.commentnum+'">'+'_작성자 : '+showWriter;
+	            	
+                   
+	            	if(id == value.com_writer){
+	            		str += '<a onclick="commentUpdate('+value.commentnum+',   \'   '+value.com_content+'   \'  )"> [수정] </a>';
+	            		str += '<a onclick="deleteComment('+value.commentnum+');"> [삭제] </a> </div>';
+	            	} 
+	            	
+	            	
+	            	
 	            	str += '<div class="commentContent'+value.commentnum+'"> <p> 내용 : '+value.com_content +'</p>';
 	            	str += '</div></div>';
 	            });
@@ -117,6 +128,8 @@
 	        }
 	    });
 	}
+
+   
    
  //댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
    function commentUpdate(commentnum, com_content){
