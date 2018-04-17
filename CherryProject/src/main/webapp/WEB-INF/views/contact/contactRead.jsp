@@ -142,6 +142,7 @@
        
        $('.commentContent'+commentnum).html(str);
        
+       
    }
  
  //댓글 수정

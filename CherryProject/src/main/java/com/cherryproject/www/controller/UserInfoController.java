@@ -94,7 +94,7 @@ public class UserInfoController {
 			logger.info("User Join Fail");
 		}
 		
-		return "redirect:/";
+		return "redirect:../";
 
 	}
 	
@@ -121,7 +121,7 @@ public class UserInfoController {
 			logger.info("E-mail Verify Fail");
 		}
 		
-		return "redirect:/";
+		return "redirect:../";
 	}
 
 	

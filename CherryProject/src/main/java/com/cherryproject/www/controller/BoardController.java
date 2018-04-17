@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -210,18 +209,16 @@ public class BoardController {
 	 * @comment			: 댓글 리스트 출력하기
 	 * @author			: 여지원
 	 * @param			: 게시판 넘버와 session값
-	 * @return 			: hashmap
+	 * @return 			: hashmap으로 엮어서 리턴
 	 */	
 	@ResponseBody
 	@RequestMapping(value="commentList", method=RequestMethod.GET)
 	public HashMap<String, Object> commentList(int boardnum, HttpSession session){
 		
-		System.out.println("starttt-----------------------------");
 		String loginid = (String)session.getAttribute("userid");
 		System.out.println("id 값 : " + loginid);
 		ArrayList<CommentVO> list = null;		
 		list = boardDAO.commentList(boardnum);
-		logger.info("댓글 리스트 :::::::::: : " + list);
 		
 		HashMap<String, Object> hashmap = new HashMap<>();
 		hashmap.put("loginid", loginid);
@@ -229,7 +226,6 @@ public class BoardController {
 		
 		
 		System.out.println(hashmap);
-		
 		return hashmap;
 	}
 	

@@ -145,11 +145,11 @@
 			tbl_yourcardinfo
 					
 		WHERE
-			(userid like #{userid} and phone like #{search}) 
+			(userid like #{userid} and phone like '%' || #{search} || '%') 
 			or
-			(userid like #{userid} and name1 like #{search}) 
+			(userid like #{userid} and name1 like '%' || #{search} || '%') 
 			or
-			(userid like #{userid} and company like #{search})
+			(userid like #{userid} and company like '%' || #{search} || '%')
 		ORDER BY
 			yourcardnum
 	

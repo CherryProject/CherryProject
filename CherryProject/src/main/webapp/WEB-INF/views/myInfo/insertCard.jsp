@@ -24,12 +24,6 @@
 	<script type="text/javascript">
 		
 		
-		
-		
-		
-		
-		
-		
 		// 다중 파일 미리보기에서 특정 이미지만 삭제하기
 		//onclick=\"deleteImageAction(" + index + ")\"
 		function deleteImageAction(index) {
@@ -76,6 +70,32 @@
 
 			xhr.send(data);
 		}
+		
+		//userid를 참조하니까, session에서 MyCardInfoVO 가지고오기
+/* 		function getMyCardsImg(){
+			$.ajax({
+		        url : 'getMyCardImg'
+		        ,type : 'post'
+		      	,dataType:"json" */
+/* 		        ,success : function(result){
+		        	
+		        	var str ='';
+		        	var Imglist = data.frontimgsaved;
+		            alert(data.mycardnum);
+		            alert(data.frontimgsaved); //명함 앞면의 이미지 경로
+		            
+		            $.each(Imglist, function(key, value){ 
+		            }
+		            
+		            str+= '<div class="input-group">';
+		            $(".selectMyCard").attr('img','');
+		           // str+= $(".selctMyCard").html("abc")
+		           //ex) <img src="<c:url value="/resources/myinfo/insertYourCard/img/bg4(B).png "/>" >
+		           //ex) $('#greatphoto').attr('title', 'Photo by Kelly Clark');
+
+		        }
+		    });
+		} */
 
 	</script>
 </head>
@@ -114,23 +134,27 @@
 			</div>
 			
 			<!-- 가장 좌측에 이미지들이 세로로 정렬되는 부분 : 미리보기 -->
-			<div class="imgs_wrap" style="float: left; width: 320px"> 
-				<img id="img" src="<c:url value="/resources/myinfo/insertYourCard/img/bg4(B).png "/>" width="400px">
+			<div class="imgs_wrap" style="float: left; width: 320px;"> 
+				<%-- <img id="img" src="<c:url value="/resources/myinfo/insertYourCard/img/bg4(B).png "/>" width="400px"> --%>
+				<pre id="comment">NO IMAGES , PLEASE CLICK YOUR IMAGES.</pre>
 			</div>
 			
 			<!-- 미리보기 선택시 확대된 이미지가 보이는 부분 -->
-			<div class="centerDiv" style="float: left; width: 60%; margin-left: 30px; ">
-				<div class="selectedImg">
-					<img style="width : 100%;" src=""  />
-						<pre id="comment">NO IMAGES , PLEASE CLICK YOUR IMAGES.</pre>
+			<div class="centerDiv" style="float: left; width: 60%; margin-left: 30px;">
+				<div class="selectedImg" style="width=80%;">
+					<img src="<c:url value="/resources/myinfo/insertYourCard/img/bg4(B).png "/>" >
 				</div>
+			</div>
+			
+			<!-- 미리보기 밑에 유저의 명함이미지가 보이는 부분(My Card) -->
+			<div class="selctMyCard" >
+				
+			
 			</div>
 		
 	    </div>
 	</div>
 </div>
-
-
 </form>
 
 <form id="tempUpload" enctype="multipart/form-data">

@@ -35,7 +35,6 @@
 			<!-- <mvc:mapping path="/board/**" /> -->
 			<mvc:mapping path="/management" />
 			<mvc:mapping path="/myInfo" />
-			<mvc:mapping path="/tool" />
 			
 			<mvc:mapping path="/users/myCardInsert" />
 			

@@ -1,121 +1,115 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en" class="no-js">
 <head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Expanding Bar Menus | Demo 1 | Codrops</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/common.css">
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700i" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/index.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/component.css" />
+	<script>document.documentElement.className = 'js';</script>
 
-	<title>Block Reveal Effects | Menu | Codrops</title>
-	
-	<!-- 정보승 : CSS 및 JS 공통부분 -->
-	<%@ include file="/WEB-INF/views/common/headPart.jsp" %>
-	
-	<!-- 정보승: E-mail 인증이 안된 사용자에게 보내는 경고메시지 -->
-	<script>
-		<c:if test="${notVerify eq 'true'}">
-		alert("이메일 인증이 되지 않았습니다! 이메일을 확인하시고 인증해주시기 바랍니다!");
-		</c:if>
-	</script>
-	
-	<!-- 정보승 : 로그인과 회원가입에서 유효성 검사가 되지 않는다 -->
-	<!-- 
-		<script type="text/javascript" src="resources/js/loginValid.js"></script>
-		<script type="text/javascript" src="resources/js/joinValid.js"></script>
-	 -->
 </head>
-<body>
-
-	<div class="videoBox">
-		<video autoplay loop="100" muted  id="videoBG">
-			<source src="resources/img/SUZY-BLOSSOM PINK.mp4" type="video/mp4">
-		</video>
-	</div>
-	
-	<%@ include file="/WEB-INF/views/common/bodyHeader.jsp" %>
-	
-	<article>
-		<section class="content content--related flexy">
-			<div class="box box--border box--small">
-				<h2>Do you want to express yourself?</h2>
-				<h2>Make it your own.</h2>
-				<div class="login_button">
-					<ul>
-						<li>
-							<!-- 회원가입 버튼 -->
-							<button class="btn btn--default btn--form-open">joinUS</button>	
-						</li>
-						<li>
-							<!-- 로그인 버튼 -->
-							<button class="btn btn--default btn--login-open">Login</button>	
-						</li>
-					</ul>
-				</div>
+<body class="demo-1">
+	<div class="view">
+		<div class="content">
+			<header class="codrops-header">
+				<div class="codrops-links">
+					<c:choose>
+					<c:when test="${sessionScope.userid eq null}">
+						<a class="" href="users/join">회원가입</a>
+						<a class="" href="#">로그인</a>
+					</c:when>
+					<c:otherwise>
+						<a class="" href="#">로그아웃</a>
+					</c:otherwise>
+				</c:choose>
 			</div>
-		</section>
-		
-		<!-- 회원 가입 폼 -->
-		<section class="form">
-			<form class="form__inner flexy flexy--center" action="users/join" method="post">
-				<h3 class="form__section form__section--title">joinUS</h3>
-				
-				<!-- userid(E-mail형식) 입력 폼 -->
-				<div class="form__section">
-					<label class="form__label">Email</label>
-					<input class="form__input" type="email" name="userid" id="join_userid">
-				</div>
-				
-				<!-- userpw 입력 폼 -->
-				<div class="form__section">
-					<label class="form__label">Password</label>
-					<input class="form__input" type="password" name="userpw" id="join_userpw">
-				</div>
-				
-				<!-- username 입력 폼 -->
-				<div class="form__section">
-					<label class="form__label">Full Name</label>
-					<input class="form__input" type="text" name="username" id="join_username">
-				</div>
-				
-				<!-- 버튼 -->
-				<div class="form__section form__section--right">
-					<button class="form__close btn btn--default">Close this</button>
-					<button class="join__user btn btn--default">Join us</button>
-				</div>
-			</form>
-		</section>
-		
-		<!-- 로그인 폼 -->
-		<section class="login form">
-			<form class="form__inner flexy flexy--center" action="users/login" method="post">
-				<h3 class="form__section form__section--title">Login</h3>
-				
-				<!-- userid(E-mail형식) 입력 폼 -->
-				<div class="form__section">
-					<label class="form__label">Email</label>
-					<input class="form__input" type="email" name="userid" id="login_userid">
-				</div>
-				
-				<!-- userpw 입력 폼 -->
-				<div class="form__section">
-					<label class="form__label">Password</label>
-					<input class="form__input" type="password" name="userpw" id="login_userpw">
-				</div>
-				
-				<!-- 버튼 -->
-				<div class="form__section form__section--right">
-					<button class="login__close btn btn--default" >Close this</button>
-					<button class="login__user btn btn--default" >Login</button>
-				</div>
-			</form>
-		</section>
-		
-	</article><!-- article end -->
-	
-	<footer></footer><!-- footer end -->
-	
-	<script type="text/javascript" src="resources/js/anime.min.js"></script>
-	<script type="text/javascript" src="resources/js/main.js"></script>
-	<script type="text/javascript" src="resources/js/joinForm.js"></script>
- 	<script type="text/javascript" src="resources/js/loginForm.js"></script>
-	
+			<p class="codrops-header__info">Do you want to express yourself?<br/>Make it your own.</p>
+			<span class="codrops-header__deco">hitherto</span>
+			<h1 class="codrops-header__title">Arias</h1>
+			<p class="codrops-header__tagline">make a business card</p>
+		</header>
+	</div>
+	<button class="btn btn--menu">
+		<svg class="icon icon--menu"><use xlink:href="#icon-menu"></use></svg>
+		<svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
+	</button>
+	<nav class="tabsnav tabsnav--vertical tabsnav--ander">
+		<div class="tabsnav__item">
+			<div class="tabsnav__bar"></div>
+			<h3 class="tabsnav__title">TemplateList</h3>
+		</div>
+		<div class="tabsnav__item">
+			<div class="tabsnav__bar"></div>
+			<h3 class="tabsnav__title">Tools</h3>
+		</div>
+		<div class="tabsnav__item">
+			<div class="tabsnav__bar"></div>
+			<h3 class="tabsnav__title">Myinfo</h3>
+		</div>
+		<div class="tabsnav__item">
+			<div class="tabsnav__bar"></div>
+			<h3 class="tabsnav__title">Contact</h3>
+		</div>
+	</nav>
+	<div class="tabscontent">
+		<div class="tabscontent__item">
+			<figure class="poster">
+				<img class="poster__img" src="resources/img/newMain_img/img1.jpg" alt="Poster 1"/>
+				<figcaption class="poster__caption">
+					<h2 class="poster__title" >TemplateList</h2>
+					<p class="poster__deco">Choose a simple template</p>
+					<div class="poster__box"></div>
+					<span class="poster__number"><i class="fas fa-location-arrow"></i></span>
+				</figcaption>
+			</figure>
+		</div>
+		<div class="tabscontent__item">
+			<figure class="poster">
+				<img class="poster__img" src="resources/img/newMain_img/img1.jpg" alt="Poster 1"/>
+				<figcaption class="poster__caption">
+					<h2 class="poster__title">Tools</h2>
+					<p class="poster__deco">명함 만들기</p>
+					<div class="poster__box"></div>
+					<span class="poster__number"><i class="fas fa-location-arrow"></i></span>
+					</figcaption>
+				</figure>
+			</div>
+			<div class="tabscontent__item">
+				<figure class="poster">
+					<img class="poster__img" src="resources/img/newMain_img/img1.jpg" alt="Poster 1"/>
+					<figcaption class="poster__caption">
+						<h2 class="poster__title">Myinfo</h2>
+						<p class="poster__deco">카드관리</p>
+						<div class="poster__box"></div>
+						<span class="poster__number" ><i class="fas fa-location-arrow"></i></span></a>
+					</figcaption>
+				</figure>
+			</div>
+			<div class="tabscontent__item">
+				<figure class="poster">
+					<img class="poster__img" src="resources/img/newMain_img/img1.jpg" alt="Poster 1"/>
+					<figcaption class="poster__caption">
+						<h2 class="poster__title">contact</h2>
+						<p class="poster__deco">공지사항</p>
+						<div class="poster__box"></div>
+						<span class="poster__number" href="/www/contact"><i class="fas fa-location-arrow"></i></span>
+					</figcaption>
+				</figure>
+			</div>
+			<button class="btn btn--back"><i class="fas fa-angle-left"></i></button>
+		</div>
+	</div>
+	<script src="resources/js/newMain_js/anime.min.js"></script>
+	<script src="resources/js/newMain_js/enquire.min.js"></script>
+	<script src="resources/js/newMain_js/tabsnav.js"></script>
+	<script src="resources/js/newMain_js/demo1.js"></script>
 </body>
 </html>
