@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -13,13 +14,12 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/index.css" />
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/component.css" />
-<<<<<<< HEAD
-=======
+
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/link_hover_basic.css">
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/link_hover.css">
 	
 	<script type="text/javascript" src="resources/js/newMain_js/modernizr.custom.js"></script>
->>>>>>> af8fab7cfe3c234f24ace833ff16cfa4da8bddd0
+
 	<script>document.documentElement.className = 'js';</script>
 
 </head>
@@ -77,31 +77,6 @@
 					<span class="poster__number"><i class="fas fa-location-arrow"></i></span>
 				</figcaption>
 			</figure>
-<<<<<<< HEAD
-		</div>
-		<div class="tabscontent__item">
-			<figure class="poster">
-				<img class="poster__img" src="resources/img/newMain_img/img1.jpg" alt="Poster 1"/>
-				<figcaption class="poster__caption">
-					<h2 class="poster__title">Tools</h2>
-					<p class="poster__deco">명함 만들기</p>
-					<div class="poster__box"></div>
-					<span class="poster__number"><i class="fas fa-location-arrow"></i></span>
-					</figcaption>
-				</figure>
-			</div>
-			<div class="tabscontent__item">
-				<figure class="poster">
-					<img class="poster__img" src="resources/img/newMain_img/img1.jpg" alt="Poster 1"/>
-					<figcaption class="poster__caption">
-						<h2 class="poster__title">Myinfo</h2>
-						<p class="poster__deco">카드관리</p>
-						<div class="poster__box"></div>
-						<span class="poster__number" ><i class="fas fa-location-arrow"></i></span></a>
-					</figcaption>
-				</figure>
-			</div>
-=======
 			<div class="cl-effect-21">
 				<a href="/www/templateList">TemplateList</a>
 			</div>
@@ -134,27 +109,19 @@
 					<a href="/www/myInfo">MyInfo</a>
 				</div>
 			</div>
->>>>>>> af8fab7cfe3c234f24ace833ff16cfa4da8bddd0
 			<div class="tabscontent__item">
 				<figure class="poster">
 					<img class="poster__img" src="resources/img/newMain_img/img1.jpg" alt="Poster 1"/>
 					<figcaption class="poster__caption">
-<<<<<<< HEAD
-						<h2 class="poster__title">contact</h2>
-=======
 						<h2 class="poster__title">Contact</h2>
->>>>>>> af8fab7cfe3c234f24ace833ff16cfa4da8bddd0
 						<p class="poster__deco">공지사항</p>
 						<div class="poster__box"></div>
 						<span class="poster__number" href="/www/contact"><i class="fas fa-location-arrow"></i></span>
 					</figcaption>
 				</figure>
-<<<<<<< HEAD
-=======
 				<div class="cl-effect-21">
 					<a href="/www/contact">Contact</a>
 				</div>
->>>>>>> af8fab7cfe3c234f24ace833ff16cfa4da8bddd0
 			</div>
 			<button class="btn btn--back"><i class="fas fa-angle-left"></i></button>
 		</div>

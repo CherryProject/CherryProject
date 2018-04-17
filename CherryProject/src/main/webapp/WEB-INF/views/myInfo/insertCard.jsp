@@ -23,12 +23,6 @@
 	
 	<script type="text/javascript">
 		
-<<<<<<< HEAD
-		
-=======
->>>>>>> af8fab7cfe3c234f24ace833ff16cfa4da8bddd0
-		// 다중 파일 미리보기에서 특정 이미지만 삭제하기
-		//onclick=\"deleteImageAction(" + index + ")\"
 		function deleteImageAction(index) {
 
 			if(sel_files.length == 0) {
@@ -138,12 +132,9 @@
 			
 			<!-- 가장 좌측에 이미지들이 세로로 정렬되는 부분 : 미리보기 -->
 			<div class="imgs_wrap" style="float: left; width: 320px;"> 
-<<<<<<< HEAD
 				<%-- <img id="img" src="<c:url value="/resources/myinfo/insertYourCard/img/bg4(B).png "/>" width="400px"> --%>
 				<pre id="comment">NO IMAGES , PLEASE CLICK YOUR IMAGES.</pre>
-=======
-				<img id="img" src="<c:url value="/resources/myinfo/insertYourCard/img/bg4(B).png "/>" width="400px">
->>>>>>> af8fab7cfe3c234f24ace833ff16cfa4da8bddd0
+				
 			</div>
 			
 			<!-- 미리보기 선택시 확대된 이미지가 보이는 부분 -->
