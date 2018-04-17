@@ -13,6 +13,10 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/index.css" />
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/component.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/link_hover_basic.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/link_hover.css">
+	
+	<script type="text/javascript" src="resources/js/newMain_js/modernizr.custom.js"></script>
 	<script>document.documentElement.className = 'js';</script>
 
 </head>
@@ -70,6 +74,9 @@
 					<span class="poster__number"><i class="fas fa-location-arrow"></i></span>
 				</figcaption>
 			</figure>
+			<div class="cl-effect-21">
+				<a href="/www/templateList">TemplateList</a>
+			</div>
 		</div>
 		<div class="tabscontent__item">
 			<figure class="poster">
@@ -81,28 +88,37 @@
 					<span class="poster__number"><i class="fas fa-location-arrow"></i></span>
 					</figcaption>
 				</figure>
+				<div class="cl-effect-21">
+					<a href="/www/tool">Tools</a>
+				</div>
 			</div>
 			<div class="tabscontent__item">
 				<figure class="poster">
 					<img class="poster__img" src="resources/img/newMain_img/img1.jpg" alt="Poster 1"/>
 					<figcaption class="poster__caption">
-						<h2 class="poster__title">Myinfo</h2>
+						<h2 class="poster__title">MyInfo</h2>
 						<p class="poster__deco">카드관리</p>
 						<div class="poster__box"></div>
 						<span class="poster__number" ><i class="fas fa-location-arrow"></i></span></a>
 					</figcaption>
 				</figure>
+				<div class="cl-effect-21">
+					<a href="/www/myInfo">MyInfo</a>
+				</div>
 			</div>
 			<div class="tabscontent__item">
 				<figure class="poster">
 					<img class="poster__img" src="resources/img/newMain_img/img1.jpg" alt="Poster 1"/>
 					<figcaption class="poster__caption">
-						<h2 class="poster__title">contact</h2>
+						<h2 class="poster__title">Contact</h2>
 						<p class="poster__deco">공지사항</p>
 						<div class="poster__box"></div>
 						<span class="poster__number" href="/www/contact"><i class="fas fa-location-arrow"></i></span>
 					</figcaption>
 				</figure>
+				<div class="cl-effect-21">
+					<a href="/www/contact">Contact</a>
+				</div>
 			</div>
 			<button class="btn btn--back"><i class="fas fa-angle-left"></i></button>
 		</div>

@@ -23,13 +23,6 @@
 	
 	<script type="text/javascript">
 		
-		
-		
-		
-		
-		
-		
-		
 		// 다중 파일 미리보기에서 특정 이미지만 삭제하기
 		//onclick=\"deleteImageAction(" + index + ")\"
 		function deleteImageAction(index) {
@@ -146,7 +139,11 @@
 	<script src="<c:url value="/resources/myinfo/insertYourCard/js/main.js" />"></script>
 	<script src="<c:url value="/resources/myinfo/insertYourCard/js/inserContent.js" />"></script>
 
+	<!-- 
 	<script type="text/javascript" src="<c:url value="/resources/js/anime.min.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="/resources/js/main.js "/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/main.js"/>"></script>
+	 -->
+	<script src="<c:url value="/resources/js/newMain_js/menu/classie.js" />"> </script>
+	<script src="<c:url value="/resources/js/newMain_js/menu/borderMenu.js" />"></script>
 </body>
 </html>

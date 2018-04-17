@@ -32,26 +32,9 @@
 </head>
 
 <body>
-		<header class="codrops-header">
-		<h1 class="codrops-header__title">명함만들기프로젝트</h1>
-	
-		<!-- 메뉴 선택 바 열기 -->
-		<button class="btn btn--menu"><i class="fas fa-bars"></i></button>
-		<nav class="menu">
-	
-		<!-- 메뉴 선택 바 닫기 -->
-		<button class="btn btn--close"><i class="fas fa-times"></i></button>
+
+	<%@ include file="/WEB-INF/views/common/bodyHeader.jsp" %>
 		
-		<!-- 메뉴 선택 바 -->
-			<ul class="menu__inner">
-				<li class="menu__item"><a class="menu__link" href="/www">Home</a></li>
-				<li class="menu__item"><a class="menu__link" href="/www/templateList">TemplateList</a></li>
-				<li class="menu__item"><a class="menu__link" href="/www/tool">Tool</a></li>
-				<li class="menu__item"><a class="menu__link" href="/www/management">Management</a></li>
-				<li class="menu__item"><a class="menu__link" href="/www/contact">Contact</a></li>
-			</ul>
-		</nav>
-	</header><!-- header end -->
 	<!-- d여기가 작업 공간 -->
 	<article>
 	
@@ -92,8 +75,12 @@
 		</article><!-- article end -->
 		<footer></footer><!-- footer end -->
 		
-		<script type="text/javascript" src="<c:url value="/resources/js/anime.min.js"/>"></script>
-		<script type="text/javascript" src="<c:url value="/resources/js/main.js "/>"></script>
+		 <!-- 
+	<script type="text/javascript" src="<c:url value="/resources/js/anime.min.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/main.js"/>"></script>
+	 -->
+	<script src="<c:url value="/resources/js/newMain_js/menu/classie.js" />"> </script>
+	<script src="<c:url value="/resources/js/newMain_js/menu/borderMenu.js" />"></script>
 
 	
 </body>
