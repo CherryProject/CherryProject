@@ -110,7 +110,7 @@ public class HomeController {
 	
 	
 	/*
-	 * @comment		: management.jsp로 이동
+	 * @comment		: myInfo.jsp로 이동
 	 * @author		: 정보승
 	 */
 	@RequestMapping(value = "myInfo", method = RequestMethod.GET)

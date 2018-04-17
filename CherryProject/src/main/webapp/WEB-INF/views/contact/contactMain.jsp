@@ -382,7 +382,11 @@
 		</article><!-- article end -->
 		<footer></footer><!-- footer end -->
 		
-		<script type="text/javascript" src="resources/js/anime.min.js"></script>
-		<script type="text/javascript" src="resources/js/main.js"></script>
+		 <!-- 
+	<script type="text/javascript" src="<c:url value="/resources/js/anime.min.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/main.js"/>"></script>
+	 -->
+	<script src="<c:url value="/resources/js/newMain_js/menu/classie.js" />"> </script>
+	<script src="<c:url value="/resources/js/newMain_js/menu/borderMenu.js" />"></script>
 	</body>
 	</html>

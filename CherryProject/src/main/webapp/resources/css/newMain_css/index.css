@@ -295,7 +295,7 @@ a:focus {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
-	margin: 0 0 0 -0.1em;
+	margin: 0 0 1em -0.1em;
 	text-indent: -0.75em;
 }
 
