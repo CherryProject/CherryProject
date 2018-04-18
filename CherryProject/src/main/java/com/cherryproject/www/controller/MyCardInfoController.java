@@ -11,9 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.cherryproject.www.common.util.FileService;
 import com.cherryproject.www.dao.MyCardInfoDAO;
 import com.cherryproject.www.vo.MyCardInfoVO;
+
+import net.sf.json.JSON;
 
 /*
  * @comment	:	내가 만든 명함과 보유하고 있는 명함을 조회
@@ -70,4 +76,31 @@ public class MyCardInfoController {
 		}
 		
 	}
+	
+	/*
+	 * @comment	:	나의 카드정보를 담은 리스트
+	 * @author	:	여지원
+	 */
+	@ResponseBody
+	@RequestMapping(value="getMyCards", method=RequestMethod.GET)
+	public ArrayList<MyCardInfoVO> getMyCards(HttpSession session) {
+		
+		//produces="text/plain; charset=UTF-8"
+		
+		
+		logger.info("getMyCards Success 성공");
+		
+		String userid = (String) session.getAttribute("userid");
+		System.out.println("유저아이디");
+		System.out.println(userid);
+		ArrayList<MyCardInfoVO> list = null;
+		list = myCardInfoDAO.selectAllMyCard("ik872000@gmail.com");
+		System.out.println(list);
+		
+		return list;
+		
+	}
+	
+	
+
 }

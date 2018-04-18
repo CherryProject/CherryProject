@@ -16,9 +16,10 @@ var inputTypeNum = 0;	// inputType의 갯수
  */
 $(document).ready(function() {
 	$("#input_imgs").on("change", handleImgFileSelect);
-	$(document).on("mouseenter",".delBtnClass",function(){
-		/*$(this);*/
-	})
+	/*$(document).on("mouseenter",".delBtnClass",function(){
+		$(this);
+	})*/
+	getMyCardsImg();
 });
 
 
@@ -42,7 +43,7 @@ function fileUploadAction() {
  *	@comment	:	업로드한 이미지들의 미리보기 화면 생성 메소드
  */ 
 function handleImgFileSelect(e) {
-	
+	alert("handleImgFileselect");
 	// 이미지 정보들을 초기화
 	sel_files = [];
 	
@@ -61,8 +62,6 @@ function handleImgFileSelect(e) {
 	var inputLen = 0;		// input으로 업로드한 이미지의 갯수.
 	
 	filesArr.forEach(function(f) {
-		
-		
 		if(!f.type.match("image.*")) {
 			alert("이미지 파일만 가능합니다.");
 			return;

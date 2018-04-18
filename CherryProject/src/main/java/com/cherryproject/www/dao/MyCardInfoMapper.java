@@ -2,6 +2,8 @@ package com.cherryproject.www.dao;
 
 import java.util.ArrayList;
 
+import org.springframework.dao.DataAccessException;
+
 import com.cherryproject.www.vo.MyCardInfoVO;
 
 /*
@@ -13,7 +15,7 @@ public interface MyCardInfoMapper {
 	
 	
 	// 정보승 : 등록한 내 명함 전체 조회
-	public ArrayList<MyCardInfoVO> selectAllMyCard(String userid);
+	public ArrayList<MyCardInfoVO> selectAllMyCard(String userid) throws DataAccessException;
 	
 	// 정보승 : 등록한 내 명함 하나 조회
 	

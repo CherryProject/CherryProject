@@ -19,6 +19,7 @@
 		<mapper resource="mappers/userInfoMapper.xml" />
 		<mapper resource="mappers/yourCardInfoMapper.xml" />
 		<mapper resource="mappers/boardMapper.xml" />
+		<mapper resource="mappers/myCardInfoMapper.xml" />
 
 	</mappers>
 	

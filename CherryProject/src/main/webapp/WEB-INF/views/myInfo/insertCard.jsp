@@ -68,36 +68,41 @@
 			xhr.send(data);
 		}
 		
-		
-		//0418_ 여지원 수정
-/* 		//userid를 참조하니까, session에서 MyCardInfoVO 가지고오기
- 		function getMyCardsImg(){
-			$.ajax({
-		        url : 'getMyCardImg'
-		        ,type : 'post'
-		      	,dataType:"json" 
- 		        ,success : function(result){
-		        	
-		        	var str ='';
-		        	var Imglist = data.frontimgsaved;
-		            alert(data.mycardnum);
-		            alert(data.frontimgsaved); //명함 앞면의 이미지 경로
-		             */
-/* 		            $.each(Imglist, function(key, value){ 
-		            	
-		            	
-		            }
-		            
-		            str+= '<div class="input-group">';
-		            $(".selectMyCard").attr('img','');
-		           // str+= $(".selctMyCard").html("abc")
-		           //ex) <img src="<c:url value="/resources/myinfo/insertYourCard/img/bg4(B).png "/>" >
-		           //ex) $('#greatphoto').attr('title', 'Photo by Kelly Clark');
+		//내 개인명함들만 리스트 띄우기
+		//userid를 참조하니까, session에서 MyCardInfoVO 가지고오기
+		function getMyCardsImg(){
+			alert("겟마이발동");
+		$.ajax({
+	        url : '../mycard/getMyCards'
+	        ,type : 'get'
+		    ,success : function(list){
+		    	alert("성공");
+		    	
+	        	    var mycardnum = list.mycardnum;
+		        	var company = list.company;
+		        	var job= list.job;
+		        	alert(mycardnum);
+		        	//<form action="">
+	             //<input type="radio" name="gender" value="male"> Male<br>
+	        	    var str ='';
+	          
+		            $.each(list, function(key, value){ 
+					str+= '<input type='+radio+' value='+value.mycardnum+'> '+value.mycardnum+'' ;
+	            	
+	            });
+	            
+				$(".selctMyCard").html(str);
+	           // str+= $(".selctMyCard").html("abc")
+	           //ex) <img src="<c:url value="/resources/myinfo/insertYourCard/img/bg4(B).png "/>" >
+	           //ex) $('#greatphoto').attr('title', 'Photo by Kelly Clark');
 
-		        }
-		    });
-		} 
- */
+	        }
+	    });
+	} 
+		
+		
+		
+ 
 	</script>
 </head>
 
