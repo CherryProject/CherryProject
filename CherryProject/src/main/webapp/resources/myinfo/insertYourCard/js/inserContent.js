@@ -15,9 +15,13 @@ var inputTypeNum = 0;	// inputType의 갯수
  *	@comment	:	 
  */
 $(document).ready(function() {
-	
 	$("#input_imgs").on("change", handleImgFileSelect);
+	$(document).on("mouseenter",".delBtnClass",function(){
+		/*$(this);*/
+	})
 });
+
+
 
 
 /*
@@ -60,7 +64,6 @@ function handleImgFileSelect(e) {
 		
 		
 		if(!f.type.match("image.*")) {
-			
 			alert("이미지 파일만 가능합니다.");
 			return;
 		};
@@ -75,12 +78,18 @@ function handleImgFileSelect(e) {
 			
 			// 업로드한 이미지의 미리보기 영역 생성
 			var makeImgPreview = "<div class='imgPreview'>";
-					makeImgPreview += "<a href='javascript:void(0)' onclick='moveToDiv(\"" + src + "\"," + (num-1) + "," + inputLen + "," + index + ")' id='img_id_" + index + "'>";
-						makeImgPreview += "<img style='width : 200px;' src='" + e.target.result + "' data-file='" + f.name + "' class='selProductFile' id='ocrImg_" + index + "'>";
-					makeImgPreview += "</a>";
+				makeImgPreview += "<a href='javascript:void(0)' onclick='moveToDiv(\"" + src + "\"," + (num-1) + "," + inputLen + "," + index + ")' id='img_id_" + index + "'>";
+				makeImgPreview += "<img style='width : 200px;' src='" + e.target.result + "' data-file='" + f.name + "' class='selProductFile' id='ocrImg_" + index + "'>";
+				makeImgPreview += "</a>";
 				makeImgPreview += "</div>";
-			
+			//미리보기 밑에 유저의 명함이미지가 보이는 부분(My Card) -여지원
+				/*'/resources/myinfo/insertYourCard/img/delBTN.png'*/
+			 var makeDelBtn	= "<div class='selctMyCard'>";
+			 	makeDelBtn += " <img class='delBtnClass' style=  'display:inline;' id='delBTN"+index+"' src='../resources/img/delBTN.png' onclick='delOne("+index+")'>";
+			 																									/*onclick="commentUpdateProc('+commentnum+');"*/
+			    makeDelBtn += "</div>";
 			$(".imgs_wrap").append(makeImgPreview);
+			$(".imgs_wrap").append(makeDelBtn);
 			index++;
 			inputLen++;
 		};
@@ -89,11 +98,24 @@ function handleImgFileSelect(e) {
 		reader.readAsDataURL(f);
 		
 		// 
-		if(inputLen <= $("#input_imgs"+(num-1))[0].files.length) {
+		/*if(inputLen <= $("#input_imgs"+(num-1))[0].files.length) {
 			
 			inputLen = 0;
-		}
+		}*/
 	});
+	
+}
+
+//삭제버튼 누르고 미리보기 이미지 삭제 (여지원)
+function delOne(index){
+	var ocrImg = "ocrImg_"+index;
+	var bool = confirm("이미지를 목록에서 지울까요?");
+	if(!bool){
+		return false;
+	}
+	$("#"+ocrImg+"").remove();
+	$("#delBTN"+index+"").remove();
+	
 	
 }
 

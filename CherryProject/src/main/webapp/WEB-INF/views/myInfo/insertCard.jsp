@@ -68,20 +68,24 @@
 			xhr.send(data);
 		}
 		
-		//userid를 참조하니까, session에서 MyCardInfoVO 가지고오기
-/* 		function getMyCardsImg(){
+		
+		//0418_ 여지원 수정
+/* 		//userid를 참조하니까, session에서 MyCardInfoVO 가지고오기
+ 		function getMyCardsImg(){
 			$.ajax({
 		        url : 'getMyCardImg'
 		        ,type : 'post'
-		      	,dataType:"json" */
-/* 		        ,success : function(result){
+		      	,dataType:"json" 
+ 		        ,success : function(result){
 		        	
 		        	var str ='';
 		        	var Imglist = data.frontimgsaved;
 		            alert(data.mycardnum);
 		            alert(data.frontimgsaved); //명함 앞면의 이미지 경로
-		            
-		            $.each(Imglist, function(key, value){ 
+		             */
+/* 		            $.each(Imglist, function(key, value){ 
+		            	
+		            	
 		            }
 		            
 		            str+= '<div class="input-group">';
@@ -92,8 +96,8 @@
 
 		        }
 		    });
-		} */
-
+		} 
+ */
 	</script>
 </head>
 
