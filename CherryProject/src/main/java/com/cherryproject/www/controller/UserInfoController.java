@@ -1,5 +1,6 @@
 package com.cherryproject.www.controller;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
@@ -44,6 +45,7 @@ public class UserInfoController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserInfoController.class);
 	
+	final String uploadPath = "/BusinessCardProject/management/temp/";
 	
 	/*
 	 * @comment				: 회원 가입 페이지 이동
@@ -140,6 +142,19 @@ public class UserInfoController {
 
 	
 	/* 
+	 * @comment				: 로그인 페이지로 이동
+	 * @author				: 정보승
+	 */
+	@RequestMapping(value="loginForm", method=RequestMethod.GET)
+	public String userLoginForm() {
+		
+		logger.info("Move User Login Page");
+		
+		return "loginForm";
+	}
+	
+	
+	/* 
 	 * @comment				: 회원 로그인 처리
 	 * @param	loginInfo	: View에서 입력받은 User ID와 User Pw를 저장하고 있는 객체
 	 * 			session		: 로그인 성공 시 User ID를 저장
@@ -213,7 +228,33 @@ public class UserInfoController {
 	}
 	
 	
-	
+	/*
+	 * @comment		: 회원 로그아웃
+	 * @author		: 정보승
+	 */
+	@RequestMapping(value = "logout", method = RequestMethod.GET)
+	public String myCardInsert(HttpSession session) {
+		
+		logger.info("Logout Start");
+		
+		String userid = (String) session.getAttribute("userid");
+		
+		String deleteFile = new StringBuffer().append(uploadPath).append(userid).toString();
+		
+		// temp 폴더의 회원 ID 폴더의 모든 이미지를 삭제
+		File files[] = new File(deleteFile).listFiles();
+		
+		for(int i=0; i<files.length; i++) {
+
+			files[i].delete();
+			logger.info("Image Delete Success");
+		}
+		
+		
+		session.invalidate();
+		
+		return "redirect:/";
+	}
 	
 	
 }

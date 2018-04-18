@@ -1,8 +1,14 @@
 package com.cherryproject.www.common.util;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -93,5 +99,67 @@ public class FileService {
 		
 		return result;
 	}
+	
+	
+	/*
+	 * @comment	:	해당 폴더의 파일 리스트를 읽는 메소드
+	 * @param	:	폴더 경로
+	 * @return	:	파일 목록
+	 * @author	:	정보승 
+	 */
+	 public static ArrayList<File> getDirFileList(String dirPath){
+
+		// 디렉토리 파일 리스트
+		ArrayList<File> dirFileList = null;
+		  
+		// 파일 목록을 요청한 디렉토리를 가지고 파일 객체를 생성함
+		File dir = new File(dirPath);
+		  
+		// 디렉토리가 존재한다면
+		if (dir.exists())
+		{
+			// 파일 목록을 구함
+			File[] files = dir.listFiles();
+			   
+			// 파일 배열을 파일 리스트로 변화함 
+			dirFileList = new ArrayList<File>(Arrays.asList(files));
+		}
+		  
+		return dirFileList;
+
+	}
+	
+	
+	/*
+	 * @param	:	임시 폴더에서 사용자의 계정폴더로 이미지 파일을 복사하는 메소드
+	 * @author	:	정보승 
+	 */
+	public static void fileCopy(String tempFile ,String uploadFile) {
+		
+		try {
+			
+			FileInputStream fis = new FileInputStream(tempFile);
+			FileOutputStream fos = new FileOutputStream(uploadFile);
+			   
+			int data = 0;
+			
+			while((data=fis.read())!=-1) {
+				
+				fos.write(data);
+			}
+			
+			fis.close();
+			fos.close();
+			
+		} catch (IOException e) {
+		
+			e.printStackTrace();
+		}
+
+//		return false;
+	}
+	
+	
+	
 }
 

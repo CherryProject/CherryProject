@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.inject.Inject;
@@ -46,6 +47,7 @@ public class YourCardInfoController {
 	final String detectFilePath = "BusinessCardProject\\management\\temp\\";			// OCR 처리할 파일이 있는 경로
 	final String uploadPath = "/BusinessCardProject/management/temp/";					// OCR 처리할 파일을 만드는 경로
 	
+	static String uploadSavedImg;			// 업로드를 위해 temp에서 회원 폴더로 이동할 파일의 이름
 	
 	/*
 	 * @comment		: 다른 사람 명함 등록 페이지로 이동
@@ -62,52 +64,72 @@ public class YourCardInfoController {
 	
 	
 	/*
-	 * @comment		: 다른 사람 명함 등록 
-	 * @author		: 정보승
+	 * @comment				:	다른 사람 명함 등록 (사진 이외의 정보)
+	 * @param	uploadImg	:	이미지의 실제 파일명
+	 * @author				:	정보승
 	 */
-	@RequestMapping(value = "insertYourCard", method = RequestMethod.POST)
+	@ResponseBody
+	@RequestMapping(value = "insertYourCard", method = RequestMethod.POST, produces="text/plain; charset=UTF-8")
 	public String yourCardInsert(YourCardInfoVO yourCard
-								, MultipartFile upload
+								, String uploadImg				
 								, HttpSession session
-								,  Model model) {
+								, Model model) {
 		
-		logger.info("yourCardInsert");
+		logger.info("yourCard Insert Start");
 		
 		// 세션을 통해 회원 ID를 가져와서 저장.
 		String userid = (String) session.getAttribute("userid");
 		yourCard.setUserid(userid);
-		yourCard.setFrontimgsaved("img");
-//		yourCard.setMycardnum("mbc14");
-		logger.info("MEMO : " + yourCard.toString());
-		//logger.info(upload.getOriginalFilename());
 		
-		//첨부파일이 있는 경우 지정된 경로에 저장하고, 원본 파일명과 저장된 파일명을 YourCardInfoVO객체에 세팅
-//		if (!upload.isEmpty()) {
-//			
-//			String filepath = new StringBuffer().append(yourCarduploadPath).append(yourCard.getUserid()).append("/").toString() ;
-//			String savedfile = FileService.saveFile(upload, filepath);
-//			yourCard.setFrontimgoriginal(upload.getOriginalFilename());
-//			yourCard.setFrontimgsaved(savedfile);
-//		}
+		// temp폴더의 파일목록을 생성
+		ArrayList<File> dirList = FileService.getDirFileList(new StringBuffer().append(uploadPath).append(userid).append("/").toString());
+		
+		// temp 폴더의 파일 수
+		int dirListLen = dirList.size(); 
+		
+		// temp 폴더의 파일을 회원의 yourcard 폴더로 이동
+		for (int i=0; i<dirListLen; i++)
+		{
+			
+			if(uploadSavedImg.equals(dirList.get(i).getName())){
+				
+				FileService.fileCopy(
+					new StringBuffer().append(uploadPath).append(userid).append("/").append(uploadSavedImg).toString()
+					, new StringBuffer().append(yourCarduploadPath).append(userid).append("/").append(uploadSavedImg).toString()
+					);
+				
+				break;
+			}
+			
+		}
+		
+		yourCard.setFrontimgsaved(uploadSavedImg);		// 서버에 저장될 이미지 파일명
+		yourCard.setFrontimgoriginal(uploadImg);		// 회원이 올린 실제 이미지 파일명
+		yourCard.setMycardnum("mbc14");	// 삭제 예정
 		
 //		yourCardInfoDAO
 		boolean insertIs = yourCardInfoDAO.yourCardInsert(yourCard);
 		
+		String resultMsg = "";	// 화면으로 명함 등록의 결과를 알려줄 변수
+		
 		if(insertIs) {
 			
-			logger.info("Insert Your Card Success");
+			logger.info("Insert Your Card Success" + yourCard.toString());
 //			model.addAttribute("resultMsg", "정상 등록 되었습니다.");
-			return "redirect:../management";
+			
+			uploadSavedImg = "";
+			resultMsg = "true";
+			
 		}
 		else {
 			
 			logger.info("Insert Your Card Fail");
 //			model.addAttribute("failMsg", "등록 실패하였습니다.");
-			return "redirect:../management";
+			resultMsg = "false";
 		}
-		
+		return resultMsg;
 	}
-	
+
 	
 	
 	/*
@@ -118,41 +140,28 @@ public class YourCardInfoController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="detectTextFromImage", method=RequestMethod.GET, produces="text/plain; charset=UTF-8")
-	public String detectTextFromImage(String ocrImage) {
+	public String detectTextFromImage(String ocrImage, HttpSession session) {
 		
 		logger.info("detectTextFromImage Start");
 		
 		String detectResult = "";	// OCR 분석 결과를 담을 변수
 		
+		String userid = (String) session.getAttribute("userid");
+		
 		// OCR 분석을 위한 이미지를 불러올 경로
-		String filepath = new StringBuffer().append("c:\\").append(detectFilePath).append(ocrImage).toString();
+		String filepath = new StringBuffer().append("c:\\").append(detectFilePath).append(userid).append("\\").append(ocrImage).toString();
 
 		try {
 			
 			// OCR분석 결과
 			detectResult = GoogleVisionApi.detectText(filepath);
+			uploadSavedImg = ocrImage;		// 분석 완료된 이미지의 파일명을 전역변수에 담음.(서버 저장을 위해)
 			logger.info("분석 결과 : " + detectResult);
 		}
 		catch (Exception e) {
 			
 			logger.info("detectTextFromImage Fail");
 		}
-		
-		// OCR 분석 후 삭제할 이미지 경로
-//		String deleteFile = new StringBuffer().append(uploadPath).append(ocrImage).toString();
-		String deleteFile = new StringBuffer().append(uploadPath).toString();
-		
-		// OCR 분석 후 이미지 삭제
-		File files[] = new File(deleteFile).listFiles();
-		
-		for(int i=0; i<files.length; i++) {
-
-			files[i].delete();
-			logger.info("Image Delete Success");
-		}
-//		if(new File(deleteFile).delete()) {
-//			logger.info("Image Delete Success" + deleteFile);
-//		}
 		
 		return detectResult;
 		
@@ -167,7 +176,7 @@ public class YourCardInfoController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="tempUpload", method=RequestMethod.POST, produces="text/plain; charset=UTF-8")
-	public String tempUpload(MultipartHttpServletRequest multi) {
+	public String tempUpload(MultipartHttpServletRequest multi, HttpSession session) {
 
 		
 		logger.info("tempUpload Start");
@@ -176,12 +185,14 @@ public class YourCardInfoController {
 		MultipartFile testSample = multi.getFile("fileObj");
 		String ocrImage = "";
 		
+		String userid = (String) session.getAttribute("userid");
+		
 		logger.info(testSample.getOriginalFilename());
 		
 		// fileObj의 파일명 생성
 		if (!testSample.isEmpty()) {
 			
-			ocrImage = FileService.saveFile(testSample, uploadPath);
+			ocrImage = FileService.saveFile(testSample, new StringBuffer().append(uploadPath).append("/").append(userid).toString());
 		}
 		
 		return ocrImage;

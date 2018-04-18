@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Expanding Bar Menus | Demo 1 | Codrops</title>
+	<title>Making Business Card</title>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/common.css">
@@ -19,8 +19,25 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/link_hover.css">
 	
 	<script type="text/javascript" src="resources/js/newMain_js/modernizr.custom.js"></script>
-
+	<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js"/>"></script>
 	<script>document.documentElement.className = 'js';</script>
+	<script>
+		
+	/*
+		로그아웃 확인 메소드
+	*/
+		function logoutValid() {
+			
+			if(confirm("로그아웃 하시겠습니까?")) {
+				
+				location.href="users/logout";
+				return true;
+			}
+		
+			return false;
+		}
+	
+	</script>
 
 </head>
 <body class="demo-1">
@@ -30,15 +47,16 @@
 				<div class="codrops-links">
 					<c:choose>
 					<c:when test="${sessionScope.userid eq null}">
-						<a class="" href="users/join">회원가입</a>
-						<a class="" href="#">로그인</a>
+						<a class=""  href="users/join">회원가입</a>
+						<a class=""  href="users/loginForm">로그인</a>
 					</c:when>
 					<c:otherwise>
-						<a class="" href="#">로그아웃</a>
+						<pre class="">${sessionScope.username}(${sessionScope.userid})님		</pre>
+						<a class=""  style="cursor:pointer;" onclick="return logoutValid();">로그아웃</a>
 					</c:otherwise>
 				</c:choose>
 			</div>
-			<p class="codrops-header__info">Do you want to express yourself?<br/>Make it your own.</p>
+			<p class="codrops-header__info">Do you want to make yourself?<br/>Make it your own.</p>
 			<span class="codrops-header__deco">hitherto</span>
 			<h1 class="codrops-header__title">Arias</h1>
 			<p class="codrops-header__tagline">make a business card</p>

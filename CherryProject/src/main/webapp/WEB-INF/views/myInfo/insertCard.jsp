@@ -68,24 +68,20 @@
 			xhr.send(data);
 		}
 		
-		
-		//0418_ 여지원 수정
-/* 		//userid를 참조하니까, session에서 MyCardInfoVO 가지고오기
- 		function getMyCardsImg(){
+		//userid를 참조하니까, session에서 MyCardInfoVO 가지고오기
+/* 		function getMyCardsImg(){
 			$.ajax({
 		        url : 'getMyCardImg'
 		        ,type : 'post'
-		      	,dataType:"json" 
- 		        ,success : function(result){
+		      	,dataType:"json" */
+/* 		        ,success : function(result){
 		        	
 		        	var str ='';
 		        	var Imglist = data.frontimgsaved;
 		            alert(data.mycardnum);
 		            alert(data.frontimgsaved); //명함 앞면의 이미지 경로
-		             */
-/* 		            $.each(Imglist, function(key, value){ 
-		            	
-		            	
+		            
+		            $.each(Imglist, function(key, value){ 
 		            }
 		            
 		            str+= '<div class="input-group">';
@@ -96,14 +92,14 @@
 
 		        }
 		    });
-		} 
- */
+		} */
+
 	</script>
 </head>
 
 <body>
 
-	<%@ include file="/WEB-INF/views/common/bodyHeader.jsp" %>
+<%@ include file="/WEB-INF/views/common/bodyHeader.jsp" %>
 
 <form action="../yourcard/insertYourCard" method="post" enctype="multipart/form-data" id="cardInfoForm">
 <div class="mainView" >
@@ -164,6 +160,7 @@
 </form>
 	<!-- JavaScript plugins (requires jQuery) -->
 	<script src="<c:url value="/resources/myinfo/insertYourCard/js/jquery.min.js" />"></script>
+	
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="<c:url value="/resources/myinfo/insertYourCard/js/bootstrap.min.js" />"></script>
 	<script src="<c:url value="/resources/myinfo/insertYourCard/js/jquery.imgareaselect.js" />"></script>
