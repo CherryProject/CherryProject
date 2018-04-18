@@ -22,14 +22,13 @@
 
       function go_url(){
 
-         location.href="/"  // 페이지 이동...
+         location.href="/www";  // 페이지 이동...
 
       }
 
   -->
 
   </script>
-[출처] 특정시간 후 자동으로 페이지 이동 (HTML & javascript)|작성자 gtime4u
 <title>오류</title>
 </head>
 <body>

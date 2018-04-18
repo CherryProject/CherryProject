@@ -9,6 +9,7 @@ var index = 0;
 var num = 0;			// <input ~~> 들의 id 구분 변수
 var totalLen = 0;		// 전체 이미지들의 갯수
 var inputTypeNum = 0;	// inputType의 갯수
+var uploadFile;			// 서버로 이미지를 보내기 위한 변수.
 
 
 /*
@@ -21,7 +22,6 @@ $(document).ready(function() {
 	})*/
 	getMyCardsImg();
 });
-
 
 
 
@@ -81,14 +81,17 @@ function handleImgFileSelect(e) {
 				makeImgPreview += "<img style='width : 200px;' src='" + e.target.result + "' data-file='" + f.name + "' class='selProductFile' id='ocrImg_" + index + "'>";
 				makeImgPreview += "</a>";
 				makeImgPreview += "</div>";
-			//미리보기 밑에 유저의 명함이미지가 보이는 부분(My Card) -여지원
+				
+			//미리보기 밑에 유저의 명함이미지가 보이는 부분(My Card) - 여지원
 				/*'/resources/myinfo/insertYourCard/img/delBTN.png'*/
 			 var makeDelBtn	= "<div class='selctMyCard'>";
 			 	makeDelBtn += " <img class='delBtnClass' style=  'display:inline;' id='delBTN"+index+"' src='../resources/img/delBTN.png' onclick='delOne("+index+")'>";
 			 																									/*onclick="commentUpdateProc('+commentnum+');"*/
 			    makeDelBtn += "</div>";
+			    
 			$(".imgs_wrap").append(makeImgPreview);
 			$(".imgs_wrap").append(makeDelBtn);
+			
 			index++;
 			inputLen++;
 		};
@@ -105,18 +108,29 @@ function handleImgFileSelect(e) {
 	
 }
 
-//삭제버튼 누르고 미리보기 이미지 삭제 (여지원)
+
+
+/*
+ * @comment		:	삭제버튼 누르고 미리보기 이미지 삭제
+ * @param		:	미리보기 이미지의 번호
+ * @author		:	여지원	
+ */
 function delOne(index){
+	
 	var ocrImg = "ocrImg_"+index;
 	var bool = confirm("이미지를 목록에서 지울까요?");
+	
 	if(!bool){
+		
 		return false;
 	}
+	
 	$("#"+ocrImg+"").remove();
 	$("#delBTN"+index+"").remove();
 	
 	
 }
+
 
 
 /*
@@ -143,6 +157,7 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 
 	var dataFileName = $("#ocrImg_"+index).attr("data-file");				// 화면 이미지의 파일명.
 	
+	uploadFile = filename;
 	// 화면과 실제 리스트의 파일명을 맞춰주기 위한 반복문
 	for(var i=0; i<fileLen; i++) {
 		
@@ -205,6 +220,7 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 
  /*
   *	@comment	:	OCR분석 결과를 텍스트에 집어넣기
+  * @author		:	정보승
   */
 	 function resultInput(detectResult) {
 		 
@@ -215,7 +231,10 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 		
 		// 회원ID를 hidden으로 추가
 		$("#cardInfo").append("<input type='hidden' name='userid' />");
-		$("#cardInfo").append("<input type='file' name='fileUpload' />");
+		
+		// 현재 이미지의 파일명을 저장.
+		$("#cardInfo").append("<input type='hidden' name='uploadImg' value='"+ uploadFile + "' />");
+		
 		var htmlCode = '';
 		var keyName = '';
 		
@@ -232,7 +251,11 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 			
 			console.log(detectResultArr[i]);
 			
-			if(detectResultArr[i].length == 0 || detectResultArr[i] == null) {
+			// OCR 분석이 된 문자열이 없거나 길이가 1인 경우 생략
+			if(	detectResultArr[i].length == 0 || detectResultArr[i] == null
+					|| detectResultArr[i].length == 1
+					|| detectResultArr[i].toLowerCase() == "tel"
+					|| detectResultArr[i].toLowerCase() == "fax") {
 				
 				continue;
 			}
@@ -260,54 +283,54 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 			htmlCode += "</div>";
 			
 			$("#cardInfo").append(htmlCode);
+			
 			// htmlCode 초기화
 			htmlCode='';
 			keyName='';
 				
-			}
+		}
+		
 	 }
- 
-// Select Menu 추가하기
-/*
- function selectMenuAdd1() {
-	 
-	var keyName1 = "<select class='selectMenu'>";
-			keyName1 += "<option>정보승</option>";
-			keyName1 += "<option value='name1'>이름(국문)</option>";
-			keyName1 += "<option value='name2'>이름(영문)</option>";
-			keyName1 += "<option value='name3'>이름</option>";
-			keyName1 += "<option value='company'>회사</option>";
-			keyName1 += "<option value='job'>직급</option>";
-			keyName1 += "<option value='department'>부서</option>";
-			keyName1 += "<option value='address'>주소</option>";
-			keyName1 += "<option value='tel'>전화번호</option>";
-			keyName1 += "<option value='phone'>휴대폰번호</option>";
-			keyName1 += "<option value='email'>E-Mail</option>";
-			keyName1 += "<option value='fax'>Fax</option>";
-			keyName1 += "<option value='memo'>Memo</option>";
-			keyName1 += "<option value='otherinfo'>Etc</option>";
-		keyName1 += "</select>";
-	 
-	 var selectMenu_ = "<div class='input-group'>";
-			 selectMenu_ += "<span class='input-group-addon'>" + keyName1 + "</span>";
-			 selectMenu_ += "<textarea class='form-control' name='' id=''></textarea>";
-	 	 selectMenu_ += "</div>";
-	 
-	 $("#cardInfo").append(selectMenu_);
- }		 
-*/
 
-// Submit 
+	 
+	 
+/*
+ * @comment		:	동적으로 생성된 input 태그들의 name속성을 설정하고 Submit
+ * @author		:	정보승
+ */ 
 function cardInfoSubmit() {
 	
-	//$("#cardInfo").trigger("create");
-	console.log("값값값 : " + $("#selectMenu_0").val());
 	for(var i=0; i<inputTypeNum; i++) {
 		
+		// 동적으로 생성된 input 태그들의 name 속성에 selectBox의 value를 대입
 		$("#cardInfo_"+i).attr("name", $("#selectMenu_"+i).val());
-		console.log($("#selectMenu_"+i).val());
+		
+//		$("#cardInfo").append("<input type='hidden' name='" + $("#selectMenu_"+i).val() + "' value='"+ $("#cardInfo_"+i).val() +"' />");
 	}
 	
-	$("#cardInfoForm").submit();
+	$("#cardInfo").trigger("create");
+//	var formString = $("form[id=cardInfoForm]").serialize();
+	
+	// form태그 submit
+	
+	$.ajax({
+		 
+		url : "insertYourCard"
+		, processData: false
+		, contentType: false
+		, type : "post"
+		, data : $("#cardInfoForm").serialize()
+		, success : function(resultMsg) {
+	
+			if(resultMsg == "true") {
+				
+				alert("성공적으로 등록되었습니다.");
+			}
+			else {
+				
+				alert("등록에 실패하였습니다.");
+			}
+		}
+	});
 }
 		
