@@ -365,31 +365,6 @@ public class YourCardInfoController {
 
 		return null;
 	}
-/*	
-	
-	 * @comment	:	나의 카드정보를 담은 리스트
-	 * @author	:	여지원
-	 
-	@ResponseBody
-	@RequestMapping(value="getMyCards", method=RequestMethod.GET)
-	public ArrayList<MyCardInfoVO> getMyCards(HttpSession session) {
-		
-		//produces="text/plain; charset=UTF-8"
-		
-		
-		logger.info("getMyCards Success 성공");
-		
-		String userid = (String) session.getAttribute("userid");
-		System.out.println("유저아이디");
-		System.out.println(userid);
-		ArrayList<MyCardInfoVO> list = null;
-		list = myCardInfoDAO.selectAllMyCard("ik872000@gmail.com");
-		System.out.println(list);
-		
-		return list;
-		
-	}*/
-	
 	
 	
 }

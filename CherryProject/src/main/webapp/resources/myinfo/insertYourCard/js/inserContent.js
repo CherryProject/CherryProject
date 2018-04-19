@@ -16,13 +16,10 @@ var uploadFile;			// 서버로 이미지를 보내기 위한 변수.
  *	@comment	:	 
  */
 $(document).ready(function() {
-	$("#input_imgs").on("change", handleImgFileSelect);
-	/*$(document).on("mouseenter",".delBtnClass",function(){
-		$(this);
-	})*/
+	alert("레디펑션");
+	$("#input_imgs").on("change", handleImgFileSelect)
 	getMyCardsImg();
 });
-
 
 
 /*
@@ -43,7 +40,6 @@ function fileUploadAction() {
  *	@comment	:	업로드한 이미지들의 미리보기 화면 생성 메소드
  */ 
 function handleImgFileSelect(e) {
-	alert("handleImgFileselect");
 	// 이미지 정보들을 초기화
 	sel_files = [];
 	
@@ -146,8 +142,10 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 	$(".selectedImg img").attr("src", src);
 	
 	// 이미지 미리보기를 선택할 경우 이미지에 테두리를 나타나게 한다.
-	$("#ocrImg_" + index).css('border', 'solid 10px red');
+	$("#ocrImg_" + index).css('border', 'solid 3px red');
 	$("#ocrImg_" + index).trigger("create");
+	
+	
 	
 	var form = $('#tempUpload')[0];
 	var formData = new FormData(form);
@@ -333,4 +331,6 @@ function cardInfoSubmit() {
 		}
 	});
 }
+
+
 		

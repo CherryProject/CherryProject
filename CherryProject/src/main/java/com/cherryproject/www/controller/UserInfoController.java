@@ -244,12 +244,18 @@ public class UserInfoController {
 		// temp 폴더의 회원 ID 폴더의 모든 이미지를 삭제
 		File files[] = new File(deleteFile).listFiles();
 		
+		if(files.length == 0 || files == null) {
+		
+			session.invalidate();
+			
+			return "redirect:/";
+		}
+		
 		for(int i=0; i<files.length; i++) {
-
+			
 			files[i].delete();
 			logger.info("Image Delete Success");
 		}
-		
 		
 		session.invalidate();
 		

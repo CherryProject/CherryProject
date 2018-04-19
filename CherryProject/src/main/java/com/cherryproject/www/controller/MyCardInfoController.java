@@ -1,6 +1,7 @@
 package com.cherryproject.www.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -82,25 +83,28 @@ public class MyCardInfoController {
 	 * @author	:	여지원
 	 */
 	@ResponseBody
-	@RequestMapping(value="getMyCards", method=RequestMethod.GET)
-	public ArrayList<MyCardInfoVO> getMyCards(HttpSession session) {
-		
+	@RequestMapping(value="getMyCards", method=RequestMethod.GET, produces="text/plain; charset=UTF-8")
+	public HashMap<String, Object> getMyCards(HttpSession session) {
 		//produces="text/plain; charset=UTF-8"
 		
 		
-		logger.info("getMyCards Success 성공");
+		logger.info("getMyCards Success 시작");
 		
 		String userid = (String) session.getAttribute("userid");
 		System.out.println("유저아이디");
 		System.out.println(userid);
-		ArrayList<MyCardInfoVO> list = null;
-		list = myCardInfoDAO.selectAllMyCard("ik872000@gmail.com");
-		System.out.println(list);
 		
-		return list;
+		ArrayList<MyCardInfoVO> list = null;
+		list = myCardInfoDAO.selectAllMyCard(userid);
+		
+		HashMap<String, Object> hashmap = new HashMap<>();
+		hashmap.put("list", list);
+		System.out.println(list);
+
+		logger.info("getMyCards Success 종료");
+		
+		
+		return hashmap;
 		
 	}
-	
-	
-
 }
