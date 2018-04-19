@@ -146,7 +146,7 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 	$(".selectedImg img").attr("src", src);
 	
 	// 이미지 미리보기를 선택할 경우 이미지에 테두리를 나타나게 한다.
-	$("#ocrImg_" + index).css('border', 'solid 10px red');
+	$("#ocrImg_" + index).css('border', 'solid 3px red');
 	$("#ocrImg_" + index).trigger("create");
 	
 	var form = $('#tempUpload')[0];
@@ -295,10 +295,57 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 	 
 	 
 /*
+ * @comment		:	입력 항목을 추가하는 메소드
+ * @author		:	정보승
+ */	 
+function selectMenuAdd1() {
+	
+	
+	var keyName_ = "";
+	var htmlCode_ = "";
+	
+	keyName_ += "<select class='selectMenu' id='selectMenu_" + inputTypeNum + "'>";
+		keyName_ += "<option>선택</option>";
+		keyName_ += "<option value='name1'>이름(국문)</option>";
+		keyName_ += "<option value='name2'>이름(영문)</option>";
+		keyName_ += "<option value='name3'>이름</option>";
+		keyName_ += "<option value='company'>회사</option>";
+		keyName_ += "<option value='job'>직급</option>";
+		keyName_ += "<option value='department'>부서</option>";
+		keyName_ += "<option value='address'>주소</option>";
+		keyName_ += "<option value='tel'>전화번호</option>";
+		keyName_ += "<option value='phone'>휴대폰번호</option>";
+		keyName_ += "<option value='email'>E-Mail</option>";
+		keyName_ += "<option value='fax'>Fax</option>";
+		keyName_ += "<option value='memo'>Memo</option>";
+		keyName_ += "<option value='otherinfo'>Etc</option>";
+	keyName_ += "</select>";
+
+	htmlCode_ += "<div class='input-group'>";
+		htmlCode_ += "<span class='input-group-addon'>" + keyName_ + "</span>";
+		htmlCode_ += "<textarea class='form-control' name='' id='cardInfo_" + inputTypeNum + "' >" +  "</textarea>";
+	htmlCode_ += "</div>";
+
+	$("#cardInfo").append(htmlCode_);
+	
+	// htmlCode 초기화
+	htmlCode_='';
+	keyName_='';
+	inputTypeNum++;
+	
+	$("#cardInfo").trigger("create");
+
+}
+
+
+	 
+/*
  * @comment		:	동적으로 생성된 input 태그들의 name속성을 설정하고 Submit
  * @author		:	정보승
  */ 
 function cardInfoSubmit() {
+	
+	
 	
 	for(var i=0; i<inputTypeNum; i++) {
 		
@@ -307,14 +354,14 @@ function cardInfoSubmit() {
 		
 	}
 	
-//	$("#cardInfoForm").trigger("create");
+//	$("#cardInfo").trigger("create");
 	
 	$.ajax({
 		 
 		url : "insertYourCard"
-
 		, type : "post"
 		, data : {
+			
 			name1 : $("textarea[name*=name1]").val()
 			, name2 : $("textarea[name*=name2]").val()
 			, name3 : $("textarea[name*=name3]").val()
