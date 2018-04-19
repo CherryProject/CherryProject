@@ -305,26 +305,38 @@ function cardInfoSubmit() {
 		// 동적으로 생성된 input 태그들의 name 속성에 selectBox의 value를 대입
 		$("#cardInfo_"+i).attr("name", $("#selectMenu_"+i).val());
 		
-//		$("#cardInfo").append("<input type='hidden' name='" + $("#selectMenu_"+i).val() + "' value='"+ $("#cardInfo_"+i).val() +"' />");
 	}
 	
-	$("#cardInfo").trigger("create");
-//	var formString = $("form[id=cardInfoForm]").serialize();
-	
-	// form태그 submit
+//	$("#cardInfoForm").trigger("create");
 	
 	$.ajax({
 		 
 		url : "insertYourCard"
-		, processData: false
-		, contentType: false
+
 		, type : "post"
-		, data : $("#cardInfoForm").serialize()
+		, data : {
+			name1 : $("textarea[name*=name1]").val()
+			, name2 : $("textarea[name*=name2]").val()
+			, name3 : $("textarea[name*=name3]").val()
+			, company : $("textarea[name*=company]").val()
+			, job : $("textarea[name*=job]").val()
+			, department : $("textarea[name*=department]").val()
+			, address : $("textarea[name*=address]").val()
+			, tel : $("textarea[name*=tel]").val()
+			, phone : $("textarea[name*=phone]").val()
+			, email : $("textarea[name*=email]").val()
+			, fax : $("textarea[name*=fax]").val()
+			, memo : $("textarea[name*=memo]").val()
+			, otherinfo : $("textarea[name*=otherinfo]").val()
+			, uploadImg : uploadFile							// original file name
+		}
 		, success : function(resultMsg) {
 	
 			if(resultMsg == "true") {
 				
 				alert("성공적으로 등록되었습니다.");
+				$("#cardInfo").html("");				// input tag 부분 날리기.
+				$("#cardBtn").hide();					// submit 버튼 숨기기
 			}
 			else {
 				
