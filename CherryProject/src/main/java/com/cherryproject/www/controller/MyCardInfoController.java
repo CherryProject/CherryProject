@@ -1,14 +1,22 @@
 package com.cherryproject.www.controller;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.inject.Inject;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.cherryproject.www.common.util.FileService;
 import com.cherryproject.www.dao.MyCardInfoDAO;
 import com.cherryproject.www.vo.MyCardInfoVO;
+import com.cherryproject.www.vo.YourCardInfoVO;
 
 import net.sf.json.JSON;
 
@@ -34,6 +43,7 @@ public class MyCardInfoController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MyCardInfoController.class);
 	
+	final String myCarduploadPath = "/BusinessCardProject/management/myCardInfo/";		// 내 명함 파일 업로드 경로
 	
 	/*
 	 * @comment		: 내 명함 등록 페이지로 이동
@@ -102,5 +112,60 @@ public class MyCardInfoController {
 	}
 	
 	
+	
+	/**
+	 * @comment				:	파일 다운로드
+	 * @param mycardnum 	:	내 명함 번호
+	 * @author 				:	정보승
+	 */
+	@RequestMapping(value = "download", method = RequestMethod.GET)
+	public String fileDownload(String mycardnum, Model model,
+								HttpServletResponse response, HttpSession session) {
+		
+		String userid = (String) session.getAttribute("userid");
+		HashMap<String, Object> myCard = new HashMap<>();
+		myCard.put("userid", userid);
+		myCard.put("mycardnum", mycardnum);
+		
+		MyCardInfoVO myOneCard = myCardInfoDAO.selectOneMyCard(myCard);
+		
+		//원래의 파일명
+		String originalfile = myOneCard.getFrontimgoriginal();
+		try {
+			
+			response.setHeader("Content-Disposition", " attachment;filename="+ URLEncoder.encode(originalfile, "UTF-8"));
+			
+		} catch (UnsupportedEncodingException e) {
+			
+			e.printStackTrace();
+		}
+		
+		//저장된 파일 경로
+		String filepath = new StringBuffer().append(myCarduploadPath).append(userid).append("/").toString();
+		String fullPath = new StringBuffer().append(filepath).append(myOneCard.getFrontimgsaved()).toString();
+		
+		
+		//서버의 파일을 읽을 입력 스트림과 클라이언트에게 전달할 출력스트림
+		FileInputStream filein = null;
+		ServletOutputStream fileout = null;
+		
+		try {
+			
+			filein = new FileInputStream(fullPath);
+			fileout = response.getOutputStream();
+			
+			//Spring의 파일 관련 유틸
+			FileCopyUtils.copy(filein, fileout);
+			
+			filein.close();
+			fileout.close();
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 
 }

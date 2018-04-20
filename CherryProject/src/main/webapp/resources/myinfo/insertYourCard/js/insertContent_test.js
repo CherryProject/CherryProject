@@ -12,6 +12,7 @@ var inputTypeNum = 0;	// inputType의 갯수
 var uploadFile;			// 서버로 이미지를 보내기 위한 변수.
 
 
+
 /*
  *	@comment	:	 
  */
@@ -222,25 +223,6 @@ function moveToDiv(src, inputTagNum, inputNum, index){
   *	@comment	:	OCR분석 결과를 텍스트에 집어넣기
   * @author		:	정보승
   */
-//정규표현식들
-//var regExp = /\s/g;					//모든 공백 체크 정규식
-//var numberRegExp = /^[0-9]+$/;		//숫자만 체크 정규식
-//var cityName = ["서울", "대구", "부산", "광주", "울산", "대전", "인천", "경기도", "경상북도", "경상남도"];
-//var jobName = ["사장", "부장", "차장", "과장", "대리", "계장", "사원", "선임", "연구원"];
-//var departmentName = ["영업", "마케팅", "인사", "금융", "품질"];
-//var urlRegExp = /(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$/;
-//var eMailRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-//var phoneRegExp = /\w\/cell\/[ ]\d{3}[- ]?\d{3,4}[- ]?\d{4}/g;
-//var telRegExp = /\d[0]{2,3}?[- ]?\d{3,4}[- ]?\d{4}/g;
-
-
-var jobRegExp = /[사장과장차장대리]/g;
-var departmentRegExp = /[\/영업\/ \/마케팅\/ \/인사\/ \/금융\/ \/품질\/]/g;
-var cityNameRegExp = /[서울대구부산광주울산대전인천경기도]/g;
-var urlRegExp = /([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$/;	//도메인 형태, http:// https:// 포함안해도 되고 해도 되고
-var eMailRegExp = /[0-9a-zA-Z]*[\-\_\.]?[0-9a-zA-Z]*\@[0-9a-zA-Z]*[\-\_\.]?[0-9a-zA-Z]*\.[a-zA-Z]{2,3}[\.]?[a-zA-Z]{2}?/g;
-var phoneRegExp =  /\d{3}[- ]?\d{3,4}[- ]?\d{4}$/;
-var telRegExp = /\d{2,3}[- ]?\d{3,4}[- ]?\d{4}$/;
 	 function resultInput(detectResult) {
 		 
 		// 엔터키 기준으로 OCR 분석 결과 자르기
@@ -251,14 +233,20 @@ var telRegExp = /\d{2,3}[- ]?\d{3,4}[- ]?\d{4}$/;
 		// 회원ID를 hidden으로 추가
 		$("#cardInfo").append("<input type='hidden' name='userid' />");
 		
-		// 현재 이미지의 파일명을 저장. 	
+		// 현재 이미지의 파일명을 저장.
 		$("#cardInfo").append("<input type='hidden' name='uploadImg' value='"+ uploadFile + "' />");
 		
 		var htmlCode = '';
 		var keyName = '';
 		
+		// 정규표현식들
+		//var regExp = /\s/g;					//모든 공백 체크 정규식
+		//var numberRegExp = /^[0-9]+$/;		//숫자만 체크 정규식
 		
-		
+		var urlRegExp = /^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$/;	//도메인 형태, http:// https:// 포함안해도 되고 해도 되고	
+		var eMailRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		var phoneRegExp =  /^\d{3}-\d{3,4}-\d{4}$/;
+		var telRegExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
 		
 		for(var i=0; i<detectResultArrLen; i++) {
 			
@@ -267,95 +255,33 @@ var telRegExp = /\d{2,3}[- ]?\d{3,4}[- ]?\d{4}$/;
 			// OCR 분석이 된 문자열이 없거나 길이가 1인 경우 생략
 			if(	detectResultArr[i].length == 0 || detectResultArr[i] == null
 					|| detectResultArr[i].length == 1
-			) {
+					|| detectResultArr[i].toLowerCase() == "tel"
+					|| detectResultArr[i].toLowerCase() == "fax") {
 				
 				continue;
 			}
 			
+			keyName += "<select class='selectMenu' id='selectMenu_" + i + "'>";
+				keyName += "<option>선택</option>";
+				keyName += "<option value='name1'>이름(국문)</option>";
+				keyName += "<option value='name2'>이름(영문)</option>";
+				keyName += "<option value='name3'>이름</option>";
+				keyName += "<option value='company'>회사</option>";
+				keyName += "<option value='job'>직급</option>";
+				keyName += "<option value='department'>부서</option>";
+				keyName += "<option value='address'>주소</option>";
+				keyName += "<option value='tel'>전화번호</option>";
+				keyName += "<option value='phone'>휴대폰번호</option>";
+				keyName += "<option value='email'>E-Mail</option>";
+				keyName += "<option value='fax'>Fax</option>";
+				keyName += "<option value='memo'>Memo</option>";
+				keyName += "<option value='otherinfo'>Etc</option>";
+			keyName += "</select>";
 			
-			// E-Mail
-			if(eMailRegExp.test(detectResultArr[i])) {
-				
-				htmlCode += "<div class='input-group'>";
-					htmlCode += "<span class='input-group-addon'>" + "E-Mail" + "</span>";
-					htmlCode += "<textarea class='form-control' name='email' id='cardInfo_" + i + "' >" + detectResultArr[i].match(eMailRegExp).toString() +  "</textarea>";
-				htmlCode += "</div>";
-				console.log("이메일");
-			}
-			else if(urlRegExp.test(detectResultArr[i])) {
-				
-				htmlCode += "<div class='input-group'>";
-					htmlCode += "<span class='input-group-addon'>" + "Etc" + "</span>";
-					htmlCode += "<textarea class='form-control' name='etc' id='cardInfo_" + i + "' >" + detectResultArr[i].match(urlRegExp).toString() +  "</textarea>";
-				htmlCode += "</div>";
-				console.log("Etc");
-			}
-			else if(phoneRegExp.test(detectResultArr[i])) {
-				
-				htmlCode += "<div class='input-group'>";
-					htmlCode += "<span class='input-group-addon'>" + "Phone" + "</span>";
-					htmlCode += "<textarea class='form-control' name='phone' id='cardInfo_" + i + "' >" + detectResultArr[i].match(phoneRegExp).toString() +  "</textarea>";
-				htmlCode += "</div>";
-				console.log("Phone");
-			}
-			else if(telRegExp.test(detectResultArr[i])) {
-				
-				htmlCode += "<div class='input-group'>";
-					htmlCode += "<span class='input-group-addon'>" + "TEL" + "</span>";
-					htmlCode += "<textarea class='form-control' name='tel' id='cardInfo_" + i + "' >" + detectResultArr[i].match(telRegExp).toString() +  "</textarea>";
-				htmlCode += "</div>";
-				console.log("TEL");
-			}
-			else if(cityNameRegExp.test(detectResultArr[i])) {
-				
-				htmlCode += "<div class='input-group'>";
-					htmlCode += "<span class='input-group-addon'>" + "주소" + "</span>";
-					htmlCode += "<textarea class='form-control' name='tel' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
-				htmlCode += "</div>";
-				console.log("주소");
-			}
-			else if(departmentRegExp.test(detectResultArr[i])) {
-				
-				htmlCode += "<div class='input-group'>";
-					htmlCode += "<span class='input-group-addon'>" + "부서" + "</span>";
-					htmlCode += "<textarea class='form-control' name='tel' id='cardInfo_" + i + "' >" + detectResultArr[i].match(departmentRegExp).toString() +  "</textarea>";
-				htmlCode += "</div>";
-				console.log("부서");
-			}
-			else if(jobRegExp.test(detectResultArr[i])) {
-				
-				htmlCode += "<div class='input-group'>";
-					htmlCode += "<span class='input-group-addon'>" + "직책" + "</span>";
-					htmlCode += "<textarea class='form-control' name='tel' id='cardInfo_" + i + "' >" + detectResultArr[i].match(jobRegExp).toString() +  "</textarea>";
-				htmlCode += "</div>";
-				console.log("직책");
-			}
-			else {
-				
-            	keyName += "<select class='selectMenu' id='selectMenu_" + i + "'>";
-					keyName += "<option>선택</option>";
-					keyName += "<option value='name1'>이름(국문)</option>";
-					keyName += "<option value='name2'>이름(영문)</option>";
-					keyName += "<option value='name3'>이름</option>";
-					keyName += "<option value='company'>회사</option>";
-					keyName += "<option value='job'>직급</option>";
-					keyName += "<option value='department'>부서</option>";
-					keyName += "<option value='address'>주소</option>";
-					keyName += "<option value='tel'>전화번호</option>";
-					keyName += "<option value='phone'>휴대폰번호</option>";
-					keyName += "<option value='email'>E-Mail</option>";
-					keyName += "<option value='fax'>Fax</option>";
-					keyName += "<option value='memo'>Memo</option>";
-					keyName += "<option value='otherinfo'>Etc</option>";
-				keyName += "</select>";
-				
-    			htmlCode += "<div class='input-group'>";
-	    			htmlCode += "<span class='input-group-addon'>" + keyName + "</span>";
-	    			htmlCode += "<textarea class='form-control' name='' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
-    			htmlCode += "</div>";
-      
-				
-			}
+			htmlCode += "<div class='input-group'>";
+				htmlCode += "<span class='input-group-addon'>" + keyName + "</span>";
+				htmlCode += "<textarea class='form-control' name='' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
+			htmlCode += "</div>";
 			
 			$("#cardInfo").append(htmlCode);
 			
