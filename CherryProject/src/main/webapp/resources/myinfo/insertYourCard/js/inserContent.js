@@ -43,7 +43,6 @@ function fileUploadAction() {
  *	@comment	:	업로드한 이미지들의 미리보기 화면 생성 메소드
  */ 
 function handleImgFileSelect(e) {
-	alert("handleImgFileselect");
 	// 이미지 정보들을 초기화
 	sel_files = [];
 	
@@ -148,6 +147,8 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 	// 이미지 미리보기를 선택할 경우 이미지에 테두리를 나타나게 한다.
 	$("#ocrImg_" + index).css('border', 'solid 3px red');
 	$("#ocrImg_" + index).trigger("create");
+	
+	
 	
 	var form = $('#tempUpload')[0];
 	var formData = new FormData(form);
@@ -412,7 +413,58 @@ function selectMenuAdd1() {
 
 }
 
-
+function getMyCardsImg(){
+	
+	
+	$.ajax({
+		url: '../mycard/getMyCards'
+		,type : 'get'
+		,datatype :'json'
+		,success: function(json){
+			
+			//나의 명함이 리스트에 없을 때
+			if(json=='[]'){
+				str ='<br><현재 등록된 나의 명함이 없습니다>';
+				$(".selctMyCard").html(str);
+				return ;
+			}
+			
+			var str ='<br><상대방과의 명함 교환시 건낸 나의 명함은 무엇입니까?>';
+			str += '<table>';
+			str += '<tr>';
+			$.each($.parseJSON(json), function(idx, item) {
+				str += '<td><input type="radio" name="gaveMyCardRadio" value="' + item.mycardnum + '" checked /> </td>' ;	
+			});	
+			str += '</tr><tr>';
+			$.each($.parseJSON(json), function(idx, item) {
+				str+= '<td>'+ item.company +'</td>';	
+			});	
+			str += '</tr><tr>';
+			$.each($.parseJSON(json), function(idx, item) {
+				str+= '<td>'+ item.job +'</td>';
+			});	
+			str += '</tr><tr>';
+			//이미지
+			$.each($.parseJSON(json), function(idx, item) {
+				var frontimage = item.frontimgoriginal
+				str += '<td><img src="../mycard/download?mycardnum='+item.mycardnum+'" width="90px"></td>';
+				
+			});	
+			str += '</tr>';
+			str+= '</table>';
+			console.log(str);
+			$(".selctMyCard").html(str);
+			
+			
+			
+			//$(".cardInfoMenu").attr("type","hidden").attr("name","mycardnum").attr("value","")
+		}
+		
+		,error :function(e){
+			alert(e);
+		}
+	})
+}
 	 
 /*
  * @comment		:	동적으로 생성된 input 태그들의 name속성을 설정하고 Submit
@@ -420,7 +472,10 @@ function selectMenuAdd1() {
  */ 
 function cardInfoSubmit() {
 	
-	
+	//여지원-라디오박스로 선택된 mycardnum
+	var getmycardnum = $(".selctMyCard").find("input[type=radio]:checked").val();
+	$(".selctMyCard").trigger("create");
+	console.log("카드 번호 : " + getmycardnum);
 	
 	for(var i=0; i<inputTypeNum; i++) {
 		
@@ -450,7 +505,8 @@ function cardInfoSubmit() {
 			, fax : $("textarea[name*=fax]").val()
 			, memo : $("textarea[name*=memo]").val()
 			, otherinfo : $("textarea[name*=otherinfo]").val()
-			, uploadImg : uploadFile							// original file name
+			, mycardnum : getmycardnum 				// original file name
+			
 		}
 		, success : function(resultMsg) {
 	
@@ -467,4 +523,6 @@ function cardInfoSubmit() {
 		}
 	});
 }
+
+
 		
