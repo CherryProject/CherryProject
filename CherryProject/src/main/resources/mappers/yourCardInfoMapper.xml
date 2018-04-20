@@ -103,7 +103,29 @@
 	<select id="selectYourCardOne" parameterType="hashmap" resultType="yourcard">
 		
 		SELECT 
-			*
+			yourcardnum
+			, userid
+			, yournum
+			, mycardnum
+			, memo
+			, company
+			, name1
+			, name2
+			, name3
+			, phone
+			, tel
+			, fax
+			, email
+			, address
+			, job
+			, department
+			, otherinfo
+			, frontimgsaved
+			, backimgsaved
+			, cardorder
+			, sex
+			, frontimgoriginal
+			, backimgoriginal
 		FROM
 			tbl_yourcardinfo
 		WHERE

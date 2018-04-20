@@ -16,7 +16,6 @@ var uploadFile;			// 서버로 이미지를 보내기 위한 변수.
  *	@comment	:	 
  */
 $(document).ready(function() {
-	alert("레디펑션");
 	$("#input_imgs").on("change", handleImgFileSelect)
 	getMyCardsImg();
 });
@@ -277,6 +276,9 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 			
 			htmlCode += "<div class='input-group'>";
 				htmlCode += "<span class='input-group-addon'>" + keyName + "</span>";
+				
+				
+				
 				htmlCode += "<textarea class='form-control' name='' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
 			htmlCode += "</div>";
 			
@@ -293,36 +295,150 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 	 
 	 
 /*
+ * @comment		:	입력 항목을 추가하는 메소드
+ * @author		:	정보승
+ */	 
+function selectMenuAdd1() {
+	
+	
+	var keyName_ = "";
+	var htmlCode_ = "";
+	
+	keyName_ += "<select class='selectMenu' id='selectMenu_" + inputTypeNum + "'>";
+		keyName_ += "<option>선택</option>";
+		keyName_ += "<option value='name1'>이름(국문)</option>";
+		keyName_ += "<option value='name2'>이름(영문)</option>";
+		keyName_ += "<option value='name3'>이름</option>";
+		keyName_ += "<option value='company'>회사</option>";
+		keyName_ += "<option value='job'>직급</option>";
+		keyName_ += "<option value='department'>부서</option>";
+		keyName_ += "<option value='address'>주소</option>";
+		keyName_ += "<option value='tel'>전화번호</option>";
+		keyName_ += "<option value='phone'>휴대폰번호</option>";
+		keyName_ += "<option value='email'>E-Mail</option>";
+		keyName_ += "<option value='fax'>Fax</option>";
+		keyName_ += "<option value='memo'>Memo</option>";
+		keyName_ += "<option value='otherinfo'>Etc</option>";
+	keyName_ += "</select>";
+
+	htmlCode_ += "<div class='input-group'>";
+		htmlCode_ += "<span class='input-group-addon'>" + keyName_ + "</span>";
+		htmlCode_ += "<textarea class='form-control' name='' id='cardInfo_" + inputTypeNum + "' >" +  "</textarea>";
+	htmlCode_ += "</div>";
+
+	$("#cardInfo").append(htmlCode_);
+	
+	// htmlCode 초기화
+	htmlCode_='';
+	keyName_='';
+	inputTypeNum++;
+	
+	$("#cardInfo").trigger("create");
+
+}
+
+function getMyCardsImg(){
+	
+	
+	$.ajax({
+		url: '../mycard/getMyCards'
+		,type : 'get'
+		,datatype :'json'
+		,success: function(json){
+			
+			//나의 명함이 리스트에 없을 때
+			if(json=='[]'){
+				str ='<br><현재 등록된 나의 명함이 없습니다>';
+				$(".selctMyCard").html(str);
+				return ;
+			}
+			
+			var str ='<br><상대방과의 명함 교환시 건낸 나의 명함은 무엇입니까?>';
+			str += '<table>';
+			str += '<tr>';
+			$.each($.parseJSON(json), function(idx, item) {
+				str += '<td><input type="radio" name="gaveMyCardRadio" value="' + item.mycardnum + '" checked /> </td>' ;	
+			});	
+			str += '</tr><tr>';
+			$.each($.parseJSON(json), function(idx, item) {
+				str+= '<td>'+ item.company +'</td>';	
+			});	
+			str += '</tr><tr>';
+			$.each($.parseJSON(json), function(idx, item) {
+				str+= '<td>'+ item.job +'</td>';
+			});	
+			str += '</tr><tr>';
+			//이미지
+			$.each($.parseJSON(json), function(idx, item) {
+				var frontimage = item.frontimgoriginal
+				str += '<td><img src="../mycard/download?mycardnum='+item.mycardnum+'" width="90px"></td>';
+				
+			});	
+			str += '</tr>';
+			str+= '</table>';
+			console.log(str);
+			$(".selctMyCard").html(str);
+			
+			
+			
+			//$(".cardInfoMenu").attr("type","hidden").attr("name","mycardnum").attr("value","")
+		}
+		
+		,error :function(e){
+			alert(e);
+		}
+	})
+}
+	 
+/*
  * @comment		:	동적으로 생성된 input 태그들의 name속성을 설정하고 Submit
  * @author		:	정보승
  */ 
 function cardInfoSubmit() {
+	
+	//여지원-라디오박스로 선택된 mycardnum
+	var getmycardnum = $(".selctMyCard").find("input[type=radio]:checked").val();
+	$(".selctMyCard").trigger("create");
+	console.log("카드 번호 : " + getmycardnum);
 	
 	for(var i=0; i<inputTypeNum; i++) {
 		
 		// 동적으로 생성된 input 태그들의 name 속성에 selectBox의 value를 대입
 		$("#cardInfo_"+i).attr("name", $("#selectMenu_"+i).val());
 		
-//		$("#cardInfo").append("<input type='hidden' name='" + $("#selectMenu_"+i).val() + "' value='"+ $("#cardInfo_"+i).val() +"' />");
 	}
 	
-	$("#cardInfo").trigger("create");
-//	var formString = $("form[id=cardInfoForm]").serialize();
-	
-	// form태그 submit
+//	$("#cardInfo").trigger("create");
 	
 	$.ajax({
 		 
 		url : "insertYourCard"
-		, processData: false
-		, contentType: false
 		, type : "post"
-		, data : $("#cardInfoForm").serialize()
+		, data : {
+			
+			name1 : $("textarea[name*=name1]").val()
+			, name2 : $("textarea[name*=name2]").val()
+			, name3 : $("textarea[name*=name3]").val()
+			, company : $("textarea[name*=company]").val()
+			, job : $("textarea[name*=job]").val()
+			, department : $("textarea[name*=department]").val()
+			, address : $("textarea[name*=address]").val()
+			, tel : $("textarea[name*=tel]").val()
+			, phone : $("textarea[name*=phone]").val()
+			, email : $("textarea[name*=email]").val()
+			, fax : $("textarea[name*=fax]").val()
+			, memo : $("textarea[name*=memo]").val()
+			, otherinfo : $("textarea[name*=otherinfo]").val()
+			, mycardnum : getmycardnum 				// original file name
+			
+		}
 		, success : function(resultMsg) {
 	
 			if(resultMsg == "true") {
 				
 				alert("성공적으로 등록되었습니다.");
+				$("#cardInfo").html("");				// input tag 부분 날리기.
+				$("#cardBtn").hide();					// submit 버튼 숨기기
 			}
 			else {
 				

@@ -84,7 +84,6 @@ public class YourCardInfoController {
 		// 세션을 통해 회원 ID를 가져와서 저장.
 		String userid = (String) session.getAttribute("userid");
 		yourCard.setUserid(userid);
-		
 		// temp폴더의 파일목록을 생성
 		ArrayList<File> dirList = FileService.getDirFileList(new StringBuffer().append(uploadPath).append(userid).append("/").toString());
 		
@@ -109,7 +108,6 @@ public class YourCardInfoController {
 		
 		yourCard.setFrontimgsaved(uploadSavedImg);		// 서버에 저장될 이미지 파일명
 		yourCard.setFrontimgoriginal(uploadImg);		// 회원이 올린 실제 이미지 파일명
-		yourCard.setMycardnum("mbc14");	// 삭제 예정
 		
 //		yourCardInfoDAO
 		boolean insertIs = yourCardInfoDAO.yourCardInsert(yourCard);

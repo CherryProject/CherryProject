@@ -27,6 +27,8 @@
 			, job
 			, department
 			, otherinfo
+			, frontimgsaved
+			, backimgsaved
 			, cardorder
 			, frontimgoriginal
 			, backimgoriginal
@@ -37,5 +39,37 @@
 	
 	</select>
 
+<!-- 정보승 : 내 명함 1개 조회 -->
+	<select id="selectOneMyCard" parameterType="hashmap" resultType="mycard">
+	
+		SELECT 
+			mycardnum
+			, company
+			, name1
+			, name2
+			, name3
+			, phone
+			, tel
+			, fax
+			, email
+			, address
+			, job
+			, department
+			, otherinfo
+			, frontimgsaved
+			, backimgsaved
+			, cardorder
+			, frontimgoriginal
+			, backimgoriginal
+		FROM
+			tbl_mycardinfo
+		WHERE
+			userid like #{userid}
+			
+			AND
+			
+			mycardnum = #{mycardnum}
+	
+	</select>
 
 </mapper>
