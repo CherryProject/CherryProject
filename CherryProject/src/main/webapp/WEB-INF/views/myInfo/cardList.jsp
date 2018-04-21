@@ -24,105 +24,68 @@
 	
 	<script src="<c:url value="/resources/js/newMain_js/menu/modernizr.custom.js"/> "> </script>
 	<script>document.documentElement.className = 'js';</script>
+	<script>
+	
+		$(function() {
+			
+			$("#mycard_grid").addClass("grid__item--c1", "grid__item--c2");
+		});
+	
+	</script>
 </head>
 <div class="container">
-	<header>
-		<nav id="bt-menu" class="bt-menu">
-			<a href="#" class="bt-menu-trigger"><i class="fas fa-bars"></i></a>
-			<ul>
-				<li><a href="#">Home</a></li>
-				<li><a href="#">TemplateList</a></li>
-				<li><a href="#">Tools</a></li>
-				<li><a href="#">Myinfo</a></li>
-				<li><a href="#">Contact</a></li>
-			</ul>
-			<ul>
-				<li>Twitter</li>
-				<li>Google+</li>
-				<li>Facebook</li>
-			</ul>
-		</nav>
-	</header>
+
+	<%@ include file="/WEB-INF/views/common/bodyHeader.jsp" %>
+	
+	
 	<article>
+		
 		<section class="content">
+		
 			<div class="grid grid--effect-vega">
-				<a href="#" class="grid__item grid__item--c1">
+			<c:forEach items="${myCardList}" var="mycard">
+				<a href="javascript:" class="grid__item grid__item--c1" id="mycard_grid" >
 					<div class="stack">
 						<div class="stack__deco"></div>
 						<div class="stack__deco"></div>
 						<div class="stack__deco"></div>
 						<div class="stack__deco"></div>
 						<div class="stack__figure">
-							<img class="stack__img" src="img/1.png" alt="Image"/>
+							<img class="stack__img" src="mycard/download?mycardnum=${mycard.mycardnum }" alt="Image"/>
 						</div>
 					</div>
 					<div class="grid__item-caption">
 						<h3 class="grid__item-title">anaerobic</h3>
 						<div class="column column--left">
-							<span class="column__text">Period</span>
-							<span class="column__text">Subjects</span>
-							<span class="column__text">Result</span>
+							<span class="column__text">
+							<c:if test="${mycard.name1 ne null}">
+								Name
+							</c:if>
+							</span>
+							<span class="column__text">
+							<c:if test="${mycard.company ne null}">
+								Company
+							</c:if></span>
+							<span class="column__text">
+							<c:if test="${mycard.phone ne null}">
+								Phone
+							</c:if>
+							</span>
 						</div>
 						<div class="column column--right">
-							<span class="column__text">2045</span>
-							<span class="column__text">133456</span>
-							<span class="column__text">Positive</span>
+							<span class="column__text">${mycard.name1} </span>
+							<span class="column__text">${mycard.company} </span>
+							<span class="column__text">${mycard.phone} </span>
 						</div>
 					</div>
 				</a>
-				<a href="#" class="grid__item grid__item--c2">
-					<div class="stack">
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__figure">
-							<img class="stack__img" src="img/2.png" alt="Image"/>
-						</div>
-					</div>
-					<div class="grid__item-caption">
-						<h3 class="grid__item-title">exothermic</h3>
-						<div class="column column--left">
-							<span class="column__text">Period</span>
-							<span class="column__text">Subjects</span>
-							<span class="column__text">Result</span>
-						</div>
-						<div class="column column--right">
-							<span class="column__text">2045</span>
-							<span class="column__text">133456</span>
-							<span class="column__text">Positive</span>
-						</div>
-					</div>
-				</a>
-				<a href="#" class="grid__item grid__item--c3">
-					<div class="stack">
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__figure">
-							<img class="stack__img" src="img/3.png" alt="Image"/>
-						</div>
-					</div>
-					<div class="grid__item-caption">
-						<h3 class="grid__item-title">diatomic</h3>
-						<div class="column column--left">
-							<span class="column__text">Period</span>
-							<span class="column__text">Subjects</span>
-							<span class="column__text">Result</span>
-						</div>
-						<div class="column column--right">
-							<span class="column__text">2045</span>
-							<span class="column__text">133456</span>
-							<span class="column__text">Positive</span>
-						</div>
-					</div>
-				</a>
+			</c:forEach>
 			</div>
+			
 		</section>
-
-		<script src="<c:url value="/resources/myinfo/js/anime.min.js" />">
-		<script src="<c:url value="/resources/myinfo/js/main.js" />">
+		
+		<script src="<c:url value="/resources/myinfo/js/anime.min.js" />"></script>
+		<script src="<c:url value="/resources/myinfo/js/main.js" />" ></script>
 		<script>
 			(function() {
 				[].slice.call(document.querySelectorAll('.grid--effect-vega > .grid__item')).forEach(function(stackEl) {
@@ -130,6 +93,7 @@
 				});
 			})();
 		</script>
+		
 	</article><!-- article end -->
 </div><!-- /container -->
 <script src="<c:url value="/resources/js/newMain_js/menu/classie.js" />"></script>

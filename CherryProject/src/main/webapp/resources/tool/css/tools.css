@@ -23,7 +23,7 @@ body { padding:0; margin:0; font:15px arial; }
   background:#333;
 }
 
-.canvas {
+.output {
   position:absolute;
   top:0; left:0; right:300px; bottom:0;
   background:#ccc; overflow: auto;

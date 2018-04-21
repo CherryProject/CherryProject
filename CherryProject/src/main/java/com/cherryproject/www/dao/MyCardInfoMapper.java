@@ -12,7 +12,8 @@ import com.cherryproject.www.vo.MyCardInfoVO;
  */
 public interface MyCardInfoMapper {
 
-	// 정보승 : 내 명함 등록
+	// 정현수 : 내 명함 등록
+	public void insertMyCard (MyCardInfoVO mycard); 
 	
 	
 	// 정보승 : 등록한 내 명함 전체 조회

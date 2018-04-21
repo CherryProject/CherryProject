@@ -41,8 +41,6 @@ public class YourCardInfoController {
 
 	@Inject 
 		private YourCardInfoDAO yourCardInfoDAO;
-	@Inject
-		private MyCardInfoDAO myCardInfoDAO;
 	
 	private static final Logger logger = LoggerFactory.getLogger(YourCardInfoController.class);
 

@@ -225,9 +225,6 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 //정규표현식들
 //var regExp = /\s/g;					//모든 공백 체크 정규식
 //var numberRegExp = /^[0-9]+$/;		//숫자만 체크 정규식
-//var cityName = ["서울", "대구", "부산", "광주", "울산", "대전", "인천", "경기도", "경상북도", "경상남도"];
-//var jobName = ["사장", "부장", "차장", "과장", "대리", "계장", "사원", "선임", "연구원"];
-//var departmentName = ["영업", "마케팅", "인사", "금융", "품질"];
 //var urlRegExp = /(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$/;
 //var eMailRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 //var phoneRegExp = /\w\/cell\/[ ]\d{3}[- ]?\d{3,4}[- ]?\d{4}/g;
@@ -239,8 +236,9 @@ var departmentRegExp = /인사|총무|회계|기획|영업|경리|경영|재경|
 var cityNameRegExp = /서울|대구|부산|광주|대전|인천|울산|세종|경기도|경상북도|경북|경상남도|경남|전라북도|전북|전라남도|전남|충청북도|충북|충청남도|충남|강원도|제주도|제주/g;
 var urlRegExp = /([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$/;	//도메인 형태, http:// https:// 포함안해도 되고 해도 되고
 var eMailRegExp = /[0-9a-zA-Z]*[\-\_\.]?[0-9a-zA-Z]*\@[0-9a-zA-Z]*[\-\_\.]?[0-9a-zA-Z]*\.[a-zA-Z]{2,3}[\.]?[a-zA-Z]{2}?/g;
-var phoneRegExp =  /\d{3}[- ]?\d{3,4}[- ]?\d{4}$/;
+var phoneRegExp =  /[0][1]\d{1}[- ]?\d{3,4}[- ]?\d{4}$/;
 var telRegExp = /\d{2,3}[- ]?\d{3,4}[- ]?\d{4}$/;
+var delRegExp = /tel|fax|phone|cell/g;
 	 function resultInput(detectResult) {
 		 
 		// 엔터키 기준으로 OCR 분석 결과 자르기
@@ -257,17 +255,13 @@ var telRegExp = /\d{2,3}[- ]?\d{3,4}[- ]?\d{4}$/;
 		var htmlCode = '';
 		var keyName = '';
 		
-		
-		
-		
 		for(var i=0; i<detectResultArrLen; i++) {
 			
 			console.log(detectResultArr[i]);
 			
-			// OCR 분석이 된 문자열이 없거나 길이가 1인 경우 생략
-			if(	detectResultArr[i].length == 0 || detectResultArr[i] == null
-					|| detectResultArr[i].length == 1
-			) {
+			// OCR 분석이 된 문자열의 길이가 1인 경우나 delRegExp에 해당하는 경우 생략
+			if(	detectResultArr[i].length == 1)
+			{
 				
 				continue;
 			}
@@ -278,34 +272,39 @@ var telRegExp = /\d{2,3}[- ]?\d{3,4}[- ]?\d{4}$/;
 				
 				htmlCode += "<div class='input-group'>";
 					htmlCode += "<span class='input-group-addon'>" + "E-Mail" + "</span>";
-					htmlCode += "<textarea class='form-control' name='email' id='cardInfo_" + i + "' >" + detectResultArr[i].match(eMailRegExp).toString() +  "</textarea>";
+					htmlCode += "<textarea class='form-control' name='email' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
 				htmlCode += "</div>";
 				console.log("이메일");
 			}
+			// 회사 홈페이지 주소
 			else if(urlRegExp.test(detectResultArr[i])) {
 				
 				htmlCode += "<div class='input-group'>";
 					htmlCode += "<span class='input-group-addon'>" + "Etc" + "</span>";
-					htmlCode += "<textarea class='form-control' name='etc' id='cardInfo_" + i + "' >" + detectResultArr[i].match(urlRegExp).toString() +  "</textarea>";
+					htmlCode += "<textarea class='form-control' name='etc' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
 				htmlCode += "</div>";
 				console.log("Etc");
 			}
-			else if(phoneRegExp.test(detectResultArr[i])) {
+			// 휴대폰 번호
+			else if( phoneRegExp.test(detectResultArr[i])) {
 				
 				htmlCode += "<div class='input-group'>";
-					htmlCode += "<span class='input-group-addon'>" + "Phone" + "</span>";
-					htmlCode += "<textarea class='form-control' name='phone' id='cardInfo_" + i + "' >" + detectResultArr[i].match(phoneRegExp).toString() +  "</textarea>";
+					htmlCode += "<span class='input-group-addon'>" + "PHONE" + "</span>";
+					htmlCode += "<textarea class='form-control' name='phone' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
 				htmlCode += "</div>";
-				console.log("Phone");
+					
 			}
+			// 전화번호
 			else if(telRegExp.test(detectResultArr[i])) {
-				
+
 				htmlCode += "<div class='input-group'>";
 					htmlCode += "<span class='input-group-addon'>" + "TEL" + "</span>";
-					htmlCode += "<textarea class='form-control' name='tel' id='cardInfo_" + i + "' >" + detectResultArr[i].match(telRegExp).toString() +  "</textarea>";
+					htmlCode += "<textarea class='form-control' name='tel' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
 				htmlCode += "</div>";
-				console.log("TEL");
+				
 			}
+			
+			// 회사 주소
 			else if(cityNameRegExp.test(detectResultArr[i].toLowerCase())) {
 				
 				htmlCode += "<div class='input-group'>";
@@ -314,6 +313,7 @@ var telRegExp = /\d{2,3}[- ]?\d{3,4}[- ]?\d{4}$/;
 				htmlCode += "</div>";
 				console.log("주소");
 			}
+			// 부서
 			else if(departmentRegExp.test(detectResultArr[i].toLowerCase())) {
 				
 				htmlCode += "<div class='input-group'>";
@@ -322,6 +322,7 @@ var telRegExp = /\d{2,3}[- ]?\d{3,4}[- ]?\d{4}$/;
 				htmlCode += "</div>";
 				console.log("부서");
 			}
+			// 직책 및 직급
 			else if(jobRegExp.test(detectResultArr[i].toLowerCase())) {
 				
 				htmlCode += "<div class='input-group'>";
@@ -330,6 +331,7 @@ var telRegExp = /\d{2,3}[- ]?\d{3,4}[- ]?\d{4}$/;
 				htmlCode += "</div>";
 				console.log("직책");
 			}
+			// 그 외
 			else {
 				
             	keyName += "<select class='selectMenu' id='selectMenu_" + i + "'>";
@@ -354,7 +356,6 @@ var telRegExp = /\d{2,3}[- ]?\d{3,4}[- ]?\d{4}$/;
 	    			htmlCode += "<textarea class='form-control' name='' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
     			htmlCode += "</div>";
       
-				
 			}
 			
 			$("#cardInfo").append(htmlCode);
@@ -441,11 +442,16 @@ function getMyCardsImg(){
 			});	
 			str += '</tr><tr>';
 			$.each($.parseJSON(json), function(idx, item) {
-				str+= '<td>'+ item.company +'</td>';	
+				
+				if(item.company === undefined)
+				str+= '<td>'+ item.company +'</td>';
 			});	
 			str += '</tr><tr>';
 			$.each($.parseJSON(json), function(idx, item) {
-				str+= '<td>'+ item.job +'</td>';
+				
+				if(item.job != null || item.job.length != 0) {
+					str+= '<td>'+ item.job +'</td>';
+				}
 			});	
 			str += '</tr><tr>';
 			//이미지

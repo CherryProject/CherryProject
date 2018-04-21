@@ -6,10 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>MyInfo Page</title>
+<%@ include file="/WEB-INF/views/common/headPart.jsp" %>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/bodyHeader.jsp" %>
 
-<a href="">내 명함 보기</a>
+<a href="/www/cardList">내 명함 보기</a>
 <a href="/www/management">받은 명함 보기</a>
 
 </body>

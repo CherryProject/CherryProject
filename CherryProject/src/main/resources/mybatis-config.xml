@@ -13,6 +13,11 @@
 		<typeAlias type="com.cherryproject.www.vo.CommentVO" 		alias="comment" />
 	</typeAliases>
 	
+	<!-- 오라클 LongType 처리하기 위한 핸들러 -->
+	<typeHandlers>
+        <typeHandler handler="com.cherryproject.www.common.exception.CLOBHandler" javaType="String" jdbcType="LONGVARCHAR"/>
+    </typeHandlers>
+	
 	<mappers>
 	
 		<!-- MembersInfo MapperFile -->

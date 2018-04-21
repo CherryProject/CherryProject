@@ -4,7 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+<%-- 
+<%@ include file="/WEB-INF/views/common/headPart.jsp" %>
+--%>
+	<title>Make BusinessCard</title>
     <link rel="stylesheet" type="text/css" href="<c:url value=" resources/tool/css/common.css" />">
     <link rel="stylesheet" type="text/css" href="<c:url value=" resources/tool/css/b.css" />">
     
@@ -12,12 +15,72 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
     <link href="https://code.jquery.com/ui/jquery-ui-git.css" rel="stylesheet"/>
    
+   	<script type="text/javascript" src="<c:url value=" resources/tool/js/html2canvas.js" />"></script>
+   
     <script type="text/javascript" src="<c:url value=" resources/tool/js/jquery-3.3.1.min.js" />"></script>
     <script src ="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="<c:url value=" resources/tool/js/tab.js" />"></script>
     <script type="text/javascript" src="<c:url value=" resources/tool/js/dragAndDropv4.js" />"></script>
+	<script>
+    
+   $(function(){
+		
+	   var mycardnum = 0; // 명함 번호
+	   
+	   //$(".download")영역 안에 마우스가 들어올 경우
+	   $(document).on("mouseenter", ".download", function() {
+		   
+		   $(this).on("click", function(){
+			   //$('.canvas') 는 이미지로 만들 태그 (영역)
+			/* $('.canvas').css({
+				   'width' : '',
+			   		'height' : '',
+			   		'top' : '',
+			   		'left' : ''
+			   });*/
+			   html2canvas($(".canvas"), {
+	                onrendered: function(canvas) {
+	                    if (typeof FlashCanvas != "undefined") {
+	                        FlashCanvas.initElement(canvas);
+	                    }
+	                   // canvas 로 변환 (Base64 encoding)
+	                	mycardnum++;
+	                    var image = canvas.toDataURL("image/png"); 
+							
+	                    var link = document.createElement('a');
+	      	        	  link.href = image;  // use realtive url 
+	                
+	                   // hidden 태그에 변환된 값 대입
+	                    $("#imgData").attr("value", link.href);
+	                   alert($("#imgData").attr("value"));
+	                    
+	                   var html  = $("#canvas").html();
+	                   $("#html").attr("value", html);
+	                   alert(html);
+	                   
+	                    // post 방식으로 submit
+	                    $("#imgForm").submit();
+	                   //$('.canvas').css("height", 412.5).css("width", 1536);
+	                }
+	            });
+			   
+		   });
+		   
+        });
+
+   });//레디 함수
+
+   function myTool() {
+	 
+	   location.href = "tool/myTool"; 
+   }
+   
+    </script>
 </head>
 <body>
+<%-- 
+	<%@ include file="/WEB-INF/views/common/bodyHeader.jsp" %>
+ --%>
     <div id="wrap">
         <header>
             <h1 id="title" class="title">tool</h1>
@@ -25,14 +88,20 @@
                 <ul class="tool_default_button_group">
                     <li><a href="#"><i class="fas fa-file-alt"></i>project</a></li>
                     <li><i class="fas fa-file"></i>page</li>
-                    <li><i class="fas fa-edit"></i>edit</li>
-                    <li><i class="fas fa-exchange-alt"></i>array</li>
+                    <li class="download"><i class="fas fa-edit"></i>edit</li>
+                    <li class="myTool" onclick="myTool()"><i class="fas fa-exchange-alt"></i>array</li>
                     <li><i class="fas fa-tag"></i>effect</li>
                     <li><i class="fas fa-table"></i>table</li>
                     <li><i class="fas fa-edit"></i>memo</li>
                     <li><i class="fas fa-expand"></i>example</li>
                     <li><i class="fas fa-hands-helping"></i>help</li>
                 </ul>
+                
+                 <form name="imgForm" id="imgForm" action="tool/download" method="post">
+			        <input type="hidden" id="imgData" name="imgData" value="">
+			        <input type="hidden" id="html" name="html">
+			    </form>
+                
                 <div class="tool_text_button_group">
                     <button id="bold" class="tool_text_button" title="Bold (Ctrl+B)"><i class="fa fa-bold"></i></button>
                     <button id="italic" class="tool_text_button" title="Italic (Ctrl+I)"><i class="fa fa-italic"></i></button>
@@ -81,7 +150,17 @@
             <ul>
                 <li>
                     <section>
-                        <div class="canvas" id="canvas"></div>
+                        <div class="output" id="output">
+                        
+                        	<div class="canvas" id="canvas"></div>                                  	
+                        	
+                        	
+                        	<!--  <div class="canvas" id="back">
+                        	
+                        	back
+                        	
+                        	</div>-->
+                        </div>
                     </section>
                     <!-- canvas end -->
                 </li>

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cherryproject.www.dao.MyCardInfoDAO;
 import com.cherryproject.www.dao.YourCardInfoDAO;
+import com.cherryproject.www.vo.MyCardInfoVO;
 import com.cherryproject.www.vo.YourCardInfoVO;
 
 import net.sf.json.JSONArray;
@@ -27,6 +29,9 @@ public class HomeController {
 	
 	@Inject
 		private YourCardInfoDAO yCardInfoDAO;
+	
+	@Inject
+		private MyCardInfoDAO mCardInfoDAO;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -41,6 +46,53 @@ public class HomeController {
 		
 		return "home";
 	}
+	
+	
+	
+	/*
+	 * @comment		: myInfo.jsp로 이동
+	 * @author		: 정보승
+	 */
+	@RequestMapping(value = "myInfo", method = RequestMethod.GET)
+	public String myInfoPage(Model model) {
+		
+		logger.info("Move MyInfo Page");
+		
+		return "myInfo/myInfo";
+	}
+	
+	
+	
+	/*
+	 * @comment		: cardList.jsp로 이동(내 명함 관리페이지)
+	 * @author		: 정보승
+	 */
+	@RequestMapping(value = "cardList", method = RequestMethod.GET)
+	public String cardListPage(HttpSession session, Model model) {
+		
+		logger.info("Move cardList Page");
+		
+		String userid = (String) session.getAttribute("userid");
+		
+		ArrayList<MyCardInfoVO> myCardList = mCardInfoDAO.selectAllMyCard(userid);
+//		int listLen = myCardList.size();
+		
+		if(myCardList != null && myCardList.size() != 0) {
+			
+			logger.info("myCardList Success");
+			
+			model.addAttribute("cardColor", new int[]{1, 2, 3});
+			model.addAttribute("myCardList", myCardList);
+		}
+		else {
+			
+			logger.info("myCardList Fail");
+			
+		}
+		
+		return "myInfo/cardList";
+	}
+	
 	
 	
 	/*
@@ -79,47 +131,8 @@ public class HomeController {
 		return "management/management";
 	}
 	
-//	@ResponseBody
-//	@RequestMapping(value = "jsonList", method = RequestMethod.GET, produces="text/plain; charset=UTF-8")
-//	public String jsonList(HttpSession session, Model model) {
-//		
-//		logger.info("Move Management Page");
-//		
-//		String userid = (String) session.getAttribute("userid");
-//		
-//		ArrayList<YourCardInfoVO> resultList = yCardInfoDAO.selectAllCard(userid);
-//		String yourCardList = "";
-//		
-//		if(resultList != null && resultList.size() != 0) {
-//			
-//			logger.info("YourCardInfo List Success");
-//			
-//			Gson gson = new Gson();
-//			yourCardList = gson.toJson(resultList);	// 리스트가 JSON형태로 변환
-//			
-//			JSONArray jarray = new JSONArray();    // JSON 배열  []
-//	        JSONObject item = null;     // JSON 배열 내의 객체.   {}
-//		}
-//		else {
-//			
-//			logger.info("YourCardInfo List Fail");
-//		}
-//		
-//		return yourCardList;	// JSON이 Management.jsp로 반환.
-//	}
 	
 	
-	/*
-	 * @comment		: myInfo.jsp로 이동
-	 * @author		: 정보승
-	 */
-	@RequestMapping(value = "myInfo", method = RequestMethod.GET)
-	public String myInfoPage(Model model) {
-		
-		logger.info("Move MyInfo Page");
-		
-		return "myInfo/myInfo";
-	}
 	
 	
 	

@@ -202,9 +202,9 @@ function renderbox(node) {
         //case "template": $(div_box).addClass('templatebox'); break;
         case "Template": 
             $(div_box).text('').css({
-                'width':'250px',
-                'height':'150px;'
-            });
+                'width':'550px',
+                'height':'450px;'
+            }).addClass("template", "template").trigger("create");
             $(img_box).css({
                 'width':'100%',
                 'height':'100%'
@@ -759,5 +759,57 @@ function save_div() {
             }
 
         }
-
-
+         
+//         $(content).html2canvas({  
+//        	    onrendered: function (canvas) {  
+//        	      var img=canvas.toDataURL("image/png");
+//        	      $('#img_val').val(img);  
+//        	      //$("#target").html('<img src=' + img + '>');<=target 영역에 캡쳐한 이미지 표시하고 싶을때
+//        	      var frm = document.captureForm;  
+//        	  	    frm.action = root + "/capture.do";  
+//        	  	    frm.submit();          
+//        	    }  
+//    	  });  
+//         
+         
+         
+//         //이미지 캡처 
+//         function  html2img(){
+//             var element = $(".Template");
+//             html2canvas(element, {
+//                   onrendered: function(canvas) {
+//                
+//                   getCanvas = canvas;
+//                   upload();
+//                   }
+//            
+//             });
+//            
+//           }
+//         
+//         //업로드 ajax
+//         function upload(){
+//        	 
+//        	 var imageData = getCanvas.toDataURL("image/png");
+//        	 var formData = new FormData();
+//        	 formData.append('file', imageData);
+//        	 
+//        	 $.ajax({
+//        		url : "tool/cature", 
+//        		type : "POST",
+//        		dataType : "json",
+//        		data : formData,
+//        		processData : false,
+//        		contentType : false,
+//        		success :  function (data) {
+//        			
+//        		},
+//        		error : function (request, status, error) {
+//        			
+//        			console.log(request, status, error);
+//        		}
+//        		
+//        		
+//        	 });
+//         }
+//

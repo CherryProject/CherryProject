@@ -1,4 +1,4 @@
-package com.cherryproject.www.dao;
+	package com.cherryproject.www.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,7 +81,7 @@ public class MyCardInfoDAO {
 		try {
 			
 			oneMyCard = mapper.selectOneMyCard(myCard);
-			logger.info("Select All My Card Result : " + oneMyCard.toString());
+			logger.info("Select One My Card Result : " + oneMyCard.toString());
 		}
 		catch (Exception e) {
 			
@@ -100,5 +100,25 @@ public class MyCardInfoDAO {
 		
 		return oneMyCard;
 		
+	}
+	
+	
+	
+	/*
+	 * @comment	:	명함 등록하기	
+	 * @param	:	MyCardInfoVO
+	 * @author	:	정현수	
+	 */
+	
+	public void insertMyCard (MyCardInfoVO mycard) {
+		logger.info("Insert My Card Start");
+		MyCardInfoMapper mapper = sqlSession.getMapper(MyCardInfoMapper.class);
+		
+		try {
+			mapper.insertMyCard(mycard);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("Insert My Card End");
 	}
 }

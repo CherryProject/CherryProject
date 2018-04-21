@@ -95,6 +95,7 @@ public class MyCardInfoController {
 		logger.info("getMyCards Success 시작");
 		
 		String userid = (String) session.getAttribute("userid");
+		
 		String result = "";
 		
 		ArrayList<MyCardInfoVO> list = null;
@@ -104,6 +105,7 @@ public class MyCardInfoController {
 		result = gson.toJson(list);
 		
 		logger.info("getMyCards Success 종료!");
+		
 		return result;
 		
 	}
