@@ -103,7 +103,6 @@
 	<select id="selectYourCardOne" parameterType="hashmap" resultType="yourcard">
 		
 		SELECT 
-			*
 			yourcardnum
 			, userid
 			, yournum

@@ -62,43 +62,6 @@ public class MyCardInfoDAO {
 		return allMyCard;
 		
 	}
-	/*
-	 * @comment	:	내 명함 1개 가져오기
-	 * @param	:	회원 ID와 원하는 카드 번호
-	 * @author	:	정보승
-	 */
-	public MyCardInfoVO selectOneMyCard(HashMap<String, Object> myCard) {
-		
-		logger.info("Select One My Card");
-		
-		MyCardInfoVO oneMyCard = null;
-		MyCardInfoMapper mapper = sqlSession.getMapper(MyCardInfoMapper.class);
-		
-		
-		try {
-			
-			oneMyCard = mapper.selectOneMyCard(myCard);
-			logger.info("Select All My Card Result : " + oneMyCard.toString());
-		}
-		catch (Exception e) {
-			
-			logger.info(e.toString());
-		}
-		
-		
-		if(oneMyCard != null) {
-			
-			logger.info("Select One My Card Success");
-		}
-		else {
-			
-			logger.info("Select One My Card Fail");
-		}
-		
-		return oneMyCard;
-		
-	}
-
 
 	
 	

@@ -43,6 +43,7 @@ function fileUploadAction() {
  *	@comment	:	업로드한 이미지들의 미리보기 화면 생성 메소드
  */ 
 function handleImgFileSelect(e) {
+//	alert("handleImgFileselect");
 	// 이미지 정보들을 초기화
 	sel_files = [];
 	
@@ -148,8 +149,6 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 	$("#ocrImg_" + index).css('border', 'solid 3px red');
 	$("#ocrImg_" + index).trigger("create");
 	
-	
-	
 	var form = $('#tempUpload')[0];
 	var formData = new FormData(form);
 	
@@ -235,9 +234,9 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 //var telRegExp = /\d[0]{2,3}?[- ]?\d{3,4}[- ]?\d{4}/g;
 
 
-var jobRegExp = /[사장과장차장대리]/g;
-var departmentRegExp = /[\/영업\/ \/마케팅\/ \/인사\/ \/금융\/ \/품질\/]/g;
-var cityNameRegExp = /[서울대구부산광주울산대전인천경기도]/g;
+var jobRegExp = /사장|ceo|대표|부장|소장|고문|과장|대리|계장|사원|선임|주임|manager|비서|실장|상무|위원|차장|점장|팀장/g;
+var departmentRegExp = /인사|총무|회계|기획|영업|경리|경영|재경|구매|전략|기획|연구|시설|홍보|금융/g;
+var cityNameRegExp = /서울|대구|부산|광주|대전|인천|울산|세종|경기도|경상북도|경북|경상남도|경남|전라북도|전북|전라남도|전남|충청북도|충북|충청남도|충남|강원도|제주도|제주/g;
 var urlRegExp = /([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$/;	//도메인 형태, http:// https:// 포함안해도 되고 해도 되고
 var eMailRegExp = /[0-9a-zA-Z]*[\-\_\.]?[0-9a-zA-Z]*\@[0-9a-zA-Z]*[\-\_\.]?[0-9a-zA-Z]*\.[a-zA-Z]{2,3}[\.]?[a-zA-Z]{2}?/g;
 var phoneRegExp =  /\d{3}[- ]?\d{3,4}[- ]?\d{4}$/;
@@ -307,27 +306,27 @@ var telRegExp = /\d{2,3}[- ]?\d{3,4}[- ]?\d{4}$/;
 				htmlCode += "</div>";
 				console.log("TEL");
 			}
-			else if(cityNameRegExp.test(detectResultArr[i])) {
+			else if(cityNameRegExp.test(detectResultArr[i].toLowerCase())) {
 				
 				htmlCode += "<div class='input-group'>";
 					htmlCode += "<span class='input-group-addon'>" + "주소" + "</span>";
-					htmlCode += "<textarea class='form-control' name='tel' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
+					htmlCode += "<textarea class='form-control' name='address' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
 				htmlCode += "</div>";
 				console.log("주소");
 			}
-			else if(departmentRegExp.test(detectResultArr[i])) {
+			else if(departmentRegExp.test(detectResultArr[i].toLowerCase())) {
 				
 				htmlCode += "<div class='input-group'>";
 					htmlCode += "<span class='input-group-addon'>" + "부서" + "</span>";
-					htmlCode += "<textarea class='form-control' name='tel' id='cardInfo_" + i + "' >" + detectResultArr[i].match(departmentRegExp).toString() +  "</textarea>";
+					htmlCode += "<textarea class='form-control' name='department' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
 				htmlCode += "</div>";
 				console.log("부서");
 			}
-			else if(jobRegExp.test(detectResultArr[i])) {
+			else if(jobRegExp.test(detectResultArr[i].toLowerCase())) {
 				
 				htmlCode += "<div class='input-group'>";
 					htmlCode += "<span class='input-group-addon'>" + "직책" + "</span>";
-					htmlCode += "<textarea class='form-control' name='tel' id='cardInfo_" + i + "' >" + detectResultArr[i].match(jobRegExp).toString() +  "</textarea>";
+					htmlCode += "<textarea class='form-control' name='job' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
 				htmlCode += "</div>";
 				console.log("직책");
 			}
@@ -413,6 +412,11 @@ function selectMenuAdd1() {
 
 }
 
+
+/*
+ * @comment	:	명함을 받으면서 건네준 자신의 명함을 선택하는 메소드
+ * @author	:	여지원
+ */
 function getMyCardsImg(){
 	
 	
@@ -465,6 +469,7 @@ function getMyCardsImg(){
 		}
 	})
 }
+
 	 
 /*
  * @comment		:	동적으로 생성된 input 태그들의 name속성을 설정하고 Submit
@@ -472,7 +477,7 @@ function getMyCardsImg(){
  */ 
 function cardInfoSubmit() {
 	
-	//여지원-라디오박스로 선택된 mycardnum
+	//여지원 : 라디오박스로 선택된 mycardnum
 	var getmycardnum = $(".selctMyCard").find("input[type=radio]:checked").val();
 	$(".selctMyCard").trigger("create");
 	console.log("카드 번호 : " + getmycardnum);
@@ -505,8 +510,8 @@ function cardInfoSubmit() {
 			, fax : $("textarea[name*=fax]").val()
 			, memo : $("textarea[name*=memo]").val()
 			, otherinfo : $("textarea[name*=otherinfo]").val()
-			, mycardnum : getmycardnum 				// original file name
-			
+			, uploadImg : uploadFile							// original file name
+			, mycardnum : getmycardnum 							// 선택한 내 명함 번호
 		}
 		, success : function(resultMsg) {
 	
@@ -523,6 +528,4 @@ function cardInfoSubmit() {
 		}
 	});
 }
-
-
 		

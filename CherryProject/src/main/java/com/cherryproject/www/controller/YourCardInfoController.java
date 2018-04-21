@@ -109,7 +109,6 @@ public class YourCardInfoController {
 		
 		yourCard.setFrontimgsaved(uploadSavedImg);		// 서버에 저장될 이미지 파일명
 		yourCard.setFrontimgoriginal(uploadImg);		// 회원이 올린 실제 이미지 파일명
-		yourCard.setMycardnum("mbc14");	// 삭제 예정
 		
 //		yourCardInfoDAO
 		boolean insertIs = yourCardInfoDAO.yourCardInsert(yourCard);
