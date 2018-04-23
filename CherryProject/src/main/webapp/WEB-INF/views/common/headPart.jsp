@@ -10,11 +10,12 @@
 	
 	<!-- 공통 CSS -->
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/newMain_css/common.css"/>">
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/header.css"/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/newMain_css/index.css"/>">
+<!--  
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/header.css"/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/revealer.css"/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/pater.css"/>">
-	
+-->
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/newMain_css/menu/normalize.css"/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/newMain_css/menu/menu.css "/>" >
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/newMain_css/menu/icons.css "/>" >

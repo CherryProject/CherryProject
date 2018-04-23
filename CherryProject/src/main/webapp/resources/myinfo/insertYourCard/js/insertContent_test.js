@@ -12,7 +12,6 @@ var inputTypeNum = 0;	// inputType의 갯수
 var uploadFile;			// 서버로 이미지를 보내기 위한 변수.
 
 
-
 /*
  *	@comment	:	 
  */
@@ -44,7 +43,7 @@ function fileUploadAction() {
  *	@comment	:	업로드한 이미지들의 미리보기 화면 생성 메소드
  */ 
 function handleImgFileSelect(e) {
-	alert("handleImgFileselect");
+//	alert("handleImgFileselect");
 	// 이미지 정보들을 초기화
 	sel_files = [];
 	
@@ -77,21 +76,24 @@ function handleImgFileSelect(e) {
 			var src = e.target.result;
 			
 			// 업로드한 이미지의 미리보기 영역 생성
-			var makeImgPreview = "<div class='imgPreview'>";
-				makeImgPreview += "<a href='javascript:void(0)' onclick='moveToDiv(\"" + src + "\"," + (num-1) + "," + inputLen + "," + index + ")' id='img_id_" + index + "'>";
-				makeImgPreview += "<img style='width : 200px;' src='" + e.target.result + "' data-file='" + f.name + "' class='selProductFile' id='ocrImg_" + index + "'>";
-				makeImgPreview += "</a>";
-				makeImgPreview += "</div>";
+			var makeImgPreview = "<div class='imgPreview_"+index+"' style='margin-left : 20px; margin-top : 10px; float : left;'>";
+	            makeImgPreview += "<a href='javascript:void(0)' onclick='moveToDiv(\"" + src + "\"," + (num-1) + "," + inputLen + "," + index + ")'>";
+	            makeImgPreview += "<img style='width : 200px;' src='" + e.target.result + "' data-file='" + f.name + "' class='selProductFile' id='ocrImg_" + index + "'>";
+	            makeImgPreview += "</a>";
+	            makeImgPreview += "<div class='selectMyCard' style='float : right ' id='delBTN"+index+"'>";
+	            makeImgPreview += " <img class='delBtnClass'  src='../resources/img/delBTN.png' onclick='delOne("+index+")'>";
+	            makeImgPreview += "</div>";
+	            makeImgPreview += "</div>";
 				
 			//미리보기 밑에 유저의 명함이미지가 보이는 부분(My Card) - 여지원
 				/*'/resources/myinfo/insertYourCard/img/delBTN.png'*/
-			 var makeDelBtn	= "<div class='selctMyCard'>";
-			 	makeDelBtn += " <img class='delBtnClass' style=  'display:inline;' id='delBTN"+index+"' src='../resources/img/delBTN.png' onclick='delOne("+index+")'>";
-			 																									/*onclick="commentUpdateProc('+commentnum+');"*/
-			    makeDelBtn += "</div>";
+//			 var makeDelBtn	= "<div class='selctMyCard'>";
+//			 	makeDelBtn += " <img class='delBtnClass' style=  'display:inline;' id='delBTN"+index+"' src='../resources/img/delBTN.png' onclick='delOne("+index+")'>";
+//			 																									/*onclick="commentUpdateProc('+commentnum+');"*/
+//			    makeDelBtn += "</div>";
 			    
 			$(".imgs_wrap").append(makeImgPreview);
-			$(".imgs_wrap").append(makeDelBtn);
+//			$(".imgs_wrap").append(makeDelBtn);
 			
 			index++;
 			inputLen++;
@@ -106,6 +108,7 @@ function handleImgFileSelect(e) {
 			inputLen = 0;
 		}*/
 	});
+	
 	
 }
 
@@ -223,45 +226,128 @@ function moveToDiv(src, inputTagNum, inputNum, index){
   *	@comment	:	OCR분석 결과를 텍스트에 집어넣기
   * @author		:	정보승
   */
-	 function resultInput(detectResult) {
-		 
-		// 엔터키 기준으로 OCR 분석 결과 자르기
-		var detectResultArr = detectResult.split('\n');
-		var detectResultArrLen = detectResultArr.length;
-		inputTypeNum = detectResultArrLen;
+//정규표현식들
+//var regExp = /\s/g;					//모든 공백 체크 정규식
+//var numberRegExp = /^[0-9]+$/;		//숫자만 체크 정규식
+//var urlRegExp = /(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$/;
+//var eMailRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+//var phoneRegExp = /\w\/cell\/[ ]\d{3}[- ]?\d{3,4}[- ]?\d{4}/g;
+//var telRegExp = /\d[0]{2,3}?[- ]?\d{3,4}[- ]?\d{4}/g;
+
+
+var jobRegExp = /사장|ceo|대표|부장|소장|고문|과장|대리|계장|사원|선임|주임|manager|비서|실장|상무|위원|차장|점장|팀장/g;
+var departmentRegExp = /인사|총무|회계|기획|영업|경리|경영|재경|구매|전략|기획|연구|시설|홍보|금융/g;
+var cityNameRegExp = /서울|대구|부산|광주|대전|인천|울산|세종|경기도|경상북도|경북|경상남도|경남|전라북도|전북|전라남도|전남|충청북도|충북|충청남도|충남|강원도|제주도|제주/g;
+var urlRegExp = /([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$/;	//도메인 형태, http:// https:// 포함안해도 되고 해도 되고
+var eMailRegExp = /[0-9a-zA-Z]*[\-\_\.]?[0-9a-zA-Z]*\@[0-9a-zA-Z]*[\-\_\.]?[0-9a-zA-Z]*\.[a-zA-Z]{2,3}[\.]?[a-zA-Z]{2}?/g;
+var phoneRegExp =  /[0][1]\d{1}[- ]?\d{3,4}[- ]?\d{4}$/;
+var telRegExp = /\d{2,3}[- ]?\d{3,4}[- ]?\d{4}$/;
+var delRegExp = /tel|fax|phone|cell/g;
+ function resultInput(detectResult) {
+	 
+	// 엔터키 기준으로 OCR 분석 결과 자르기
+	var detectResultArr = detectResult.split('\n');
+	var detectResultArrLen = detectResultArr.length;
+	inputTypeNum = detectResultArrLen;
+	
+	// 회원ID를 hidden으로 추가
+	$("#cardInfo").append("<input type='hidden' name='userid' />");
+	
+	// 현재 이미지의 파일명을 저장. 	
+	$("#cardInfo").append("<input type='hidden' name='uploadImg' value='"+ uploadFile + "' />");
+	
+	var htmlCode = '';
+	var keyName = '';
+	
+	for(var i=0; i<detectResultArrLen; i++) {
 		
-		// 회원ID를 hidden으로 추가
-		$("#cardInfo").append("<input type='hidden' name='userid' />");
+		console.log(detectResultArr[i]);
 		
-		// 현재 이미지의 파일명을 저장.
-		$("#cardInfo").append("<input type='hidden' name='uploadImg' value='"+ uploadFile + "' />");
-		
-		var htmlCode = '';
-		var keyName = '';
-		
-		// 정규표현식들
-		//var regExp = /\s/g;					//모든 공백 체크 정규식
-		//var numberRegExp = /^[0-9]+$/;		//숫자만 체크 정규식
-		
-		var urlRegExp = /^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?$/;	//도메인 형태, http:// https:// 포함안해도 되고 해도 되고	
-		var eMailRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-		var phoneRegExp =  /^\d{3}-\d{3,4}-\d{4}$/;
-		var telRegExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
-		
-		for(var i=0; i<detectResultArrLen; i++) {
+		// OCR 분석이 된 문자열의 길이가 1인 경우나 delRegExp에 해당하는 경우 생략
+		if(	detectResultArr[i].length == 1)
+		{
 			
-			console.log(detectResultArr[i]);
+			continue;
+		}
+		
+		
+		// E-Mail
+		if(eMailRegExp.test(detectResultArr[i])) {
 			
-			// OCR 분석이 된 문자열이 없거나 길이가 1인 경우 생략
-			if(	detectResultArr[i].length == 0 || detectResultArr[i] == null
-					|| detectResultArr[i].length == 1
-					|| detectResultArr[i].toLowerCase() == "tel"
-					|| detectResultArr[i].toLowerCase() == "fax") {
+			htmlCode += "<div class='input-group' id='input-group" + i + "'>";
+				htmlCode += "<span class='input-group-addon'>" + "E-Mail" + "</span>";
+				htmlCode += "<textarea class='form-control' name='email' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
+			htmlCode += "<div class='delMenuOne' style='float:right;' >";
+			htmlCode += "<img class='delBtnClass' src='../resources/img/delBTN.png' onclick='delForm(" + i + ")'>";
+			htmlCode += "</div>";
+		}
+		// 회사 홈페이지 주소
+		else if(urlRegExp.test(detectResultArr[i])) {
+			
+			htmlCode += "<div class='input-group' id='input-group" + i + "'>";
+				htmlCode += "<span class='input-group-addon'>" + "Etc" + "</span>";
+				htmlCode += "<textarea class='form-control' name='etc' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
+			htmlCode += "<div class='delMenuOne' style='float:right;' >";
+			htmlCode += "<img class='delBtnClass' src='../resources/img/delBTN.png' onclick='delForm(" + i + ")'>";
+			htmlCode += "</div>";
+		}
+		// 휴대폰 번호
+		else if( phoneRegExp.test(detectResultArr[i])) {
+			
+			htmlCode += "<div class='input-group' id='input-group" + i + "'>";
+				htmlCode += "<span class='input-group-addon'>" + "PHONE" + "</span>";
+				htmlCode += "<textarea class='form-control' name='phone' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
+			htmlCode += "<div class='delMenuOne' style='float:right;' >";
+			htmlCode += "<img class='delBtnClass' src='../resources/img/delBTN.png' onclick='delForm(" + i + ")'>";
+			htmlCode += "</div>";
 				
-				continue;
-			}
+		}
+		// 전화번호
+		else if(telRegExp.test(detectResultArr[i])) {
+
+			htmlCode += "<div class='input-group' id='input-group" + i + "'>";
+				htmlCode += "<span class='input-group-addon'>" + "TEL" + "</span>";
+				htmlCode += "<textarea class='form-control' name='tel' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
+			htmlCode += "<div class='delMenuOne' style='float:right;' >";
+			htmlCode += "<img class='delBtnClass' src='../resources/img/delBTN.png' onclick='delForm(" + i + ")'>";
+			htmlCode += "</div>";
 			
-			keyName += "<select class='selectMenu' id='selectMenu_" + i + "'>";
+		}
+		
+		// 회사 주소
+		else if(cityNameRegExp.test(detectResultArr[i].toLowerCase())) {
+			
+			htmlCode += "<div class='input-group' id='input-group" + i + "'>";
+				htmlCode += "<span class='input-group-addon'>" + "주소" + "</span>";
+				htmlCode += "<textarea class='form-control' name='address' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
+			htmlCode += "<div class='delMenuOne' style='float:right;' >";
+			htmlCode += "<img class='delBtnClass' src='../resources/img/delBTN.png' onclick='delForm(" + i + ")'>";
+			htmlCode += "</div>";
+		}
+		// 부서
+		else if(departmentRegExp.test(detectResultArr[i].toLowerCase())) {
+			
+			htmlCode += "<div class='input-group' id='input-group" + i + "'>";
+				htmlCode += "<span class='input-group-addon'>" + "부서" + "</span>";
+				htmlCode += "<textarea class='form-control' name='department' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
+			htmlCode += "<div class='delMenuOne' style='float:right;' >";
+			htmlCode += "<img class='delBtnClass' src='../resources/img/delBTN.png' onclick='delForm(" + i + ")'>";
+			htmlCode += "</div>";
+		}
+		// 직책 및 직급
+		else if(jobRegExp.test(detectResultArr[i].toLowerCase())) {
+			
+			htmlCode += "<div class='input-group' id='input-group" + i + "'>";
+				htmlCode += "<span class='input-group-addon'>" + "직책" + "</span>";
+				htmlCode += "<textarea class='form-control' name='job' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
+			htmlCode += "<div class='delMenuOne' style='float:right;' >";
+			htmlCode += "<img class='delBtnClass' src='../resources/img/delBTN.png' onclick='delForm(" + i + ")'>";
+			htmlCode += "</div>";
+		}
+		// 그 외
+		else {
+			
+        	keyName += "<select class='selectMenu' id='selectMenu_" + i + "'>";
 				keyName += "<option>선택</option>";
 				keyName += "<option value='name1'>이름(국문)</option>";
 				keyName += "<option value='name2'>이름(영문)</option>";
@@ -278,20 +364,24 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 				keyName += "<option value='otherinfo'>Etc</option>";
 			keyName += "</select>";
 			
-			htmlCode += "<div class='input-group'>";
-				htmlCode += "<span class='input-group-addon'>" + keyName + "</span>";
-				htmlCode += "<textarea class='form-control' name='' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
+			htmlCode += "<div class='input-group' id='input-group" + i + "'>";
+    			htmlCode += "<span class='input-group-addon'>" + keyName + "</span>";
+    			htmlCode += "<textarea class='form-control' name='' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
+    			htmlCode += "<div class='delMenuOne' style='float:right;' >";
+    			htmlCode += "<img class='delBtnClass' src='../resources/img/delBTN.png' onclick='delForm(" + i + ")'>";
 			htmlCode += "</div>";
-			
-			$("#cardInfo").append(htmlCode);
-			
-			// htmlCode 초기화
-			htmlCode='';
-			keyName='';
-				
+  
 		}
 		
-	 }
+		$("#cardInfo").append(htmlCode);
+		
+		// htmlCode 초기화
+		htmlCode='';
+		keyName='';
+			
+	}
+	
+ }
 
 	 
 	 
@@ -322,11 +412,16 @@ function selectMenuAdd1() {
 		keyName_ += "<option value='otherinfo'>Etc</option>";
 	keyName_ += "</select>";
 
-	htmlCode_ += "<div class='input-group'>";
+	htmlCode_ += "<div class='input-group' id='input-group" + inputTypeNum + "'>";
 		htmlCode_ += "<span class='input-group-addon'>" + keyName_ + "</span>";
 		htmlCode_ += "<textarea class='form-control' name='' id='cardInfo_" + inputTypeNum + "' >" +  "</textarea>";
-	htmlCode_ += "</div>";
 
+	// 삭제버튼 추가 여지원
+		htmlCode_ += "<div class='delMenuOne' style='float:right;'>";
+			htmlCode_ += "<img class='delBtnClass' src='../resources/img/delBTN.png' onclick='delForm(" + inputTypeNum + ")'>";
+		htmlCode_ += "</div>";
+	htmlCode_ += "</div>";
+	
 	$("#cardInfo").append(htmlCode_);
 	
 	// htmlCode 초기화
@@ -339,6 +434,68 @@ function selectMenuAdd1() {
 }
 
 
+/*
+ * @comment	:	명함을 받으면서 건네준 자신의 명함을 선택하는 메소드
+ * @author	:	여지원
+ */
+function getMyCardsImg(){
+	
+	
+	$.ajax({
+		url: '../mycard/getMyCards'
+		,type : 'get'
+		,datatype :'json'
+		,success: function(json){
+			
+			//나의 명함이 리스트에 없을 때
+			if(json=='[]'){
+				str ='<br><현재 등록된 나의 명함이 없습니다>';
+				$(".selctMyCard").html(str);
+				return ;
+			}
+			
+			var str ='<br><상대방과의 명함 교환시 건낸 나의 명함은 무엇입니까?>';
+			str += '<table>';
+			str += '<tr>';
+			$.each($.parseJSON(json), function(idx, item) {
+				str += '<td><input type="radio" name="gaveMyCardRadio" value="' + item.mycardnum + '" checked /> </td>' ;	
+			});	
+			str += '</tr><tr>';
+			$.each($.parseJSON(json), function(idx, item) {
+				
+				console.log(item.company);
+				str+= '<td>'+ item.company +'</td>';
+			});	
+			str += '</tr><tr>';
+			$.each($.parseJSON(json), function(idx, item) {
+				console.log(item.job);
+				if(item.job != null || item.job.length != 0) {
+					str+= '<td>'+ item.job +'</td>';
+				}
+			});	
+			str += '</tr><tr>';
+			//이미지
+			$.each($.parseJSON(json), function(idx, item) {
+				var frontimage = item.frontimgoriginal
+				str += '<td><img src="../mycard/download?mycardnum='+item.mycardnum+'" width="90px"></td>';
+				
+			});	
+			str += '</tr>';
+			str+= '</table>';
+			console.log(str);
+			$(".selctMyCard").html(str);
+			
+			
+			
+			//$(".cardInfoMenu").attr("type","hidden").attr("name","mycardnum").attr("value","")
+		}
+		
+		,error :function(e){
+			alert(e);
+		}
+	})
+}
+
 	 
 /*
  * @comment		:	동적으로 생성된 input 태그들의 name속성을 설정하고 Submit
@@ -346,7 +503,10 @@ function selectMenuAdd1() {
  */ 
 function cardInfoSubmit() {
 	
-	
+	//여지원 : 라디오박스로 선택된 mycardnum
+	var getmycardnum = $(".selctMyCard").find("input[type=radio]:checked").val();
+	$(".selctMyCard").trigger("create");
+	console.log("카드 번호 : " + getmycardnum);
 	
 	for(var i=0; i<inputTypeNum; i++) {
 		
@@ -377,6 +537,7 @@ function cardInfoSubmit() {
 			, memo : $("textarea[name*=memo]").val()
 			, otherinfo : $("textarea[name*=otherinfo]").val()
 			, uploadImg : uploadFile							// original file name
+			, mycardnum : getmycardnum 							// 선택한 내 명함 번호
 		}
 		, success : function(resultMsg) {
 	
@@ -393,4 +554,24 @@ function cardInfoSubmit() {
 		}
 	});
 }
+
+
+
+/*
+ * @comment	:	폼에서 항목을 지우는 함수
+ * @author	:	여지원
+ */
+function delForm(i){
+	
+	var bool = confirm("이 항목을 지울까요?");
+	
+	if(!bool){
+		
+		return false;
+	}
+	
+	$("#input-group"+i).remove();
+}
+
+
 		

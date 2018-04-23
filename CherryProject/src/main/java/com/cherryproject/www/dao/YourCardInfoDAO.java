@@ -61,6 +61,67 @@ public class YourCardInfoDAO {
 	
 	
 	/*
+	 * @comment	:	(모바일용) 받은 명함 전체 조회
+	 * @author	:	정보승
+	 */
+	public ArrayList<YourCardInfoVO> mSelectAllCard (String userid) {
+		
+		logger.info("Mobile YourCardInfo List");
+		
+		YourCardInfoMapper mapper = sqlSession.getMapper(YourCardInfoMapper.class);
+		
+		ArrayList<YourCardInfoVO> resultList = null;
+		
+		try {
+			
+			resultList = mapper.mSelectAllCard(userid);
+		}
+		catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		if(resultList != null && resultList.size() != 0) {
+			
+			logger.info("Mobile YourCardInfo List Success");
+		}
+		else {
+			
+			logger.info("Mobile YourCardInfo List Fail");
+		}
+		
+		return resultList;
+	}
+	
+	
+	/*
+	 * @comment	:	받은 명함 등록 갯수 조회
+	 * @author	:	정보승
+	 */
+	public int cntYourCard(String userid) {
+		
+		logger.info("YourCard Count");
+		
+		YourCardInfoMapper mapper = sqlSession.getMapper(YourCardInfoMapper.class);
+		
+		int yourCardCnt = 0;
+		
+		try {
+			
+			yourCardCnt = mapper.cntYourCard(userid);
+		}
+		catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return yourCardCnt;
+		
+	}
+	
+	
+	
+	/*
 	 * @comment		:	회원이 가진 명함 중 검색어에 해당하는 명함 호출
 	 * @param		:	회원의 ID
 	 * @return		:	검색어에 해당하는 모든 명함 정보.
@@ -105,7 +166,7 @@ public class YourCardInfoDAO {
 	public boolean yourCardInsert(YourCardInfoVO insertYourCardInfo) {
 		
 		logger.info("YourCardInfo Insert");
-		
+		logger.info("YourCardInfo Sex : " + insertYourCardInfo.getSex());
 		YourCardInfoMapper mapper = sqlSession.getMapper(YourCardInfoMapper.class);
 		int insertIs = 0;
 		

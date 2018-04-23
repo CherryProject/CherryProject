@@ -14,11 +14,10 @@
 			, userid
 			, yournum
 			, mycardnum
-			, memo
-			, company
 			, name1
 			, name2
 			, name3
+			, company
 			, phone
 			, tel
 			, fax
@@ -26,6 +25,7 @@
 			, address
 			, job
 			, department
+			, memo
 			, otherinfo
 			, frontimgsaved
 			, backimgsaved
@@ -39,6 +39,41 @@
 			userid like #{userid}
 		ORDER BY
 			yourcardnum
+	
+	</select>
+	
+	
+	
+	<!-- 정보승 : (모바일용) 받은 명함 전체 가져오기 -->
+	<select id="mSelectAllCard" parameterType="string" resultType="yourcard">
+	
+		SELECT 
+			yourcardnum
+			, company
+			, name1
+			, phone
+			, job
+			, department
+			, sex
+		FROM
+			tbl_yourcardinfo
+		WHERE
+			userid like #{userid}
+		ORDER BY
+			yourcardnum
+	
+	</select>
+	
+	
+	<!-- 정보승 : 받은 명함 등록 갯수 조회 -->
+	<select id="cntYourCard" parameterType="string" resultType="_int">
+	
+		SELECT
+			COUNT(yourcardnum)
+		FROM
+			tbl_yourcardinfo
+		WHERE
+			userid like #{userid}
 	
 	</select>
 	
@@ -68,6 +103,7 @@
 				, frontimgsaved
 				, backimgsaved
 				, cardorder
+				, sex
 				, frontimgoriginal
 				, backimgoriginal
 			)
@@ -92,6 +128,7 @@
 				, #{frontimgsaved}
 				, #{backimgsaved, jdbcType=VARCHAR}
 				, #{cardorder, jdbcType=VARCHAR}
+				, #{sex}
 				, #{frontimgoriginal, jdbcType=VARCHAR}
 				, #{backimgoriginal, jdbcType=VARCHAR}
 		)

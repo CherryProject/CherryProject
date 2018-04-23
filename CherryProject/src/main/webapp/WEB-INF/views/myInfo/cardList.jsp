@@ -20,7 +20,7 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/newMain_css/menu/menu.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/newMain_css/menu/icons.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/newMain_css/menu/menustyle.css"/>" />
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/myinfo/css/cardlist.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/myinfo/myCardList/css/cardlist.css"/>" />
 	
 	<script src="<c:url value="/resources/js/newMain_js/menu/modernizr.custom.js"/> "> </script>
 	<script>document.documentElement.className = 'js';</script>
@@ -44,14 +44,14 @@
 		
 			<div class="grid grid--effect-vega">
 			<c:forEach items="${myCardList}" var="mycard">
-				<a href="javascript:" class="grid__item grid__item--c1" id="mycard_grid" >
+				<a href="javascript:location.href='mycard/myCardOneInfo?mycardnum=${mycard.mycardnum}' " class="grid__item grid__item--c1" id="mycard_grid" >
 					<div class="stack">
 						<div class="stack__deco"></div>
 						<div class="stack__deco"></div>
 						<div class="stack__deco"></div>
 						<div class="stack__deco"></div>
 						<div class="stack__figure">
-							<img class="stack__img" src="mycard/download?mycardnum=${mycard.mycardnum }" alt="Image"/>
+								<img class="stack__img" src="mycard/download?mycardnum=${mycard.mycardnum }" alt="Image"/>
 						</div>
 					</div>
 					<div class="grid__item-caption">
@@ -61,14 +61,24 @@
 							<c:if test="${mycard.name1 ne null}">
 								Name
 							</c:if>
+							<c:if test="${mycard.name1 eq null}">
+								<br>
+							</c:if>
 							</span>
 							<span class="column__text">
 							<c:if test="${mycard.company ne null}">
 								Company
-							</c:if></span>
+							</c:if>
+							<c:if test="${mycard.name1 eq null}">
+								<br>
+							</c:if>
+							</span>
 							<span class="column__text">
 							<c:if test="${mycard.phone ne null}">
 								Phone
+							</c:if>
+							<c:if test="${mycard.name1 eq null}">
+								<br><br>
 							</c:if>
 							</span>
 						</div>
@@ -84,8 +94,8 @@
 			
 		</section>
 		
-		<script src="<c:url value="/resources/myinfo/js/anime.min.js" />"></script>
-		<script src="<c:url value="/resources/myinfo/js/main.js" />" ></script>
+		<script src="<c:url value="/resources/myinfo/myCardList/js/anime.min.js" />"></script>
+		<script src="<c:url value="/resources/myinfo/myCardList/js/main.js" />" ></script>
 		<script>
 			(function() {
 				[].slice.call(document.querySelectorAll('.grid--effect-vega > .grid__item')).forEach(function(stackEl) {

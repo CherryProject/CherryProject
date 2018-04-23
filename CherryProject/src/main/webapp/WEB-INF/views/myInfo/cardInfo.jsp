@@ -6,9 +6,13 @@
 <head>
 	<meta charset="utf-8">
 	<title>Card Info</title>
+	
+	<!-- 
 	<link rel="stylesheet" type="text/css" href="css/cardinfo.css">
-	<script type="text/javascript" src="resources/js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="resources/management/js/cardinfo.js"></script>
+	 -->
+	 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/myinfo/css/myCardOne.css" />">
+	<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
+	
 </head>
 <body>
 	<!-- 정보승 : <header>부분 -->
@@ -19,13 +23,13 @@
 			<div class="app-wrapper">
 				<!--Wallet-->
 				<aside class="wallet">
-					<h2>My Name-card</h2>
+					<h2>${selectMyCard.name1}</h2>
 					<div class="modal-control">+</div>
 					<div class="cards"></div>
 				</aside>
 
 				<content class="transactions-wrapper">
-					<h2>INFORMATION</h2>
+					<h2>${selectMyCard.company}</h2>
 					<div class="transactions"></div>
 				</content>
 

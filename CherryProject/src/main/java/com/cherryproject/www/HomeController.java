@@ -18,8 +18,7 @@ import com.cherryproject.www.dao.MyCardInfoDAO;
 import com.cherryproject.www.dao.YourCardInfoDAO;
 import com.cherryproject.www.vo.MyCardInfoVO;
 import com.cherryproject.www.vo.YourCardInfoVO;
-
-import net.sf.json.JSONArray;
+import com.google.gson.Gson;
 
 /**
  * @comment 	Handles requests for the application home page.
@@ -54,9 +53,15 @@ public class HomeController {
 	 * @author		: 정보승
 	 */
 	@RequestMapping(value = "myInfo", method = RequestMethod.GET)
-	public String myInfoPage(Model model) {
+	public String myInfoPage(HttpSession session, Model model) {
 		
 		logger.info("Move MyInfo Page");
+		
+		String userid = (String) session.getAttribute("userid");
+		
+		int yourCardCnt = yCardInfoDAO.cntYourCard(userid);
+		
+		model.addAttribute("yourCardCnt", yourCardCnt);
 		
 		return "myInfo/myInfo";
 	}
@@ -116,11 +121,12 @@ public class HomeController {
 			logger.info("YourCardInfo List Success");
 			model.addAttribute("yourCardList", resultList);
 			
-//			Gson gson = new Gson();
-//			yourCardList = gson.toJson(resultList);	// 리스트가 JSON형태로 변환
+			Gson gson = new Gson();
+			yourCardList = gson.toJson(resultList);	// 리스트가 JSON형태로 변환
+			model.addAttribute("jsonList", yourCardList);	// JSON파일을 추가
 			
-			JSONArray jarray = new JSONArray();    // JSON 배열  []
-			model.addAttribute("jsonList", jarray.fromObject(resultList));	// JSON파일을 추가
+//			JSONArray jarray = new JSONArray();    // JSON 배열  []
+//			model.addAttribute("jsonList", jarray.fromObject(resultList));	// JSON파일을 추가
 			
 		}
 		else {

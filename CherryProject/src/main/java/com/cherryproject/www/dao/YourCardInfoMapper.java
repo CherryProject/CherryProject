@@ -13,6 +13,12 @@ public interface YourCardInfoMapper {
 
 	// 정보승 : 받은 명함 전체 가져오기
 	public ArrayList<YourCardInfoVO> selectAllCard(String userid);
+	
+	// 정보승 : (모바일용) 받은 명함 전체 가져오기
+	public ArrayList<YourCardInfoVO> mSelectAllCard (String userid);
+	
+	// 정보승 : 받은 명함 등록 갯수 조회
+	public int cntYourCard(String userid);
 
 	// 정보승 : 받은 명함 등록
 	public int yourCardInsert(YourCardInfoVO insertYourCardInfo);

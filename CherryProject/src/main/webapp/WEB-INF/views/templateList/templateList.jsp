@@ -3,17 +3,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <!-- 정보승 : CSS 및 JS 공통부분 -->
-<%@ include file="/WEB-INF/views/common/headPart.jsp" %>
+
 <html lang="ko">
 <head>
 
 	<title>Templates</title>
 	
 	<!-- 템플릿 리스트 CSS -->
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/templateList/css/base.css" />">
+	<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700|Poppins:700" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
+	
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/newMain_css/menu/normalize.css"/>">
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/newMain_css/menu/menu.css "/>" >
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/newMain_css/menu/icons.css "/>" >
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/newMain_css/menu/menustyle.css" />">
+	
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/templateList/css/slideList.css" />">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/templateList/css/uncover.css" />">
 	
+	<script src="<c:url value="/resources/js/newMain_js/menu/modernizr.custom.js"/>"></script>
 	<script>
 		var supportsCssVars = function() { var e, t = document.createElement("style"); return t.innerHTML = "root: { --tmp-var: bold; }", document.head.appendChild(t), e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)")), t.parentNode.removeChild(t), e };
 		supportsCssVars() || alert("Please view this demo in a modern browser that supports CSS Variables.");
@@ -98,11 +107,11 @@
 			</div>
 		</div>
 		
-		<script src="<c:url value="resources/js/anime.min.js" />"></script>
+		<script src="<c:url value="resources/js/newMain_js/anime.min.js" />"></script>
 		
-		<script src="resources/templateList/js/imagesloaded.pkgd.min.js"></script>
-		<script src="resources/templateList/js/uncover.js"></script>
-		<script src="resources/templateList/js/demo3.js"></script>
+		<script src="<c:url value="resources/templateList/js/imagesloaded.pkgd.min.js"/>"></script>
+		<script src="<c:url value="resources/templateList/js/uncover.js"/>"></script>
+		<script src="<c:url value="resources/templateList/js/demo3.js"/>"></script>
 		
 	</article><!-- article end -->
 	<footer></footer><!-- footer end -->

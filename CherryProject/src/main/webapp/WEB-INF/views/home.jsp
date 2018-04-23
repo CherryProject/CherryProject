@@ -41,27 +41,52 @@
 
 </head>
 <body class="demo-1">
+	<header class="codrops-header">
+		<div class="codrops-links">
+			<c:choose>
+				<c:when test="${sessionScope.userid eq null}">
+					<a class=""  href="users/join">회원가입</a>
+					<a class=""  href="users/loginForm">로그인</a>
+				</c:when>
+				<c:otherwise>
+					<pre class="">${sessionScope.username}(${sessionScope.userid})님		</pre>
+					<a class=""  style="cursor:pointer;" onclick="return logoutValid();">로그아웃</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</header>
+
+	<!-- 정보승이 넣음 -->
+	<div class="videoBox">
+		<video autoplay loop="100" muted  id="videoBG">
+			<source src="resources/img/SUZY-BLOSSOM PINK.mp4" type="video/mp4">
+		</video>
+	</div>
+	<!-- 
 	<div class="view">
 		<div class="content">
 			<header class="codrops-header">
 				<div class="codrops-links">
 					<c:choose>
-					<c:when test="${sessionScope.userid eq null}">
-						<a class=""  href="users/join">회원가입</a>
-						<a class=""  href="users/loginForm">로그인</a>
-					</c:when>
-					<c:otherwise>
-						<pre class="">${sessionScope.username}(${sessionScope.userid})님		</pre>
-						<a class=""  style="cursor:pointer;" onclick="return logoutValid();">로그아웃</a>
-					</c:otherwise>
-				</c:choose>
-			</div>
-			<p class="codrops-header__info">Do you want to make yourself?<br/>Make it your own.</p>
-			<span class="codrops-header__deco">hitherto</span>
-			<h1 class="codrops-header__title">Arias</h1>
-			<p class="codrops-header__tagline">make a business card</p>
-		</header>
-	</div>
+						<c:when test="${sessionScope.userid eq null}">
+							<a class=""  href="users/join">회원가입</a>
+							<a class=""  href="users/loginForm">로그인</a>
+						</c:when>
+						<c:otherwise>
+							<pre class="">${sessionScope.username}(${sessionScope.userid})님		</pre>
+							<a class=""  style="cursor:pointer;" onclick="return logoutValid();">로그아웃</a>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				
+				<p class="codrops-header__info">Do you want to make yourself?<br/>Make it your own.</p>
+				<span class="codrops-header__deco">hitherto</span>
+				<h1 class="codrops-header__title">Arias</h1>
+				<p class="codrops-header__tagline">make a business card</p>
+				
+			</header>
+		</div>
+		 -->
 	<button class="btn btn--menu">
 		<svg class="icon icon--menu"><use xlink:href="#icon-menu"></use></svg>
 		<svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>

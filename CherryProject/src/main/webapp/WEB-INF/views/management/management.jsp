@@ -15,49 +15,131 @@
    	<title>Swiper demo</title>
 	  	
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+ 	
+ 	<!-- Live Search를 위한 소스 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
  
  	<!-- Management CSS -->
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/management/css/normalize.css" />" />
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/management/css/demo.css" />" />
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/management/css/style2.css" />" />
   	
+  	<style>
+		#result {
+			position: absolute;
+			width: 100%;
+			max-width:870px;
+			cursor: pointer;
+			overflow-y: auto;
+			max-height: 400px;
+			box-sizing: border-box;
+			z-index: 1001;
+		}
+		.link-class:hover{
+		 	background-color:#f1f1f1;
+		}
+  	</style>
+  	
   	<!-- Management JS--> 
 	<script src="<c:url value="/resources/management/js/modernizr-custom.js" />"></script>
+	<script src="<c:url value="/resources/js/jquery-3.2.1.js" />"></script>
   	<!-- 여지원 : 명함 삭제 및 수정, 메시지 스크립트 -->
   	<script src="<c:url value="/resources/management/js/yourCardList.js" />"></script>
+  	
   	<script type="text/javascript">
   	
-  	$(function() {
-  		yourCardInfoList();
-  	});
-  	  		
+	  	$(function() {
+	  		yourCardInfoList();
+	  	});
+  		
   	/**
   	 * @comment : 	명함 전체 리스트 출력
   	 * @author	:	여지원
   	 */
+  	 
+  	var resultObj;
+  	var ajaxRun = true;
   	function yourCardInfoList() {
   		
-  		//alert("리스트 가져오기 처음");
-  		
-  		$.ajax({
+  		$.ajaxSetup({
   			
-  			url: 'management'
-  			, type : 'get'
-  			, data : {}
-  			, dataTYpe : "json"
-  			, success : function(yourCardList){
-  				//alert("리스트 가져오기");
-  				
-  				var obj = JSON.parse('${jsonList}');	// JSON파일을 파싱
-  				// var list = obj.yourCardList;
-  			
-  				console.log(obj[0].address);
-  			
-  			}
+  			cache: false 
   		});
+  		
+  		$('#search').keyup(function(){	// 뭐라도 키보드가 눌릴때 실행.
+
+  			$('#result').html('');
+  			$('#state').val('');
+  			
+  			var searchField = $('#search').val();
+  			var expression = new RegExp(searchField, "i");
+  		
+  			if(ajaxRun)
+		  		$.ajax({
+		  			
+		  			url: 'management'
+		  			, type : 'get'
+		  			, data : {}
+		  			, dataTYpe : "json"
+		  			, success : function(yourCardList){
+						
+		  			//$.each($.parseJSON(resultObj), function(key, value){
+		  				resultObj = ${jsonList};
+		  				ajaxRun = false;
+		  			}
+		  		});
+	  			
+	  		// 검색부분(리스트출력)		
+	  		$.each(resultObj, function(key, value){
+					
+				if(expression.length == 0 || expression == "") {
+				
+					$('#search').keydown();
+					alert("KEYDOWN");
+				}
+				
+				if ( value.name1.search(expression) != -1
+					|| value.company.search(expression) != -1
+					|| value.job.search(expression) != -1
+					|| value.phone.search(expression) != -1	
+					) {
+					
+					$('#result').append('<li class="list-group-item link-class" style="color:black;">'
+								+ value.name1 
+								+ ' | <span class="text-muted">'
+								+ value.company 
+								+ '</span>'
+								+ ' | <span class="text-muted">'
+								+ value.job 
+								+ '</span>'
+								+ ' | <span class="text-muted">'
+								+ value.phone 
+								+ '</span></li>'
+								);
+				}
+			});   
+  		});
+  		
+  		$('#result').on('click', 'li', function() {
+  			
+  			var click_text = $(this).text().split('|');
+  			
+  			$('#search').val($.trim(click_text[0]));
+  			$("#result").html('');
+  		});
+  		
   	}
   	
-  	/* 전병익 : db에서 저장된 명함을 검색 */
+  	
+  	
+  	
+  	/* 
+  	 * @comment	:	db에서 저장된 명함을 검색
+  	 * @author	:	전병익 
+  	 */
+  	 /*
 	$(document).ready(function(){
 		
 		var searchArray = [];
@@ -81,7 +163,7 @@
 			
 		});
 	});
-  	
+  	*/
   	</script>
 </head>
 <body>
@@ -95,7 +177,7 @@
 	</a>
 	
 	
-	<!-- 전병익 : 명함을 검색하는 검색창 -->
+	 <!--  전병익 : 명함을 검색하는 검색창 
 	<form action="search" method="post">
 		<div class="ui-widget">
 			<label for="autocomplete">검색어를 입력:</label>
@@ -103,6 +185,20 @@
 			<input type="submit" value ="검색">
 		</div>
 	</form>
+	-->
+	
+	<!-- 정보승 : 라이브검색 -->
+	<div class="container1" align="center" style="width:900px;">
+	<br /><br />
+	<form action="search" method="post">
+		<div align="center">
+			<input type="text" id="search" name="search" class="form-control" />
+		</div>
+		<ul class="list-group" id="result"></ul>
+	</form>
+	<br />
+  	</div>
+	
 	
 	<article class="container">
 	    <section class="content">
@@ -117,7 +213,7 @@
 		<div class="grid__item" data-size="700x800">
 		
 			<%-- 정보승 : 명함 이미지 --%>
-			<a href="<c:url value="/resources/management/img/sample5_F.png" />" class="img-wrap">
+			<a href="<c:url value="yourcard/download?yourcardnum=${yourCardList.yourcardnum}" />" class="img-wrap">
 	
 			<%-- 정보승 : 썸네일 이미지 (Resourcese) --%>
 			<c:choose>
@@ -175,11 +271,12 @@
 	</article>
 	<!-- /container -->
 	
+	 
 	<script src="<c:url value="/resources/management/js/imagesloaded.pkgd.min.js" />"></script>
 	<script src="<c:url value="/resources/management/js/masonry.pkgd.min.js" />"></script>
 	<script src="<c:url value="/resources/management/js/classie.js" />"></script>
 	<script src="<c:url value="/resources/management/js/main.js" />"></script>
-   
+    
 	<script>
 		(function() {
 			var support = { transitions: Modernizr.csstransitions },
@@ -247,7 +344,8 @@
 	 -->
 	<script src="<c:url value="/resources/js/newMain_js/menu/classie.js" />"> </script>
 	<script src="<c:url value="/resources/js/newMain_js/menu/borderMenu.js" />"></script>
-      
-	
+	<!-- 
+    <script src="<c:url value="/resources/management/js/liveSearch.js" />"></script>
+	 -->
 </body>
 </html>

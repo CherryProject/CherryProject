@@ -9,7 +9,7 @@
 	<title>ContactMain</title>
 	
 	<link rel="stylesheet" type="text/css" href="resources/contact/contact.css" />
-	<script type="text/javascript" src=" <c:url value="/resources/js/jquery-3.2.1.js" />" > </script>
+	<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js" />" > </script>
 	<script type="text/javascript">
 	
 	

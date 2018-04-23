@@ -38,7 +38,10 @@ public class MyCardInfoController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MyCardInfoController.class);
 	
-	final String myCarduploadPath = "/BusinessCardProject/management/myCardInfo/";		// 내 명함 파일 업로드 경로
+//	final String myCarduploadPath = "/BusinessCardProject/management/myCardInfo/";		// 내 명함 파일 업로드 경로
+	String myCarduploadPath = YourCardInfoController.myCarduploadPath;
+	
+	
 	
 	/*
 	 * @comment		: 내 명함 등록 페이지로 이동
@@ -52,6 +55,8 @@ public class MyCardInfoController {
 		return "myInfo/insertCard";
 		
 	}
+	
+	
 	
 	/*
 	 * @comment	:	내 명함을 볼 수 있는 페이지로 이동
@@ -82,6 +87,37 @@ public class MyCardInfoController {
 		
 	}
 	
+	
+	
+	/*
+	 * @comment				:	내 카드 정보(1개)를 보는 페이지(cardInfo.jsp)로 이동
+	 * @param	mycardnum	:	내가 조회하고 싶은 명함의 번호	
+	 * @author				:	정보승
+	 */
+	@RequestMapping(value="myCardOneInfo", method=RequestMethod.GET)
+	public String myCardOneInfo(String mycardnum, HttpSession session, Model model) {
+		
+		logger.info("Move MyCardOne");
+		
+		String userid = (String) session.getAttribute("userid");
+		HashMap<String, Object> myCard = new HashMap<>();
+		myCard.put("userid", userid);
+		myCard.put("mycardnum", mycardnum);
+		
+		MyCardInfoVO selectMyCard = myCardInfoDAO.selectOneMyCard(myCard);
+		
+		if(selectMyCard != null) {
+			
+			logger.info("Get MyCardnum Success");
+			model.addAttribute("selectMyCard", selectMyCard);
+		}
+		else {
+			
+			logger.info("Get MyCardnum Fail");
+		}
+		
+		return "myInfo/cardInfo";
+	}
 	
 	
 	/*

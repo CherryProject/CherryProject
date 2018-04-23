@@ -124,8 +124,7 @@
 			AND
 			
 			mycardnum = #{mycardnum}
-		ORDER BY
-			mycardnum DESC
+		
 	
 	</select>
 

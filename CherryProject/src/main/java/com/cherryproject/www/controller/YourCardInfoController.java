@@ -44,12 +44,12 @@ public class YourCardInfoController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(YourCardInfoController.class);
 
-	final String yourCarduploadPath = "/BusinessCardProject/management/yourCardInfo/";	// 받은 명함 파일 업로드 경로
-	final String myCarduploadPath = "/BusinessCardProject/management/myCardInfo/";		// 내 명함 파일 업로드 경로
-	final String detectFilePath = "BusinessCardProject\\management\\temp\\";			// OCR 처리할 파일이 있는 경로
-	final String uploadPath = "/BusinessCardProject/management/temp/";					// OCR 처리할 파일을 만드는 경로
+	static final String yourCarduploadPath = "/BusinessCardProject/management/yourCardInfo/";	// 받은 명함 파일 업로드 경로
+	static final String myCarduploadPath = "/BusinessCardProject/management/myCardInfo/";		// 내 명함 파일 업로드 경로
+	static final String detectFilePath = "BusinessCardProject\\management\\temp\\";			// OCR 처리할 파일이 있는 경로
+	static final String uploadPath = "/BusinessCardProject/management/temp/";					// OCR 처리할 파일을 만드는 경로
 	
-	static String uploadSavedImg;			// 업로드를 위해 temp에서 회원 폴더로 이동할 파일의 이름
+	public static String uploadSavedImg;			// 업로드를 위해 temp에서 회원 폴더로 이동할 파일의 이름
 	
 	/*
 	 * @comment		: 다른 사람 명함 등록 페이지로 이동
@@ -338,7 +338,6 @@ public class YourCardInfoController {
 		//저장된 파일 경로
 		String filepath = new StringBuffer().append(yourCarduploadPath).append(oneYourCard.getUserid()).append("/").toString();
 		String fullPath = filepath + oneYourCard.getFrontimgsaved();
-		
 		
 		//서버의 파일을 읽을 입력 스트림과 클라이언트에게 전달할 출력스트림
 		FileInputStream filein = null;

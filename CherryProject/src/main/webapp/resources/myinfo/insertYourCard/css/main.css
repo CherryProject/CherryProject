@@ -42,8 +42,20 @@
    appearance: none;
    /*background: url('select-arrow.png') no-repeat 95% 50%;  화살표 아이콘 추가 */       
 }
-
 .cardInfoMenu {
 	margin-bottom: 15px;
 } 
 
+//여지원 -  insertYourCard 줄간격 맞추기위해 추가 
+.input-group .form-control{
+	width: 300px;
+}
+//이하동문
+.input-group-addon{
+	width: 155px;
+}
+
+
+
+
+}

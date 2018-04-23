@@ -45,8 +45,7 @@ public class UserInfoController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserInfoController.class);
 	
-	final String uploadPath = "/BusinessCardProject/management/temp/";
-	
+//	final String uploadPath = "/BusinessCardProject/management/temp/";
 	/*
 	 * @comment				: 회원 가입 페이지 이동
 	 * @param	joinUser	: 
@@ -182,6 +181,19 @@ public class UserInfoController {
 			
 			session.setAttribute("userid", user.getUserid());	// 로그인 성공시 User ID를 Session에 저장
 			session.setAttribute("username", user.getUsername()); 
+			
+			//저장 폴더가 없으면 생성
+			File myUploadPath = new File(YourCardInfoController.myCarduploadPath + "/" + user.getUserid());
+			File yourUploadPath = new File(YourCardInfoController.yourCarduploadPath + "/" + user.getUserid());
+			
+			if (!myUploadPath.isDirectory()) {
+				
+				myUploadPath.mkdirs();
+			}
+			if(!yourUploadPath.isDirectory()) {
+				
+				yourUploadPath.mkdirs();
+			}
 		}
 		
 		// E-mail 인증이 되지 않은 로그인
@@ -239,7 +251,7 @@ public class UserInfoController {
 		
 		String userid = (String) session.getAttribute("userid");
 		
-		String deleteFile = new StringBuffer().append(uploadPath).append(userid).toString();
+		String deleteFile = new StringBuffer().append(YourCardInfoController.uploadPath).append(userid).toString();
 		
 		// temp 폴더의 회원 ID 폴더의 모든 이미지를 삭제
 		File files[] = new File(deleteFile).listFiles();
