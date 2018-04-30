@@ -61,7 +61,8 @@
      <div id="hs-container" class="hs-container">
 <aside class="hs-menu" id="hs-menu">
 	<div class="hs-headline">
-		<h1>Arisol</h1>
+		<!-- 정현수가 넣음 - 아리소루 로고 -->
+		<div class="logoBox"><img class="logo" src="<c:url value="/resources/img/ArisoruSketch(White).png" />"/></div>
 		<small>My info</small>
 	</div>
 	<nav>
@@ -78,7 +79,7 @@
 		<article class="hs-content" id="introduction">
 			<div class="hs-inner my_card_text">
 				<h2>My Card</h2>
-     				<img id="profile" src="<c:url value="/resources/myinfo/img/3.jpg"/>">
+     				<img id="profile" src="<c:url value="/resources/img/ArisoruSketch(Blue).png"/>">
 				<div class="other_card_link">
 					<div class="grid__item theme-11">
 						<button class="action"><svg class="icon icon--rewind"><use xlink:href="#icon-rewind"></use></svg></button>
