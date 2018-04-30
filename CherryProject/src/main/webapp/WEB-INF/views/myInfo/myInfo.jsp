@@ -36,10 +36,14 @@
 
 	function getProfile(){
 		$("#profile").attr("src","mycard/download?mycardnum=${profileCardNum}");
-		//alert( ${profileCardNum} );
+		alert( ${profileCardNum} );
 		
+	}
+	
+	/* 현재 쓰지 않는 ajax , 대표명함 이미지 ajax를 쓴다묜.. */
+	function getProfileAjax(){
 		$.ajax({
-	 
+			 
 			url : "tempUpload"
 			, processData: false
 			, contentType: false
@@ -52,7 +56,9 @@
 				
 				console.log(e);
 			}
+	})
 	}
+
 
 	</script>
 	
