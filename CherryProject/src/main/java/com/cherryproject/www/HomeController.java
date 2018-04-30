@@ -33,6 +33,7 @@ public class HomeController {
    
    @Inject
       private MyCardInfoDAO mCardInfoDAO;
+   
    @Inject
       private UserInfoDAO userInfoDAO;
    
@@ -49,9 +50,12 @@ public class HomeController {
       logger.info("Move Home Page");
     	 
       session.removeAttribute("loginMsg");
-    	  
+      session.removeAttribute("emailVerify");
+      
       return "home";
    }
+   
+   
    
    /*
     * @comment      : loginForm.jsp로 이동
@@ -61,12 +65,6 @@ public class HomeController {
    public String home(HttpSession session, Model model) {
       
       logger.info("Move Home Page");
-      
-//      model.addAttribute("msg", null);
-      
-      if(session.getAttribute("loginMsg") != null) {
-    	  
-      }
       
       return "loginForm";
    }

@@ -67,7 +67,7 @@ public class UserInfoController {
 	 * @author				: 정보승
 	 */
 	@RequestMapping(value="join", method=RequestMethod.POST)
-	public String userJoin(UserInfoVO joinUser, Model model) throws MessagingException, UnsupportedEncodingException {
+	public String userJoin(UserInfoVO joinUser, HttpSession session, Model model) throws MessagingException, UnsupportedEncodingException {
 		
 		logger.info("User Join Start");
 		
@@ -98,6 +98,7 @@ public class UserInfoController {
 			      e.printStackTrace();
 			 }
 		 
+			 session.setAttribute("verifyMsg", "emailVerify");
 			logger.info("User Join Success");
 		}
 		else {
@@ -165,6 +166,7 @@ public class UserInfoController {
 			
 			session.setAttribute("userid", user.getUserid());	// 로그인 성공시 User ID를 Session에 저장
 			session.setAttribute("username", user.getUsername()); 
+			session.setAttribute("loginMsg", "login");
 			
 			//저장 폴더가 없으면 생성
 			File myUploadPath = new File(YourCardInfoController.myCarduploadPath + "/" + user.getUserid());

@@ -15,13 +15,20 @@
 	<script type="text/javascript">
 	
 	<c:choose>
+		<c:when test="${sessionScope.loginMsg eq 'login' }">
+			
+		</c:when>
 		<c:when test="${sessionScope.loginMsg eq 'emailFail' }">
 			alert("E-mail 인증이 완료되지 않았습니다.");
 		</c:when>
 		<c:when test="${sessionScope.loginMsg eq 'passwordFail' }">
 			alert("로그인 정보가 일치하지 않습니다.");
 		</c:when>
+		<c:when test="${sessionScope.verifyMsg eq 'emailVerify' }">
+			alert("인증을 위한 E-mail이 전송되었습니다.");
+		</c:when>
 		<c:otherwise>
+			console.log("");
 		</c:otherwise>
 	</c:choose>
 	
@@ -53,7 +60,7 @@
 			<h1 class="title">Login</h1>
 			<form method="post" action="users/login">
 				<div class="input-container has-feedback">
-					<input type="text" id="Username" name="userid" placeholder="UserID" required
+					<input type="text" id="Username" name="userid" required
 						
 						title="Must contain from 3 to 20 characters such as any letter, number, an underscore, or a hyphen." />
 					<label for="Username">UserID</label><i
