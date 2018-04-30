@@ -60,7 +60,6 @@ $('.toggle').click(
 	 * @author	:	여지원
 	 */
 	function insertProfileImage(mycardnum){
-		alert(mycardnum);
 		if(confirm("대표 명함으로 변경하시겠습니까?")){
 			location.href = 'insertProfileImage?mycardnum='+mycardnum;
 		}

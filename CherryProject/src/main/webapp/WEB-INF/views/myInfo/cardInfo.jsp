@@ -151,7 +151,7 @@
 							
 							<div class="button-container">
 							<button class="rkmd-btn btn-lightBlue ripple-effect float-right" onclick="insertProfileImage('${selectMyCard.mycardnum}')"><span>profile</span></button> 
-								<button class="rkmd-btn btn-lightBlue ripple-effect float-right"><span>delete</span></button>
+								<button class="rkmd-btn btn-lightBlue ripple-effect float-right"onclick="deleteCard('${selectMyCard.mycardnum}')"><span>delete</span></button>
 							</div>
 						</div>
 						
