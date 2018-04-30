@@ -8,7 +8,7 @@
 .feature .fInner {
 	margin: 0 auto;	width: 55%; overflow: hidden;
 	padding-bottom: 1%;
-	border: solid;
+	/* border: solid; */
 	height: 200px;
 }
 

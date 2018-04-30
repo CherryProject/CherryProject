@@ -27,6 +27,13 @@
 	<script>document.documentElement.className = 'js';</script>
 	<script>
 	
+		history.pushState(null, null, location.href);
+		
+	 	window.onpopstate = function(event) {
+	
+	 		history.go(1);
+	 	};
+
 		$(function() {
 			
 			$("#mycard_grid").addClass("grid__item--c1", "grid__item--c2");
