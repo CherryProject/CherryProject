@@ -21,7 +21,8 @@
 </head>
 </head>
 <body>
-	
+	<!-- 정현수가 넣음 - 아리소루 로고 -->
+	<div class="logoBox"><img class="logo" src="<c:url value="/resources/img/ArisoruSketch(White).png" />"/></div>
 	<!-- 수지 동영상 -->
 	<div class="videoBox">
 		<video autoplay loop="100" muted  id="videoBG">

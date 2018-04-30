@@ -388,7 +388,7 @@
 			<div class="div_outline"> <!-- contactMain 작업 영역 -->
 				
 				<div class="div_header"> <!-- hearder 영역 -->
-					<h2>Arisoru_Sketch</h2>
+					<div class="logo"><img class="logo" src="<c:url value="/resources/img/ArisoruSketch(Gray).png" />"/></div>					
 				</div>
 				
 				<div class="div_inform">
@@ -411,9 +411,8 @@
 					<span class="goLast">▷▷</span>
 				</div>
 					<div class="div_search">
-						<select id="findList" name ="findList">
-							<!--   <c:if test="${searchList == 'title' }">selected</c:if> -->
-							<option value="default" selected="selected">전체</option>
+						<select class="findList" id="findList" name ="findList">
+							<option value="default" <c:if test="${findList == '' }">selected</c:if> >전체</option>
 							<option value="all" <c:if test="${findList == 'all' }">selected</c:if> > 제목+내용+작성자 </option>
 							<option value="board_title" <c:if test="${findList == 'board_title' }" >selected</c:if> > 제목</option>
 							<option value="board_content" <c:if test="${findList == 'board_content' }" >selected</c:if> >내용</option>
@@ -421,8 +420,8 @@
 						</select>			
 										
 						<input type="hidden" name="boardnum" value="${board.boardnum }">
-						<input  type="text" id="findText" name="findText" value="${findText }">
-						<input  id="search" type="button" paging="${1}"  value="검색">  <!-- 페이징 처리를 위해서 submit이 아니라 button으로 만든다 -->
+						<input  type="text" id="findText" class="findText" name="findText" value="${findText }">
+						<input  id="search" class="search" type="button" paging="${1}"  value="검색">  <!-- 페이징 처리를 위해서 submit이 아니라 button으로 만든다 -->
 					<!-- 검색은 항상 첫페이지로 와야하므로, 1페이지 가된다 -->
 					</div>
 			</div>

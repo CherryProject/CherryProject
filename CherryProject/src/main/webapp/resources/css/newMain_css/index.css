@@ -436,3 +436,10 @@ a:focus {
 	}
 }
 */
+
+.logoBox{
+    z-index: 100;
+    position: absolute;
+    top: 83%;
+    left: 85%;
+}

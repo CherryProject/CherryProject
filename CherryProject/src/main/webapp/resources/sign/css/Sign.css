@@ -413,3 +413,10 @@ p.reset-info {
 .card .input-container input:focus ~ .form-control-feedback {
 	color: #7FA0D3;
 }
+
+.logoBox{
+    z-index: 100;
+    position: absolute;
+    top: 83%;
+    left: 85%;
+}
