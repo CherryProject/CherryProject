@@ -28,8 +28,16 @@
 	 -->
 	<script src="<c:url value="/resources/js/newMain_js/menu/modernizr.custom.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/resources/mycardtextlist/js/my_card_text_list.js" />"></script>
+	<style>
+	/* 플레이스홀더 색깔 바꾸기 : 여지원 */
+	::-webkit-input-placeholder { 
+    color: #c1d0f0;
+	}
+	</style>
 	<script type="text/javascript">
+	
 	  $(function(){
+		  
 		  var count = 0;
 	    $('.bt-menu-trigger').click(function(){
 	      if (count == 0) {
@@ -39,6 +47,29 @@
 		}
 	    });
 	  });
+	  
+	  
+	  function formCheck(){
+			var name1 = document.getElementById("name1");
+			var company = document.getElementById("company");
+			var phone = document.getElementById("phone");
+			
+			if(name1.value == ''){
+				alert('대표이름은 필수입니다.');
+				return false;
+			}
+			else if(company.value == ''){
+				alert('회사이름은 필수입니다.');
+				return false;
+			}
+			else if(phone.value == ''){
+				alert('번호(phone)는 필수입니다.');
+				return false;
+			}
+			
+			return true;
+	  }
+	 
 	</script>
 </head>
 <body>
@@ -159,94 +190,87 @@
 						<!-- 명함 정보 수정하기 -->
 						<div class="card login-register" >
 							<h1 class="title">수정하기</h1>
-							<form method="post" action="updateMyCard">
+							<form method="post" action="updateMyCard"  onsubmit="return formCheck();">
 								<!-- 내 명함 번호 -->
 								<input type="hidden" name="mycardnum" value="${selectMyCard.mycardnum }" />
 								
 								<!-- 대표이름 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="name1" name="name1" value="${selectMyCard.name1}" required />
-									<label for="">Name</label>
+									<input type="text" id="name1" name="name1" value="${selectMyCard.name1}" placeholder="대표이름"  />
+									
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 추가 이름 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="name2" name="name2" value="${selectMyCard.name2}" />
-									<label for="">Name2</label>
+									<input type="text" id="name2" name="name2" value="${selectMyCard.name2}" placeholder="name2" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 추가 이름2 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="name3" name="name3" value="${selectMyCard.name3}"  />
-									<label for="">Name3</label>
+									<input type="text" id="name3" name="name3" value="${selectMyCard.name3}" placeholder="name3" />
+									
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 회사명 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="company" name="company" value="${selectMyCard.company}" required />
-									<label for="">Company</label>
+									<input type="text" id="company" name="company" value="${selectMyCard.company}" placeholder="company" />
+									
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 부서명 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="department" name="department" value="${selectMyCard.department}"  />
-									<label for="">Department</label>
+									<input type="text" id="department" name="department" value="${selectMyCard.department}" placeholder="department"  />
+									
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 직책명 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="job" name="job" value="${selectMyCard.job}" />
-									<label for="">Job</label>
+									<input type="text" id="job" name="job" value="${selectMyCard.job}" placeholder="job" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 전화번호 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="tel" name="tel" value="${selectMyCard.tel}"  />
-									<label for="">Tel</label>
+									<input type="text" id="tel" name="tel" value="${selectMyCard.tel}" placeholder="tel"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 휴대폰 번호 -->
 								<div class = "input-container has-feedback">
-									<input type="type" id="phone" name="phone" value="${selectMyCard.phone}" required />
-									<label for="">Phone</label>
+									<input type="type" id="phone" name="phone" value="${selectMyCard.phone}" placeholder="phone"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- E-Mail 주소 -->
 								<div class = "input-container has-feedback">
-									<input type="email" id="email" name="email" value="${selectMyCard.email}"  />
-									<label for="">E-mail</label>
+									<input type="email" id="email" name="email" value="${selectMyCard.email}" placeholder="email"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 회사 주소 -->
 								<div class = "input-container has-feedback">
-									<input type="type" id="address" name="address" value="${selectMyCard.address}"  />
-									<label for="">Address</label>
+									<input type="type" id="address" name="address" value="${selectMyCard.address}" placeholder="address"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 메모(otherinfo2) -->
 								<div class = "input-container has-feedback">
-									<input type="type" id="otherinfo2" name="otherinfo2" value="${selectMyCard.otherinfo2}"  />
-									<label for="">Memo</label>
+									<input type="type" id="otherinfo2" name="otherinfo2" value="${selectMyCard.otherinfo2}"  placeholder="otherinfo2" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
