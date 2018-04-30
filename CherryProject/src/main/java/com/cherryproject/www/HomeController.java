@@ -44,12 +44,12 @@ public class HomeController {
     * @author      : 정보승
     */
    @RequestMapping(value = "/home", method = RequestMethod.GET)
-   public String home2(Model model) {
+   public String home2(HttpSession session, Model model) {
       
       logger.info("Move Home Page");
-      
-      
-      
+    	 
+      session.removeAttribute("loginMsg");
+    	  
       return "home";
    }
    
@@ -58,11 +58,15 @@ public class HomeController {
     * @author      : 정보승
     */
    @RequestMapping(value = "/", method = RequestMethod.GET)
-   public String home(Model model) {
+   public String home(HttpSession session, Model model) {
       
       logger.info("Move Home Page");
       
-      model.addAttribute("msg", null);
+//      model.addAttribute("msg", null);
+      
+      if(session.getAttribute("loginMsg") != null) {
+    	  
+      }
       
       return "loginForm";
    }

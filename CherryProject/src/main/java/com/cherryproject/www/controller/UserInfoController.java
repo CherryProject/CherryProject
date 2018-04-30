@@ -187,14 +187,18 @@ public class UserInfoController {
 			
 			logger.info("User Login Fail - Email Verify Fail");
 			
-			model.addAttribute("msg", "아직 E-mail인증이 완료되지 않았습니다");
-			return "loginFrom";
+//			model.addAttribute("msg", "아직 E-mail인증이 완료되지 않았습니다");
+			
+			// login 실패 시 alert를 띄어줄 속성
+			session.setAttribute("loginMsg", "emailFail");
+			return "redirect:../";
 		}
 		else {
 			
 			logger.info("User Login Fail");
-			model.addAttribute("msg", "로그인 정보가 일치하지 않습니다.");
-			return "loginFrom";
+//			model.addAttribute("msg", "로그인 정보가 일치하지 않습니다.");
+			session.setAttribute("loginMsg", "passwordFail");
+			return "redirect:../";
 		}
 		
 		

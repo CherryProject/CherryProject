@@ -13,9 +13,18 @@
 
 
 	<script type="text/javascript">
-	<c:if test='${msg ne null }'>
-		alert('${msg}');
-	</c:if>
+	
+	<c:choose>
+		<c:when test="${sessionScope.loginMsg eq 'emailFail' }">
+			alert("E-mail 인증이 완료되지 않았습니다.");
+		</c:when>
+		<c:when test="${sessionScope.loginMsg eq 'passwordFail' }">
+			alert("로그인 정보가 일치하지 않습니다.");
+		</c:when>
+		<c:otherwise>
+		</c:otherwise>
+	</c:choose>
+	
 	
 	</script>
 </head>
