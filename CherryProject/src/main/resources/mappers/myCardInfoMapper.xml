@@ -147,7 +147,7 @@
 	
 	
 	<!-- 정보승 : 내 명함 삭제 -->
-	<delete id="deleteMyCard" parameterType="string">
+	<delete id="deleteMyCard" parameterType="hashmap">
 	
 		DELETE FROM
 			tbl_mycardinfo

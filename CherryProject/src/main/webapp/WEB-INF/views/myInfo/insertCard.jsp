@@ -17,7 +17,6 @@ pageEncoding="UTF-8"%>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
 	
-	
 	<link href="<c:url value="/resources/css/newMain_css/menu/normalize.css" />" rel="stylesheet" media="screen">
 	<link href="<c:url value="/resources/css/newMain_css/menu/menu.css" />" rel="stylesheet" media="screen">
 	<link href="<c:url value="/resources/css/newMain_css/menu/icons.css" />" rel="stylesheet" media="screen">
@@ -85,33 +84,14 @@ pageEncoding="UTF-8"%>
 						<section class="feature" style="margin-left: 10%;">
 						<div class="inWrap">
 							<div class="fInner swiper-container">
-								<ul class="swiper-wrapper">
-									<li class="swiper-slide"><a href="#"><span>Finding Dory<br>(2016)</span></a></li>
-									<li class="swiper-slide"><a href="#"><span>The Good Dinosaur<br>(2015)</span></a></li>
-									<li class="swiper-slide"><a href="#"><span>Inside Out<br>(2015)</span></a></li>
-									<li class="swiper-slide"><a href="#"><span>Brave<br>(2012)</span></a></li>
-									<li class="swiper-slide"><a href="#"><span>Car 2<br>(2011)</span></a></li>
-									<li class="swiper-slide"><a href="#"><span>Toy Story 3<br>(2010)</span></a></li>
-									<li class="swiper-slide"><a href="#"><span>Up<br>(2009)</span></a></li>
-									<li class="swiper-slide"><a href="#"><span>WALL·E<br>(2008)</span></a></li>
-									<li class="swiper-slide"><a href="#"><span>Ratatouille<br>(2007)</span></a></li>
-									<li class="swiper-slide"><a href="#"><span>Cars<br>(2006)</span></a></li>
-									<li class="swiper-slide"><a href="#"><span>The Incredibles<br>(2004)</span></a></li>
-									<li class="swiper-slide"><a href="#"><span>Finding Nemo<br>(2003)</span></a></li>
-									<li class="swiper-slide"><a href="#"><span>Monsters, Inc.<br>(2001)</span></a></li>
-									<li class="swiper-slide"><a href="#"><span>Toy Story 2<br>(1999)</span></a></li>
-									<li class="swiper-slide"><a href="#"><span>A Bug's Life<br>(1998)</span></a></li>
-									<li class="swiper-slide"><a href="#"><span>Toy Story<br>(1995)</span></a></li>
+							<ul class="swiper-wrapper">
+								<!-- <ul class="swiper-wrapper"> -->
+									<!-- <li class="swiper-slide"><a href="#"><span>Finding Dory<br>(2016)</span></a></li> -->
+									
 								</ul>
 							</div>
 						</div>
 					</section>
-
-
-						<div class="selectMyCard" >
-							
-
-						</div>
 					</div>
 
 					<!-- OCR 분석결과가 나오는 부분 -->

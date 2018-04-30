@@ -85,9 +85,9 @@ public class HomeController {
       
       /*여지원 대표이미지표시를 위해 mycardnum이 필요*/
       String profileCardNum = userInfoDAO.getProfile(userid);
-      System.out.println(yourCardCnt);
-      System.out.println("-------------------------");
-      System.out.println(profileCardNum);
+//      System.out.println(yourCardCnt);
+//      System.out.println("-------------------------");
+//      System.out.println(profileCardNum);
       model.addAttribute("profileCardNum", profileCardNum);
       model.addAttribute("yourCardCnt", yourCardCnt);
       model.addAttribute("recentResult", recentResult);
