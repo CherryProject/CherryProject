@@ -172,15 +172,44 @@ pageEncoding="UTF-8"%>
 				<%-- 정보승 : DB에서 불러온 명함의 상세 정보 --%>
 				<div class="description description--grid">
 					<input type="hidden" value="${yourCardList.yourcardnum}" />
-					<h3>${yourCardList.name1}</h3>
-					<p>${yourCardList.memo}</p>
+					<h2 class="cardName1">${yourCardList.name1}</h2>
 					<div class="details">
 						<ul>
+						
 							<li><i class="icon icon-camera"></i><span>${yourCardList.company}</span></li>
 							<li><i class="icon icon-focal_length"></i><span>${yourCardList.phone}</span></li>
-							<li><i class="icon icon-aperture"></i><span>${yourCardList.email}</span></li>
-							<li><i class="icon icon-exposure_time"></i><span>${yourCardList.address}</span></li>
-							<li><i class="icon icon-iso"></i><span>${yourCardList.department}</span></li>
+							
+							<c:if test="${yourCardList.name2 ne null}">
+							<li><i class="icon icon-focal_length"></i><span>${yourCardList.name2}</span></li>
+							</c:if>
+							<c:if test="${yourCardList.name3 ne null}">
+							<li><i class="icon icon-focal_length"></i><span>${yourCardList.name3}</span></li>
+							</c:if>
+							<c:if test="${yourCardList.email ne null}">
+							<li><i class="icon icon-focal_length"></i><span>${yourCardList.email}</span></li>
+							</c:if>
+							<c:if test="${yourCardList.department ne null}">
+							<li><i class="icon icon-focal_length"></i><span>${yourCardList.department}</span></li>
+							</c:if>
+							<c:if test="${yourCardList.job ne null}">
+							<li><i class="icon icon-focal_length"></i><span>${yourCardList.job}</span></li>
+							</c:if>
+							<c:if test="${yourCardList.tel ne null}">
+							<li><i class="icon icon-focal_length"></i><span>${yourCardList.tel}</span></li>
+							</c:if>
+							<c:if test="${yourCardList.fax ne null}">
+							<li><i class="icon icon-focal_length"></i><span>${yourCardList.fax}</span></li>
+							</c:if>
+							<c:if test="${yourCardList.address ne null}">
+							<li><i class="icon icon-focal_length"></i><span>${yourCardList.address}</span></li>
+							</c:if>
+							<c:if test="${yourCardList.memo ne null}">
+							<li><i class="icon icon-focal_length"></i><span>${yourCardList.memo}</span></li>
+							</c:if>
+							<c:if test="${yourCardList.otherinfo ne null}">
+							<li><i class="icon icon-focal_length"></i><span>${yourCardList.otherinfo}</span></li>
+							</c:if>
+							
 						</ul>
 					</div>
 					<div>

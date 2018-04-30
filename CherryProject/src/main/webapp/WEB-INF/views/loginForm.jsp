@@ -13,9 +13,18 @@
 
 
 	<script type="text/javascript">
-	<c:if test='${msg ne null }'>
-		alert('${msg}');
-	</c:if>
+	
+	<c:choose>
+		<c:when test="${sessionScope.loginMsg eq 'emailFail' }">
+			alert("E-mail 인증이 완료되지 않았습니다.");
+		</c:when>
+		<c:when test="${sessionScope.loginMsg eq 'passwordFail' }">
+			alert("로그인 정보가 일치하지 않습니다.");
+		</c:when>
+		<c:otherwise>
+		</c:otherwise>
+	</c:choose>
+	
 	
 	</script>
 </head>
@@ -44,7 +53,7 @@
 			<h1 class="title">Login</h1>
 			<form method="post" action="users/login">
 				<div class="input-container has-feedback">
-					<input type="text" id="Username" name="userid" placehold="UserID" required
+					<input type="text" id="Username" name="userid" placeholder="UserID" required
 						
 						title="Must contain from 3 to 20 characters such as any letter, number, an underscore, or a hyphen." />
 					<label for="Username">UserID</label><i
@@ -90,7 +99,7 @@
 			<form method="post" action="users/join">
 				<!-- UserName -->
 				<div class="input-container has-feedback">
-					<input type="text" id="Username" name="username" required
+					<input type="text" id="username" name="username" required
 						autocomplete="off" pattern="[\w_-]{2,20}"
 						title="Username must contain from 3 to 20 characters such as any letter, number, an underscore, or a hyphen." />
 					<label for="Username">UserName</label> <i
@@ -101,7 +110,7 @@
 				
 				<!-- UserID -->
 				<div class="input-container has-feedback">
-					<input type="email" id="E-mail" name="userid" required
+					<input type="email" id="userid" name="userid" required
 						pattern="[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+"
 						title="Not an e-mail!" autocomplete="off" /> <label for="E-mail">E-mail</label>
 					<i class="fa fa-envelope form-control-feedback"></i>
@@ -111,7 +120,7 @@
 				
 				<!-- UserPW -->
 				<div class="input-container has-feedback">
-					<input type="password" id="Password" name="userpw" 
+					<input type="password" id="userpw" name="userpw" 
 						title="Password must contain at least one number and one uppercase and lowercase letter, and from 8 to 20 characters." />
 					<label for="Password">Password</label> <i
 						class="fa fa-lock form-control-feedback"></i>

@@ -13,7 +13,10 @@
 }
 
 .feature li {
-	float: left; width: 188px; height: 282px;	margin-bottom: 4em; list-style: none
+	float: left; width: 188px; height: 282px; list-style: none;
+	/*
+	margin-bottom: 4em;
+	*/
 }
 
 .feature li a {
@@ -25,7 +28,7 @@
 .feature li span {
 	display: block;
 	position: absolute;
-	bottom: -3em;
+	/* bottom: -3em; */
 	width: 100%;
     color:#333;
 	font-size: 1em;

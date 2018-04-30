@@ -240,7 +240,6 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 //var phoneRegExp = /\w\/cell\/[ ]\d{3}[- ]?\d{3,4}[- ]?\d{4}/g;
 //var telRegExp = /\d[0]{2,3}?[- ]?\d{3,4}[- ]?\d{4}/g;
 
-
 var jobRegExp = /사장|ceo|대표|부장|소장|고문|과장|대리|계장|사원|선임|주임|manager|비서|실장|상무|위원|차장|점장|팀장/g;
 var departmentRegExp = /인사|총무|회계|기획|영업|경리|경영|재경|구매|전략|기획|연구|시설|홍보|금융/g;
 var cityNameRegExp = /서울|대구|부산|광주|대전|인천|울산|세종|경기도|경상북도|경북|경상남도|경남|전라북도|전북|전라남도|전남|충청북도|충북|충청남도|충남|강원도|제주도|제주/g;
@@ -425,11 +424,26 @@ function getMyCardsImg(){
 		,success: function(json){
 			//나의 명함이 리스트에 없을 때
 			if(json=='[]'){
-				str ='<br><현재 등록된 나의 명함이 없습니다>';
-				$(".selectMyCard").html(str);
+//				str ='<br><현재 등록된 나의 명함이 없습니다>';
+//				$(".swiper-wrapper").html(str);
+				$(".inWrap").html("");		// Div 전체(내 명함을 보여주는 전체 DIV)
+//				$(".swiper-wrapper").html("");
 				return ;
 			}
 			
+			
+			var selectMyCard = "";
+			
+			$.each($.parseJSON(json), function(idx, item) {
+				
+				selectMyCard += "<li class='swiper-slide' style='background: url(../mycard/download?mycardnum="+ item.mycardnum + ") center center no-repeat;	background-size: contain;'><span>";
+				selectMyCard += "<input type='radio' name='gaveMyCardRadio' value='" + item.mycardnum + "' checked />";
+//				selectMyCard += "<img src='../mycard/download?mycardnum=" + item.mycardnum + "' width='90px'>";
+				selectMyCard +=	"</span></li>";	
+			});	
+				
+				
+			/*
 			var str ='<br><상대방과의 명함 교환시 건낸 나의 명함은 무엇입니까?>';
 			str += '<table>';
 			str += '<tr>';
@@ -454,9 +468,10 @@ function getMyCardsImg(){
 			});	
 			str += '</tr>';
 			str+= '</table>';
-			console.log(str);
-			$(".selectMyCard").html(str);
+			*/
+			console.log(selectMyCard);
 			
+			$(".swiper-wrapper").html(selectMyCard);
 			
 		}
 		
@@ -475,13 +490,12 @@ function cardInfoSubmit() {
 	var validIs = insertValid();
 	
 	if(validIs) {
-		alert("fsdafasdfadkljfsd");
+		
 		//여지원-라디오박스로 선택된 mycardnum 과 성별
-		var getmycardnum = $(".selectMyCard").find("input[type=radio]:checked").val();
+		var getmycardnum = $(".swiper-wrapper").find("input[type=radio]:checked").val();
 		var getGender = $("#cardinfo").find("input[type=radio]:checked").val();
 		
-		alert(getGender);
-		$(".selectMyCard").trigger("create");
+		$(".swiper-wrapper").trigger("create");
 
 //	for(var i=0; i<inputTypeNum; i++) {
 //		
