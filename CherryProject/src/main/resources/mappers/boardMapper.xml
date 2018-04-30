@@ -65,6 +65,29 @@
 			boardnum desc
 	</select>
 	
+	
+	<!-- 2018-04-23-1849 : 정현수 작성, selectNoticeAll 공지 게시글 전부 출력  -->
+	<select id="selectNoticeAll"  resultType="board">
+		
+		select
+			boardnum
+			,board_writer
+			,board_title
+			,board_content
+			,board_hits
+			,to_char(board_inputdate, 'yyyy-MM-dd')board_inputdate
+			,check_notice
+		from
+			tbl_board
+		order by
+			boardnum desc
+		
+	</select>
+	
+	
+	
+	
+	
 	<!-- 2018-03-31-1024 : 정현수 작성, contact 게시글 전체 수 출력 -->
 	<select id="getTotal" parameterType="map" resultType="int">
 		select

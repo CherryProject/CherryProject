@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,8 +47,8 @@ public class YourCardInfoDAO {
 			
 			e.printStackTrace();
 		}
-		
-		if(resultList != null && resultList.size() != 0) {
+		int resultSize = resultList.size();
+		if(resultList != null && resultSize != 0) {
 			
 			logger.info("YourCardInfo List Success");
 		}
@@ -80,8 +81,8 @@ public class YourCardInfoDAO {
 			
 			e.printStackTrace();
 		}
-		
-		if(resultList != null && resultList.size() != 0) {
+		int resultSize = resultList.size();
+		if(resultList != null && resultSize != 0) {
 			
 			logger.info("Mobile YourCardInfo List Success");
 		}
@@ -91,6 +92,44 @@ public class YourCardInfoDAO {
 		}
 		
 		return resultList;
+	}
+	
+	
+	/*
+	 * @comment	:	최근 받은 명함 5개 조회
+	 * @author	:	정보승
+	 */
+	public ArrayList<YourCardInfoVO> recent5YourCard (String userid) {
+		
+		logger.info("Recent 5 YourCardInfo List");
+		
+		YourCardInfoMapper mapper = sqlSession.getMapper(YourCardInfoMapper.class);
+		
+		int startRecord = 0;
+		int countPerPage = 5;
+		ArrayList<YourCardInfoVO> resultList = null;
+		RowBounds rb = new RowBounds(startRecord, countPerPage);
+		
+		try {
+			
+			resultList = mapper.recent5YourCard(userid, rb);
+		}
+		catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		int resultSize = resultList.size();
+		if(resultList != null && resultSize != 0) {
+			
+			logger.info("Recent 5  YourCardInfo List Success");
+		}
+		else {
+			
+			logger.info("Recent 5  YourCardInfo List Fail");
+		}
+		
+		return resultList;
+		
 	}
 	
 	
@@ -143,8 +182,8 @@ public class YourCardInfoDAO {
 			
 			e.printStackTrace();
 		}
-		
-		if(resultList != null && resultList.size() != 0) {
+		int resultSize = resultList.size();
+		if(resultList != null && resultSize != 0) {
 			
 			logger.info("YourCardInfo Selected List Success");
 		}
@@ -166,14 +205,14 @@ public class YourCardInfoDAO {
 	public boolean yourCardInsert(YourCardInfoVO insertYourCardInfo) {
 		
 		logger.info("YourCardInfo Insert");
-		logger.info("YourCardInfo Sex : " + insertYourCardInfo.getSex());
+		
 		YourCardInfoMapper mapper = sqlSession.getMapper(YourCardInfoMapper.class);
+		
 		int insertIs = 0;
 		
 		try {
 			
 			insertIs = mapper.yourCardInsert(insertYourCardInfo);
-			logger.debug("Insert Your Card Num : {}", insertIs);
 		}
 		catch(Exception e) {
 			
@@ -228,38 +267,6 @@ public class YourCardInfoDAO {
 	}
 	
 	
-	/*
-	 * @comment		: 하나의 명함 정보 선택
-	 */
-//	public YourCardInfoVO selectYourCardOne(HashMap<String, String> selectYourCard) {
-//		
-//		logger.info("Select One YourCardInfo");
-//		
-//		YourCardInfoMapper mapper = sqlSession.getMapper(YourCardInfoMapper.class);
-//		YourCardInfoVO resultYourCard = null;
-//		
-//		try {
-//			
-//			resultYourCard = mapper.selectYourCardOne(selectYourCard);
-//		}
-//		catch(Exception e) {
-//			
-//			e.printStackTrace();
-//		}
-//		
-//		if(resultYourCard != null) {
-//			
-//			logger.info("Select One YourCardInfo Success");
-//		}
-//		else {
-//			
-//			logger.info("Select One YourCardInfo Fail");
-//		}
-//		
-//		return resultYourCard;
-//		
-//	}
-	
 	
 	/*
 	 * @comment		: 명함 삭제 (1개)
@@ -268,6 +275,7 @@ public class YourCardInfoDAO {
 	public boolean deleteYourCardOne(HashMap<String, String> deleteYourCard) {
 		
 		logger.info("Delete One YourCardInfo");
+		
 		YourCardInfoMapper mapper = sqlSession.getMapper(YourCardInfoMapper.class);
 		int deleteCnt = 0;
 		
@@ -292,4 +300,46 @@ public class YourCardInfoDAO {
 		}
 		
 	}
+	
+	
+	
+	/*
+	 * @comment	:	명함 정보 수정
+	 * @author	:	정보승
+	 */
+	public boolean updaetYourCardOne(YourCardInfoVO updateYourCard) {
+		
+		logger.info("Update One YourCardInfo");
+		
+		YourCardInfoMapper mapper = sqlSession.getMapper(YourCardInfoMapper.class);
+		int updateCnt = 0;
+		
+		try {
+			
+			updateCnt = mapper.updaetYourCardOne(updateYourCard);
+		}
+		catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		if(updateCnt == 1) {
+			
+			logger.info("Update One YourCardInfo Success");
+			return true;
+		}
+		else {
+			
+			logger.info("Update One YourCardInfo Fail");
+			return false;
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 }

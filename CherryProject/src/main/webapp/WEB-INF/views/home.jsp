@@ -14,7 +14,6 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/index.css" />
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/component.css" />
-
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/link_hover_basic.css">
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/link_hover.css">
 	
@@ -22,7 +21,21 @@
 	<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js"/>"></script>
 	<script>document.documentElement.className = 'js';</script>
 	<script>
-		
+	
+	/*
+	 *	뒤로가기 금지 : Histroy 페이지를 현재 페이지로 하여 계속 현재 페이지에 머물게 한다
+	 */
+	 <c:if test="${sessionScope.userid ne null }">
+	 
+		history.pushState(null, null, location.href);
+
+	 	window.onpopstate = function(event) {
+
+	 		history.go(1);
+	 	};
+	 </c:if>
+	 	
+	
 	/*
 		로그아웃 확인 메소드
 	*/
@@ -41,7 +54,7 @@
 
 </head>
 <body class="demo-1">
-	<header class="codrops-header">
+	<%-- <header class="codrops-header">
 		<div class="codrops-links">
 			<c:choose>
 				<c:when test="${sessionScope.userid eq null}">
@@ -53,8 +66,8 @@
 					<a class=""  style="cursor:pointer;" onclick="return logoutValid();">로그아웃</a>
 				</c:otherwise>
 			</c:choose>
-		</div>
-	</header>
+		</div> 
+	</header> --%>
 
 	<!-- 정보승이 넣음 -->
 	<div class="videoBox">

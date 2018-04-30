@@ -13,7 +13,7 @@ header{
   background-color: #f8f8f8;
   margin: 0;
   padding: 0;
-  height: 20%;
+  height: 10%;
 }
 header .title{
   font-size: 35px;
@@ -26,8 +26,7 @@ header ul li{
   float: left;
 }
 header .main_menu, header .sub_menu{
-  margin-top: 15px;
-  border-bottom: solid 2px black;
+  border-bottom: solid 4px black;
   font-size: 17px;
 }
 header .main_menu li, header .sub_menu li{
@@ -38,7 +37,7 @@ header>.main_menu>ul>li>i{
 }
 
 /* tool_text_button_group */
-.tool_text_button_group button{
+.tool_text_button_group .tool_text_button{
   width: 30px;
   height: 30px;
   border-radius: 3px;
@@ -52,7 +51,7 @@ header>.main_menu>ul>li>i{
   outline: none;
 }
 
-.tool_text_button_group button:hover {
+.tool_text_button_group .tool_text_button:hover {
    border: 1px solid #a6a6a6;
    color: #777;
 }
@@ -150,7 +149,7 @@ article>ul>li:nth-child(2){
 #menubox{
   position:relative;
   width:100%;
-  height:200px;
+  height:100%;
   background-color:#fff;
 }
 
@@ -194,12 +193,12 @@ article>ul>li:nth-child(2){
 #menubox #contentbox{
   position:relative;
   width:100%;
-  height: 100%;
+  height: 50%;
   background-color: #f8f8f8;
 }
 #contentbox .content{
   width:100%;
-  height:100%;
+  height:50%;
 }
 /*#menubox .content span{
 display:block;
@@ -598,9 +597,6 @@ transition: all 0.25s ease;
   .tool_text_button:nth-child(1){
     margin-left: 10px;
   }
-  .tool_text_button_group{
-    display: none;  
-  }
 
 
   /*툴팁*/
@@ -633,7 +629,7 @@ transition: all 0.25s ease;
 	width : 610px;
 	height : 430px;
 	overflow: hidden;
-    
+    text-align: center;
 } 
 
 #back{
@@ -646,3 +642,11 @@ transition: all 0.25s ease;
 	overflow: hidden;
 	
 } 
+
+.delete{
+	position : absolute;
+	top : 18%;
+	right : 12%;
+	width : 25px;
+	height : 25px;
+}

@@ -21,16 +21,20 @@ CREATE TABLE tbl_mycardinfo (
 	, address			VARCHAR2(200)					-- 회사 주소
 	, job				VARCHAR2(100)					-- 직책, 직위, 직급
 	, department		VARCHAR2(100)					-- 부서명
-	, otherinfo			VARCHAR2(200)					-- 기타 정보
+	, otherinfo			LONG							-- 기타 정보
+	, otherinfo2		VARCHAR2(1000)					-- 기타 정보
 	, frontimgsaved		VARCHAR2(300)	NOT NULL		-- 명함 앞면의 이미지 경로
 	, backimgsaved		VARCHAR2(300)					-- 명함 뒷면의 이미지 경로
 	, cardorder			NUMBER			DEFAULT 0		-- 명함의 순서(현재 사용하고 있는 명함의 숫자가 가장 크다)
 	, frontimgoriginal	VARCHAR2(300)					-- 명함 앞면의 이미지 원본 파일명
 	, backimgoriginal	VARCHAR2(300)					-- 명함 뒷면의 이미지 원본 파일명
-	
 );
  */
 
+/**
+ * @author SCITMASTER
+ *
+ */
 public class MyCardInfoVO {
 
 	/*
@@ -50,12 +54,12 @@ public class MyCardInfoVO {
 	private String job;					// 직책, 직위, 직급
 	private String department;			// 부서명
 	private String otherinfo;			// 기타 정보
+	private String otherinfo2;			// 제작한 명함의 DIV 코드 저장
 	private String frontimgsaved;		// 명함 앞면의 이미지 경로
 	private String backimgsaved;		// 명함 뒷면의 이미지 경로
 	private int cardorder;				// 명함의 순서
 	private String frontimgoriginal;	//
 	private String backimgoriginal;		// 
-	
 	
 	/*
 	 * Constructor
@@ -110,6 +114,9 @@ public class MyCardInfoVO {
 	public String getOtherinfo() 					{	return otherinfo;			}
 	public void   setOtherinfo(String otherinfo) 	{	this.otherinfo = otherinfo;	}
 	
+	public String getOtherinfo2() 					{	return otherinfo2;	}
+	public void   setOtherinfo2(String otherinfo2) 	{	this.otherinfo2 = otherinfo2;	}
+
 	public String getFrontimgsaved() 						{	return frontimgsaved;				}
 	public void   setFrontimgsaved(String frontimgsaved) 	{	this.frontimgsaved = frontimgsaved;	}
 
@@ -134,13 +141,12 @@ public class MyCardInfoVO {
 		return "MyCardInfoVO [mycardnum=" + mycardnum + ", userid=" + userid + ", company=" + company + ", name1="
 				+ name1 + ", name2=" + name2 + ", name3=" + name3 + ", phone=" + phone + ", tel=" + tel + ", fax=" + fax
 				+ ", email=" + email + ", address=" + address + ", job=" + job + ", department=" + department
-				+ ", otherinfo=" + otherinfo + ", frontimgsaved=" + frontimgsaved + ", backimgsaved=" + backimgsaved
-				+ ", cardorder=" + cardorder + ", frontimgoriginal=" + frontimgoriginal + ", backimgoriginal="
-				+ backimgoriginal + "]";
+				+ ", otherinfo=" + otherinfo + ", otherinfo2=" + otherinfo2 + ", frontimgsaved=" + frontimgsaved
+				+ ", backimgsaved=" + backimgsaved + ", cardorder=" + cardorder + ", frontimgoriginal="
+				+ frontimgoriginal + ", backimgoriginal=" + backimgoriginal + "]";
 	}
 
 
-	
 	
 	
 	

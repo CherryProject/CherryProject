@@ -31,7 +31,7 @@ public class BoardController {
 	@Inject
 		private BoardDAO boardDAO;
 	
-	final int countPerPage = 5; //현재 페이지 게시글 갯수, 하나의 페이지에 몇개의 게시글 출력 여부
+	final int countPerPage = 7; //현재 페이지 게시글 갯수, 하나의 페이지에 몇개의 게시글 출력 여부
 	final int pagePerGroup = 5; //현재 페이지 그룹 갯수, 현재 보이는 페이지에 몇개의 페이지번호를 보여줄 것인가
 	
 	
@@ -91,17 +91,19 @@ public class BoardController {
 		
 		logger.info("selectBoardAll Start");
 		
-		int total = boardDAO.getTotal(findText, findList); 
-		
+		int total = boardDAO.getTotal(findList, findText); 
+		logger.info("total값 : "+total);
 		logger.info("findText값 :" + findText);
 		logger.info("findList값 :" + findList);
 		
 		ArrayList<BoardVO> list = null;
+		ArrayList<BoardVO> noticeList = null;		
 		
 		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total);
 		
 		 list = boardDAO.selectBoardAll(findText, findList, navi.getStartRecord(), navi.getCountPerPage());
-		 logger.info("리스트값 : "+list);
+		 noticeList = boardDAO.selectNoticeAll();
+		 logger.info("게시글 리스트값 : "+noticeList);
 		 
 		 java.text.SimpleDateFormat sf = new java.text.SimpleDateFormat("yyyy-MM-dd");
 
@@ -115,7 +117,7 @@ public class BoardController {
 		 map.put("findText", findText);
 		 map.put("total", total);
 		 map.put("now", now);	
-	 
+		 map.put("noticeList", noticeList);
 		logger.info("selectBoardAll end");
 		
 		return map;
@@ -139,8 +141,6 @@ public class BoardController {
 		board = boardDAO.selectBoardOne(boardnum);
 				boardDAO.updateHits(boardnum);
 		
-		
-		logger.info("readBoard 컨트롤러 board값 : " + board);
 		model.addAttribute("board", board);
 		
 		logger.info("selectBoardOne end");

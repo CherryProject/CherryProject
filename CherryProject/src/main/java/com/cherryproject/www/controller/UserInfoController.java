@@ -44,6 +44,8 @@ public class UserInfoController {
 		private JavaMailSender mailSender;
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserInfoController.class);
+	private final String admin = "arisol342@gmail.com";	// 관리자 계정
+	private final String serverAddress = "http://203.233.199.165:8888/www/";	// Server Address
 	
 //	final String uploadPath = "/BusinessCardProject/management/temp/";
 	/*
@@ -68,12 +70,6 @@ public class UserInfoController {
 	public String userJoin(UserInfoVO joinUser, Model model) throws MessagingException, UnsupportedEncodingException {
 		
 		logger.info("User Join Start");
-		
-		// 관리자 계정
-		String admin = "arisol342@gmail.com";
-		
-		// Server Address
-		String serverAddress = "http://203.233.199.165:8888/www/";
 		
 		boolean joinIs = userDao.joinUser(joinUser);
 
@@ -140,19 +136,7 @@ public class UserInfoController {
 	}
 
 	
-	/* 
-	 * @comment				: 로그인 페이지로 이동
-	 * @author				: 정보승
-	 */
-	@RequestMapping(value="loginForm", method=RequestMethod.GET)
-	public String userLoginForm() {
-		
-		logger.info("Move User Login Page");
-		
-		return "loginForm";
-	}
-	
-	
+
 	/* 
 	 * @comment				: 회원 로그인 처리
 	 * @param	loginInfo	: View에서 입력받은 User ID와 User Pw를 저장하고 있는 객체
@@ -194,6 +178,8 @@ public class UserInfoController {
 				
 				yourUploadPath.mkdirs();
 			}
+			
+			return "redirect:../home";
 		}
 		
 		// E-mail 인증이 되지 않은 로그인
@@ -201,14 +187,76 @@ public class UserInfoController {
 			
 			logger.info("User Login Fail - Email Verify Fail");
 			
-//			model.addAttribute("notVerify", "true");
+			model.addAttribute("msg", "아직 E-mail인증이 완료되지 않았습니다");
+			return "loginFrom";
 		}
 		else {
 			
 			logger.info("User Login Fail");
+			model.addAttribute("msg", "로그인 정보가 일치하지 않습니다.");
+			return "loginFrom";
 		}
 		
-		return "redirect:/";
+		
+	}
+	
+	
+	
+	/*
+	 * @comment	:	Password 찾기
+	 * @author	:	정보승
+	 */
+	@RequestMapping(value="findPw", method=RequestMethod.POST)
+	public String findPassword(String userid, String username, Model model) throws MessagingException {
+		
+		logger.info("Find Password Start");
+		
+		HashMap<String, Object> findTemp = new HashMap<>();
+		findTemp.put("userid", userid);
+		findTemp.put("findPW", userid + username);
+		
+		UserInfoVO findPwResult = userDao.selectUser(findTemp);
+		
+		
+		if(findPwResult.getUsername().equals(username)) {
+			
+			// 인증을 위한 E-mail을 보내는 부분		
+		    MimeMessage message = mailSender.createMimeMessage();
+		    MimeMessageHelper messageHelper 
+		                      = new MimeMessageHelper(message, true, "UTF-8");
+		    
+		    messageHelper.setFrom(admin);  					// 보내는사람 (생략 시 정상작동을 안함)
+		    messageHelper.setTo(findPwResult.getUserid());     	// 받는사람 이메일
+		    messageHelper.setSubject("[Password 변경]"); 		// 메일제목(생략 가능)
+		    messageHelper.setText(							// 메일 내용
+		    		  new StringBuffer().append("메일인증 \n")
+						.append("Arisol에 가입해주셔서 감사합니다. \n"
+								+ serverAddress + "users/verify?userid="
+								+ findPwResult.getUserid())
+						.append("\n이메일 인증 확인")
+						.append("\n pw : ")
+						.append(findPwResult.getUserpw())
+						.toString());	
+			 
+		    try {	 
+			      mailSender.send(message);					// 메일 보내기
+			 }
+		    
+			 catch(Exception e){
+				 
+			      e.printStackTrace();
+			 }
+		   
+			logger.info("Find User Password Success");
+			model.addAttribute("msg", "E-mail이 발송되었습니다.");
+			
+		}
+		else {
+			
+			model.addAttribute("msg", "입력한 정보가 일치하지 않습니다.");
+		}
+		return "redirect:../";
+		
 	}
 	
 	

@@ -1,7 +1,11 @@
 @import url('normalize.css');
+@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans+SC');
 
 body{
-	font-family: Baskerville, "Hoefler Text", Garamond, "Times New Roman", serif;
+	font-family: 'Alegreya Sans SC', sans-serif;
+	/*font-family: Julius Sans One', sans-serif;*/
+	/*font-family: 'Jura', sans-serif;*/
+	/*font-family: Baskerville, "Hoefler Text", Garamond, "Times New Roman", serif;*/
 	background: #e9f0f5 url(../images/pattern.png) repeat top left;
 	font-weight: 400;
 	font-size: 12px;
@@ -9,6 +13,7 @@ body{
 	overflow-y: hidden;
 	overflow-x: hidden;
 }
+
 h1, h3, h4{
 	font-weight: 400;
 }

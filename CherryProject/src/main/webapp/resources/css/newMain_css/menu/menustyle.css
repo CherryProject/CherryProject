@@ -6,9 +6,6 @@
     box-sizing: border-box;
 }
 
-.container {
-	padding: 80px;
-}
 
 .bt-menu {
 	position: fixed;

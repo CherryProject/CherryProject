@@ -23,9 +23,26 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/templateList/css/uncover.css" />">
 	
 	<script src="<c:url value="/resources/js/newMain_js/menu/modernizr.custom.js"/>"></script>
+	<script type="text/javascript" src="<c:url value=" resources/tool/js/jquery-3.3.1.min.js" />"></script>
+	
 	<script>
 		var supportsCssVars = function() { var e, t = document.createElement("style"); return t.innerHTML = "root: { --tmp-var: bold; }", document.head.appendChild(t), e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)")), t.parentNode.removeChild(t), e };
 		supportsCssVars() || alert("Please view this demo in a modern browser that supports CSS Variables.");
+		
+		$(function(){
+			
+			
+			//스크롤 이미지에 마우스가 들어올경우 포인터가 바뀌고 그 상태에서 클릭할 경우 함수가 발동한다.
+			$(".scroll-img").mouseenter().css('cursor', 'pointer').on('click',function(){
+				
+			   var src = $(this).attr("data"); //data 속성의 값을 가져와서 변수에 넣는다.
+					
+			   	location.href="/www/tool?src="+src; // (HomeController 부분)tool의 값을 가진 컨트롤러에 parameter 값으로 src를 가지고 간다.
+			});
+			
+		});
+		
+		
 	</script>
 </head>
 <body>
@@ -36,70 +53,70 @@
 	<article>
 		<div class="content grid">
 			<div class="grid__item">
-				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg1_1.png);"></div>
+				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg1_1.png);" data="resources/templateList/img/bg1_1.png"></div>
 				<div class="grid__item-titlewrap">
 					<h2 class="grid__item-title">#Template1</h2>
 					<p class="grid__item-description">Find me tomorrow or never</p>
 				</div>
 			</div>
 			<div class="grid__item">
-				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg2_1.png);"></div>
+				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg2_1.png);" data="resources/templateList/img/bg2_1.png"></div>
 				<div class="grid__item-titlewrap">
 					<h2 class="grid__item-title">#Template2</h2>
 					<p class="grid__item-description">Never end it like that</p>
 				</div>
 			</div>
 			<div class="grid__item">
-				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg3_1.png);"></div>
+				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg3_1.png);" data="resources/templateList/img/bg3_1.png"></div>
 				<div class="grid__item-titlewrap">
 					<h2 class="grid__item-title">#Template3</h2>
 					<p class="grid__item-description">Why make noise like that?</p>
 				</div>
 			</div>
 			<div class="grid__item">
-				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg4_1.png);"></div>
+				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg4_1.png);" data="resources/templateList/img/bg4_1.png"></div>
 				<div class="grid__item-titlewrap">
 					<h2 class="grid__item-title">#Template4</h2>
 					<p class="grid__item-description">No point in running</p>
 				</div>
 			</div>
 			<div class="grid__item">
-				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg5_1.png);"></div>
+				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg5_1.png);" data="resources/templateList/img/bg5_1.png"></div>
 				<div class="grid__item-titlewrap">
 					<h2 class="grid__item-title">#Template5</h2>
 					<p class="grid__item-description">When you get there</p>
 				</div>
 			</div>
 			<div class="grid__item">
-				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg6_1.png);"></div>
+				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg6_1.png);" data="resources/templateList/img/bg6_1.png"></div>
 				<div class="grid__item-titlewrap">
 					<h2 class="grid__item-title">#Template6</h2>
 					<p class="grid__item-description">Timeless manners count</p>
 				</div>
 			</div>
 			<div class="grid__item">
-				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg7_1.png);"></div>
+				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg7_1.png);" data="resources/templateList/img/bg7_1.png"></div>
 				<div class="grid__item-titlewrap">
 					<h2 class="grid__item-title">#Template7</h2>
 					<p class="grid__item-description">Together we can sit</p>
 				</div>
 			</div>
 			<div class="grid__item">
-				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg8-1.png);"></div>
+				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg8-1.png);" data="resources/templateList/img/bg8-1.png"></div>
 				<div class="grid__item-titlewrap">
 					<h2 class="grid__item-title">#Template8</h2>
 					<p class="grid__item-description">The new kid on the block</p>
 				</div>
 			</div>
 			<div class="grid__item">
-				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg9_1.png);"></div>
+				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg9_1.png);" data="resources/templateList/img/bg9_1.png"></div>
 				<div class="grid__item-titlewrap">
 					<h2 class="grid__item-title">#Template9</h2>
 					<p class="grid__item-description">The new kid on the block</p>
 				</div>
 			</div>
 			<div class="grid__item">
-				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg10_1.png);"></div>
+				<div class="scroll-img" style="background-image: url(resources/templateList/img/bg10_1.png);" data="resources/templateList/img/bg10_1.png"></div>
 				<div class="grid__item-titlewrap">
 					<h2 class="grid__item-title">#Template10</h2>
 					<p class="grid__item-description">Find me tomorrow or never</p>

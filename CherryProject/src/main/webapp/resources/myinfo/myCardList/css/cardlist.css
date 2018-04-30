@@ -14,6 +14,7 @@ a:focus {
 /* Content */
 .content {
 	position: relative;
+	top: 90px;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;

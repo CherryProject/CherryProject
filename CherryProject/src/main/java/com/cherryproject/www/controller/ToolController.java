@@ -1,9 +1,6 @@
 package com.cherryproject.www.controller;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,19 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cherryproject.www.dao.MyCardInfoDAO;
 import com.cherryproject.www.vo.MyCardInfoVO;
 import com.google.api.client.repackaged.org.apache.commons.codec.binary.Base64;
-import com.google.api.client.util.IOUtils;
-import com.cherryproject.www.common.util.FileService;
 
 
 //Tool 페이지와 관련된 것을 담당하는 컨트롤러
@@ -50,7 +45,7 @@ public class ToolController {
 	 * @author				:	정현수
 	 */
 	@RequestMapping(value ="download", method = RequestMethod.POST)
-    public void download(HttpServletRequest request, MyCardInfoVO myCard,HttpServletResponse response, HttpSession session)throws Exception {
+    public String download(HttpServletRequest request, MyCardInfoVO myCard, HttpServletResponse response, HttpSession session, Model model)throws Exception {
 		
 		logger.info("Image Capture Start ");
 		
@@ -86,7 +81,7 @@ public class ToolController {
             //byte[] 을 ByteArrayInputStream 으로 변환
             ByteArrayInputStream is = new ByteArrayInputStream(file);
             
-            System.out.println("file  :::::::: " + file + " || " + file.length);
+//            System.out.println("file  :::::::: " + file + " || " + file.length);
            
             String fileName=  UUID.randomUUID().toString();
             
@@ -103,25 +98,25 @@ public class ToolController {
             stream.write(file); 
             stream.close();
             
-            System.out.println("fileName  :::::::: " + fileName);
+//            System.out.println("fileName  :::::::: " + fileName);
 
             //contentType, header 정보 셋팅. header 마지막에 filename 는 다운로드되는 파일명
-            response.setContentType("image/png");
-            response.setHeader("Content-Disposition", "attachment; filename=report.png");
-            
-            /*IOUtils 을 이용해서 다운로드
-			commons-io 라이브러리가 필요함 ( import org.apache.commons.io.IOUtils; )*/
-            IOUtils.copy(is, response.getOutputStream());
-            
-            response.flushBuffer();
+//            response.setContentType("image/png");
+//            response.setHeader("Content-Disposition", "attachment; filename=report.png");
+//            
+//            /*IOUtils 을 이용해서 다운로드
+//			commons-io 라이브러리가 필요함 ( import org.apache.commons.io.IOUtils; )*/
+//            IOUtils.copy(is, response.getOutputStream());
+//            
+//            response.flushBuffer();
             
             
             //myCard에 세팅
             myCard.setFrontimgsaved(fileName+".png");
             myCard.setFrontimgoriginal(fileName+".png");
             myCard.setUserid(userid);
-            myCard.setOtherinfo(html);
-//            myCard.setBackimgsaved(backimgsaved);
+            myCard.setOtherinfo(html); //div코드
+//          myCard.setBackimgsaved(backimgsaved);
             myCardDAO.insertMyCard(myCard);
             
             
@@ -134,8 +129,58 @@ public class ToolController {
 
 		logger.info("Image Capture End ");
 		
+		ArrayList<MyCardInfoVO> mycards = myCardDAO.selectAllMyCard(userid);
+		
+		int myCardLen = mycards.size();
+		String temp = myCard.getFrontimgsaved();
+		
+		for(int i =0;i<myCardLen;i++){
+			
+			if(mycards.get(i).getFrontimgsaved().equals(temp)) {
+				
+				session.setAttribute("myCardNum", mycards.get(i).getMycardnum());
+				String getNum =(String)session.getAttribute("myCardNum");
+				System.out.println(getNum);
+				break;
+			}
+		}
+		
+		return "redirect:addInfo";
 		
     }
+	
+	
+	/*
+	 * @comment	:	커스터마이징 이미지 추가 정보 입력란 이동
+	 * @
+	 */
+	@RequestMapping(value="addInfo", method=RequestMethod.GET)
+	public String addMyCardInfo(HttpSession session, Model model) {
+	
+		logger.info("Move addMyCardInfo");
+		
+//		String userid = (String) session.getAttribute("userid");
+		
+		//session에서 myCardNum을 가져와서 바로 모델에 넣고 session의 값은 바로 지워버린다.
+		String myCardNum=(String)session.getAttribute("myCardNum");
+		  
+		model.addAttribute("myCardNum", myCardNum);
+		session.removeAttribute("myCardNum");
+		
+//		HashMap<String, Object> myCard = new HashMap<>();
+//		myCard.put("userid", userid);
+//		myCard.put("myCardNum", myCardNum);
+//		
+//		MyCardInfoVO updateVo = myCardDAO.selectOneMyCard(myCard);
+//		
+//		// 수정을 위한 내 명함 정보를 보낸다.
+//		model.addAttribute("updateVo", updateVo);
+		
+		
+		
+		return "myInfo/addMyCardInfo";
+	}
+	
 
 	/*
 	 * @comment				:	커스터마이징 이미지 가져오기 
@@ -155,7 +200,6 @@ public class ToolController {
 		list = myCardDAO.selectAllMyCard(userid);
 		
 		logger.info("list 값 : " + list);
-		System.out.println("list 값 : " + list);
 		
 		model.addAttribute("list", list);
 		logger.info("myTool End ");

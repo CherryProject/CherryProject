@@ -30,17 +30,23 @@ public class BoardDAO {
 	 * @author		:	여지원
 	 */
 	public int insertBoard(BoardVO board) {
+		
 		logger.info("inserBoard start");
+		
 		int result = 0;
 
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 
 		try {
+			
 			result = mapper.insertBoard(board);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
+		
 		logger.info("inserBoard end");
+		
 		return result;
 	}
 	
@@ -52,6 +58,7 @@ public class BoardDAO {
 	 * @author		:	정현수
 	 */
 	public ArrayList<BoardVO> selectBoardAll(String findText, String findList, int startRecord, int countPerPage) {
+		
 		logger.info("selectBoardAll start");
 		
 		ArrayList<BoardVO> list = null;
@@ -64,34 +71,81 @@ public class BoardDAO {
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		System.out.println("맵 findList 값 : " + map.get("findList") );
 		System.out.println("맵 findText 값 : " + map.get("findText") );
+		
 		try {
-		list = mapper.selectBoardAll(map, rb);
+			
+			list = mapper.selectBoardAll(map, rb);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 		
 		logger.info("selectBoardAll end");
+		
 		return list;
 	}
-
+	
+	
+	
+	/*
+	 * @comment		:	selectNoticeAll 공지 게시글 전부 출력 메소드
+	 * @param		: 	check_notice	
+	 * @return		:	noticeList 츨력
+	 * @author		:	정현수
+	 */
+	public ArrayList<BoardVO> selectNoticeAll() {
+		
+		logger.info("selectBoardAll start");
+		
+		ArrayList<BoardVO> noticeList = null;
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		
+		try {
+			
+			noticeList = mapper.selectNoticeAll();
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		logger.info("selectBoardAll start");
+		
+		return noticeList;
+	}
+	
+	
+	
+	/*
+	 * @comment		:	getTotal 게시글 갯수
+	 * @param		: 	findList, findText
+	 * @return		:	total 츨력
+	 * @author		:	정현수
+	 */
 	public int getTotal(String findList, String findText) {
 		
 		logger.info("boardGetTotal Start");
-		int total = 0;
+		
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		
+		int total = 0;
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("findList", findList);
 		map.put("findText", findText);
+		
 		try {
-		total = mapper.getTotal(map);
+			
+			total = mapper.getTotal(map);
 		} catch (Exception e) {
+			
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		
 		logger.info("boardGetTotal End");
+		
 		return total;
 	}
+	
 	
 	
 	/*
@@ -100,20 +154,26 @@ public class BoardDAO {
 	 * @author		:	정현수
 	 */
 	public BoardVO selectBoardOne(int boardnum) {
+		
 		logger.info("selectBoardOne start");
+		
 		BoardVO board = null;
 		
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		
 		try {
+			
 			board = mapper.selectBoardOne(boardnum);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 		
 		logger.info("selectBoardOne end");
+		
 		return board;
 	}
+	
 	
 	
 	/*
@@ -122,14 +182,18 @@ public class BoardDAO {
 	 * @author		:	여지원
 	 */
 	public void updateHits(int boardnum){
+		
 		logger.info("updateHits start");
+		
 		BoardVO board = null;
 		
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		
 		try {
+			
 			mapper.updateHits(boardnum);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 		
@@ -144,20 +208,27 @@ public class BoardDAO {
 	 * @author		:	여지원
 	 */
 	public int updateBoard(BoardVO board){
+		
 		logger.info("updateBoard start");
+		
 		int result = 0;
 		
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		
 		try {
+			
 			result = mapper.updateBoard(board);
+			
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 		
 		logger.info("updateBoard end");
+		
 		return result;
 	}
+	
 	
 	
 	/*
@@ -166,22 +237,27 @@ public class BoardDAO {
 	 * @author		:	여지원
 	 */
 	public int deleteBoard(int boardnum){
+		
 		logger.info("deleteBoard start");
+		
 		int result = 0;
 		
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		
 		try {
+			
 			result = mapper.deleteBoard(boardnum);
-			System.out.println("@@@@@@"+result);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
-		System.out.println("deleteDAO    "+result);
+		
 		logger.info("deleteBoard end");
 		
 		return result;
 	}
+	
+	
 	
 	/*
 	 * @comment		:	댓글 등록
@@ -189,21 +265,27 @@ public class BoardDAO {
 	 * @author		:	여지원
 	 */
 	public int insertComment(CommentVO comment){
+		
 		logger.info("insertComment start");
-		int result = 0;
-		System.out.println(comment+"dao!!!");
+		
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		int result = 0;
 		
 		try {
+			
 			result = mapper.insertComment(comment);
-			System.out.println(result+"dao!!!!");
+			
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 		
 		logger.info("insertComment end");
+		
 		return result;
 	};
+	
+	
 	
 	/*
 	 * @comment		:	댓글 리스트 불러오기
@@ -211,20 +293,26 @@ public class BoardDAO {
 	 * @author		:	여지원
 	 */
 	public ArrayList<CommentVO> commentList(int boardnum){
+		
 		logger.info("commentList start");
-		ArrayList<CommentVO> list = null;
 		
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		
+		ArrayList<CommentVO> list = null;
+		
 		try {
+			
 			list = mapper.commentList(boardnum);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 		
 		logger.info("commentList end");
+		
 		return list;
 	}
+	
 	
 	
 	/*
@@ -233,20 +321,27 @@ public class BoardDAO {
 	 * @author		:	여지원
 	 */
 	public int updateComment(CommentVO comment){
+		
 		logger.info("updateComment start");
-		int result = 0;
 		
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		
+		int result = 0;
+		
 		try {
+			
 			result = mapper.updateComment(comment);
+			
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
-		System.out.println(result+"dao");
+		
 		logger.info("updateComment end");
+		
 		return result;
 	}
+	
 	
 	
 	/*
@@ -257,17 +352,21 @@ public class BoardDAO {
 	public int deleteComment(int commentnum){
 		
 		logger.info("deleteComment start");
-		int result = 0;
 		
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		
+		int result = 0;
+		
 		try {
+			
 			result = mapper.deleteComment(commentnum);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 		
 		logger.info("deleteComment end");
+		
 		return result;
 		
 	}

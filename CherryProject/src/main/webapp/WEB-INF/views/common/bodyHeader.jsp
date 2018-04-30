@@ -3,13 +3,13 @@
  --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
 
 	<header>
 		<nav id="bt-menu" class="bt-menu">
 			<a href="#" class="bt-menu-trigger"><i class="fas fa-bars"></i></a>
 			<ul>
-				<li><a href="/www">Home</a></li>
+				<li><a href="/www/home">Home</a></li>
 				<li><a href="/www/templateList">TemplateList</a></li>
 				<li><a href="/www/tool">Tools</a></li>
 				<li><a href="/www/myInfo">Myinfo</a></li>

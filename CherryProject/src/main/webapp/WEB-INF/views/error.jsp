@@ -22,7 +22,7 @@
 
       function go_url(){
 
-         location.href="/www";  // 페이지 이동...
+         location.href="/www/home";  // 페이지 이동...
 
       }
 

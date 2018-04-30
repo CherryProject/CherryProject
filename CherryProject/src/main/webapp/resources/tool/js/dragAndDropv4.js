@@ -79,7 +79,7 @@ $(document).ready(function(){
            //드래그를 시작할 때 동작할 내용
            ,start :function (event, ui) { 
               src = $(this).attr("src"); //경로를 가져오고 전역변수에 값을 넣는다.
-
+              
            }
          
         });
@@ -102,20 +102,28 @@ $(document).ready(function(){
 
             // node의 최초 위치 조정..?
             node.position.left -= canvas.position().right;
-
+            node.position.top -= canvas.position().bottom;
+           
             // 드랍한 아이템이 3가지 텍스트 메뉴 중 어느 것인지 판별해서 type에 저장
             if(ui.helper.hasClass("text")){
                 node.type = "text";
             } else if(ui.helper.hasClass("icon")){
                 node.type = "icon";
                 $('#title').text(ui.helper.html());
-                node.svgsrc =  ui.helper.children().children('img').attr('src');
+                node.svgsrc =  ui.helper.children().children('img').attr('src');             
             } else if(ui.helper.hasClass("Template")){
-                node.type = "Template";
-                node.imgsrc = ui.helper.children().children('img').attr('src');
+               // node.type = "Template";
+               // node.imgsrc = ui.helper.children().children('img').attr('src');
+                var str = '<img class="background" src=' + src + '>';  // 템플릿 이미지 가져오기
+                var output = "<img class='delete' src='resources/img/delBTN.png' onclick='delAction()'>"; //삭제 이미지 누를시
+                $('#canvas').prepend(str).trigger("create"); //캔버스에 가장 뒤쪽에 위치시킨다.(background처럼 보이기 위해서)
+                $('#output').append(output).trigger("create"); //캔버스에 가장 앞쪽에 위치시킨다.(background 위에 와야되기 때문에)
             } else if(ui.helper.hasClass("file")){ //file이란 클래스를 가지고 있을 경우 
                 node.type = "file";
                 node.filesrc = src; //src 전역변수 경로를 참조한다.
+           //     var str = "<img class='background' src=\"" +  src + "\">"; 
+           //    $('#canvas').prepend(str).trigger("create");
+           //     $('#canvas').html(str).css("background-image","url("+src+")").css("width","610px").css("height","430px").trigger("create");
             } else {
                 return;
             }
@@ -187,7 +195,7 @@ function renderbox(node) {
     // node의 타입별 textfield 기본 폰트 크기 지정
     switch(node.type) {
         case "text": 
-            $(div_box).addClass('textbox').text("입력하세요...!");
+            $(div_box).addClass('textbox').text("Insert Your Text");
             break;
         case "icon": 
             $(div_box).text('').css({
@@ -218,7 +226,7 @@ function renderbox(node) {
             $(img_box).css({
                 'width':'100%',
                 'height':'100%'
-            }).attr('src',node.filesrc);
+            }).attr('src',node.filesrc).trigger("create");
             break;
     }
 
@@ -257,9 +265,9 @@ function renderbox(node) {
     });
 
     // canvas에 textbox 출력
-    $(div_box).append(img_box).find(".ui-resizable-handle").hide();
+    $(div_box).prepend(img_box).find(".ui-resizable-handle").hide();
     $(div_box).find(".ui-resizable-handle").hide();
-    canvas.append(div_box);
+    canvas.prepend(div_box);
 
 
     // textbox 마우스 다운 시 크기 조절 모드 + 전역 편집 모드
@@ -515,39 +523,38 @@ function createSelectionEditor(top, left) {
     });
 
 
+     // [start] TODO 폰트 크기
+     var $div_fontsize = $('<div />');
+     var bt_curr_fontsize = document.createElement('button');
+     var div_select_fontsize = document.createElement('div');
+     $(div_select_fontsize).css({
+         "display": "none"
+     });
+     var arr_fontsize = ['9', '10', '11', '12', '14', '18', '24', '36', '60'];
+     var arr_bt_fontsize = [];
+     for (var i = 0; i < arr_fontsize.length; i++) {
+         arr_bt_fontsize[i] = document.createElement('button');
+         $(arr_bt_fontsize[i]).text(arr_fontsize[i]).click(function() {
+             execFontSize($(this).text(), "px");
+         }).appendTo(div_select_fontsize);
+     }
 
-    // // [start] TODO 폰트 크기
-    // var $div_fontsize = $('<div />');
-    // var bt_curr_fontsize = document.createElement('button');
-    // var div_select_fontsize = document.createElement('div');
-    // $(div_select_fontsize).css({
-    //     "display": "none"
-    // });
-    // var arr_fontsize = ['9', '10', '11', '12', '14', '18', '24', '36', '60'];
-    // var arr_bt_fontsize = [];
-    // for (var i = 0; i < arr_fontsize.length; i++) {
-    //     arr_bt_fontsize[i] = document.createElement('button');
-    //     $(arr_bt_fontsize[i]).text(arr_fontsize[i]).click(function() {
-    //         execFontSize($(this).text(), "px");
-    //     }).appendTo(div_select_fontsize);
-    // }
+     if(document.queryCommandState('fontSize') == false) {
+         $(bt_curr_fontsize).text('16');
+     } else {
+         $(bt_curr_fontsize).text(document.queryCommandState('fontSize'));
+     }
+     $(bt_curr_fontsize).click(function(e) {
+         // TODO 매우 중요!! document.queryCommandState('bold')
+         if($(div_select_fontsize).css("display") == "block") {
+             $(div_select_fontsize).css("display", "none");
+         } else {
+             $(div_select_fontsize).css("display", "block");
+         }
+     });
 
-    // if(document.queryCommandState('fontSize') == false) {
-    //     $(bt_curr_fontsize).text('16');
-    // } else {
-    //     $(bt_curr_fontsize).text(document.queryCommandState('fontSize'));
-    // }
-    // $(bt_curr_fontsize).click(function(e) {
-    //     // TODO 매우 중요!! document.queryCommandState('bold')
-    //     if($(div_select_fontsize).css("display") == "block") {
-    //         $(div_select_fontsize).css("display", "none");
-    //     } else {
-    //         $(div_select_fontsize).css("display", "block");
-    //     }
-    // });
-
-    // $div_fontsize.append(bt_curr_fontsize).append(div_select_fontsize);
-    // // [end] TODO 폰트 크기
+     $div_fontsize.append(bt_curr_fontsize).append(div_select_fontsize);
+     // [end] TODO 폰트 크기
 
     // 텍스트 편집 옵션창
     var $div_selection_editor = $('<div />');
@@ -759,6 +766,28 @@ function save_div() {
             }
 
         }
+         
+         //템플릿 삭제 함수
+        function delAction() {
+        	
+        	var result = confirm('템플릿을 지우시겠습니까?'); 
+        	
+        	if(result) { 
+        		//true
+        		
+        		$(".background").remove();//객체를 삭제
+            	$(".delete").remove();//삭제 버튼을 삭제
+            	alert("삭제완료");
+        	} else {
+        		//false
+        		
+        		alert("삭제취소");
+        	}
+
+        	
+        	
+        	
+        } 
          
 //         $(content).html2canvas({  
 //        	    onrendered: function (canvas) {  

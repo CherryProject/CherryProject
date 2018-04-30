@@ -157,7 +157,7 @@ public class YourCardInfoController {
 			// OCR분석 결과
 			detectResult = GoogleVisionApi.detectText(filepath);
 			uploadSavedImg = ocrImage;		// 분석 완료된 이미지의 파일명을 전역변수에 담음.(서버 저장을 위해)
-			logger.info("분석 결과 : " + detectResult);
+//			logger.info("분석 결과 : " + detectResult);
 		}
 		catch (Exception e) {
 			
@@ -239,15 +239,15 @@ public class YourCardInfoController {
 	
 	
 	/*
-	 * @comment				:	수정하고자 하는 받은 명함의 정보를 수정하기 전에 세션에 등록하는 메소드.
+	 * @comment				:	수정하고자 하는 받은 명함의 정보를 받아 페이지 이동하는 메소드.
 	 * @param	yourcardnum	:	받은 명함의 등록번호
 	 * 			session		:	회원의 ID를 받기 위함.
 	 * @author				:	정보승
 	 */
-	@RequestMapping(value="registerSession", method = RequestMethod.GET)
-	public String registerSession (String yourcardnum, HttpSession session) {
+	@RequestMapping(value="yourCardUpdatePage", method = RequestMethod.GET)
+	public String registerSession (String yourcardnum, HttpSession session, Model model) {
 		
-		logger.info("Update Original CardInfo Session Register Start");
+		logger.info("Move Update Your Card Page Start");
 		
 		String userid = (String) session.getAttribute("userid");
 		
@@ -258,14 +258,20 @@ public class YourCardInfoController {
 		// 수정하고자 하는 명함 정보를 세션에 등록하기 위해 DB에서 가져온다.
 		YourCardInfoVO originalYourCardInfo = yourCardInfoDAO.selectYourCardOne(updateYourCardInfo);
 		
-		// Session에 수정하고자 하는 명함의 정보를 등록한다.
-		session.setAttribute("originalYourCardInfo", originalYourCardInfo);
+		if(originalYourCardInfo != null) {
+			
+			logger.info("Get Update Your Card Info Success");
+			
+			// Model에 담아 페이지 이동
+			model.addAttribute("originalYourCardInfo", originalYourCardInfo);
+		}
+		else {
+			
+			logger.info("Get Update Your Card Info Fail");
+		}
 		
-		logger.info("세션에 등록된 기존 명함 정보 : " + session.getAttribute("originalYourCardInfo").toString());
 		
-//		mod
-		
-		return "";
+		return "management/updateYourCard";
 	}
 	
 	
@@ -274,37 +280,27 @@ public class YourCardInfoController {
 	 * @comment		: 명함 정보수정
 	 * @author		: 여지원
 	 */
-	@ResponseBody
-	@RequestMapping(value="yourCardUpdate", method=RequestMethod.POST, produces="text/plain; charset=UTF-8")
-	public String yourCardUpdate(String yourcardnum, HttpSession session) {
+	@RequestMapping(value="yourCardUpdate", method=RequestMethod.POST)
+	public String yourCardUpdate(YourCardInfoVO udpateYourCard, HttpSession session) {
 		
-		logger.info("Delete One YourCardInfo");
+		logger.info("Update One YourCardInfo");
 		
 		// 회원의 ID와 기존의 수정되기 전의 받은 명함정보를 세션에서 가져온다.
 		String userid = (String) session.getAttribute("userid");
-		YourCardInfoVO originalYourCardInfo = (YourCardInfoVO) session.getAttribute("originalYourCardInfo");
 		
+		udpateYourCard.setUserid(userid);
+		boolean updateIs = yourCardInfoDAO.updaetYourCardOne(udpateYourCard);
 		
-		// 회원 ID와 받은 명함 번호를 이용해 삭제
-		HashMap<String, String> deleteYourCard = new HashMap<>();
-		deleteYourCard.put("userid", userid);
-		deleteYourCard.put("yourcardnum", yourcardnum);
-		
-		boolean deleteIs = yourCardInfoDAO.deleteYourCardOne(deleteYourCard);
-		
-		if(deleteIs) {
+		if(updateIs) {
 			
-			logger.info("Delete One YourCardInfo Success");
-			return "정상 삭제 되었습니다.";
-
+			logger.info("Update One YourCardInfo Success");
 		}
 		else {
 			
-			logger.info("Delete One YourCardInfo Fail");
-			return "삭제 실패하였습니다.";
+			logger.info("Update One YourCardInfo Fail");
 		}
-		
 	
+		return "redirect:../management";
 	}
 	
 	
@@ -361,31 +357,7 @@ public class YourCardInfoController {
 
 		return null;
 	}
-/*	
-	
-	 * @comment	:	나의 카드정보를 담은 리스트
-	 * @author	:	여지원
-	 
-	@ResponseBody
-	@RequestMapping(value="getMyCards", method=RequestMethod.GET)
-	public ArrayList<MyCardInfoVO> getMyCards(HttpSession session) {
-		
-		//produces="text/plain; charset=UTF-8"
-		
-		
-		logger.info("getMyCards Success 성공");
-		
-		String userid = (String) session.getAttribute("userid");
-		System.out.println("유저아이디");
-		System.out.println(userid);
-		ArrayList<MyCardInfoVO> list = null;
-		list = myCardInfoDAO.selectAllMyCard("ik872000@gmail.com");
-		System.out.println(list);
-		
-		return list;
-		
-	}*/
-	
+
 	
 	
 }

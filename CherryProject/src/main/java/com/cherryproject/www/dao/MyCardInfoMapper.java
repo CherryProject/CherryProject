@@ -15,6 +15,8 @@ public interface MyCardInfoMapper {
 	// 정현수 : 내 명함 등록
 	public void insertMyCard (MyCardInfoVO mycard); 
 	
+	// 정보승	:	내 명함 추가 정보 등록
+	public int updateAddMyCard(MyCardInfoVO mycard);
 	
 	// 정보승 : 등록한 내 명함 전체 조회
 	public ArrayList<MyCardInfoVO> selectAllMyCard(String userid) throws DataAccessException;
@@ -23,4 +25,5 @@ public interface MyCardInfoMapper {
 	public MyCardInfoVO selectOneMyCard(HashMap<String, Object> myCard);
 	
 	// 정보승 : 내 명함 하나 삭제
+	public int deleteMyCard (HashMap<String, Object> deleteMyCard);
 }

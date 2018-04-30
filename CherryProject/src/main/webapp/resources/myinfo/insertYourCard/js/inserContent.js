@@ -17,7 +17,6 @@ var uploadFile;			// 서버로 이미지를 보내기 위한 변수.
  */
 $(document).ready(function() {
 	$("#input_imgs").on("change", handleImgFileSelect)
-	//getMyCardsImg();
 });
 
 
@@ -27,7 +26,7 @@ $(document).ready(function() {
 function fileUploadAction() {
 	
 	var	inputTag = "<input type='file' class='fileUploadBtn' id='input_imgs" + num + "' multiple />";
-
+	
 	$("#input_imgs").append(inputTag);		// input Tag 생성
 	$("#input_imgs" + num).trigger("click");	// input Tag 실행
 	
@@ -121,10 +120,26 @@ function delOne(index){
 	//class='ocrImg_" + index + "' 
 	//$("."+ocrImg+"").remove();
 	$(".imgPreview_"+index+"").remove();
-	alert(".imgPreview_"+index+"");
+	//alert(".imgPreview_"+index+"");
 	$("#delBTN"+index+"").remove();
 	
 	
+}
+
+
+/*
+ * @comment	:	OCR이미지 분석결과가 나오는 부분 애니메이션 효과
+ */
+var count=0;
+function OCRResult() { 
+	if (count == 0) {
+		
+		$('.menu2').css('right','0');
+		count++;
+	} else if (count == 1) {
+		$('.menu2').css('right', '320');
+		count--;
+	}
 }
 
 
@@ -136,16 +151,16 @@ function delOne(index){
  *			inputNum	:	동적 생성된 <input type="file" />에서 업로드한 이미지 파일의 수
  *			index		:	사용자가 업로드한 전체 이미지의 수
  */ 
+var choiceIndex;
 function moveToDiv(src, inputTagNum, inputNum, index){
-			 
+	choiceIndex = index;
 	//  업로드한 이미지 파일을 나타내는 경로를 <div class='selectedImg img' src=''> 에 추가한다.
 	$(".selectedImg img").attr("src", src);
+	OCRResult();
 	
 	// 이미지 미리보기를 선택할 경우 이미지에 테두리를 나타나게 한다.
 	//$("#ocrImg_" + index).css('border', 'solid 3px red');
 	$("#ocrImg_" + index).trigger("create");
-	
-	
 	
 	var form = $('#tempUpload')[0];
 	var formData = new FormData(form);
@@ -186,20 +201,17 @@ function moveToDiv(src, inputTagNum, inputNum, index){
 				}
 				, success : function (detectResult) {	// detectResult : OCR 분석 결과 String.
 					
-					$("#cardInfo").html('');
 					console.log(detectResult);
-					$("#comment").show();		// 나중에 삭제
+					$("#cardinfo").show();
 					$("#cardBtn").show();
 					
-					
-					var str = detectResult;
-					$("#comment").html(str);	// 나중에 삭제
+//					var str = detectResult;
 					
 					//OCR 분석 자료
 					resultInput(detectResult);
 					
 					// Ajax 후 CSS 적용을 위한 이벤트 발생
-					$("#cardInfo").trigger("create");
+					//$("#cardInfo").trigger("create");
 					
 				}
 				, error : function (e) {
@@ -245,22 +257,27 @@ function resultInput(detectResult) {
 	inputTypeNum = detectResultArrLen;
 	
 	// 회원ID를 hidden으로 추가
-	$("#cardInfo").append("<input type='hidden' name='userid' />");
+	//$("#cardInfo").append("<input type='hidden' name='userid' />");
 	
 	// 현재 이미지의 파일명을 저장. 	
-	$("#cardInfo").append("<input type='hidden' name='uploadImg' value='"+ uploadFile + "' />");
+	$("#cardinfo").append("<input type='hidden' name='uploadImg' value='"+ uploadFile + "' />");
 	
 	var htmlCode = '';
-	var keyName = '';
 	
-	
-	//폼이 시작하는 가장 첫번째에 성별선택을 넣는다.
-	htmlCode += "<div class='input-group'>";
-	htmlCode += "<span class='input-group-addon' style='height: 70px;'>" + "성별" + "</span>";
-	htmlCode += "<input type ='radio' name='selectGender' value='M' checked >남성   ";
-	htmlCode += "<input type ='radio' name='selectGender' value='W'>여성   ";
-	htmlCode += "</div>";
-	
+	$("#name1").val('');
+	$("#name2").val('');
+	$("#name3").val('');
+	$("#company").val('');
+	$("#job").val('');
+	$("#department").val('');
+	$("#address").val('');
+	$("#tel").val('');
+	$("#phone").val('');
+	$("#email").val('');
+	$("#fax").val('');
+	$("#memo").val('');
+	$("#otherinfo").val('');
+	$("#etc").val("");
 	
 	for(var i=0; i<detectResultArrLen; i++) {
 		var delStr = "<div class ='delMenuOne' style='float:right;' ><img class='delBtnClass' src='../resources/img/delBTN.png' onclick='delForm("+i+")'></div> "; 
@@ -276,112 +293,71 @@ function resultInput(detectResult) {
 		
 		// E-Mail
 		if(eMailRegExp.test(detectResultArr[i])) {
-			
-			htmlCode += "<div class='input-group'id='input-group"+i+"'>";
-				htmlCode += "<span class='input-group-addon'>" + "E-Mail" + "</span>";
-				htmlCode += "<textarea class='form-control' name='email' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
-				htmlCode += delStr;
-			htmlCode += "</div>";
+
+//			$("input[name*=email]").attr("id", "cardInfo_" + i);
+//			$("input[name*=email]").attr("value", detectResultArr[i]);
+			$("#email").val(detectResultArr[i]);
+//			$("input[name*=email]").val(detectResultArr[i]);
 		}
 		// 회사 홈페이지 주소
 		else if(urlRegExp.test(detectResultArr[i])) {
 			
-			htmlCode += "<div class='input-group'id='input-group"+i+"'>";
-				htmlCode += "<span class='input-group-addon'>" + "Etc" + "</span>";
-				htmlCode += "<textarea class='form-control' name='etc' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
-				htmlCode += delStr;
-			htmlCode += "</div>";
+//			$("input[name*=otherinfo]").attr("id", "cardInfo_" + i);
+//			$("input[name*=otherinfo]").attr("value", detectResultArr[i]);
+			$("#otherinfo").val(detectResultArr[i]);
+//			$("input[name*=otherinfo]").val(detectResultArr[i]);
 		}
 		// 휴대폰 번호
 		else if( phoneRegExp.test(detectResultArr[i])) {
 			
-			htmlCode += "<div class='input-group'id='input-group"+i+"'>";
-				htmlCode += "<span class='input-group-addon'>" + "PHONE" + "</span>";
-				htmlCode += "<textarea class='form-control' name='phone' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
-				//추가!!!!!!!
-				htmlCode += delStr;
-			htmlCode += "</div>";
+//			$("input[name*=phone]").attr("id", "cardInfo_" + i);
+//			$("input[name*=phone]").attr("value", detectResultArr[i]);
+			$("#phone").val(detectResultArr[i]);
+//			$("input[name*=phone]").val(detectResultArr[i]);
 				
 		}
 		// 전화번호
 		else if(telRegExp.test(detectResultArr[i])) {
 
-			htmlCode += "<div class='input-group'id='input-group"+i+"'>";
-				htmlCode += "<span class='input-group-addon'>" + "TEL" + "</span>";
-				htmlCode += "<textarea class='form-control' name='tel' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
-				htmlCode += delStr;
-			htmlCode += "</div>";
-			
+//			$("input[name*=tel]").attr("id", "cardInfo_" + i);
+//			$("input[name*=tel]").attr("value", detectResultArr[i]);
+			$("#tel").val(detectResultArr[i]);
+//			$("input[name*=tel]").val(detectResultArr[i]);
 		}
 		
 		// 회사 주소
 		else if(cityNameRegExp.test(detectResultArr[i].toLowerCase())) {
 			
-			htmlCode += "<div class='input-group'id='input-group"+i+"'>";
-				htmlCode += "<span class='input-group-addon'>" + "주소" + "</span>";
-				htmlCode += "<textarea class='form-control' name='address' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
-				htmlCode += delStr;
-			htmlCode += "</div>";
-			console.log("주소");
+//			$("input[name*=address]").attr("id", "cardInfo_" + i);
+//			$("input[name*=address]").attr("value", detectResultArr[i]);
+			$("#address").val(detectResultArr[i]);
+//			$("input[name*=email]").val(detectResultArr[i]);
 		}
 		// 부서
 		else if(departmentRegExp.test(detectResultArr[i].toLowerCase())) {
 			
-			htmlCode += "<div class='input-group'id='id='input-group"+i+"'>";
-				htmlCode += "<span class='input-group-addon'>" + "부서" + "</span>";
-				htmlCode += "<textarea class='form-control' name='department' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
-				htmlCode += delStr;
-			htmlCode += "</div>";
-			console.log("부서");
+//			$("input[name*=department]").attr("id", "cardInfo_" + i);
+//			$("input[name*=department]").attr("value", detectResultArr[i]);
+			$("#department").val(detectResultArr[i]);
+//			$("input[name*=department]").val(detectResultArr[i]);
 		}
 		// 직책 및 직급
 		else if(jobRegExp.test(detectResultArr[i].toLowerCase())) {
 			
-			htmlCode += "<div class='input-group'id='input-group"+i+"'>";
-				htmlCode += "<span class='input-group-addon'>" + "직책" + "</span>";
-				htmlCode += "<textarea class='form-control' name='job' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
-				htmlCode += delStr;
-			htmlCode += "</div>";
-			console.log("직책");
+//			$("input[name*=job]").attr("id", "cardInfo_" + i);
+//			$("input[name*=job]").attr("value", detectResultArr[i]);
+			$("#job").val(detectResultArr[i]);
+//			$("input[name*=job]").val(detectResultArr[i]);
 		}
 		// 그 외
 		else {
 			
-
-			keyName += "<select class='selectMenu' id='selectMenu_" + i + "'>";
-				keyName += "<option>선택</option>";
-				keyName += "<option value='name1'>이름(국문)</option>";
-				keyName += "<option value='name2'>이름(영문)</option>";
-				keyName += "<option value='name3'>이름</option>";
-				keyName += "<option value='company'>회사</option>";
-				keyName += "<option value='job'>직급</option>";
-				keyName += "<option value='department'>부서</option>";
-				keyName += "<option value='address'>주소</option>";
-				keyName += "<option value='tel'>전화번호</option>";
-				keyName += "<option value='phone'>휴대폰번호</option>";
-				keyName += "<option value='email'>E-Mail</option>";
-				keyName += "<option value='fax'>Fax</option>";
-				keyName += "<option value='memo'>Memo</option>";
-				keyName += "<option value='otherinfo'>Etc</option>";
-				keyName += "</select>";
-			
-				htmlCode += "<div class='input-group' id='input-group"+i+"'>";
-				htmlCode += "<span class='input-group-addon'>" + keyName + "</span>";
-				
-				
-				
-				htmlCode += "<textarea class='form-control' name='' id='cardInfo_" + i + "' >" + detectResultArr[i] +  "</textarea>";
-				//항목삭제버튼 추가하기
-				htmlCode += delStr;
-			htmlCode += "</div>";
+			htmlCode += detectResultArr[i] + "\n";
 		}
+	
 		
-		$("#cardInfo").append(htmlCode);
-		
-		// htmlCode 초기화
-		htmlCode='';
-		keyName='';
-			
+		//$("textarea[id=etc]").val(htmlCode);
+		$("#etc").val(htmlCode);
 	}
 	
 }
@@ -393,62 +369,60 @@ function resultInput(detectResult) {
  * @comment		:	입력 항목을 추가하는 메소드
  * @author		:	정보승
  */	 
-function selectMenuAdd1() {
-	
-	
-	var keyName_ = "";
-	var htmlCode_ = "";
-	
-		keyName_ += "<select class='selectMenu' id='selectMenu_" + inputTypeNum + "'>";
-		keyName_ += "<option>선택</option>";
-		keyName_ += "<option value='name1'>이름(국문)</option>";
-		keyName_ += "<option value='name2'>이름(영문)</option>";
-		keyName_ += "<option value='name3'>이름</option>";
-		keyName_ += "<option value='company'>회사</option>";
-		keyName_ += "<option value='job'>직급</option>";
-		keyName_ += "<option value='department'>부서</option>";
-		keyName_ += "<option value='address'>주소</option>";
-		keyName_ += "<option value='tel'>전화번호</option>";
-		keyName_ += "<option value='phone'>휴대폰번호</option>";
-		keyName_ += "<option value='email'>E-Mail</option>";
-		keyName_ += "<option value='fax'>Fax</option>";
-		keyName_ += "<option value='memo'>Memo</option>";
-		keyName_ += "<option value='otherinfo'>Etc</option>";
-		keyName_ += "</select>";
-	
-		htmlCode_ += "<div class='input-group' id='input-group"+inputTypeNum+"'>";
-		htmlCode_ += "<span class='input-group-addon'>" + keyName_ + "</span>";
-		htmlCode_ += "<textarea class='form-control' name='' id='cardInfo_" + inputTypeNum + "' >" +  "</textarea>";
-		
-	//삭제 버튼 추가 (여지원)
-	htmlCode_ += "<div class ='delMenuOne' style='float:right;' > ";
-	htmlCode_ += "<img class='delBtnClass' src='../resources/img/delBTN.png' onclick='delForm("+inputTypeNum+")'>" ;
-	htmlCode_ +="</div>"
-	htmlCode_ += "</div>";
-	
-	
-	$("#cardInfo").append(htmlCode_);
-	
-	// htmlCode 초기화
-	htmlCode_='';
-	keyName_='';
-	inputTypeNum++;
-	
-	$("#cardInfo").trigger("create");
-
-}
+//function selectMenuAdd1() {
+//	
+//	
+//	var keyName_ = "";
+//	var htmlCode_ = "";
+//	
+//		keyName_ += "<select class='selectMenu' id='selectMenu_" + inputTypeNum + "'>";
+//		keyName_ += "<option>선택</option>";
+//		keyName_ += "<option value='name1'>이름(국문)</option>";
+//		keyName_ += "<option value='name2'>이름(영문)</option>";
+//		keyName_ += "<option value='name3'>이름</option>";
+//		keyName_ += "<option value='company'>회사</option>";
+//		keyName_ += "<option value='job'>직급</option>";
+//		keyName_ += "<option value='department'>부서</option>";
+//		keyName_ += "<option value='address'>주소</option>";
+//		keyName_ += "<option value='tel'>전화번호</option>";
+//		keyName_ += "<option value='phone'>휴대폰번호</option>";
+//		keyName_ += "<option value='email'>E-Mail</option>";
+//		keyName_ += "<option value='fax'>Fax</option>";
+//		keyName_ += "<option value='memo'>Memo</option>";
+//		keyName_ += "<option value='otherinfo'>Etc</option>";
+//		keyName_ += "</select>";
+//	
+//		htmlCode_ += "<div class='input-group' id='input-group"+inputTypeNum+"'>";
+//		htmlCode_ += "<span class='input-group-addon'>" + keyName_ + "</span>";
+//		htmlCode_ += "<textarea class='form-control' name='' id='cardInfo_" + inputTypeNum + "' >" +  "</textarea>";
+//		
+//	//삭제 버튼 추가 (여지원)
+//	htmlCode_ += "<div class ='delMenuOne' style='float:right;' > ";
+//	htmlCode_ += "<img class='delBtnClass' src='../resources/img/delBTN.png' onclick='delForm("+inputTypeNum+")'>" ;
+//	htmlCode_ +="</div>"
+//	htmlCode_ += "</div>";
+//	
+//	
+//	$("#cardInfo").append(htmlCode_);
+//	
+//	// htmlCode 초기화
+//	htmlCode_='';
+//	keyName_='';
+//	inputTypeNum++;
+//	
+//	$("#cardInfo").trigger("create");
+//
+//}
 
 
 //여지원: 내 명함들의 이미지및 정보들을 가지고와서 보여준뒤 선택하기 (서로주고받은 명함 표시를 위해)
 function getMyCardsImg(){
-	
 	
 	$.ajax({
 		url: '../mycard/getMyCards'
 		,type : 'get'
 		,datatype :'json'
 		,success: function(json){
-			
 			//나의 명함이 리스트에 없을 때
 			if(json=='[]'){
 				str ='<br><현재 등록된 나의 명함이 없습니다>';
@@ -498,59 +472,90 @@ function getMyCardsImg(){
  */ 
 function cardInfoSubmit() {
 	
-	//여지원-라디오박스로 선택된 mycardnum 과 성별
-	var getmycardnum = $(".selectMyCard").find("input[type=radio]:checked").val();
-	var getGender = $(".cardInfoMenu").find("input[type=radio]:checked").val();
+	var validIs = insertValid();
 	
-	$(".selectMyCard").trigger("create");
-	console.log("카드 번호 : " + getmycardnum);
-	
-	for(var i=0; i<inputTypeNum; i++) {
+	if(validIs) {
+		alert("fsdafasdfadkljfsd");
+		//여지원-라디오박스로 선택된 mycardnum 과 성별
+		var getmycardnum = $(".selectMyCard").find("input[type=radio]:checked").val();
+		var getGender = $("#cardinfo").find("input[type=radio]:checked").val();
 		
-		// 동적으로 생성된 input 태그들의 name 속성에 selectBox의 value를 대입
-		$("#cardInfo_"+i).attr("name", $("#selectMenu_"+i).val());
+		alert(getGender);
+		$(".selectMyCard").trigger("create");
+
+//	for(var i=0; i<inputTypeNum; i++) {
+//		
+//		// 동적으로 생성된 input 태그들의 name 속성에 selectBox의 value를 대입
+//		$("#cardInfo"+i).attr("name", $("#selectMenu_"+i).val());
+//	}
+
+		$.ajax({
+			 
+			url : "insertYourCard"
+			, type : "post"
+			, data : {
+				
+				name1 : $("input[name*=name1]").val()
+				, name2 : $("input[name*=name2]").val()
+				, name3 : $("input[name*=name3]").val()
+				, company : $("input[name*=company]").val()
+				, job : $("input[name*=job]").val()
+				, department : $("input[name*=department]").val()
+				, address : $("input[name*=address]").val()
+				, tel : $("input[name*=tel]").val()
+				, phone : $("input[name*=phone]").val()
+				, email : $("input[name*=email]").val()
+				, fax : $("input[name*=fax]").val()
+				, memo : $("input[name*=memo]").val()
+				, otherinfo : $("input[name*=otherinfo]").val()
+				, mycardnum : getmycardnum 				// 선택한 내 명함 번호
+				, uploadImg :uploadFile					// original file name
+				, sex : getGender
+			}
+			, success : function(resultMsg) {
+		
+				if(resultMsg == "true") {
+					
+					alert("성공적으로 등록되었습니다.");
+					
+					// Submit 후 input 태그를 비워주는 부분
+					$("#name1").val('');
+					$("#name2").val('');
+					$("#name3").val('');
+					$("#company").val('');
+					$("#job").val('');
+					$("#department").val('');
+					$("#address").val('');
+					$("#tel").val('');
+					$("#phone").val('');
+					$("#email").val('');
+					$("#fax").val('');
+					$("#memo").val('');
+					$("#otherinfo").val('');
+					$("#etc").val("");
+					$(".selectedImg img").attr("src", '/www/resources/myinfo/insertYourCard/img/mycard.png');
+					//$("#cardinfo").hide();				// input tag 부분 날리기.
+					$("#cardBtn").hide();					// submit 버튼 숨기기
+					
+					// 미리보기 부분 사진 지우기
+					var ocrImg = "ocrImg_"+choiceIndex;
+					$(".imgPreview_"+choiceIndex+"").remove();
+//						$("#delBTN"+index+"").remove();
+					choiceIndex = '';
+				}
+				else {
+					
+					alert("등록에 실패하였습니다.");
+				}
+			}
+		});
 		
 	}
+	else {
+		
+		return false;
+	}
 	
-//	$("#cardInfo").trigger("create");
-	
-	$.ajax({
-		 
-		url : "insertYourCard"
-		, type : "post"
-		, data : {
-			
-			name1 : $("textarea[name*=name1]").val()
-			, name2 : $("textarea[name*=name2]").val()
-			, name3 : $("textarea[name*=name3]").val()
-			, company : $("textarea[name*=company]").val()
-			, job : $("textarea[name*=job]").val()
-			, department : $("textarea[name*=department]").val()
-			, address : $("textarea[name*=address]").val()
-			, tel : $("textarea[name*=tel]").val()
-			, phone : $("textarea[name*=phone]").val()
-			, email : $("textarea[name*=email]").val()
-			, fax : $("textarea[name*=fax]").val()
-			, memo : $("textarea[name*=memo]").val()
-			, otherinfo : $("textarea[name*=otherinfo]").val()
-			, mycardnum : getmycardnum 				// 선택한 내 명함 번호
-			, uploadImg :uploadFile					// original file name
-			, sex : getGender
-		}
-		, success : function(resultMsg) {
-	
-			if(resultMsg == "true") {
-				
-				alert("성공적으로 등록되었습니다.");
-				$("#cardInfo").html("");				// input tag 부분 날리기.
-				$("#cardBtn").hide();					// submit 버튼 숨기기
-			}
-			else {
-				
-				alert("등록에 실패하였습니다.");
-			}
-		}
-	});
 }
 
 //폼에서 항목을 지우는 함수 -여지원

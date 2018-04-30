@@ -8,6 +8,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 	<title>Responsive Horizontal Layout</title>
 	
+	<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC" rel="stylesheet"><!-- 구글 웹폰트 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
 	<meta name="description" content="Responsive Horizontal Layout with jQuery and custom Scrollbars" />
 	<meta name="keywords" content="horizontal, scrolling, panels, layout, template, jquery, responsive, custom scrollbar, html5" />
@@ -17,11 +18,44 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/myinfo/css/style.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/myinfo/css/calendar/calendar.css"/>" />
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/myinfo/css/calendar/custom_2.css"/>" />
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/myinfo/css/other_card_list.css"/>">
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/myinfo/css/button.css"/>">
 	
 	<script type="text/javascript" src="<c:url value="/resources/myinfo/js/jquery-3.3.1.min.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/resources/myinfo/js/head.min.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/resources/myinfo/js/count.js"/>"></script>
 	<script src="<c:url value="/resources/myinfo/js/calendar/modernizr.custom.63321.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/myinfo/js/anime.min.js"/>"></script>
+
+<!-- 여지원 : 대표이미지 지정을 위해 script 추가 -->
+	<script type="text/javascript">
+
+	$(function(){
+		getProfile();
+	});
+
+	function getProfile(){
+		$("#profile").attr("src","mycard/download?mycardnum=${profileCardNum}");
+		//alert( ${profileCardNum} );
+		
+		$.ajax({
+	 
+			url : "tempUpload"
+			, processData: false
+			, contentType: false
+			, type : "post"
+			, data : formData
+			, success : function() {
+				
+			}
+			, error : function (e) {
+				
+				console.log(e);
+			}
+	}
+
+	</script>
+	
 </head>
 <body>
      <div id="hs-container" class="hs-container">
@@ -31,6 +65,7 @@
 		<small>My info</small>
 	</div>
 	<nav>
+		<a href="#" onclick="location.href='/www/home'"><span>Home</span></a>
 		<a href="#introduction"><span>My Card</span></a>
 		<a href="#chapter1"><span>statistics</span></a>
 		<a href="#chapter2"><span>schedule</span></a>
@@ -43,11 +78,15 @@
 		<article class="hs-content" id="introduction">
 			<div class="hs-inner my_card_text">
 				<h2>My Card</h2>
-				<img src="<c:url value="/resources/myinfo/img/3.jpg"/>">
-		<ul>
-			<li><a href="#" onclick="location.href='/www/cardList'">MyCard</a></li>
-			<li>######</li>
-		</ul>
+     				<img id="profile" src="<c:url value="/resources/myinfo/img/3.jpg"/>">
+				<div class="other_card_link">
+					<div class="grid__item theme-11">
+						<button class="action"><svg class="icon icon--rewind"><use xlink:href="#icon-rewind"></use></svg></button>
+						<button class="particles-button" onclick="location.href='/www/cardList'">Register</button>
+						<script type="text/javascript" src="<c:url value="/resources/myinfo/js/particles.js"/>"></script>
+						<script type="text/javascript" src="<c:url value="/resources/myinfo/js/button.js"/>"></script>
+					</div>
+				</div>
 	</div>
 </article>
 <article class="hs-content" id="chapter1">
@@ -151,8 +190,41 @@ $(function() {
 </article>
 <article class="hs-content" id="chapter3">
 	<div class="hs-inner">
-		<h2>OtherCard</h2>
-		<a href="#" onclick="location.href='/www/management'">Management BusinessCard</a>
+		<h2>Othercard</h2>
+		<div class="other_card_link">
+			<a href="#" onclick="location.href='/www/management'">+</a>
+		</div>
+		
+		<!-- 5개 뿌리기 -->
+		<div id="other_card_container">
+		<!-- 
+	    	<div id="list-1" class="list">
+	     -->
+	    	<c:if test="${recentResult ne null}">
+	    	<c:forEach items="${recentResult}" var="recentCard">
+		    	<div id="list" class="list">
+		      		<div class="icon"></div>
+		      		<div class="title">${recentCard.name1}</div>
+	
+		      		<ul>
+		        		<li>${recentCard.name1 }</li>
+		        		<li>${recentCard.company }</li>
+			        	<li>${recentCard.department }</li>
+			        	<li>${recentCard.phone }</li>
+			        	<li>${recentCard.email }</li>
+			        </ul>
+		    	</div>
+		    </c:forEach>
+	    	</c:if>
+		</div>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('.list').click(function(){
+			    $(this).find('ul').toggleClass('open');
+				});
+			});
+		</script>
 	</div>
 </article>
 </div><!-- hs-content-wrapper -->

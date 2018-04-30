@@ -24,12 +24,13 @@
 				, job
 				, department
 				, otherinfo
+				, otherinfo2
 				, frontimgsaved
 				, backimgsaved
 				, frontimgoriginal
 				, backimgoriginal
 		 	)values(
-		 		CONCAT('mbc',TO_CHAR(seq_mycardnum.nextval))
+		 		CONCAT('mbc',TO_CHAR(LPAD(seq_mycardnum.nextval,27,0)))
 		 		,#{userid}
 		 		,#{company, jdbcType=VARCHAR}
 		 		,#{name1, jdbcType=VARCHAR}
@@ -43,6 +44,7 @@
 		 		,#{job, jdbcType=VARCHAR}
 		 		,#{department, jdbcType=VARCHAR}
 		 		,#{otherinfo, jdbcType=LONGVARCHAR}
+		 		,#{otherinfo2, jdbcType=VARCHAR}
 		 		,#{frontimgsaved}
 		 		,#{backimgsaved, jdbcType=VARCHAR}
 		 		,#{frontimgoriginal, jdbcType=VARCHAR}
@@ -50,6 +52,30 @@
 		 	)
 		 		
 	</insert>
+	
+	
+	<!-- 정보승 : 내 명함 정보 추가 등록 -->
+	<update id="updateAddMyCard" parameterType="mycard">
+		UPDATE 
+		 	tbl_mycardinfo
+		SET 	
+	 		company = #{company, jdbcType=VARCHAR}
+	 		, name1 = #{name1, jdbcType=VARCHAR}
+	 		, name2 = #{name2, jdbcType=VARCHAR}
+	 		, name3 = #{name3, jdbcType=VARCHAR}
+	 		, phone = #{phone, jdbcType=VARCHAR}
+	 		, tel 	= #{tel, jdbcType=VARCHAR}
+	 		, fax 	= #{fax, jdbcType=VARCHAR}
+	 		, email = #{email, jdbcType=VARCHAR}
+	 		, address = #{address, jdbcType=VARCHAR}
+	 		, job 	= #{job, jdbcType=VARCHAR}
+	 		, department = #{department, jdbcType=VARCHAR}
+	 		, otherinfo2 = #{otherinfo2, jdbcType=VARCHAR}
+		 WHERE
+		 	userid like #{userid}
+		 	AND
+		 	mycardnum like #{mycardnum}
+	</update>
 	
 	<!-- 정보승 : 내 명함 전체 조회 -->
 	<select id="selectAllMyCard" parameterType="string" resultType="mycard">
@@ -68,20 +94,14 @@
 			, address
 			, job
 			, department
+			, otherinfo2
 			, frontimgsaved
 			, backimgsaved
-			<!--  
-			, otherinfo
-			-->
 			, frontimgsaved
 			, backimgsaved
 			, cardorder
 			, frontimgoriginal
 			, backimgoriginal
-		<!--
-		 	otherinfo
-			,frontimgsaved
-			-->
 		FROM
 			tbl_mycardinfo
 		WHERE
@@ -108,9 +128,7 @@
 			, address
 			, job
 			, department
-			<!--  
-			, otherinfo
-			-->
+			, otherinfo2
 			, frontimgsaved
 			, backimgsaved
 			, cardorder
@@ -124,8 +142,23 @@
 			AND
 			
 			mycardnum = #{mycardnum}
-		
 	
 	</select>
+	
+	
+	<!-- 정보승 : 내 명함 삭제 -->
+	<delete id="deleteMyCard" parameterType="string">
+	
+		DELETE FROM
+			tbl_mycardinfo
+			
+		WHERE
+			userid like #{userid}
+			
+			AND
+			
+			mycardnum like #{mycardnum}
+	
+	</delete>
 
 </mapper>

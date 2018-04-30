@@ -28,28 +28,26 @@ function cardRemove(yourcardnum) {
 
 
 
-/**
- * @comment : 	명함 수정 스크립트
- * @author	:	정보승
- */
-function cardUpdate(yourcardnum) {
-	
-	// 수정하고자 하는 명함의 정보를 세션에 등록
-	location.href="yourcard/registerSession?yourcardnum="+yourcardnum;
-	alert("수정하는 거야?");
-	
-	
-	
-	// 수정을 위한 메소드
-	$.ajax({
+	/**
+	 * @comment : 	명함 수정 스크립트
+	 * @author	:	정보승
+	 */
+	function cardUpdate(yourcardnum) {
 		
-		url : 'yourcard/yourCardUpdate' 	//session
-		, type : 'post'
-		, data : {'yourcardnum' : yourcardnum}
-		, success : function(str){
 		
-			alert(str);
-			window.location.reload();
+		if(confirm("명함 정보를 수정하시겠습니까?")) {
+			
+			location.href="yourcard/yourCardUpdatePage?yourcardnum="+yourcardnum;
+			
+//			$.ajax({
+//				
+//				url : 'yourcard/yourCardUpdate' 
+//				, type : 'post'
+//				, data : {'yourcardnum' : yourcardnum}
+//				, success : function(str){
+//				
+//					window.location.reload();
+//				}
+//			});
 		}
-	});
-}
+	}

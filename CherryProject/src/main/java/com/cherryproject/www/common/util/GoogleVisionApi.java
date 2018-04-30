@@ -35,14 +35,14 @@ public class GoogleVisionApi {
         // GCS에서 이미지를 가져올때 image 생성
         if (filePath.startsWith("gs://")) { 
         	
-        	logger.info("gs");
+//        	logger.info("gs");
             ImageSource imgSource = ImageSource.newBuilder().setGcsImageUri(filePath).build();
             image = Image.newBuilder().setSource(imgSource).build();
         }
         //	로컬에서 이미지를 가져올때 image 생성
         else { 
         	
-        	logger.info("local : " + filePath);
+//        	logger.info("local : " + filePath);
             ByteString imgBytes = ByteString.readFrom(new FileInputStream(filePath));
             image = Image.newBuilder().setContent(imgBytes).build();
         }
@@ -81,7 +81,7 @@ public class GoogleVisionApi {
 	            if (res.hasError()) {
 	            	
 	            	detectText = res.getError().getMessage();
-	                logger.info("Error: " + detectText);
+//	                logger.info("Error: " + detectText);
 	            }
 
 	            // For full list of available annotations, see http://g.co/cloud/vision/docs
@@ -91,7 +91,7 @@ public class GoogleVisionApi {
 //	            	logger.info("Position : " + annotation.getBoundingPoly());
 //	            }
 	            detectText = res.getTextAnnotationsList().get(0).getDescription();
-	            logger.info(detectText);
+//	            logger.info(detectText);
 	        }
 	    }
 	    

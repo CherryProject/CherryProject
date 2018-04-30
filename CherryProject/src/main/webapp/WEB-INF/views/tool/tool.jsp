@@ -14,17 +14,39 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
     <link href="https://code.jquery.com/ui/jquery-ui-git.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value="resources/tool/css/button.css"/>">
    
    	<script type="text/javascript" src="<c:url value=" resources/tool/js/html2canvas.js" />"></script>
    
     <script type="text/javascript" src="<c:url value=" resources/tool/js/jquery-3.3.1.min.js" />"></script>
     <script src ="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="<c:url value=" resources/tool/js/tab.js" />"></script>
+    <script type="text/javascript" src="<c:url value=" resources/tool/js/anime.min.js" />"></script>
     <script type="text/javascript" src="<c:url value=" resources/tool/js/dragAndDropv4.js" />"></script>
+    
+     <!-- Bootstrap -->
+    <!-- <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" media="screen">
+    <link href="<c:url value="/resources/myinfo/insertYourCard/css/imgareaselect-default.css"/>" rel="stylesheet" media="screen">
+    <link href="<c:url value="/resources/myinfo/insertYourCard/css/pick-a-color-1.1.7.min.css"/>" rel="stylesheet" media="screen">
+	<link href="<c:url value="/resources/myinfo/insertYourCard/css/main.css"/>" rel="stylesheet" media="screen" rel="stylesheet"> -->
+    
 	<script>
     
    $(function(){
 		
+        var src = $("#imgpath").attr("value");//imgpath값의 value를 가져온다.
+	   
+	   //src의 값이 있을 경우에만 삭제버튼 출력(templateList에서 오는 이미지 값과 tool페이지에 바로 접속할때를 생각해야하기 때문에 분기처리를 하였다.)
+	   if (!(src.length == 0 || src == "")) {
+	   var str = '<img class="background" src=' + src + '>';  // 템플릿 이미지 가져오기
+       var output = "<img class='delete' src='resources/img/delBTN.png' onclick='delAction()'>"; //삭제 이미지 누를시   
+
+	   }
+		   
+       $('#canvas').prepend(str).trigger("create"); //캔버스에 가장 뒤쪽에 위치시킨다.(background처럼 보이기 위해서)
+       $('#output').append(output).trigger("create"); //캔버스에 가장 앞쪽에 위치시킨다.(background 위에 와야되기 때문에) 
+
+
 	   var mycardnum = 0; // 명함 번호
 	   
 	   //$(".download")영역 안에 마우스가 들어올 경우
@@ -45,19 +67,19 @@
 	                    }
 	                   // canvas 로 변환 (Base64 encoding)
 	                	mycardnum++;
-	                    var image = canvas.toDataURL("image/png"); 
-							
+	      		          var image = canvas.toDataURL("image/png"); 
+						
+						
 	                    var link = document.createElement('a');
 	      	        	  link.href = image;  // use realtive url 
 	                
 	                   // hidden 태그에 변환된 값 대입
 	                    $("#imgData").attr("value", link.href);
-	                   alert($("#imgData").attr("value"));
+	                  
 	                    
 	                   var html  = $("#canvas").html();
 	                   $("#html").attr("value", html);
-	                   alert(html);
-	                   
+	                  	                   
 	                    // post 방식으로 submit
 	                    $("#imgForm").submit();
 	                   //$('.canvas').css("height", 412.5).css("width", 1536);
@@ -83,8 +105,10 @@
  --%>
     <div id="wrap">
         <header>
-            <h1 id="title" class="title">tool</h1>
+            <!-- <h1 id="title" class="title">tool</h1> -->
             <div class="main_menu" id="main_menu">
+            	
+            	<!-- 
                 <ul class="tool_default_button_group">
                     <li><a href="#"><i class="fas fa-file-alt"></i>project</a></li>
                     <li><i class="fas fa-file"></i>page</li>
@@ -95,13 +119,9 @@
                     <li><i class="fas fa-edit"></i>memo</li>
                     <li><i class="fas fa-expand"></i>example</li>
                     <li><i class="fas fa-hands-helping"></i>help</li>
+                    
                 </ul>
-                
-                 <form name="imgForm" id="imgForm" action="tool/download" method="post">
-			        <input type="hidden" id="imgData" name="imgData" value="">
-			        <input type="hidden" id="html" name="html">
-			    </form>
-                
+                 -->
                 <div class="tool_text_button_group">
                     <button id="bold" class="tool_text_button" title="Bold (Ctrl+B)"><i class="fa fa-bold"></i></button>
                     <button id="italic" class="tool_text_button" title="Italic (Ctrl+I)"><i class="fa fa-italic"></i></button>
@@ -132,17 +152,29 @@
                     <button id="align-center" class="tool_text_button" title="Center"><i class="fa fa-align-center"></i></button>
                     <button id="align-right" class="tool_text_button" title="Right"><i class="fa fa-align-right"></i></button>
                     <button id="list-ul" class="tool_text_button" title="Unordered List"><i class="fa fa-list-ul"></i></button>
-                    <button id="list-ol" class="tool_text_button" title="Ordered List"><i class="fa fa-list-ol"></i></button>
+                    <button id="list-ol" class="tool_text_button" title="Ordered List"><i class="fa fa-list-ol"></i></button>  
+                    <!-- <button id="download" class="tool_text_button download"><i class="fas fa-save download"></i></li></button> -->
+                    
+                    <div class="grid__item theme-2">
+                        <button class="action"><svg class="icon icon--rewind"><use xlink:href="#icon-rewind"></use></svg></button>
+                        <button class="particles-button download">Upload</button><!-- 저장화면으로 넘어가는 부분 -->
+                        <script src="<c:url value=" resources/tool/js/particles.js" />">"></script>
+                        <script src="<c:url value=" resources/tool/js/button.js" />">"></script>
+                    </div>
+                                     
                 </div>
             </div>
             <!-- main menu end -->
-            <div class="sub_menu">
-                <ul>
-                    <li><i class="fas fa-undo-alt"></i></li><!-- go to back -->
-                    <li><i class="fas fa-redo-alt"></i></li><!-- go to front -->
-                    <li><i class="fas fa-save"></i></li><!-- save -->
-                </ul>
-            </div>
+          	
+           <!--  <div class="sub_menu">  -->
+              
+               <!--  <ul>  -->
+              <!--        <li><i class="fas fa-undo-alt"></i></li><!-- go to back -->
+              <!--        <li><i class="fas fa-redo-alt"></i></li><!-- go to front --> 
+              <!--     <li><i class="fas fa-save download"></i></li><!-- save -->
+              <!--       </ul>  -->
+          <!--   </div>  -->
+             
             <!-- sub menu end -->
         </header>
         <!-- header end -->
@@ -151,8 +183,14 @@
                 <li>
                     <section>
                         <div class="output" id="output">
-                        
-                        	<div class="canvas" id="canvas"></div>                                  	
+                            <input type="hidden" id="imgpath" value="${src}">
+	                        <div class='input-group'>
+			                 <form name="imgForm" id="imgForm" action="tool/download" method="post">
+						        <input type="hidden" id="imgData" name="imgData" value="">
+						        <input type="hidden" id="html" name="html">						      
+						    </form>
+		           	       </div>
+                        	<div class="canvas" id="canvas" ></div>                                  	
                         	
                         	
                         	<!--  <div class="canvas" id="back">
@@ -181,64 +219,64 @@
                                             </div>
                                             <div class="submenu tools" id="div_list_tools"><!-- 여기가 아이콘 목록 -->
                                                 <div class="tool Template">
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg1_1.png " />"></div>
+                                                   <div> <img class="tool Template" src="<c:url value="resources/tool/sample/bg1_1.png " />"></div>
                                                 </div>                                           
                                                 <div class="tool Template">                      
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg1_2.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg1_2.png"/>"></div>
                                                 </div>                                           
                                                 <div class="tool Template">                      
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg2_1.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg2_1.png"/>"></div>
                                                 </div>                                           
                                                 <div class="tool Template">                      
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg2_2.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg2_2.png"/>"></div>
                                                 </div>                                           
                                                 <div class="tool Template">                      
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg3_1.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg3_1.png"/>"></div>
                                                 </div>                                           
                                                 <div class="tool Template">                      
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg3_2.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg3_2.png"/>"></div>
                                                 </div>                                           
                                                 <div class="tool Template">                      
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg4_1.png"/>"></div>
-                                                </div>                                          
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg4_1.png"/>"></div>
+                                                </div>                                         
                                                 <div class="tool Template">                      
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg4_2.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg4_2.png"/>"></div>
                                                 </div>                                           
                                                 <div class="tool Template">                     
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg5_1.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg5_1.png"/>"></div>
                                                 </div>                                           
                                                 <div class="tool Template">                      
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg5_2.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg5_2.png"/>"></div>
                                                 </div>                                           
                                                 <div class="tool Template">                      
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg6_1.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg6_1.png"/>"></div>
                                                 </div>                                           
                                                 <div class="tool Template">                      
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg6_2.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg6_2.png"/>"></div>
                                                 </div>                                           
                                                  <div class="tool Template">                     
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg7_1.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg7_1.png"/>"></div>
                                                 </div>                                           
                                                  <div class="tool Template">                     
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg7_2.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg7_2.png"/>"></div>
                                                 </div>                                           
                                                  <div class="tool Template">                     
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg8-1_1.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg8-1_1.png"/>"></div>
                                                 </div>
                                                  <div class="tool Template">
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg8-2_1.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg8-2_1.png"/>"></div>
                                                 </div>	
                                                  <div class="tool Template">
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg9_1.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg9_1.png"/>"></div>
                                                 </div>
                                                  <div class="tool Template">
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg9_2.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg9_2.png"/>"></div>
                                                 </div>
                                                  <div class="tool Template">
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg10_1.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg10_1.png"/>"></div>
                                                 </div>
                                                  <div class="tool Template">
-                                                    <div><img src="<c:url value=" resources/tool/sample/bg10_2.png"/>"></div>
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg10_2.png"/>"></div>
                                                 </div>
                                             </div>
                                         </li>
@@ -250,9 +288,11 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        <!-- 여기가 아이콘 목록 -->
+                                        
                                         <li>
                                             <div class="link"><i class="fa fa-mobile"></i>Icon<i class="fa fa-chevron-down"></i></div>
-                                            <div class="submenu tools" id="div_list_tools"><!-- 여기가 아이콘 목록 -->
+                                            <div class="submenu tools" id="div_list_tools">
                                                 <div class="tool icon">
                                                     <span class="fa fa-code"></span>
                                                 </div>
@@ -260,12 +300,13 @@
                                         </li>
                                         <li>
                                             <div class="link"><i class="fa fa-globe"></i>Date Time<i class="fa fa-chevron-down"></i></div>
-                                            <div class="submenu tools" id="div_list_tools"><!-- 여기가 아이콘 목록 -->
+                                            <div class="submenu tools" id="div_list_tools">
                                                 <div class="tool icon">
                                                     <span class="fa fa-code"></span>
                                                 </div>
                                             </div>
                                         </li>
+                                       
                                     </ul>
                                 </div>
                                 <div class="content">
@@ -274,8 +315,8 @@
                                             <div class="link">
                                                 <i class="fa fa-database"></i>Text<i class="fa fa-chevron-down"></i>
                                             </div>
-                                            <div class="submenu tools" id="div_list_tools"><!-- 여기가 아이콘 목록 -->
-                                                <div class="tool text"><span>Heading 1</span></div>
+                                            <div class="submenu tools" id="div_list_tools"><!-- 여기가 아이콘 목록(Text) -->
+                                                <div class="tool text"><span><img src="<c:url value=" resources/tool/img/textDrag.png"/>"></span></div>
                                             </div>
                                         </li>
                                         <li class="icon">
@@ -349,6 +390,7 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        
                                         <li>
                                             <div class="link"><i class="fa fa-mobile"></i>Icon<i class="fa fa-chevron-down"></i></div>
                                             <ul class="submenu">
@@ -380,6 +422,7 @@
                                             </ul>
                                         </li>
                                     </ul>
+                                     
                                 </div>
                                  <div class="content file"> 
                                         <input type='file' id="images" onchange="readURL(this);"  multiple name="images" />

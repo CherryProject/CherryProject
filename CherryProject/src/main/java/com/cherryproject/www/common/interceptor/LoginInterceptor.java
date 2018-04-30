@@ -30,7 +30,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		if (userid == null) {
 			//request.getContextPath()로 루트 경로를 구하여 절대 경로로 처리
 //			response.sendRedirect(request.getContextPath() + "/members/login");
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath() + "/");
 			return false;
 		}
 		

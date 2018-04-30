@@ -23,6 +23,7 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/myinfo/myCardList/css/cardlist.css"/>" />
 	
 	<script src="<c:url value="/resources/js/newMain_js/menu/modernizr.custom.js"/> "> </script>
+	<script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/> "> </script>
 	<script>document.documentElement.className = 'js';</script>
 	<script>
 	
@@ -31,12 +32,21 @@
 			$("#mycard_grid").addClass("grid__item--c1", "grid__item--c2");
 		});
 	
+		  $(function(){
+			  var count = 0;
+		    $('.bt-menu-trigger').click(function(){
+		      if (count == 0) {
+				$('#bt-menu').css('z-index','10');
+			}else if (count == 1) {
+				$('#bt-menu').css('z-index','0');
+			}
+		    });
+		  });
 	</script>
 </head>
 <div class="container">
 
 	<%@ include file="/WEB-INF/views/common/bodyHeader.jsp" %>
-	
 	
 	<article>
 		
@@ -69,7 +79,7 @@
 							<c:if test="${mycard.company ne null}">
 								Company
 							</c:if>
-							<c:if test="${mycard.name1 eq null}">
+							<c:if test="${mycard.company eq null}">
 								<br>
 							</c:if>
 							</span>
@@ -77,7 +87,7 @@
 							<c:if test="${mycard.phone ne null}">
 								Phone
 							</c:if>
-							<c:if test="${mycard.name1 eq null}">
+							<c:if test="${mycard.phone eq null}">
 								<br><br>
 							</c:if>
 							</span>

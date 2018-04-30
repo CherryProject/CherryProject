@@ -14,6 +14,8 @@ public interface BoardMapper {
 	
 	public ArrayList<BoardVO> selectBoardAll(HashMap<String, Object> map, RowBounds rb); // 2018-03-28-1123 : 정현수 작성, contact 게시글 전부 출력
 	
+	public ArrayList<BoardVO> selectNoticeAll(); //2018-04-23-1849 : selectNoticeAll 공지 게시글 전부 출력
+	
 	public int getTotal(HashMap<String, Object> map);// 2018-03-31-1024 : 정현수 작성, contact 게시글 전체 수 출력
 	
 	public BoardVO selectBoardOne(int boardnum);  // 2018-03-28-1923 : 정현수 작성, contact 게시글 하나만 읽기

@@ -21,5 +21,8 @@ public interface UserInfoMapper {
 	
 	// 회원 정보 수정 : 정보승
 	public int updateUserInfo(UserInfoVO updateUser);
+	
+	//대표이미지 가져오기 : 여지원
+	public String getProfile(String userid);
 
 }

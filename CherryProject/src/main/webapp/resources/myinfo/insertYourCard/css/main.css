@@ -25,6 +25,11 @@
 	display: none; 
 }
 
+.uploadBtn{
+	width : 40%;
+	float : right;
+	margin-top : 17%;
+}
 .imgPreview {
 	margin-bottom: 20px;
 }
@@ -56,6 +61,17 @@
 }
 
 
+.selectMyCard {
+	
+	border : 2px solid red;
+	width : 50%;
+	height : 250px;
+	margin-left : 30%;
+	overflow: hidden;
+}
 
-
+.selectedImg2 > img {
+	margin-top: 5%;
+    margin-right: 10%;
+    width: 60%;
 }

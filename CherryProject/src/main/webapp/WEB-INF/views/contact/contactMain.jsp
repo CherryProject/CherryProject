@@ -8,7 +8,7 @@
 	<%@ include file="/WEB-INF/views/common/headPart.jsp" %>
 	<title>ContactMain</title>
 	
-	<link rel="stylesheet" type="text/css" href="resources/contact/contact.css" />
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/contact/contact.css"/>" />
 	<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js" />" > </script>
 	<script type="text/javascript">
 	
@@ -56,19 +56,25 @@
 				
 				
 				var list = map.list; //서버단에서 받은 데이터를 list변수에 넣음
+				var noticeList = map.noticeList; //서버단에서 받은 데이터를 noticeList변수에 넣음
 				var now = map.now; //서버단에서 받은 now 값을 넣음
 				var inputDate = ''; //게시글의 날짜
 			    var navi = map.navi; //페이지 함수
 				var total = map.total //게시글 갯수
 				var findList = map.findList; // 게시글 키워드
 				var findText = map.findText; // 게시글 입력값
+				var checkNotice = ''; // 공지 게시글 받는 값 
+				var checkNoticeTrue = 'Y'; // 공지 게시글일 경우 가져야하는 값(비교용)
+				var ctn = 0; //공지게시글 카운트
 				$("#findList").val(findList); 
 				$("#findText").val(findText);
 				
 				$(".board").empty();	//초기화
 				$(".page_output").empty();  //초기화
 				 
-				var str = ''; //출력용 sysout
+				var str = ''; //게시글 출력용 
+				var notice = ''; //공지글 출력용
+			
 				
 				str += ''
 				str += '<input type="button" class="write" value="글쓰기" onclick="contactForm()">';	
@@ -80,24 +86,72 @@
 					 	str += '<th class="boarddate"> 작성일 </th>';
 					 	str += '<th class="hits"> 조회수 </th>';
 				 	 str += '</tr>';
+				 	 
+				 	notice += '<table class="board">';
+			 			notice += '<tr>';
+			 			notice += '<th class="boardnum"> 글번호 </th>';
+			 			notice += '<th class="boardtitle"> 제목 </th>';
+			 			notice += '<th class="userid"> 작성자 </th>';
+			 			notice += '<th class="boarddate"> 작성일 </th>';
+			 			notice += '<th class="hits"> 조회수 </th>';
+		 			notice += '</tr>';
 				
+				 	$.each(noticeList,function(index,item){
+	 				 	 
+				 		//리스트에서  check_notice 값을 가져옴
+			 			 checkNotice = item.check_notice;
+			 			inputDate = item.board_inputdate;
+			 			
+			 			 //공지글의 값이 'Y'를가지고 있을 경우 조건문
+			 			 if (checkNotice == checkNoticeTrue) {
+			 				//공지글 5개만 출력하기 위한 조건문
+			 				 if (parseInt(ctn) <= 4) {
+							 
+				 				notice += '<tr>';
+				 				notice += '<td>' + item.boardnum + "</td>";
+								//td데이터 안에 data-num이란 변수를 임의로 생성해서 그 안에 boardnum을 넣어둔다.
+								notice += '<td class="board_title" data-num="'+item.boardnum+'">';
+								notice += '<span> <img src="/www/resources/img/bell.png"/> </span>' + item.board_title;
+									if (inputDate == now) {
+										notice += '<span> <img src="/www/resources/img/new.png"/> </span>';
+									}
+								notice += '</td>';
+								notice += '<td>' + item.board_writer  + '</td>';
+								notice += '<td>' + item.board_inputdate  + '</td>';
+								notice += '<td>' + item.board_hits  + '</td>';
+								notice += '</tr>';
+								ctn++;
+			 				 }
+			 			 } //if
+			 			 
+			 		 }); //for each	 
+				 	 
+			 		 notice += '</table>';
+			 		 
+			 		$('.div_inform').html(notice).trigger("create"); //div_board클래스에 html 출력
+			 		 
 			 	 $.each(list,function(index,item){
 			 		
 			 		 inputDate = item.board_inputdate;
+			 		 checkNotice = item.check_notice;
 			 		 
-			 		 str += '<tr>';
-						str += '<td>' + item.boardnum + "</td>";
-						//td데이터 안에 data-num이란 변수를 임의로 생성해서 그 안에 boardnum을 넣어둔다.
-						str += '<td class="board_title" data-num="'+item.boardnum+'">' + item.board_title;
-							if (inputDate == now) {
+				 		 str += '<tr>';
+							str += '<td>' + item.boardnum + "</td>";
+							//td데이터 안에 data-num이란 변수를 임의로 생성해서 그 안에 boardnum을 넣어둔다.
+							str += '<td class="board_title" data-num="'+item.boardnum+'">';
+								if (checkNotice == checkNoticeTrue) {
+								str += '<span> <img src="/www/resources/img/bell.png"/> </span>';
+								}
+							str += item.board_title;
+								if (inputDate == now) {
 								str += '<span> <img src="/www/resources/img/new.png"/> </span>'
-							}
-						str += '</td>';
-						str += '<td>' + item.board_writer  + '</td>';
-						str += '<td>' + item.board_inputdate  + '</td>';
-						str += '<td>' + item.board_hits  + '</td>';
-					str += '</tr>';					 
-				 });
+								}
+							str += '</td>';
+							str += '<td>' + item.board_writer  + '</td>';
+							str += '<td>' + item.board_inputdate  + '</td>';
+							str += '<td>' + item.board_hits  + '</td>';
+						str += '</tr>';					 
+				 }); // for each
 				str +=	'</table>';
 			 	 
 					$('.div_board').html(str).trigger("create"); //div_board클래스에 html 출력
@@ -107,7 +161,7 @@
 					//출력용 sysout
 					var str2 = '';
 					
-					//페이지 생성 (1,2,3,4,5.....)  
+					//페이지 생성 (1,2,3,4,5.....)  map.navi.endPageGroup
 					for (var i = map.navi.startPageGroup; i <= map.navi.endPageGroup; i++) {
 							str2 += '<span class="pagenum" data-num="'+ i +'">';
 							if(navi.currentPage == i){                            //현재페이지가 반복중인 페이지와 같다면
@@ -131,8 +185,8 @@
 					$(".pagenum").mouseenter().css('cursor', 'pointer').on('click',function (){
 						
 						page = $(this).attr('data-num');
-						findList = '';
-						findText = '';
+						findList = $("#findList option:selected").val();
+						findText = $("#findText").val();
 					//	$("#search").attr('paging', page.val());
 						for (var i = map.navi.startPageGroup; i <= map.navi.endPageGroup; i++) {
 							str2 += '<span class="pagenum" data-num="'+ i +'">';
@@ -159,8 +213,8 @@
 					$(".goBack").mouseenter().css('cursor', 'pointer').on('click', function(){
 						
 						page = (map.navi.currentPage) -1; 
-						findList = '';
-						findText = '';
+						findList = $("#findList option:selected").val();
+						findText = $("#findText").val();
 						for (var i = map.navi.startPageGroup; i <= map.navi.endPageGroup; i++) {
 							str2 += '<span class="pagenum" data-num="'+ i +'">';
 							if(navi.currentPage == i){                            //현재페이지가 반복중인 페이지와 같다면
@@ -184,8 +238,8 @@
 					$(".goFront").mouseenter().css('cursor', 'pointer').on('click', function(){
 						
 						page = (map.navi.currentPage) +1; 
-						findList = '';
-						findText = '';
+						findList = $("#findList option:selected").val();
+						findText = $("#findText").val();
 						for (var i = map.navi.startPageGroup; i <= map.navi.endPageGroup; i++) {
 							str2 += '<span class="pagenum" data-num="'+ i +'">';
 							if(navi.currentPage == i){                            //현재페이지가 반복중인 페이지와 같다면
@@ -209,8 +263,8 @@
 					$(".goFirst").mouseenter().css('cursor', 'pointer').on('click', function(){
 						
 						page = 1; 
-						findList = '';
-						findText = '';
+						findList = $("#findList option:selected").val();
+						findText = $("#findText").val();
 						for (var i = map.navi.startPageGroup; i <= map.navi.endPageGroup; i++) {
 							str2 += '<span class="pagenum" data-num="'+ i +'">';
 							if(navi.currentPage == i){                            //현재페이지가 반복중인 페이지와 같다면
@@ -236,8 +290,8 @@
 					$(".goLast").mouseenter().css('cursor', 'pointer').on('click', function(){
 						
 						page = map.navi.totalPageCount; 
-						findList = '';
-						findText = '';
+						findList = $("#findList option:selected").val();
+						findText = $("#findText").val();
 						for (var i = map.navi.startPageGroup; i <= map.navi.endPageGroup; i++) {
 							str2 += '<span class="pagenum" data-num="'+ i +'">';
 							if(navi.currentPage == i){                            //현재페이지가 반복중인 페이지와 같다면

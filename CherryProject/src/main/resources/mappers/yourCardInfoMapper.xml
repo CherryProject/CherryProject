@@ -38,7 +38,7 @@
 		WHERE
 			userid like #{userid}
 		ORDER BY
-			yourcardnum
+			yourcardnum DESC
 	
 	</select>
 	
@@ -60,9 +60,48 @@
 		WHERE
 			userid like #{userid}
 		ORDER BY
-			yourcardnum
+			yourcardnum DESC
 	
 	</select>
+	
+	
+	
+	<!-- 정보승 : 최근 받은 명함 5개 가져오기 -->
+	<select id="recent5YourCard" parameterType="string" resultType="yourcard">
+	
+		SELECT 
+			yourcardnum
+			, userid
+			, yournum
+			, mycardnum
+			, name1
+			, name2
+			, name3
+			, company
+			, phone
+			, tel
+			, fax
+			, email
+			, address
+			, job
+			, department
+			, memo
+			, otherinfo
+			, frontimgsaved
+			, backimgsaved
+			, cardorder
+			, sex
+			, frontimgoriginal
+			, backimgoriginal
+		FROM
+			tbl_yourcardinfo
+		WHERE
+			userid like #{userid}
+		ORDER BY
+			yourcardnum DESC
+	
+	</select>
+	
 	
 	
 	<!-- 정보승 : 받은 명함 등록 갯수 조회 -->
@@ -83,7 +122,7 @@
 	
 		INSERT INTO
 			tbl_yourcardinfo (
-				yourcardnum
+				yourcardnum 
 				, userid
 				, yournum
 				, mycardnum
@@ -108,7 +147,7 @@
 				, backimgoriginal
 			)
 		VALUES (
-				CONCAT('ybc', TO_CHAR(seq_yourcardnum.nextval))
+				CONCAT('ybc', TO_CHAR(LPAD(seq_yourcardnum.NEXTVAL,27,0)))
 				, #{userid}
 				, CONCAT('yn', TO_CHAR(seq_yournum.nextval))
 				, #{mycardnum}
@@ -209,8 +248,10 @@
 			(userid like #{userid} and name1 like '%' || #{search} || '%') 
 			or
 			(userid like #{userid} and company like '%' || #{search} || '%')
+			or
+			(userid like #{userid} and email like '%' || #{search} || '%')
 		ORDER BY
-			yourcardnum
+			yourcardnum DESC
 	
 	</select>
 	
@@ -225,5 +266,32 @@
 			yourcardnum like #{yourcardnum}
 	
 	</delete>
+	
+	<!-- 정보승 : 명함 수정(1개) -->
+	<update id="updaetYourCardOne" parameterType="yourcard">
+		
+		UPDATE 
+			tbl_yourcardinfo
+		SET
+																name1 = #{name1}				
+		<if test="name2 != null and name2 != '' ">				, name2 = #{name2}				</if>
+		<if test="name3 != null and name3 != '' ">				, name3 = #{name3}				</if>
+																, phone = #{phone}				
+		<if test="tel != null and tel != '' ">					, tel = #{tel}					</if>
+		<if test="fax != null and fax != '' ">					, fax = #{fax}					</if>
+		<if test="email != null and email != '' ">				, email = #{email}				</if>
+		<if test="address != null and address != '' ">			, address = #{address}			</if>
+		<if test="job != null and job != '' ">					, job = #{job}					</if>
+		<if test="department != null and department != '' ">	, department = #{department}	</if>
+		<if test="otherinfo != null and otherinfo != '' ">		, otherinfo = #{otherinfo}		</if>
+		<if test="memo != null and memo != '' ">				, memo = #{memo}				</if>
+																, company = #{company}			
+		<if test="company != null and company != '' ">			, sex = #{sex}					</if>
+		WHERE
+			userid like #{userid}
+		AND
+			yourcardnum like #{yourcardnum}
+	
+	</update>
 
 </mapper>
