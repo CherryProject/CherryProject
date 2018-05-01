@@ -90,6 +90,11 @@ public class HomeController {
 //      System.out.println(yourCardCnt);
 //      System.out.println("-------------------------");
 //      System.out.println(profileCardNum);
+      if( profileCardNum.equals("basicImg") ) {
+    	  
+    	  profileCardNum = "basicImg";
+      }
+      
       model.addAttribute("profileCardNum", profileCardNum);
       model.addAttribute("yourCardCnt", yourCardCnt);
       model.addAttribute("recentResult", recentResult);

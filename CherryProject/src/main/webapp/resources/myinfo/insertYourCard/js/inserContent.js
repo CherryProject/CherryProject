@@ -88,7 +88,7 @@ function handleImgFileSelect(e) {
 		
 		//이미지가 가운데로 옮겨질 때, getMyCardsImg함수 발동
 		getMyCardsImg();
-	
+		$(".swiper-wrapper").trigger("create");
 		// 이미지 파일을 보여주기
 		reader.readAsDataURL(f);
 		

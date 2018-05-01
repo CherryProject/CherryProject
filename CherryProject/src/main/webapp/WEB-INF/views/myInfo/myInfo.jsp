@@ -36,8 +36,19 @@
 	});
 
 	function getProfile(){
-		$("#profile").attr("src","mycard/download?mycardnum=${profileCardNum}");
-		alert( ${profileCardNum} );
+		
+		var profileTemp = $("#profileTemp").val();
+		if(profileTemp != 'basicImg') {
+		
+			$("#profile").attr("src","mycard/download?mycardnum=${profileCardNum}");
+		}
+		if(profileTemp == 'basicImg'){
+		
+			$("#profile").attr("src","<c:url value='/resources/img/ArisoruSketch(Blue).png'/>");
+		}
+		
+		
+		//alert( ${profileCardNum} );
 		
 	}
 	
@@ -86,6 +97,7 @@
 		<article class="hs-content" id="introduction">
 			<div class="hs-inner my_card_text">
 				<h2>My Card</h2>
+				<input type="hidden" id="profileTemp" value="${profileCardNum}" >
      				<img id="profile" src="<c:url value="/resources/img/ArisoruSketch(Blue).png"/>">
 				<div class="other_card_link">
 					<section class="sivir">

@@ -321,12 +321,23 @@ public class MyCardInfoController {
 	public String deleteMyCard(String mycardnum, HttpSession session) {
 		logger.info("deleteMyCard 시작");
 		String userid = (String)session.getAttribute("userid");
+		String username = (String)session.getAttribute("username");
 		HashMap<String, Object> deleteMyCard = new HashMap<>();
 		deleteMyCard.put("mycardnum", mycardnum);
 		deleteMyCard.put("userid", userid);
-		
+	
 		myCardInfoDAO.deleteMyCard(deleteMyCard);
-
+		
+		
+		/*userInfo에서도 mycardnum값을 빼줘야한다.(basicImg로 바뀜)*/
+		UserInfoVO updateUser = new UserInfoVO();
+		updateUser.setUserid(userid);
+		updateUser.setUsername(username);
+		updateUser.setProfilecard("basicImg");
+		
+		userInfoDAO.updateUserInfo(updateUser);
+		
+		
 		logger.info("deleteMyCard 종료");
 		return "redirect:../cardList";
 
