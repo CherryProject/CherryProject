@@ -314,6 +314,12 @@
                                                  <div class="tool Template">
                                                     <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg10_2.png"/>"></div>
                                                 </div>
+                                                <div class="tool Template">
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg11_1.png"/>"></div>
+                                                </div>
+                                                <div class="tool Template">
+                                                    <div><img class="tool Template" src="<c:url value="resources/tool/sample/bg11_2.png"/>"></div>
+                                                </div>
                                             </div>
                                         </li>
                                         <li class="icon">

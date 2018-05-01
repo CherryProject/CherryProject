@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <%-- 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 --%>
@@ -8,6 +10,9 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="refresh" content="3; url=/">
+
+<link rel="stylesheet" type="text/css" href="resources/error/error.css">
+
 <script language="javascript">
 
   <!--
@@ -34,10 +39,9 @@
 <body>
 <body onload="javascript:window_onload()">
 
-
-<h1>[ 오류 발생 ]</h1>
-
-<p>잠시 후 다시 이용해주시기 바랍니다.</p>
+<div class="error_div">
+<img class="error" src="<c:url value="/resources/img/error_page.png"/>"/>
+</div>
 
 </body>
 </html>
