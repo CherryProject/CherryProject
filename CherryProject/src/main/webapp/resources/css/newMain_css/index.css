@@ -438,8 +438,12 @@ a:focus {
 */
 
 .logoBox{
-    z-index: 100;
+   z-index: 100;
     position: absolute;
-    top: 83%;
-    left: 80%;
+    top: 35%;
+    left: 60%;
+}
+
+.logo{
+	width : 65%;
 }
