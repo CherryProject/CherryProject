@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <!-- 정보승 : CSS 및 JS 공통부분 -->
-
+<!-- cardInfo -->
 <html lang="ko">
 <head>
 
@@ -27,6 +27,7 @@
 	<script type="text/javascript" src="<c:url value="/resources/sign/js/Sign.js"/>"></script>
 	 -->
 	<script src="<c:url value="/resources/js/newMain_js/menu/modernizr.custom.js"/>"></script>
+	<script src="<c:url value="/resources/myinfo/insertYourCard/js/insertValid.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/resources/mycardtextlist/js/my_card_text_list.js" />"></script>
 	<style>
 	/* 플레이스홀더 색깔 바꾸기 : 여지원 */
@@ -49,7 +50,7 @@
 	    });
 	  });
 	  
-	  
+	  /*
 	  function formCheck(){
 			var name1 = document.getElementById("name1");
 			var company = document.getElementById("company");
@@ -70,7 +71,7 @@
 			
 			return true;
 	  }
-	 
+	 */
 	</script>
 </head>
 <body>
@@ -96,14 +97,14 @@
 							<h1 class="title">Card info</h1>
 							
 							<div class = "input-container has-feedback">
-							<input type="text" id="name1" name="name1" value="${selectMyCard.name1}" readonly="readonly" />
+							<input type="text" id="" name="" value="${selectMyCard.name1}" readonly="readonly" />
 								<div class="check"></div>
 								<div class="bar"></div>
 							</div>
 							
 							<c:if test="${selectMyCard.name2 ne null}">
 								<div class = "input-container has-feedback">
-								<input type="text" id="name2" name="name2" value="${selectMyCard.name2}" readonly="readonly" />
+								<input type="text" id="" name="" value="${selectMyCard.name2}" readonly="readonly" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
@@ -111,7 +112,7 @@
 							
 							<c:if test="${selectMyCard.name3 ne null}">
 								<div class = "input-container has-feedback">
-								<input type="text" id="name3" name="name3" value="${selectMyCard.name3}" readonly="readonly" />
+								<input type="text" id="" name="" value="${selectMyCard.name3}" readonly="readonly" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
@@ -119,7 +120,7 @@
 							
 							<c:if test="${selectMyCard.company ne null}">
 								<div class = "input-container has-feedback">
-								<input type="text" id="company" name="company" value="${selectMyCard.company}" readonly="readonly" />
+								<input type="text" id="" name="" value="${selectMyCard.company}" readonly="readonly" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
@@ -127,7 +128,7 @@
 							
 							<c:if test="${selectMyCard.department ne null}">
 								<div class = "input-container has-feedback">
-								<input type="text" id="department" name="department" value="${selectMyCard.department}" readonly="readonly" />
+								<input type="text" id="" name="" value="${selectMyCard.department}" readonly="readonly" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
@@ -135,7 +136,7 @@
 							
 							<c:if test="${selectMyCard.job ne null}">
 								<div class = "input-container has-feedback">
-								<input type="text" id="job" name="job" value="${selectMyCard.job}" readonly="readonly" />
+								<input type="text" id="" name="" value="${selectMyCard.job}" readonly="readonly" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
@@ -143,7 +144,7 @@
 							
 							<c:if test="${selectMyCard.tel ne null}">
 								<div class = "input-container has-feedback">
-								<input type="text" id="tel" name="tel" value="${selectMyCard.tel}" readonly="readonly" />
+								<input type="text" id="" name="" value="${selectMyCard.tel}" readonly="readonly" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
@@ -151,7 +152,7 @@
 							
 							<c:if test="${selectMyCard.phone ne null}">
 								<div class = "input-container has-feedback">
-								<input type="text" id="phone" name="phone" value="${selectMyCard.phone}" readonly="readonly" />
+								<input type="text" id="" name="" value="${selectMyCard.phone}" readonly="readonly" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
@@ -159,7 +160,7 @@
 							
 							<c:if test="${selectMyCard.email ne null}">
 								<div class = "input-container has-feedback">
-								<input type="text" id="email" name="email" value="${selectMyCard.email}" readonly="readonly" />
+								<input type="text" id="" name="" value="${selectMyCard.email}" readonly="readonly" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
@@ -167,7 +168,7 @@
 							
 							<c:if test="${selectMyCard.address ne null}">
 								<div class = "input-container has-feedback">
-								<input type="text" id="address" name="address" value="${selectMyCard.address}" readonly="readonly" />
+								<input type="text" id="" name="" value="${selectMyCard.address}" readonly="readonly" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
@@ -175,7 +176,7 @@
 							
 							<c:if test="${selectMyCard.otherinfo2 ne null}">
 								<div class = "input-container has-feedback">
-								<input type="text" id="otherinfo2" name="otherinfo2" value="${selectMyCard.otherinfo2}" readonly="readonly" />
+								<input type="text" id="" name="" value="${selectMyCard.otherinfo2}" readonly="readonly" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
@@ -191,14 +192,13 @@
 						<!-- 명함 정보 수정하기 -->
 						<div class="card login-register" >
 							<h1 class="title">수정하기</h1>
-							<form method="post" action="updateMyCard"  onsubmit="return formCheck();">
+							<form method="post" action="updateMyCard"  onsubmit="return updateValid();">
 								<!-- 내 명함 번호 -->
 								<input type="hidden" name="mycardnum" value="${selectMyCard.mycardnum }" />
 								
 								<!-- 대표이름 -->
 								<div class = "input-container has-feedback">
 									<input type="text" id="name1" name="name1" value="${selectMyCard.name1}" placeholder="대표이름"  />
-									
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
@@ -250,7 +250,7 @@
 								
 								<!-- 휴대폰 번호 -->
 								<div class = "input-container has-feedback">
-									<input type="type" id="phone" name="phone" value="${selectMyCard.phone}" placeholder="phone"  />
+									<input type="text" id="phone" name="phone" value="${selectMyCard.phone}" placeholder="phone"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
@@ -264,21 +264,21 @@
 								
 								<!-- 회사 주소 -->
 								<div class = "input-container has-feedback">
-									<input type="type" id="address" name="address" value="${selectMyCard.address}" placeholder="address"  />
+									<input type="text" id="address" name="address" value="${selectMyCard.address}" placeholder="address"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 메모(otherinfo2) -->
 								<div class = "input-container has-feedback">
-									<input type="type" id="otherinfo2" name="otherinfo2" value="${selectMyCard.otherinfo2}"  placeholder="otherinfo2" />
+									<input type="text" id="otherinfo2" name="otherinfo2" value="${selectMyCard.otherinfo2}"  placeholder="otherinfo2" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 수정버튼 -->
 								<div class="button-container">
-									<button>
+									<button type="submit">
 										<span>Update</span>
 									</button>
 								</div>

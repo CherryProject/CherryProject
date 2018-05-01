@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <!-- 정보승 : CSS 및 JS 공통부분 -->
-
+<!-- addMyCardInfo -->
 <html lang="ko">
 <head>
 
@@ -22,6 +22,7 @@
 	
 	<script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/> "> </script>
 	<script src="<c:url value="/resources/js/newMain_js/menu/modernizr.custom.js"/>"></script>
+	<script src="<c:url value="/resources/myinfo/insertYourCard/js/insertValid.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/resources/mycardtextlist/js/my_card_text_list.js" />"></script>
 </head>
 <body>
@@ -45,14 +46,14 @@
 						
 						<div class="card login-register login-reset">
 							<h1 class="title">Card info</h1>
-							<form method="post" action="../mycard/insertMyCard"> 
+							<form method="post" action="../mycard/insertMyCard" onsubmit="return insertValid();"> 
 							
 							<!-- 제작한 명함의 번호 -->
 							<input type="hidden" value="${myCardNum }" name="mycardnum" >
 							
 								<!-- 대표이름 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="name1" name="name1" placeholder="이름(국문)" required />
+									<input type="text" id="name1" name="name1" placeholder="이름(국문)"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
@@ -73,7 +74,7 @@
 								
 								<!-- 회사명 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="company" name="company" placeholder="회사명" required />
+									<input type="text" id="company" name="company" placeholder="회사명" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
@@ -101,7 +102,7 @@
 								
 								<!-- 휴대폰 번호 -->
 								<div class = "input-container has-feedback">
-									<input type="type" id="phone" name="phone" placeholder="휴대전화" required />
+									<input type="type" id="phone" name="phone" placeholder="휴대전화" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
@@ -136,7 +137,7 @@
 								
 								<!-- 제작한 명함의 추가 정보 전송 버튼 -->
 								<div class="button-container">
-									<button class="rkmd-btn btn-lightBlue ripple-effect float-right">
+									<button type="submit" class="rkmd-btn btn-lightBlue ripple-effect float-right">
 										<span>send information</span>
 									</button>
 								</div>

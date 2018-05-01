@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<!-- 정보승 : CSS 및 JS 공통부분 -->
+<!-- my_card_text_ -->
 
 <html lang="ko">
 <head>
