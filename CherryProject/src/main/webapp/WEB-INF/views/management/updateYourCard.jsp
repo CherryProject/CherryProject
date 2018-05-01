@@ -53,8 +53,14 @@
 				<div class="menu2">
 					<div class="close-icon" id="target" ><i class="fa fa-bars"></i></div>
 						<div class="" id="cardBtn">
-					    	<button type="submit" class="" >Update</button>
-					    	<button type="reset" class="">Reset</button>
+					    	<ul style="list-style: none; overflow: hidden;">
+								<li style="float: left; width: 50%">
+									<button type="button" class="btn btn-3 btn-sep icon-heart" onclick="return cardInfoSubmit();">submit</button>
+								</li>
+								<li style="float: left; width: 50%">
+									<button type="reset" class="btn btn-4 btn-sep icon-send">reset</button>
+								</li>
+							</ul>
 					    </div>
 						<ul id="cardinfo">
 						<!-- 등록을 위한 버튼 부분 -->

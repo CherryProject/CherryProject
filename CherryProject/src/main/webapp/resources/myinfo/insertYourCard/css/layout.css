@@ -13,10 +13,8 @@
 }
 
 .feature li {
-	float: left; width: 188px; height: 282px; list-style: none;
-	/*
-	margin-bottom: 4em;
-	*/
+	float: left; width: 188px; height: 200px; list-style: none;
+	margin-top: 20px;
 }
 
 .feature li a {
