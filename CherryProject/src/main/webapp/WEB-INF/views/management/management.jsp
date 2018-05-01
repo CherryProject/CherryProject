@@ -229,12 +229,16 @@ pageEncoding="UTF-8"%>
 					</div>
 
 				</div>
+				<div class="black">
+					<span>${yourCardList.name1}</span>
+				</div>
+				
 			</a>
-			<script type="text/javascript">
+			<!-- <script type="text/javascript">
 				$('.grid__item').hover(function(){
 		  			$( this ).append("<h3 class='namename'>${yourCardList.name1}</h3>");
 		  		});
-			</script>
+			</script> -->
 			<%-- <h3 class="namename">${yourCardList.name1}</h3> --%>
 		</div>
 	</c:forEach>
