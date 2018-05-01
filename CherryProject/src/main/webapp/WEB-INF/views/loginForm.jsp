@@ -55,12 +55,12 @@
 				return false;
 			}
 			
-			if (email.length == 0 ) {
+			if (email.length == 0) {
 				alert('이메일을 입력해주세요');
 				return false;
 			}
 			
-			if (emailReg.test(email)) {
+			if (!(emailReg.test(email))) {
 				alert("XXX@XXX.XXX 양식으로 작성해주세요");
 				return false;
 			}
@@ -158,7 +158,6 @@
 				<!-- UserName -->
 				<div class="input-container has-feedback">
 					<input type="text" id="name" name="username" placeholder="Username"/>
-					 <i	class="fa fa-user form-control-feedback"></i>
 					<div class="check"></div>
 					<div class="bar"></div>
 				</div><!-- UserName end -->
@@ -166,7 +165,6 @@
 				<!-- UserID -->
 				<div class="input-container has-feedback">
 					<input type="email" id="id" name="userid" placeholder="E-mail">
-					<i class="fa fa-envelope form-control-feedback"></i>
 					<div class="check"></div>
 					<div class="bar"></div>
 				</div><!-- UserID end -->
@@ -174,7 +172,6 @@
 				<!-- UserPW -->
 				<div class="input-container has-feedback">
 					<input type="password" id="pw" name="userpw" placeholder="Password" >
-						<i class="fa fa-lock form-control-feedback"></i>
 					<div class="check"></div>
 					<div class="bar"></div>
 				</div><!-- UserPW end -->
@@ -212,17 +209,14 @@
 				</div>
 				<!-- pattern="[\w_-]{1,20}" -->
 				<div class="input-container has-feedback">
-					<input type="text" id="Username" name="username" required
-						autocomplete="off" 
-						title="Username must contain from 3 to 20 characters such as any letter, number, an underscore, or a hyphen." />
-					<label for="Username">UserName</label>
+					<input type="text" id="Username" name="username">
 					<i class="fa fa-envelope form-control-feedback"></i>
 					<div class="check"></div>
 					<div class="bar"></div>
 				</div>
 				
 				<div class="button-container">
-					<button id="joinButton" type="submit">
+					<button type="submit">
 						<span>Reset</span>
 					</button>
 				</div>
