@@ -8,22 +8,86 @@
 	<title>Login</title>
 	
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/sign/css/Sign.css"/>">
-	<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
+	<!-- <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script> -->
+	<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js"/>"></script>		
 	<script type="text/javascript" src="<c:url value="/resources/sign/js/Sign.js"/>"></script>
 
 
 	<script type="text/javascript">
 	
+	
+	$(function(){
+	
+		$("#loginButton").on("click",function(){
+			
+			var loginForm = $("#loginForm");
+			var userId = $("#userid").val();
+			var pw = $("#userpw").val();
+			
+			
+			if (userId.length == 0) {
+				alert("이메일을 입력해주세요");
+				return false;
+			}
+			
+			if (pw.length == 0) {
+				alert('비밀번호 입력해주세요');
+				return false;
+		
+			} 
+			
+			return true;
+			
+			$(loginForm).submit();
+		});
+		
+		$("#joinButton").on("click",function(){
+						
+			var emailReg = /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/;
+			
+			var joinForm = $("#joinForm");
+			var username = $("#name").val();
+			var email = $("#id").val();
+			var password = $("#pw").val();
+			 
+			if (username.length == 0) {
+				alert("이름을 입력해주세요");
+				return false;
+			}
+			
+			if (email.length == 0 ) {
+				alert('이메일을 입력해주세요');
+				return false;
+			}
+			
+			if (emailReg.test(email)) {
+				alert("XXX@XXX.XXX 양식으로 작성해주세요");
+				return false;
+			}
+			
+			if (password.length == 0 ) {
+				alert("비밀번호를 입력해주세요");
+				return false;
+			}
+			
+			return true;
+			joinForm.submit();
+			
+		});
+		
+	});
+		
+	
 	<c:choose>
-		<c:when test="${sessionScope.loginMsg eq 'emailFail' }">
-			alert("E-mail 인증이 완료되지 않았습니다.");
-		</c:when>
-		<c:when test="${sessionScope.loginMsg eq 'passwordFail' }">
-			alert("로그인 정보가 일치하지 않습니다.");
-		</c:when>
-		<c:otherwise>
-		</c:otherwise>
-	</c:choose>
+	<c:when test="${sessionScope.loginMsg eq 'emailFail' }">
+		alert("E-mail 인증이 완료되지 않았습니다.");
+	</c:when>
+	<c:when test="${sessionScope.loginMsg eq 'passwordFail' }">
+		alert("로그인 정보가 일치하지 않습니다.");
+	</c:when>
+	<c:otherwise>
+	</c:otherwise>
+</c:choose>
 	
 	
 	</script>
@@ -51,22 +115,16 @@
 		<!-- 로그인 -->
 		<div class="card login-register login-reset">
 			<h1 class="title">Login</h1>
-			<form method="post" action="users/login">
+			<form id="loginForm"  method="post" action="users/login">
 				<div class="input-container has-feedback">
-					<input type="text" id="Username" name="userid" required
-						
-						title="Must contain from 3 to 20 characters such as any letter, number, an underscore, or a hyphen." />
-					<label for="Username">UserID</label><i
-						class="fa fa-user form-control-feedback"></i>
+					<input type="text" id="userid" name="userid" placeholder="UserID"/>
+					<i	class="fa fa-user form-control-feedback"></i>
 					<div class="check"></div>
 					<div class="bar"></div>
 				</div>
 				<div class="input-container has-feedback">
-					<input type="password" id="Password" name="userpw" required
-						
-						title="Must contain at least one number and one uppercase and lowercase letter, and from 8 to 20 characters." />
-					<label for="Password">Password</label> <i
-						class="fa fa-lock form-control-feedback"></i>
+					<input type="password" id="userpw" name="userpw" placeholder="Password"/>
+					<i	class="fa fa-lock form-control-feedback"></i>
 					<div class="check"></div>
 					<div class="bar"></div>
 				</div>
@@ -81,7 +139,7 @@
 				
 				<!-- 로그인 버튼 -->
 				<div class="button-container">
-					<button class="rkmd-btn btn-lightBlue ripple-effect float-right" type="submit">
+					<button id="loginButton" class="rkmd-btn btn-lightBlue ripple-effect float-right" type="submit"> 
 						<span>Sign in</span>
 					</button>
 				</div><!-- 로그인 버튼 end -->
@@ -96,23 +154,18 @@
 		<!-- 회원가입 -->
 		<div class="card login-register">
 			<h1 class="title">Create an account</h1>
-			<form method="post" action="users/join">
+			<form id="joinForm" method="post" action="users/join" >
 				<!-- UserName -->
 				<div class="input-container has-feedback">
-					<input type="text" id="username" name="username" required
-						autocomplete="off" pattern="[\w_-]{2,20}"
-						title="Username must contain from 3 to 20 characters such as any letter, number, an underscore, or a hyphen." />
-					<label for="Username">UserName</label> <i
-						class="fa fa-user form-control-feedback"></i>
+					<input type="text" id="name" name="username" placeholder="Username"/>
+					 <i	class="fa fa-user form-control-feedback"></i>
 					<div class="check"></div>
 					<div class="bar"></div>
 				</div><!-- UserName end -->
 				
 				<!-- UserID -->
 				<div class="input-container has-feedback">
-					<input type="email" id="userid" name="userid" required
-						pattern="[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+"
-						title="Not an e-mail!" autocomplete="off" /> <label for="E-mail">E-mail</label>
+					<input type="email" id="id" name="userid" placeholder="E-mail">
 					<i class="fa fa-envelope form-control-feedback"></i>
 					<div class="check"></div>
 					<div class="bar"></div>
@@ -120,10 +173,8 @@
 				
 				<!-- UserPW -->
 				<div class="input-container has-feedback">
-					<input type="password" id="userpw" name="userpw" 
-						title="Password must contain at least one number and one uppercase and lowercase letter, and from 8 to 20 characters." />
-					<label for="Password">Password</label> <i
-						class="fa fa-lock form-control-feedback"></i>
+					<input type="password" id="pw" name="userpw" placeholder="Password" >
+						<i class="fa fa-lock form-control-feedback"></i>
 					<div class="check"></div>
 					<div class="bar"></div>
 				</div><!-- UserPW end -->
@@ -137,7 +188,7 @@
 				</div><!--  end -->
 				
 				<div class="button-container">
-					<button>
+					<button id="joinButton" type="submit">
 						<span>Register</span>
 					</button>
 				</div>
@@ -171,7 +222,7 @@
 				</div>
 				
 				<div class="button-container">
-					<button type="submit">
+					<button id="joinButton" type="submit">
 						<span>Reset</span>
 					</button>
 				</div>
