@@ -88,12 +88,16 @@
 				<h2>My Card</h2>
      				<img id="profile" src="<c:url value="/resources/img/ArisoruSketch(Blue).png"/>">
 				<div class="other_card_link">
-					<div class="grid__item theme-11">
-						<button class="action"><svg class="icon icon--rewind"><use xlink:href="#icon-rewind"></use></svg></button>
-						<button class="particles-button" onclick="location.href='/www/cardList'">Register</button>
-						<script type="text/javascript" src="<c:url value="/resources/myinfo/js/particles.js"/>"></script>
-						<script type="text/javascript" src="<c:url value="/resources/myinfo/js/button.js"/>"></script>
-					</div>
+					<section class="sivir">
+						<div class="button-cont">
+							<button href="#" class="button-sivir" onclick="location.href='/www/cardList'"><span class="txt">Mycard<span></button>
+							<svg id="loader-g" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93.34 93.34">
+								<circle id="loader" cx="46.67" cy="46.67" r="43.67"></circle>
+								<path id="sent" d="M431.57,279.88a3,3,0,0,1-2.12-.88l-10.76-10.76a3,3,0,0,1,4.24-4.24l8.64,8.64,20.34-20.34a3,3,0,1,1,4.24,4.24L433.69,279A3,3,0,0,1,431.57,279.88Z"/>
+								<path id="error" d="M441.66,266l9.11-9.11a3,3,0,1,0-4.24-4.24l-9.11,9.11-9.11-9.11a3,3,0,1,0-4.24,4.24l9.11,9.11-9.11,9.11a3,3,0,1,0,4.24,4.24l9.11-9.11,9.11,9.11a3,3,0,0,0,4.24-4.24Z" transform="translate(-390.75 -219.31)" />
+							</svg>
+						</div>
+					</section>
 				</div>
 	</div>
 </article>

@@ -17,6 +17,8 @@ pageEncoding="UTF-8"%>
 	<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700|Poppins:700" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 	
 	<link href="<c:url value="/resources/css/newMain_css/menu/normalize.css" />" rel="stylesheet" media="screen">
 	<link href="<c:url value="/resources/css/newMain_css/menu/menu.css" />" rel="stylesheet" media="screen">
@@ -99,23 +101,31 @@ pageEncoding="UTF-8"%>
 					<div class="menu2">
 						<div class="close-icon" id="target" ><i class="fa fa-bars"></i></div>
 						<div class="insertCardBtn" id="cardBtn">
-							<button type="button" class="" onclick="return cardInfoSubmit();">Submit</button>
-							<button type="reset" class="">Reset</button>
+							<ul style="list-style: none; overflow: hidden;">
+								<li style="float: left; width: 50%">
+									<button type="button" class="btn btn-3 btn-sep icon-heart" onclick="return cardInfoSubmit();">submit</button>
+								</li>
+								<li style="float: left; width: 50%">
+									<button type="reset" class="btn btn-4 btn-sep icon-send">reset</button>
+								</li>
+							</ul>
+							<!-- <button type="button" class="" onclick="return cardInfoSubmit();">Submit</button>
+							<button type="reset" class="">Reset</button> -->
 							<!-- <button type="button" class="" id="selectMenuAdd" onclick="selectMenuAdd1();">항목 추가하기</button> -->
 						</div>
 						<ul id="cardinfo">
 							<!-- 등록을 위한 버튼 부분 -->
-							<li>Result		<br /><textarea name="" id="etc" rows="10" cols="35" value=""></textarea></li>
-							<li>Name  		<br /><input type="text" name="name1" id="name1" size="32" value="">		</li>
-							<li>Name  		<br /><input type="text" name="name2" id="name2" size="32" value="">		</li>
-							<li>Name  		<br /><input type="text" name="name3" id="name3" size="32" value="">		</li>
-							<li>Company 	<br /><input type="text" name="company" id="company" size="32" value="">	</li>
-							<li>Department 	<br /><input type="text" name="department" id="department" size="32" value=""></li>
-							<li>Job 		<br /><input type="text" name="job" id="job" size="32" value="">		</li>
-							<li>Phone 		<br /><input type="text" name="phone" id="phone" size="32" value="">		</li>
-							<li>Tel 		<br /><input type="text" name="tel" id="tel" size="32" value="">		</li>
-							<li>Fax 		<br /><input type="text" name="fax" id="fax" size="32" value="">		</li>
-							<li>E-Mail 		<br /><input type="text" name="email" id="email" size="32" value="">		</li>
+							<li>Result		<br /><textarea name="" id="etc" rows="5" cols="25" value=""></textarea></li>
+							<li>Name  		<br /><input type="text" name="name1" id="name1" size="25" value="">		</li>
+							<li>Name  		<br /><input type="text" name="name2" id="name2" size="25" value="">		</li>
+							<li>Name  		<br /><input type="text" name="name3" id="name3" size="25" value="">		</li>
+							<li>Company 	<br /><input type="text" name="company" id="company" size="25" value="">	</li>
+							<li>Department 	<br /><input type="text" name="department" id="department" size="25" value=""></li>
+							<li>Job 		<br /><input type="text" name="job" id="job" size="25" value="">		</li>
+							<li>Phone 		<br /><input type="text" name="phone" id="phone" size="25" value="">		</li>
+							<li>Tel 		<br /><input type="text" name="tel" id="tel" size="25" value="">		</li>
+							<li>Fax 		<br /><input type="text" name="fax" id="fax" size="25" value="">		</li>
+							<li>E-Mail 		<br /><input type="text" name="email" id="email" size="25" value="">		</li>
 							<li>Sex			<br />
 								<input type ='radio' name='sex' size="32" value='M' checked="checked" >남성
 								<input type ='radio' name='sex' size="32" value='W'>여성
