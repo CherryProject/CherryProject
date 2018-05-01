@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -16,6 +15,8 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/component.css" />
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/link_hover_basic.css">
 	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/link_hover.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/logoutbutton.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/newMain_css/logoutbutton_default.css">
 	
 	<script type="text/javascript" src="resources/js/newMain_js/modernizr.custom.js"></script>
 	<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js"/>"></script>
@@ -33,7 +34,6 @@
 
 	 		history.go(1);
 	 	};
-	 	
 	 </c:if>
 	 	
 	
@@ -69,8 +69,7 @@
 			</c:choose>
 		</div> 
 	</header> --%>
-	<!-- 정현수가 넣음 - 아리소루 로고 -->
-	<div class="logoBox"><img class="logo" src="<c:url value="/resources/img/ArisoruSketch(White).png" />"/></div>
+
 	<!-- 정보승이 넣음 -->
 	<div class="videoBox">
 		<video autoplay loop="100" muted  id="videoBG">
@@ -124,6 +123,9 @@
 			<h3 class="tabsnav__title">Contact</h3>
 		</div>
 	</nav>
+	<div class="logout">
+		<button class="btn-5">Button 5</button>
+	</div>
 	<div class="tabscontent">
 		<div class="tabscontent__item">
 			<figure class="poster">

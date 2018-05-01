@@ -13,7 +13,6 @@ header{
   background-color: #f8f8f8;
   margin: 0;
   padding: 0;
-  height: 10%;
 }
 header .title{
   font-size: 35px;
@@ -35,6 +34,253 @@ header .main_menu li, header .sub_menu li{
 header>.main_menu>ul>li>i{
   margin: 4px 2px 0 0;
 }
+
+
+/* 새로운 툴 그룹 */
+.wpte_toolbar {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  background: #2E343A;
+  cursor: default;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.wpte_list_item,
+.wpte_toolbar a:not(.wpte_palette_item) {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  text-align: center;
+  background: #2E343A;
+  color: #eee;
+  font-size: 15px;
+  cursor: pointer;
+  -webkit-box-ordinal-group: 1;
+  -moz-box-ordinal-group: 1;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-box-flex: 0;
+  -moz-box-flex: 0;
+  -webkit-flex: 0 0 40px;
+  -ms-flex: 0 0 40px;
+  flex: 0 0 40px;
+  -webkit-align-self: auto;
+  -ms-flex-item-align: auto;
+  align-self: auto;
+  text-decoration: none;
+}
+
+.wpte_list_item,
+.wpte_list_item {
+  border: none;
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+.wpte_list_item.open,
+.wpte_toolbar .wpte_list_item:hover,
+.wpte_toolbar a:hover {
+  background: #262B30;
+  color: #12BABA;
+}
+
+.wpte_toolbar .fa {
+  display: inline-block;
+  font: normal normal normal FontAwesome;
+  font-size: inherit;
+  line-height: 40px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wpte_toolbar .fa-caret-down{
+  position: relative;
+  width: 9px;
+  height: 9px;
+  font-size: 9px;
+  line-height: 10px;
+}
+
+.wpte_toolbar .fa-caret-down:before{
+  position: absolute;
+  top: -1px;
+}
+
+.wpte_separator {
+  position: relative;
+  width: 1px;
+  height: 100%;
+  background: #262B30;
+   -webkit-box-ordinal-group: 1;
+  -moz-box-ordinal-group: 1;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-box-flex: 0;
+  -moz-box-flex: 0;
+  -webkit-flex: 0 0 1px;
+  -ms-flex: 0 0 1px;
+  flex: 0 0 1px;
+  -webkit-align-self: auto;
+  -ms-flex-item-align: auto;
+  align-self: auto;
+}
+
+.wpte_list {
+  position: absolute;
+  display: none;
+  width: 40px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  top: 40px;
+  left: 0;
+  background: #2E343A;
+}
+
+.wpte_fontSize .wpte_list{
+  width: 60px;
+  height: 200px;
+  overflow-y: scroll;
+}
+
+.wpte_list li{
+  position: relative;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.wpte_palette-bg,
+.wpte_palette-clr {
+  position: absolute;
+  display: none;
+  min-width: 150px;
+  minheight: 110px;
+  padding: 5px;
+  font-size: 0;
+  top: 40px;
+  left: 0;
+  background: #262B30;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  cursor: default;
+  text-align: left;
+}
+
+.wpte_palette-clr a.wpte_palette_item,
+.wpte_palette-bg a.wpte_palette_item{
+  position: relative;
+  width: 27.5px;
+  height: 27.5px;
+  display: inline-block;
+  margin: 5px;
+  border-radius: 50%;
+}
+
+
+.wpte_list_item.open .wpte_palette-bg,
+.wpte_list_item.open .wpte_palette-clr,
+.wpte_list_item.open .wpte_list{
+  display: block;
+}
+
+.wpte_row{
+  position: relative;
+  padding: 5px;
+  width: 100%;
+}
+
+#wpte_palette-bg,
+#wpte_palette-clr{
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 102.5px;
+  height: 27.5px;
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 14px;
+  color: #fff;
+  background-color: #2E343A;
+  outline: none !important;
+  overflow: hidden;
+  white-space: nowrap;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 25px;
+}
+
+#wpte_palette_ok{
+  position: relative;
+  vertical-align: top;
+  width: 27.5px;
+  height: 27.5px;
+  margin-left: 10px;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1px;
+  outline: none !important;
+  overflow: hidden;
+  white-space: nowrap;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  cursor: pointer;
+  background: #12BABA;
+  color: #fff;
+  border-radius: 25px;
+}
+
+
 
 /* tool_text_button_group */
 .tool_text_button_group .tool_text_button{
@@ -122,7 +368,7 @@ header>.main_menu>ul>li>i{
 
 /*article*/
 article{
-  height: 75%;
+  height: 85%;
   position: relative;
 }
 article>ul>li:nth-child(1){
@@ -498,7 +744,6 @@ transition: all 0.25s ease;
     user-select: none
 }
 #div_list_tools div {
-    border: 2px solid gray;
     border-radius: 5px;
 }
 .textOption div, .div_whole_editor div {

@@ -22,7 +22,9 @@ pageEncoding="UTF-8"%>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/management/css/demo.css" />" />
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/management/css/style2.css" />" />
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/management/css/management-search.css" />" />
-
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+	
+	
 	<!-- Management JS--> 
 	<script src="<c:url value="/resources/management/js/modernizr-custom.js" />"></script>
 	<!-- 여지원 : 명함 삭제 및 수정, 메시지 스크립트 -->
@@ -105,6 +107,18 @@ pageEncoding="UTF-8"%>
 		  });
 	  	
 	  </script>
+	  <script type="text/javascript">
+	  	$(function(){
+	  		$('.grid__item').click(function(){
+	  			$('#search-btn').css('display','none');	
+	  		});
+	  	});
+	  	$(function(){
+	  		$('.action--close').click(function(){
+	  			$('#search-btn').css('display','block');	
+	  		});
+	  	});
+	  </script>
 	</head>
 	<body>
 
@@ -152,22 +166,19 @@ pageEncoding="UTF-8"%>
 						<c:forEach var="yourCardList" items="${yourCardList }">
 
 						<div class="grid__item" data-size="700x800">
-
 							<%-- 정보승 : 명함 이미지 --%>
 							<a href="<c:url value="yourcard/download?yourcardnum=${yourCardList.yourcardnum}" />" class="img-wrap">
-
 							<%-- 정보승 : 썸네일 이미지 (Resourcese) --%>
 							<c:choose>
-							<c:when test="${yourCardList.sex eq 'M'.charAt(0)}">
-							<%-- 정보승 : 남자에게 받은 명함 썸네일 --%>
-							<img src="<c:url value="/resources/management/img/collage/man_bg.jpg" />" alt="man_bg" />
-						</c:when>
-
-						<c:otherwise>
-						<%-- 정보승 : 여자에게 받은 명함 썸네일 --%>
-						<img src="<c:url value="/resources/management/img/collage/woman_bg.jpg" />" alt="woman_bg" />
-					</c:otherwise>	
-				</c:choose>
+								<c:when test="${yourCardList.sex eq 'M'.charAt(0)}">
+								<%-- 정보승 : 남자에게 받은 명함 썸네일 --%>
+									<img src="<c:url value="/resources/management/img/collage/man_bg.jpg" />" alt="man_bg" />
+								</c:when>
+								<c:otherwise>
+									<%-- 정보승 : 여자에게 받은 명함 썸네일 --%>
+									<img src="<c:url value="/resources/management/img/collage/woman_bg.jpg" />" alt="woman_bg" />
+								</c:otherwise>	
+							</c:choose>
 
 				<%-- 정보승 : DB에서 불러온 명함의 상세 정보 --%>
 				<div class="description description--grid">
@@ -176,49 +187,55 @@ pageEncoding="UTF-8"%>
 					<div class="details">
 						<ul>
 						
-							<li><i class="icon icon-camera"></i><span>${yourCardList.company}</span></li>
-							<li><i class="icon icon-focal_length"></i><span>${yourCardList.phone}</span></li>
+							<li><i class="far fa-building icon"></i><span>${yourCardList.company}</span></li>
+							<li><i class="fas fa-phone icon"></i><span>${yourCardList.phone}</span></li>
 							
 							<c:if test="${yourCardList.name2 ne null}">
-							<li><i class="icon icon-focal_length"></i><span>${yourCardList.name2}</span></li>
+							<li><i class="far fa-user icon"></i><span>${yourCardList.name2}</span></li>
 							</c:if>
 							<c:if test="${yourCardList.name3 ne null}">
-							<li><i class="icon icon-focal_length"></i><span>${yourCardList.name3}</span></li>
+							<li><i class="far fa-user icon"></i><span>${yourCardList.name3}</span></li>
 							</c:if>
 							<c:if test="${yourCardList.email ne null}">
-							<li><i class="icon icon-focal_length"></i><span>${yourCardList.email}</span></li>
+							<li><i class="fas fa-at icon"></i><span>${yourCardList.email}</span></li>
 							</c:if>
 							<c:if test="${yourCardList.department ne null}">
-							<li><i class="icon icon-focal_length"></i><span>${yourCardList.department}</span></li>
+							<li><i class="fas fa-building icon"></i><span>${yourCardList.department}</span></li>
 							</c:if>
 							<c:if test="${yourCardList.job ne null}">
-							<li><i class="icon icon-focal_length"></i><span>${yourCardList.job}</span></li>
+							<li><i class="fas fa-user-md icon"></i><span>${yourCardList.job}</span></li>
 							</c:if>
 							<c:if test="${yourCardList.tel ne null}">
-							<li><i class="icon icon-focal_length"></i><span>${yourCardList.tel}</span></li>
+							<li><i class="fas fa-phone-square icon"></i><span>${yourCardList.tel}</span></li>
 							</c:if>
 							<c:if test="${yourCardList.fax ne null}">
-							<li><i class="icon icon-focal_length"></i><span>${yourCardList.fax}</span></li>
+							<li><i class="fas fa-fax icon"></i><span>${yourCardList.fax}</span></li>
 							</c:if>
 							<c:if test="${yourCardList.address ne null}">
-							<li><i class="icon icon-focal_length"></i><span>${yourCardList.address}</span></li>
+							<li><i class="fas fa-map-marker icon"></i><span>${yourCardList.address}</span></li>
 							</c:if>
 							<c:if test="${yourCardList.memo ne null}">
-							<li><i class="icon icon-focal_length"></i><span>${yourCardList.memo}</span></li>
+							<li><i class="far fa-comment-alt icon"></i><span>${yourCardList.memo}</span></li>
 							</c:if>
 							<c:if test="${yourCardList.otherinfo ne null}">
-							<li><i class="icon icon-focal_length"></i><span>${yourCardList.otherinfo}</span></li>
+							<li><i class="fas fa-info-circle icon"></i><span>${yourCardList.otherinfo}</span></li>
 							</c:if>
 							
 						</ul>
 					</div>
 					<div>
-						<button type="button" onclick="cardRemove('${yourCardList.yourcardnum}')"> 삭제 </button>
-						<button type="button" onclick="cardUpdate('${yourCardList.yourcardnum}')"> 수정 </button>
+						<button class="button" type="button" onclick="cardRemove('${yourCardList.yourcardnum}')"> 삭제 </button>
+						<button class="button" type="button" onclick="cardUpdate('${yourCardList.yourcardnum}')"> 수정 </button>
 					</div>
 
 				</div>
 			</a>
+			<script type="text/javascript">
+				$('.grid__item').hover(function(){
+		  			$( this ).append("<h3 class='namename'>${yourCardList.name1}</h3>");
+		  		});
+			</script>
+			<%-- <h3 class="namename">${yourCardList.name1}</h3> --%>
 		</div>
 	</c:forEach>
 </div>	   

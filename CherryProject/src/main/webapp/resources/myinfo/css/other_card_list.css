@@ -70,4 +70,8 @@
   width: 350px;
   margin: 0 auto;
   text-align: right;
+  margin-top: -30px;
+}
+.other_card_link a{
+	font-size: 50px;
 }

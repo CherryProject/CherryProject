@@ -105,24 +105,60 @@
  --%>
     <div id="wrap">
         <header>
-            <!-- <h1 id="title" class="title">tool</h1> -->
             <div class="main_menu" id="main_menu">
-            	
-            	<!-- 
-                <ul class="tool_default_button_group">
-                    <li><a href="#"><i class="fas fa-file-alt"></i>project</a></li>
-                    <li><i class="fas fa-file"></i>page</li>
-                    <li class="download"><i class="fas fa-edit"></i>edit</li>
-                    <li class="myTool" onclick="myTool()"><i class="fas fa-exchange-alt"></i>array</li>
-                    <li><i class="fas fa-tag"></i>effect</li>
-                    <li><i class="fas fa-table"></i>table</li>
-                    <li><i class="fas fa-edit"></i>memo</li>
-                    <li><i class="fas fa-expand"></i>example</li>
-                    <li><i class="fas fa-hands-helping"></i>help</li>
-                    
-                </ul>
-                 -->
-                <div class="tool_text_button_group">
+            	<div class="wpte_toolbar">
+				  <a href="#" data-command='bold' title="Bold (Ctrl+B)"><i class='fa fa-bold'></i></a>
+				  <a href="#" data-command='italic' title="Italic (Ctrl+I)"><i class='fa fa-italic'></i></a>
+				  <a href="#" data-command='underline' title="Underline (Ctrl+U)"><i class='fa fa-underline'></i></a>
+				  <a href="#" data-command='strikeThrough' title="Strikethrough (Ctrl+S)"><i class='fa fa-strikethrough'></i></a>
+				  <div class="wpte_separator"></div>
+				  <button class="wpte_list_item wpte_fontSize" title="Font Size">
+				    <i class='fa fa-text-height'></i>
+				    <span class="fa fa-caret-down"></span>
+				    <ul class="wpte_list"></ul>
+				  </button>
+				  <button class="wpte_list_item" title="Color">
+				    <i class='fa fa-font'></i>
+				    <span class="fa fa-caret-down"></span>
+				    <div class="wpte_palette-clr"></div>
+				  </button>
+				  <button class="wpte_list_item" title="Background">
+				    <i class='fa fa-tint'></i>
+				    <span class="fa fa-caret-down"></span>
+				    <div class="wpte_palette-bg"></div>
+				  </button>
+				  <button class="wpte_list_item" title="Align">
+				    <i class='fa fa-align-left'></i>
+				    <span class="fa fa-caret-down"></span>
+				    <ul class="wpte_list">
+				      <li><a href="#" data-command='justifyLeft' title="Align Left"><i class='fa fa-align-left'></i></a></li>
+				      <li><a href="#" data-command='justifyCenter' title="Align Center"><i class='fa fa-align-center'></i></a></li>
+				      <li><a href="#" data-command='justifyRight' title="Align Right"><i class='fa fa-align-right'></i></a></li>
+				      <li><a href="#" data-command='justifyFull' title="Align Justify"><i class='fa fa-align-justify'></i></a></li>
+				    </ul>
+				  </button>
+				  <button class="wpte_list_item" title="List">
+				    <i class='fa fa-list-ul'></i>
+				    <span class="fa fa-caret-down"></span>
+				    <ul class="wpte_list">
+				      <li><a href="#" data-command='insertUnorderedList' title="Unordered List"><i class='fa fa-list-ul'></i></a></li>
+				      <li><a href="#" data-command='insertOrderedList' title="Ordered List"><i class='fa fa-list-ol'></i></a></li>
+				    </ul>
+				  </button>
+				  <button class="wpte_list_item" title="Link">
+				    <i class='fa fa-link'></i>
+				    <span class="fa fa-caret-down"></span>
+				    <ul class="wpte_list">
+				      <li><a href="#" data-command='createlink' title="Insert Link"><i class='fa fa-link'></i></a></li>
+				      <li><a href="#" data-command='unlink' title="Remove Link"><i class='fa fa-unlink'></i></a></li>
+				    </ul>
+				  </button>
+				  <div class="wpte_separator"></div>
+				  <a href="#" data-command='removeFormat' title="Clear Formatting"><i class='fa fa-eraser'></i></a>
+				  <a href="#" data-command='undo' title="Undo (Ctrl+Z)"><i class='fa fa-undo'></i></a>
+				  <a href="#" data-command='redo' title="Save (Ctrl+Shift+Z)"><i class="fa fa-save download"></i></a>
+				</div>
+                <%-- <div class="tool_text_button_group">
                     <button id="bold" class="tool_text_button" title="Bold (Ctrl+B)"><i class="fa fa-bold"></i></button>
                     <button id="italic" class="tool_text_button" title="Italic (Ctrl+I)"><i class="fa fa-italic"></i></button>
                     <button id="underline" class="tool_text_button" title="Underline (Ctrl+U)"><i class="fa fa-underline"></i></button>
@@ -162,7 +198,7 @@
                         <script src="<c:url value=" resources/tool/js/button.js" />">"></script>
                     </div>
                                      
-                </div>
+                </div> --%>
             </div>
             <!-- main menu end -->
           	
@@ -281,7 +317,7 @@
                                             </div>
                                         </li>
                                         <li class="icon">
-                                            <div class="link"><i class="fa fa-code"></i>BasicTemplate<i class="fa fa-chevron-down"></i></div>
+                                            <div class="link"><i class="fa fa-code"></i>추후 업로드 예정<i class="fa fa-chevron-down"></i></div>
                                             <div class="submenu tools" id="div_list_tools"><!-- 여기가 아이콘 목록 -->
                                                 <div class="tool text">
                                                     <span class="fa fa-code"></span>
@@ -291,7 +327,7 @@
                                         <!-- 여기가 아이콘 목록 -->
                                         
                                         <li>
-                                            <div class="link"><i class="fa fa-mobile"></i>Icon<i class="fa fa-chevron-down"></i></div>
+                                            <div class="link"><i class="fa fa-mobile"></i>추후 업로드 예정<i class="fa fa-chevron-down"></i></div>
                                             <div class="submenu tools" id="div_list_tools">
                                                 <div class="tool icon">
                                                     <span class="fa fa-code"></span>
@@ -299,7 +335,7 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="link"><i class="fa fa-globe"></i>Date Time<i class="fa fa-chevron-down"></i></div>
+                                            <div class="link"><i class="fa fa-globe"></i>추후 업로드 예정<i class="fa fa-chevron-down"></i></div>
                                             <div class="submenu tools" id="div_list_tools">
                                                 <div class="tool icon">
                                                     <span class="fa fa-code"></span>
@@ -392,7 +428,7 @@
                                         </li>
                                         
                                         <li>
-                                            <div class="link"><i class="fa fa-mobile"></i>Icon<i class="fa fa-chevron-down"></i></div>
+                                            <div class="link"><i class="fa fa-mobile"></i>추후 업로드 예정<i class="fa fa-chevron-down"></i></div>
                                             <ul class="submenu">
                                                 <div class="tool icon textbox"><i class="fas fa-bell tool"></i></div>
                                                 <div class="tool icon textbox"><i class="fas fa-calendar tool"></i></div>
@@ -407,7 +443,7 @@
                                             </ul>
                                         </li>
                                         <li>
-                                            <div class="link"><i class="fa fa-globe"></i>Date Time<i class="fa fa-chevron-down"></i></div>
+                                            <div class="link"><i class="fa fa-globe"></i>추후 업로드 예정<i class="fa fa-chevron-down"></i></div>
                                             <ul class="submenu">
                                                 <div class="tool tool-1 textbox" id="outputCompany"><i class="fas fa-bell tool"></i></div>
                                                 <div class="tool tool-2 textbox" id="outputCompany"><i class="fas fa-calendar tool"></i></div>
@@ -436,10 +472,6 @@
            </ul>
        </article>
        <!-- article end -->
-       <footer>
-
-       </footer>
-       <!-- footer end -->
    </div>
 </body>
 </html>
