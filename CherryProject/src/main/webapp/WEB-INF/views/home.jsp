@@ -70,7 +70,7 @@
 		</div> 
 	</header> --%>
 	<!-- 정현수가 넣음 - 아리소루 로고 -->
-	<div class="logoBox"><img class="logo" src="<c:url value="/resources/img/ArisoruSketch(White).png" />"/></div>
+	<div class="logoBox"><img class="logo" src="<c:url value="/resources/img/ArisoruLogo(Big).png" />"/></div>
 	<!-- 정보승이 넣음 -->
 	<div class="videoBox">
 		<video autoplay loop="100" muted  id="videoBG">
@@ -125,7 +125,7 @@
 		</div>
 	</nav>
 	<div class="logout">
-		<button class="btn-5">Button 5</button>
+		<button class="btn-5" onclick="logoutValid()">LogOut</button>
 	</div>
 	<div class="tabscontent">
 		<div class="tabscontent__item">
