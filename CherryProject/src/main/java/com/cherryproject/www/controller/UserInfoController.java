@@ -149,7 +149,7 @@ public class UserInfoController {
 	public String userLogin(UserInfoVO loginInfo, HttpSession session, Model model) {
 		
 		logger.info("User Loing Start");
-		
+		session.removeAttribute("verifyMsg");
 		// View에서 입력받은 ID와 PW를 각각 HashMap에 저장
 		HashMap<String, Object> userAccount = new HashMap<>();
 		userAccount.put("userid", loginInfo.getUserid());

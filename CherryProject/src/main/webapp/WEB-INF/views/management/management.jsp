@@ -226,6 +226,7 @@ pageEncoding="UTF-8"%>
 					<div>
 						<button class="button" type="button" onclick="cardRemove('${yourCardList.yourcardnum}')"> 삭제 </button>
 						<button class="button" type="button" onclick="cardUpdate('${yourCardList.yourcardnum}')"> 수정 </button>
+						<button class="button" type="button" onclick="cardInfo('${yourCardList.mycardnum}')"> 교환한 명함 </button>
 					</div>
 
 				</div>

@@ -80,7 +80,8 @@ pageEncoding="UTF-8"%>
 					<!-- 미리보기 사진을 선택했을 때 크게 보이는 부분 -->
 					<div id="main" class="main">
 						<div class="ocr img selectedImg" ><!--  -->
-							<img src="<c:url value="/resources/myinfo/insertYourCard/img/mycard.png "/>" >
+							<%-- <img src="<c:url value="/resources/myinfo/insertYourCard/img/mycard.png "/>" > --%>
+							<img src="<c:url value="/resources/img/ArisoruSketch(Blue).png"/>">
 						</div>
 
 
@@ -115,24 +116,24 @@ pageEncoding="UTF-8"%>
 						</div>
 						<ul id="cardinfo">
 							<!-- 등록을 위한 버튼 부분 -->
-							<li>Result		<br /><textarea name="" id="etc" rows="5" cols="25" value=""></textarea></li>
-							<li>Name  		<br /><input type="text" name="name1" id="name1" size="25" value="">		</li>
-							<li>Name  		<br /><input type="text" name="name2" id="name2" size="25" value="">		</li>
-							<li>Name  		<br /><input type="text" name="name3" id="name3" size="25" value="">		</li>
-							<li>Company 	<br /><input type="text" name="company" id="company" size="25" value="">	</li>
-							<li>Department 	<br /><input type="text" name="department" id="department" size="25" value=""></li>
-							<li>Job 		<br /><input type="text" name="job" id="job" size="25" value="">		</li>
-							<li>Phone 		<br /><input type="text" name="phone" id="phone" size="25" value="">		</li>
-							<li>Tel 		<br /><input type="text" name="tel" id="tel" size="25" value="">		</li>
-							<li>Fax 		<br /><input type="text" name="fax" id="fax" size="25" value="">		</li>
-							<li>E-Mail 		<br /><input type="text" name="email" id="email" size="25" value="">		</li>
+							<li>Result		<br /><textarea name="" id="etc" rows="5" cols="32" value=""></textarea></li>
+							<li>Name  		<br /><input type="text" name="name1" id="name1" size="32" value="">		</li>
+							<li>Name  		<br /><input type="text" name="name2" id="name2" size="32" value="">		</li>
+							<!-- <li>Name  		<br /><input type="text" name="name3" id="name3" size="32"" value="">		</li> -->
+							<li>Company 	<br /><input type="text" name="company" id="company" size="32" value="">	</li>
+							<li>Department 	<br /><input type="text" name="department" id="department" size="32" value=""></li>
+							<li>Job 		<br /><input type="text" name="job" id="job" size="32" value="">		</li>
+							<li>Phone 		<br /><input type="text" name="phone" id="phone" size="32" value="">		</li>
+							<li>Tel 		<br /><input type="text" name="tel" id="tel" size="32" value="">		</li>
+							<li>Fax 		<br /><input type="text" name="fax" id="fax" size="32" value="">		</li>
+							<li>E-Mail 		<br /><input type="text" name="email" id="email" size="32" value="">		</li>
 							<li>Sex			<br />
 								<input type ='radio' name='sex' size="32" value='M' checked="checked" >남성
 								<input type ='radio' name='sex' size="32" value='W'>여성
 							</li>
-							<li>Address 	<br /><input type="text" name="address" id="address" value="">	</li>
-							<li>Memo 		<br /><input type="text" name="memo" id="memo" value="">		</li>
-							<li>OtherInfo	<br /><input type="text" name="otherinfo" id="otherinfo" value="">	</li>
+							<li>Address 	<br /><input type="text" name="address" id="address" size="32" value="">	</li>
+							<li>Memo 		<br /><input type="text" name="memo" id="memo" size="32" value="">		</li>
+							<li>OtherInfo	<br /><input type="text" name="otherinfo" id="otherinfo" size="32" value="">	</li>
 						</ul>
 						
 					</div>

@@ -74,7 +74,7 @@
 	<!-- 정보승이 넣음 -->
 	<div class="videoBox">
 		<video autoplay loop="100" muted  id="videoBG">
-			<source src="resources/img/SUZY-BLOSSOM PINK.mp4" type="video/mp4">
+			<source src="resources/img/tutorial.mp4" type="video/mp4">
 		</video>
 	</div>
 	<!-- 

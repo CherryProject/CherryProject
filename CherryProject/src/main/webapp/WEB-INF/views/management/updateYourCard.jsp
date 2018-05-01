@@ -55,7 +55,7 @@
 						<div class="" id="cardBtn">
 					    	<ul style="list-style: none; overflow: hidden;">
 								<li style="float: left; width: 50%">
-									<button type="button" class="btn btn-3 btn-sep icon-heart" onclick="return cardInfoSubmit();">submit</button>
+									<button type="submit" class="btn btn-3 btn-sep icon-heart">submit</button>
 								</li>
 								<li style="float: left; width: 50%">
 									<button type="reset" class="btn btn-4 btn-sep icon-send">reset</button>

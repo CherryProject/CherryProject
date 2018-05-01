@@ -79,6 +79,9 @@
 		
 	
 	<c:choose>
+	<c:when test="${sessionScope.verifyMsg eq 'emailVerify' }">
+		alert("인증을 위한 E-mail을 발송하였습니다.");
+	</c:when>
 	<c:when test="${sessionScope.loginMsg eq 'emailFail' }">
 		alert("E-mail 인증이 완료되지 않았습니다.");
 	</c:when>
@@ -99,7 +102,7 @@
 	<!-- 수지 동영상 -->
 	<div class="videoBox">
 		<video autoplay loop="100" muted  id="videoBG">
-			<source src="<c:url value="/resources/img/SUZY-BLOSSOM PINK.mp4"/>" type="video/mp4">
+			<source src="<c:url value="/resources/img/tutorial.mp4"/>" type="video/mp4">
 		</video>
 	</div>
 	
@@ -216,7 +219,7 @@
 				</div>
 				
 				<div class="button-container">
-					<button type="submit">
+					<button id="joinButton" type="submit">
 						<span>Reset</span>
 					</button>
 				</div>

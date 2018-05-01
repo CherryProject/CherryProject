@@ -51,3 +51,14 @@ function cardRemove(yourcardnum) {
 //			});
 		}
 	}
+	
+	/**
+	 * @comment : 	건네 중 명함 보러가기 스크립트
+	 * @author	:	정보승
+	 */
+	function cardInfo(mycardnum) {
+
+		location.href="mycard/myCardOneInfo?mycardnum="+mycardnum;
+	}
+	
+	

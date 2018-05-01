@@ -11,15 +11,15 @@
 <meta charset="UTF-8">
 <meta http-equiv="refresh" content="3; url=/">
 
-<link rel="stylesheet" type="text/css" href="resources/error/error.css">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/error/error.css"/>">
 
 <script language="javascript">
 
-  <!--
+
 
       function window_onload(){
 
-         setTimeout('go_url()',5000)  // 5초후 go_url() 함수를 호출한다.
+         setTimeout('go_url()',3000)  // 5초후 go_url() 함수를 호출한다.
 
       }
 
@@ -31,7 +31,7 @@
 
       }
 
-  -->
+ 
 
   </script>
 <title>오류</title>

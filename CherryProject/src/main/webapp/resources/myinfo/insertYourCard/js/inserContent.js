@@ -437,7 +437,7 @@ function getMyCardsImg(){
 			$.each($.parseJSON(json), function(idx, item) {
 				
 				selectMyCard += "<li class='swiper-slide' style='background: url(../mycard/download?mycardnum="+ item.mycardnum + ") center center no-repeat;	background-size: contain;'><span>";
-				selectMyCard += "<input type='radio' name='gaveMyCardRadio' value='" + item.mycardnum + "' checked />";
+				selectMyCard += "<input type='radio' name='gaveMyCardRadio' value='" + item.mycardnum + "' >";
 //				selectMyCard += "<img src='../mycard/download?mycardnum=" + item.mycardnum + "' width='90px'>";
 				selectMyCard +=	"</span></li>";	
 			});	

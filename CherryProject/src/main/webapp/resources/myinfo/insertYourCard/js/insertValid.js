@@ -43,7 +43,6 @@ function updateValid() {
 	var phone = $("#phone").val();
 	var pattern = /[%^&*()+|<>?:{}[]\"\']/;	// 특수문자
 
-	alert(name1);
 	if(name1 == "") {
 		
 		alert("첫 번째 이름은 반드시 입력해야 합니다.");
