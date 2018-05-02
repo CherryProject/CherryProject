@@ -71,6 +71,38 @@
 	})
 	}
 
+	/*
+ 	 *	@comment	:  대표명함 벼경	
+	 */
+	function deleteProfileImg() {
+		
+		if(confirm("대표 명함을 삭제하시겠습니까? ")) {
+			
+			
+			$.ajax({
+				 
+				url : "mycard/deleteProfileImg"
+				, type : "get"
+				, success : function(str) {
+					
+					if(str == "true") {
+						$("#profile").attr("src","<c:url value='/resources/img/ArisoruSketch(Blue).png'/>");
+						$("#profile").trigger("create");
+						alert("대표 명함이 변경되었습니다.");
+					}
+					else {
+						
+						alert("대표 명함 변경에 실패하였습니다.");
+					}
+					
+				}
+				, error : function (e) {
+					alert("대표 명함 변경에 실패하였습니다.");
+					//console.log(e);
+				}
+			})
+		}
+	}
 
 	</script>
 	
@@ -98,7 +130,9 @@
 			<div class="hs-inner my_card_text">
 				<h2>My Card</h2>
 				<input type="hidden" id="profileTemp" value="${profileCardNum}" >
+				<a href="#" onclick="deleteProfileImg();"> 
      				<img id="profile" src="<c:url value="/resources/img/ArisoruSketch(Blue).png"/>">
+     			</a>
 				<div class="other_card_link">
 					<section class="sivir">
 						<div class="button-cont">

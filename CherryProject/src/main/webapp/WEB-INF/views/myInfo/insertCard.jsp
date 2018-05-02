@@ -131,8 +131,8 @@ pageEncoding="UTF-8"%>
 								<input type ='radio' name='sex' size="32" value='M' checked="checked" >남성
 								<input type ='radio' name='sex' size="32" value='W'>여성
 							</li>
-							<li>Address 	<br /><input type="text" name="address" id="address" size="32" value="">	</li>
-							<li>Memo 		<br /><input type="text" name="memo" id="memo" size="32" value="">		</li>
+							<li>Address		<br /><textarea name="address" id="address" rows="5" cols="32" ></textarea></li>
+							<li>Memo		<br /><textarea name="memo" id="memo" rows="5" cols="32"></textarea></li>
 							<li>OtherInfo	<br /><input type="text" name="otherinfo" id="otherinfo" size="32" value="">	</li>
 						</ul>
 						

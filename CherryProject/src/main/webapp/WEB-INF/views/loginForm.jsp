@@ -77,34 +77,46 @@
 		
 	});
 		
-	
 	<c:choose>
-	<c:when test="${sessionScope.verifyMsg eq 'emailVerify' }">
-		alert("인증을 위한 E-mail을 발송하였습니다.");
-	</c:when>
-	<c:when test="${sessionScope.loginMsg eq 'emailFail' }">
-		alert("E-mail 인증이 완료되지 않았습니다.");
-	</c:when>
-	<c:when test="${sessionScope.loginMsg eq 'passwordFail' }">
-		alert("로그인 정보가 일치하지 않습니다.");
-	</c:when>
-	<c:otherwise>
-	</c:otherwise>
-</c:choose>
+		<c:when test="${verifyMsg eq 'emailVerify' }">
+			alert("인증을 위한 E-mail을 발송하였습니다.");
+			go_url();
+		</c:when>
+		<c:when test="${loginMsg eq 'emailFail' }">
+			alert("E-mail 인증이 완료되지 않았습니다.");
+			go_url();
+		</c:when>
+		<c:when test="${loginMsg eq 'passwordFail' }">
+			alert("로그인 정보가 일치하지 않습니다.");
+			go_url();
+		</c:when>
 	
+		<c:otherwise>
+		</c:otherwise>
+	</c:choose>
+	
+	function go_url(){
+	
+	    location.href="/www";  // 페이지 이동...
+	
+	 }
 	
 	</script>
 </head>
 </head>
 <body>
-	<!-- 정현수가 넣음 - 아리소루 로고 -->
-	<div class="logoBox"><img class="logo" src="<c:url value="/resources/img/ArisoruLogo(Big).png" />"/></div>
 	<!-- 수지 동영상 -->
 	<div class="videoBox">
 		<video autoplay loop="100" muted  id="videoBG">
 			<source src="<c:url value="/resources/img/tutorial.mp4"/>" type="video/mp4">
 		</video>
 	</div>
+	
+	<!-- 정현수가 넣음 - 아리소루 로고 -->
+	<div class="logoBox"><img class="logo" src="<c:url value="/resources/img/ArisoruLogo(Big).png" />"/></div>
+	
+	<!-- 알림 목적 -->
+	<input type="hidden" id="loginIs" value="" />
 	
 	<!-- 회원 로그인, 회원가입 부분 -->
 	<div class="card-container">

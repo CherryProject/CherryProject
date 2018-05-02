@@ -39,9 +39,9 @@
 				<LI>
 					<div class="card-container">
 					
-						<div class="toggle">
-							<i class="fa fa-user fa-pencil fa-lg"></i>
-							<div class="tooltip">수정하기</div>
+						 <div class="toggle1">
+							<!-- <i class="fa fa-user fa-pencil fa-lg"></i>
+							<div class="tooltip">수정하기</div> -->
 						</div>
 						
 						<div class="card login-register login-reset">
@@ -53,63 +53,63 @@
 							
 								<!-- 대표이름 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="name1" name="name1" placeholder="이름(국문)"  />
+									<input type="text" id="name1" name="name1" placeholder="Name1"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 추가 이름 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="name2" name="name2" placeholder="이름(영문)"  />
+									<input type="text" id="name2" name="name2" placeholder="Name2"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 추가 이름2 -->
-								<div class = "input-container has-feedback">
+								<!-- <div class = "input-container has-feedback">
 									<input type="text" id="name3" name="name3" placeholder="이름(추가)"  />
 									<div class="check"></div>
 									<div class="bar"></div>
-								</div>
+								</div> -->
 								
 								<!-- 회사명 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="company" name="company" placeholder="회사명" />
+									<input type="text" id="company" name="company" placeholder="Company" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 부서명 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="department" name="department" placeholder="부서명"  />
+									<input type="text" id="department" name="department" placeholder="Deparment"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 직책명 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="job" name="job" placeholder="직책"  />
+									<input type="text" id="job" name="job" placeholder="Job"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 전화번호 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="tel" name="tel" placeholder="전화번호"  />
+									<input type="text" id="tel" name="tel" placeholder="Tel"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 휴대폰 번호 -->
 								<div class = "input-container has-feedback">
-									<input type="type" id="phone" name="phone" placeholder="휴대전화" />
+									<input type="text" id="phone" name="phone" placeholder="Phone" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- Fax 번호 -->
 								<div class = "input-container has-feedback">
-									<input type="type" id="fax" name="fax" placeholder="Fax"  />
+									<input type="text" id="fax" name="fax" placeholder="Fax"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
@@ -123,14 +123,14 @@
 								
 								<!-- 회사 주소 -->
 								<div class = "input-container has-feedback">
-									<input type="type" id="address" name="address" placeholder="주소"  />
+									<input type="text" id="address" name="address" placeholder="Address"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 메모(otherinfo2) -->
 								<div class = "input-container has-feedback">
-									<input type="type" id="otherinfo2" name="otherinfo2" placeholder="메모"  />
+									<input type="text" id="otherinfo2" name="otherinfo2" placeholder="Memo"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>

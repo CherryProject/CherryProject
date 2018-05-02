@@ -49,8 +49,8 @@ public class HomeController {
       
       logger.info("Move Home Page");
     	 
-      session.removeAttribute("loginMsg");
-      session.removeAttribute("emailVerify");
+//      session.removeAttribute("loginMsg");
+//      session.removeAttribute("emailVerify");
       
       return "home";
    }

@@ -58,8 +58,6 @@
    }
    
    function deleteBoard(boardnum){
-	   alert("Delete");
-	   alert(boardnum);
 	   $.ajax({
 		  url: 'deleteBoard'
 		  ,type: 'post'
@@ -148,7 +146,6 @@
  //댓글 수정
    function commentUpdateProc(commentnum){
        var updateContent = $('[name=content_'+commentnum+']').val();
-       alert(updateContent);
        $.ajax({
            url : 'updateComment',
            type : 'post',

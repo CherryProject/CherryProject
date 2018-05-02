@@ -98,7 +98,7 @@ public class UserInfoController {
 			      e.printStackTrace();
 			 }
 		 
-			 session.setAttribute("verifyMsg", "emailVerify");
+			 model.addAttribute("verifyMsg", "emailVerify");
 			logger.info("User Join Success");
 		}
 		else {
@@ -106,7 +106,8 @@ public class UserInfoController {
 			logger.info("User Join Fail");
 		}
 		
-		return "redirect:../";
+//		return "redirect:../";
+		return "loginForm";
 
 	}
 	
@@ -166,7 +167,6 @@ public class UserInfoController {
 			
 			session.setAttribute("userid", user.getUserid());	// 로그인 성공시 User ID를 Session에 저장
 			session.setAttribute("username", user.getUsername()); 
-			session.setAttribute("loginMsg", "login");
 			
 			//저장 폴더가 없으면 생성
 			File myUploadPath = new File(YourCardInfoController.myCarduploadPath + "/" + user.getUserid());
@@ -192,15 +192,18 @@ public class UserInfoController {
 //			model.addAttribute("msg", "아직 E-mail인증이 완료되지 않았습니다");
 			
 			// login 실패 시 alert를 띄어줄 속성
-			session.setAttribute("loginMsg", "emailFail");
-			return "redirect:../";
+			model.addAttribute("loginMsg", "emailFail");
+//			return "redirect:../";
+			return	"loginForm";
 		}
 		else {
 			
 			logger.info("User Login Fail");
 //			model.addAttribute("msg", "로그인 정보가 일치하지 않습니다.");
-			session.setAttribute("loginMsg", "passwordFail");
-			return "redirect:../";
+//			session.setAttribute("loginMsg", "passwordFail");
+//			return "redirect:../";
+			model.addAttribute("loginMsg", "passwordFail");
+			return	"loginForm";
 		}
 		
 		

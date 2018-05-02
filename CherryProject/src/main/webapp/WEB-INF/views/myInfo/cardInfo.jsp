@@ -198,29 +198,29 @@
 								
 								<!-- 대표이름 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="name1" name="name1" value="${selectMyCard.name1}" placeholder="대표이름"  />
+									<input type="text" id="name1" name="name1" value="${selectMyCard.name1}" placeholder="Name2"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 추가 이름 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="name2" name="name2" value="${selectMyCard.name2}" placeholder="name2" />
+									<input type="text" id="name2" name="name2" value="${selectMyCard.name2}" placeholder="Name2" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 추가 이름2 -->
-								<div class = "input-container has-feedback">
+								<%-- <div class = "input-container has-feedback">
 									<input type="text" id="name3" name="name3" value="${selectMyCard.name3}" placeholder="name3" />
 									
 									<div class="check"></div>
 									<div class="bar"></div>
-								</div>
+								</div> --%>
 								
 								<!-- 회사명 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="company" name="company" value="${selectMyCard.company}" placeholder="company" />
+									<input type="text" id="company" name="company" value="${selectMyCard.company}" placeholder="Company" />
 									
 									<div class="check"></div>
 									<div class="bar"></div>
@@ -228,7 +228,7 @@
 								
 								<!-- 부서명 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="department" name="department" value="${selectMyCard.department}" placeholder="department"  />
+									<input type="text" id="department" name="department" value="${selectMyCard.department}" placeholder="Department"  />
 									
 									<div class="check"></div>
 									<div class="bar"></div>
@@ -236,42 +236,42 @@
 								
 								<!-- 직책명 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="job" name="job" value="${selectMyCard.job}" placeholder="job" />
+									<input type="text" id="job" name="job" value="${selectMyCard.job}" placeholder="Job" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 전화번호 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="tel" name="tel" value="${selectMyCard.tel}" placeholder="tel"  />
+									<input type="text" id="tel" name="tel" value="${selectMyCard.tel}" placeholder="Tel"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 휴대폰 번호 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="phone" name="phone" value="${selectMyCard.phone}" placeholder="phone"  />
+									<input type="text" id="phone" name="phone" value="${selectMyCard.phone}" placeholder="Phone"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- E-Mail 주소 -->
 								<div class = "input-container has-feedback">
-									<input type="email" id="email" name="email" value="${selectMyCard.email}" placeholder="email"  />
+									<input type="email" id="email" name="email" value="${selectMyCard.email}" placeholder="E-Mail"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 회사 주소 -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="address" name="address" value="${selectMyCard.address}" placeholder="address"  />
+									<input type="text" id="address" name="address" value="${selectMyCard.address}" placeholder="Address"  />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>
 								
 								<!-- 메모(otherinfo2) -->
 								<div class = "input-container has-feedback">
-									<input type="text" id="otherinfo2" name="otherinfo2" value="${selectMyCard.otherinfo2}"  placeholder="otherinfo2" />
+									<input type="text" id="otherinfo2" name="otherinfo2" value="${selectMyCard.otherinfo2}"  placeholder="Memo" />
 									<div class="check"></div>
 									<div class="bar"></div>
 								</div>

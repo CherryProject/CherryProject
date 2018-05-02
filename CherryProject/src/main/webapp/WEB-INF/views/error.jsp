@@ -19,7 +19,7 @@
 
       function window_onload(){
 
-         setTimeout('go_url()',3000)  // 5초후 go_url() 함수를 호출한다.
+         setTimeout('go_url()',2000)  // 5초후 go_url() 함수를 호출한다.
 
       }
 

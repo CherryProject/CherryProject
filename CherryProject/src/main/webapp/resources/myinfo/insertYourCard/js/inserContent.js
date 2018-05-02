@@ -269,12 +269,12 @@ function resultInput(detectResult) {
 	$("#company").val('');
 	$("#job").val('');
 	$("#department").val('');
-	$("#address").val('');
+	$("#address").val("");
 	$("#tel").val('');
 	$("#phone").val('');
 	$("#email").val('');
 	$("#fax").val('');
-	$("#memo").val('');
+	$("#memo").val("");
 	$("#otherinfo").val('');
 	$("#etc").val("");
 	
@@ -303,6 +303,7 @@ function resultInput(detectResult) {
 			
 //			$("input[name*=otherinfo]").attr("id", "cardInfo_" + i);
 //			$("input[name*=otherinfo]").attr("value", detectResultArr[i]);
+//			$("#otherinfo").val(detectResultArr[i]);
 			$("#otherinfo").val(detectResultArr[i]);
 //			$("input[name*=otherinfo]").val(detectResultArr[i]);
 		}
@@ -329,6 +330,7 @@ function resultInput(detectResult) {
 			
 //			$("input[name*=address]").attr("id", "cardInfo_" + i);
 //			$("input[name*=address]").attr("value", detectResultArr[i]);
+//			$("#address").val(detectResultArr[i]);
 			$("#address").val(detectResultArr[i]);
 //			$("input[name*=email]").val(detectResultArr[i]);
 		}
@@ -515,12 +517,12 @@ function cardInfoSubmit() {
 				, company : $("input[name*=company]").val()
 				, job : $("input[name*=job]").val()
 				, department : $("input[name*=department]").val()
-				, address : $("input[name*=address]").val()
+				, address : $("textarea[name*=address]").val()
 				, tel : $("input[name*=tel]").val()
 				, phone : $("input[name*=phone]").val()
 				, email : $("input[name*=email]").val()
 				, fax : $("input[name*=fax]").val()
-				, memo : $("input[name*=memo]").val()
+				, memo : $("textarea[name*=memo]").val()
 				, otherinfo : $("input[name*=otherinfo]").val()
 				, mycardnum : getmycardnum 				// 선택한 내 명함 번호
 				, uploadImg :uploadFile					// original file name
@@ -539,15 +541,15 @@ function cardInfoSubmit() {
 					$("#company").val('');
 					$("#job").val('');
 					$("#department").val('');
-					$("#address").val('');
+					$("#address").val("");
 					$("#tel").val('');
 					$("#phone").val('');
 					$("#email").val('');
 					$("#fax").val('');
-					$("#memo").val('');
+					$("#memo").val("");
 					$("#otherinfo").val('');
 					$("#etc").val("");
-					$(".selectedImg img").attr("src", '/www/resources/myinfo/insertYourCard/img/mycard.png');
+					$(".selectedImg img").attr("src", '/www/resources/img/ArisoruSketch(Blue).png');
 					//$("#cardinfo").hide();				// input tag 부분 날리기.
 					$("#cardBtn").hide();					// submit 버튼 숨기기
 					

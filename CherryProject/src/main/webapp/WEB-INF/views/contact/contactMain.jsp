@@ -388,7 +388,7 @@
 			<div class="div_outline"> <!-- contactMain 작업 영역 -->
 				
 				<div class="div_header"> <!-- hearder 영역 -->
-					<div class="logo"><img class="logo" src="<c:url value="/resources/img/ArisoruSketch(Gray).png" />"/></div>					
+					<div class="logo"><img class="contact_logo" src="<c:url value="/resources/img/ArisoruSketch(Gray).png" />"/></div>					
 				</div>
 				
 				<div class="div_inform">

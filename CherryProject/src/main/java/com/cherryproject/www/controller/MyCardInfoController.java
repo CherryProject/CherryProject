@@ -328,7 +328,6 @@ public class MyCardInfoController {
 	
 		myCardInfoDAO.deleteMyCard(deleteMyCard);
 		
-		
 		/*userInfo에서도 mycardnum값을 빼줘야한다.(basicImg로 바뀜)*/
 		UserInfoVO updateUser = new UserInfoVO();
 		updateUser.setUserid(userid);
@@ -374,5 +373,38 @@ public class MyCardInfoController {
 	}
 
  
+	/*
+	 * @comment	:	대표 명함 제거 후 userinfo의 profileImg 열을 basicImg로 변경
+	 * @author	:	정보승
+	 */
+	@ResponseBody
+	@RequestMapping(value = "deleteProfileImg", method = RequestMethod.GET)
+	public String deleteProfileImg(HttpSession session) {
+		
+		String userid = (String) session.getAttribute("userid");
+		String username = (String) session.getAttribute("username");
+		
+		UserInfoVO updateUser = new UserInfoVO();
+		updateUser.setUserid(userid);
+		updateUser.setUsername(username);
+		updateUser.setProfilecard("basicImg");
+		
+		boolean profiileImgDelIs = userInfoDAO.updateUserInfo(updateUser);
+		
+		if(profiileImgDelIs) {
+			
+			logger.info("Delete Profile Img Success");
+			
+			return "true";
+		}
+		else {
+			
+			logger.info("Delete Profile Img Fail");
+			
+			return "false";
+		}
+	}
+	
+	
 }
 
