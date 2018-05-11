@@ -90,11 +90,11 @@
 					<div class="card-container" >
 						
 						<div class="toggle"><i class="fa fa-user fa-pencil fa-lg"></i>
-							<div class="tooltip">수정하기</div>
+							<div class="tooltip">修正</div>
 						</div>
 						
 						<div class="card login-register login-reset">
-							<h1 class="title">Card info</h1>
+							<h1 class="title">カード情報 </h1>
 							
 							<div class = "input-container has-feedback">
 							<input type="text" id="" name="" value="${selectMyCard.name1}" readonly="readonly" />
@@ -183,15 +183,15 @@
 							</c:if>
 							
 							<div class="button-container">
-							<button class="rkmd-btn btn-lightBlue ripple-effect float-right" onclick="insertProfileImage('${selectMyCard.mycardnum}')"><span>profile</span></button> 
-								<button class="rkmd-btn btn-lightBlue ripple-effect float-right"onclick="deleteCard('${selectMyCard.mycardnum}')"><span>delete</span></button>
+							<button class="rkmd-btn btn-lightBlue ripple-effect float-right" onclick="insertProfileImage('${selectMyCard.mycardnum}')"><span>代表名刺に</span></button> 
+								<button class="rkmd-btn btn-lightBlue ripple-effect float-right"onclick="deleteCard('${selectMyCard.mycardnum}')"><span>削除</span></button>
 							</div>
 						</div>
 						
 						
 						<!-- 명함 정보 수정하기 -->
 						<div class="card login-register" >
-							<h1 class="title">수정하기</h1>
+							<h1 class="title">修正</h1>
 							<form method="post" action="updateMyCard"  onsubmit="return updateValid();">
 								<!-- 내 명함 번호 -->
 								<input type="hidden" name="mycardnum" value="${selectMyCard.mycardnum }" />
@@ -279,7 +279,7 @@
 								<!-- 수정버튼 -->
 								<div class="button-container">
 									<button type="submit">
-										<span>Update</span>
+										<span>修正</span>
 									</button>
 								</div>
 								

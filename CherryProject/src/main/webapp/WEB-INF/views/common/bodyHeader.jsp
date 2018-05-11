@@ -9,11 +9,11 @@
 		<nav id="bt-menu" class="bt-menu">
 			<a href="#" class="bt-menu-trigger"><i class="fas fa-bars"></i></a>
 			<ul>
-				<li><a href="/www/home">Home</a></li>
-				<li><a href="/www/templateList">TemplateList</a></li>
-				<li><a href="/www/tool">Tools</a></li>
-				<li><a href="/www/myInfo">Myinfo</a></li>
-				<li><a href="/www/contact">Contact</a></li>
+				<li><a href="/www/home">ホーム</a></li>
+				<li><a href="/www/templateList">テンプレート</a></li>
+				<li><a href="/www/tool">名刺作り</a></li>
+				<li><a href="/www/myInfo">マイカード</a></li>
+				<li><a href="/www/contact">問い合わせ</a></li>
 			</ul>
 			<ul>
 				<li><a href="http://www.twitter.com/codrops" class="bt-icon icon-twitter">Twitter</a></li>

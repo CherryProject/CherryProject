@@ -133,9 +133,9 @@ pageEncoding="UTF-8"%>
 						<i id="close-btn" class="fas fa-times fa-2x"></i>
 						<form action='search' id='search-form' method='post' target='_top'>
 							<div>
-								<input id='search-text' name='q' placeholder='Search' type='text' />
+								<input id='search-text' name='q' placeholder='検索' type='text' />
 								<button id='search-button' type='submit'>                     
-									<span>Search</span>
+									<span>検索</span>
 								</button>
 							</div>
 							<ul class="list-group" id="result"></ul>
@@ -224,9 +224,9 @@ pageEncoding="UTF-8"%>
 						</ul>
 					</div>
 					<div>
-						<button class="button" type="button" onclick="cardRemove('${yourCardList.yourcardnum}')"> 삭제 </button>
-						<button class="button" type="button" onclick="cardUpdate('${yourCardList.yourcardnum}')"> 수정 </button>
-						<button class="button" type="button" onclick="cardInfo('${yourCardList.mycardnum}')"> 교환한 명함 </button>
+						<button class="button" type="button" onclick="cardRemove('${yourCardList.yourcardnum}')"> 削除  </button>
+						<button class="button" type="button" onclick="cardUpdate('${yourCardList.yourcardnum}')"> 修正 </button>
+						<button class="button" type="button" onclick="cardInfo('${yourCardList.mycardnum}')"> 交換した名刺  </button>
 					</div>
 
 				</div>

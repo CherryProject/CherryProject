@@ -6,7 +6,7 @@
  */
 function cardRemove(yourcardnum) {
 	
-	var bool = confirm('삭제하시겠습니까?');
+	var bool = confirm('名刺を削除しますか');
 	
 	if(!bool){
 		
@@ -35,7 +35,7 @@ function cardRemove(yourcardnum) {
 	function cardUpdate(yourcardnum) {
 		
 		
-		if(confirm("명함 정보를 수정하시겠습니까?")) {
+		if(confirm("名刺を修正しますか")) {
 			
 			location.href="yourcard/yourCardUpdatePage?yourcardnum="+yourcardnum;
 			

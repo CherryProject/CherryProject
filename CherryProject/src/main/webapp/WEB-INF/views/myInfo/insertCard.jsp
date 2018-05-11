@@ -104,10 +104,10 @@ pageEncoding="UTF-8"%>
 						<div class="insertCardBtn" id="cardBtn">
 							<ul style="list-style: none; overflow: hidden;">
 								<li style="float: left; width: 50%">
-									<button type="button" class="btn btn-3 btn-sep icon-heart" onclick="return cardInfoSubmit();">submit</button>
+									<button type="button" class="btn btn-3 btn-sep icon-heart" onclick="return cardInfoSubmit();">登録 </button>
 								</li>
 								<li style="float: left; width: 50%">
-									<button type="reset" class="btn btn-4 btn-sep icon-send">reset</button>
+									<button type="reset" class="btn btn-4 btn-sep icon-send">リセット</button>
 								</li>
 							</ul>
 							<!-- <button type="button" class="" onclick="return cardInfoSubmit();">Submit</button>
@@ -116,24 +116,24 @@ pageEncoding="UTF-8"%>
 						</div>
 						<ul id="cardinfo">
 							<!-- 등록을 위한 버튼 부분 -->
-							<li>Result		<br /><textarea name="" id="etc" rows="5" cols="32" value=""></textarea></li>
-							<li>Name  		<br /><input type="text" name="name1" id="name1" size="32" value="">		</li>
+							<li>結果		<br /><textarea name="" id="etc" rows="5" cols="32" value=""></textarea></li>
+							<li>名前  		<br /><input type="text" name="name1" id="name1" size="32" value="">		</li>
 							<li>Name  		<br /><input type="text" name="name2" id="name2" size="32" value="">		</li>
 							<!-- <li>Name  		<br /><input type="text" name="name3" id="name3" size="32"" value="">		</li> -->
-							<li>Company 	<br /><input type="text" name="company" id="company" size="32" value="">	</li>
-							<li>Department 	<br /><input type="text" name="department" id="department" size="32" value=""></li>
-							<li>Job 		<br /><input type="text" name="job" id="job" size="32" value="">		</li>
-							<li>Phone 		<br /><input type="text" name="phone" id="phone" size="32" value="">		</li>
-							<li>Tel 		<br /><input type="text" name="tel" id="tel" size="32" value="">		</li>
-							<li>Fax 		<br /><input type="text" name="fax" id="fax" size="32" value="">		</li>
+							<li>会社 	<br /><input type="text" name="company" id="company" size="32" value="">	</li>
+							<li>部署 	<br /><input type="text" name="department" id="department" size="32" value=""></li>
+							<li>職責 		<br /><input type="text" name="job" id="job" size="32" value="">		</li>
+							<li>携帯電話 		<br /><input type="text" name="phone" id="phone" size="32" value="">		</li>
+							<li>電話番号		<br /><input type="text" name="tel" id="tel" size="32" value="">		</li>
+							<li>ファックス	<br /><input type="text" name="fax" id="fax" size="32" value="">		</li>
 							<li>E-Mail 		<br /><input type="text" name="email" id="email" size="32" value="">		</li>
-							<li>Sex			<br />
-								<input type ='radio' name='sex' size="32" value='M' checked="checked" >남성
-								<input type ='radio' name='sex' size="32" value='W'>여성
+							<li>性別			<br />
+								<input type ='radio' name='sex' size="32" value='M' checked="checked" >男性
+								<input type ='radio' name='sex' size="32" value='W'>女性
 							</li>
-							<li>Address		<br /><textarea name="address" id="address" rows="5" cols="32" ></textarea></li>
-							<li>Memo		<br /><textarea name="memo" id="memo" rows="5" cols="32"></textarea></li>
-							<li>OtherInfo	<br /><input type="text" name="otherinfo" id="otherinfo" size="32" value="">	</li>
+							<li>住所		<br /><textarea name="address" id="address" rows="5" cols="32" ></textarea></li>
+							<li>メモ		<br /><textarea name="memo" id="memo" rows="5" cols="32"></textarea></li>
+							<li>他の情報	<br /><input type="text" name="otherinfo" id="otherinfo" size="32" value="">	</li>
 						</ul>
 						
 					</div>

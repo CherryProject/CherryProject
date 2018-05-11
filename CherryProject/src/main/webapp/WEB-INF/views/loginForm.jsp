@@ -147,8 +147,8 @@
 				<!-- 아이디 저장해놓기 -->
 				<div class="checkbox">
 					<label> <input type="checkbox" id="remember-me" checked>
-						<span class="cr"><i class="cr-icon fa fa-rocket"></i></span>
-						Remember me
+						<!-- <span class="cr"><i class="cr-icon fa fa-rocket"></i></span> -->
+						<!-- Remember me -->
 					</label>
 				</div><!-- 아이디 저장해놓기 end -->
 				

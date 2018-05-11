@@ -113,14 +113,14 @@
 	<div class="hs-headline">
 		<!-- 정현수가 넣음 - 아리소루 로고 -->
 		<div class="logoBox"><img class="logo" src="<c:url value="/resources/img/ArisoruSketch(White).png" />"/></div>
-		<small>My info</small>
+		<small>マイカード</small>
 	</div>
 	<nav>
-		<a href="#" onclick="location.href='/www/home'"><span>Home</span></a>
-		<a href="#introduction"><span>My Card</span></a>
-		<a href="#chapter1"><span>statistics</span></a>
-		<a href="#chapter2"><span>schedule</span></a>
-		<a href="#chapter3"><span>Other_card</span></a>
+		<a href="#" onclick="location.href='/www/home'"><span>ホーム</span></a>
+		<a href="#introduction"><span>私のカード</span></a>
+		<a href="#chapter1"><span>通計情報</span></a>
+		<a href="#chapter2"><span>スケジュール</span></a>
+		<a href="#chapter3"><span>私がもらったカード</span></a>
 	</nav>
 </aside>
 <a href="#hs-menu" class="hs-totop-link">Go to the top</a>
@@ -128,7 +128,7 @@
 	<div class="hs-content-wrapper">
 		<article class="hs-content" id="introduction">
 			<div class="hs-inner my_card_text">
-				<h2>My Card</h2>
+				<h2>私のカード　　</h2>
 				<input type="hidden" id="profileTemp" value="${profileCardNum}" >
 				<a href="#" onclick="deleteProfileImg();"> 
      				<img id="profile" src="<c:url value="/resources/img/ArisoruSketch(Blue).png"/>">
@@ -136,7 +136,7 @@
 				<div class="other_card_link">
 					<section class="sivir">
 						<div class="button-cont">
-							<button href="#" class="button-sivir" onclick="location.href='/www/cardList'"><span class="txt">Mycard<span></button>
+							<button href="#" class="button-sivir" onclick="location.href='/www/cardList'"><span class="txt">私のカード<span></button>
 							<svg id="loader-g" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93.34 93.34">
 								<circle id="loader" cx="46.67" cy="46.67" r="43.67"></circle>
 								<path id="sent" d="M431.57,279.88a3,3,0,0,1-2.12-.88l-10.76-10.76a3,3,0,0,1,4.24-4.24l8.64,8.64,20.34-20.34a3,3,0,1,1,4.24,4.24L433.69,279A3,3,0,0,1,431.57,279.88Z"/>
@@ -149,16 +149,16 @@
 </article>
 <article class="hs-content" id="chapter1">
 	<div class="hs-inner">
-		<h2>statistics</h2>
+		<h2>通計情報</h2>
 		<div class="counter col_fourth">
 			<h2 class="timer count-title count-number" data-to="${yourCardCnt}" data-speed="1500"></h2>
-			<p class="count-text ">Total Card</p>
+			<p class="count-text ">トータルカード</p>
 		</div>
 	</div>
 </article>
 <article class="hs-content" id="chapter2">
 	<div class="hs-inner">
-		<h2>schedule</h2>
+		<h2>スケジュール</h2>
 		<section class="main">
 			<div class="custom-calendar-wrap">
 				<div id="custom-inner" class="custom-inner">
@@ -248,7 +248,7 @@ $(function() {
 </article>
 <article class="hs-content" id="chapter3">
 	<div class="hs-inner">
-		<h2>Othercard</h2>
+		<h2>私がもらったカード</h2>
 		<div class="other_card_link">
 			<a href="#" onclick="location.href='/www/management'">+</a>
 		</div>

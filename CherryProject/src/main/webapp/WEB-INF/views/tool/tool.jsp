@@ -97,6 +97,14 @@
 	   location.href = "tool/myTool"; 
    }
    
+   function imgUp() {
+	   
+	   var	inputTag = '<input type="file" id="images" onchange="readURL(this);" style="display : none;" multiple name="images" />';
+		
+		$(".file").append(inputTag);		// input Tag 생성
+		$("#images").trigger("click");	// input Tag 실행
+		
+   }
     </script>
 </head>
 <body>
@@ -467,7 +475,10 @@
                                      
                                 </div>
                                  <div class="content file"> 
-                                        <input type='file' id="images" onchange="readURL(this);"  multiple name="images" />
+                                 	<a href="#" onclick="imgUp();">
+                                 		<i class="fas fa-plus" style="font-size:20px;" ></i>
+                                 	</a>
+                                        <!-- <input type='file' id="images" onchange="readURL(this);" style="display : none;" multiple name="images" /> -->
                                                                                 
                                 </div>
                            </div>

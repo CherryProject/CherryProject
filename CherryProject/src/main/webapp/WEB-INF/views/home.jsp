@@ -133,13 +133,13 @@
 				<img class="poster__img" src="resources/img/newMain_img/img1.jpg" alt="Poster 1"/>
 				<figcaption class="poster__caption">
 					<h2 class="poster__title" >TemplateList</h2>
-					<p class="poster__deco">Choose a simple template</p>
+					<p class="poster__deco">テンプレートリスト</p>
 					<div class="poster__box"></div>
 					<span class="poster__number"><i class="fas fa-location-arrow"></i></span>
 				</figcaption>
 			</figure>
 			<div class="cl-effect-21">
-				<a href="/www/templateList">TemplateList</a>
+				<a href="/www/templateList">入る</a>
 			</div>
 		</div>
 		<div class="tabscontent__item">
@@ -147,13 +147,13 @@
 				<img class="poster__img" src="resources/img/newMain_img/img1.jpg" alt="Poster 1"/>
 				<figcaption class="poster__caption">
 					<h2 class="poster__title">Tools</h2>
-					<p class="poster__deco">명함 만들기</p>
+					<p class="poster__deco">名刺作り</p>
 					<div class="poster__box"></div>
 					<span class="poster__number"><i class="fas fa-location-arrow"></i></span>
 					</figcaption>
 				</figure>
 				<div class="cl-effect-21">
-					<a href="/www/tool">Tools</a>
+					<a href="/www/tool">入る</a>
 				</div>
 			</div>
 			<div class="tabscontent__item">
@@ -161,13 +161,13 @@
 					<img class="poster__img" src="resources/img/newMain_img/img1.jpg" alt="Poster 1"/>
 					<figcaption class="poster__caption">
 						<h2 class="poster__title">MyInfo</h2>
-						<p class="poster__deco">카드관리</p>
+						<p class="poster__deco">カード管理</p>
 						<div class="poster__box"></div>
 						<span class="poster__number" ><i class="fas fa-location-arrow"></i></span></a>
 					</figcaption>
 				</figure>
 				<div class="cl-effect-21">
-					<a href="/www/myInfo">MyInfo</a>
+					<a href="/www/myInfo">入る</a>
 				</div>
 			</div>
 			<div class="tabscontent__item">
@@ -175,13 +175,13 @@
 					<img class="poster__img" src="resources/img/newMain_img/img1.jpg" alt="Poster 1"/>
 					<figcaption class="poster__caption">
 						<h2 class="poster__title">Contact</h2>
-						<p class="poster__deco">공지사항</p>
+						<p class="poster__deco">問い合わせ</p>
 						<div class="poster__box"></div>
 						<span class="poster__number" href="/www/contact"><i class="fas fa-location-arrow"></i></span>
 					</figcaption>
 				</figure>
 				<div class="cl-effect-21">
-					<a href="/www/contact">Contact</a>
+					<a href="/www/contact">入る</a>
 				</div>
 			</div>
 			<button class="btn btn--back"><i class="fas fa-angle-left"></i></button>
